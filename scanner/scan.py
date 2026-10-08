@@ -57,7 +57,8 @@ TV_INDUSTRY = {
     "Cable/Satellite TV": "Communication", "Movies/Entertainment": "Communication",
     "Broadcasting": "Communication", "Publishing: Newspapers": "Communication",
     "Real Estate Investment Trusts": "Real Estate", "Real Estate Development": "Real Estate",
-    "Drugstore Chains": "Consumer Staples", "Food Retail": "Consumer Staples",
+    "Drugstore Chains": "Health Care", "Food Retail": "Consumer Staples",
+    "Apparel/Footwear": "Consumer Discretionary",
     "Food Distributors": "Consumer Staples",
     "Medical Distributors": "Health Care",
     "Electronics Distributors": "Technology",
@@ -165,6 +166,28 @@ def polygon_history(symbols: list[str], sessions: int, max_calls: int = 40) -> d
             df.index = pd.to_datetime(df.t, unit="ms").dt.normalize()
             out[s] = df.rename(columns={"o": "Open", "h": "High", "l": "Low", "c": "Close", "v": "Volume"})[
                 ["Open", "High", "Low", "Close", "Volume"]]
+    return out
+
+
+def next_earnings(symbols: list[str]) -> dict[str, str | None]:
+    """Next earnings date per symbol (Yahoo). Best effort; None when unknown."""
+    out: dict[str, str | None] = {}
+    try:
+        import yfinance as yf
+    except ImportError:
+        return out
+    today = dt.date.today()
+    for s in symbols:
+        d = None
+        try:
+            cal = yf.Ticker(yahoo_symbol(s)).calendar or {}
+            dates = cal.get("Earnings Date") or []
+            future = sorted(x for x in dates if isinstance(x, dt.date) and x >= today)
+            d = future[0].isoformat() if future else None
+        except Exception as e:  # noqa: BLE001
+            log.debug("earnings %s: %s", s, e)
+        out[s] = d
+    log.info("Earnings dates: %d/%d known", sum(v is not None for v in out.values()), len(symbols))
     return out
 
 
@@ -442,7 +465,8 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     stage("with_history", cand)
 
     u = CFG["universe"]
-    cand = cand[(cand.sessions >= u["min_history_sessions"]) & (cand.vol_63_ann <= u["max_ann_vol_pct"])].copy()
+    cand = cand[(cand.sessions >= u["min_history_sessions"]) & (cand.vol_63_ann <= u["max_ann_vol_pct"])
+                & (cand.vol_63_ann >= u["min_ann_vol_pct"])].copy()
     cand["tags"] = [revalidate_tags(r) for r in cand.to_dict("records")]
     cand = cand[cand.tags.str.len() > 0].copy()
     cand["has_rule"] = cand.tags.apply(lambda t: any(x in ("S1", "S2", "S3") for x in t))
@@ -457,10 +481,14 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     w = CFG["ranking"]
     cand["smooth_score"] = smoothness_score(cand)
     cand["final_score"] = w["weight_signal"] * cand.signal_score + w["weight_smoothness"] * cand.smooth_score
+    cand = cand.sort_values(["has_rule", "final_score"], ascending=False).drop_duplicates("symbol")
     final = (cand.sort_values(["has_rule", "final_score"], ascending=False)
              .groupby(["supersector", "side"]).head(sel["quota_per_side_per_sector"])
              .sort_values(["supersector", "side", "final_score"], ascending=[True, True, False]))
     stage("final", final)
+
+    earn = next_earnings(sorted(set(final.symbol)))
+    final = final.assign(next_earnings=final.symbol.map(earn))
 
     # last 126 daily log returns for finalists + sector ETFs -> pair correlation / vol ratio downstream
     rets = {}
@@ -480,7 +508,7 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
             continue
         keep = ["symbol", "company", "exchange", "supersector", "industry", "side", "tags", "mcap", "close",
                 "d21", "d50", "d200", "p1w", "p1m", "p3m", "r2_63", "er_63", "sma21_crosses_63",
-                "slope_63_ann", "vol_63_ann", "sessions", "rs_1m", "rs_3m", "has_rule", "signal_score", "smooth_score", "final_score"]
+                "slope_63_ann", "vol_63_ann", "sessions", "next_earnings", "rs_1m", "rs_3m", "has_rule", "signal_score", "smooth_score", "final_score"]
         rec = {k: r.get(k) for k in keep}
         rec["chart"] = f"charts/{fn}"
         records.append(rec)

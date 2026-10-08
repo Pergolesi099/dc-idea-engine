@@ -6,6 +6,7 @@ universe:
   exchanges: [NYSE, NASDAQ, AMEX]
   min_history_sessions: 250     # excludes recent IPOs (no reliable 200D)
   max_ann_vol_pct: 80           # 63D annualised vol cap; keeps pair legs balanceable
+  min_ann_vol_pct: 12           # below this = pinned by a takeover bid, not a setup
 
 selection:
   pool_per_side_per_sector: 25  # names per sector/side pulled for full history + smoothness
