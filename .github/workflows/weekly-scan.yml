@@ -1,0 +1,54 @@
+name: weekly-scan
+
+on:
+  schedule:
+    - cron: "0 5 * * 6"     # Saturday 05:00 UTC = 07:00 Paris (summer) / 06:00 (winter)
+  workflow_dispatch: {}     # "Run workflow" button for manual runs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Scan
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: python scanner/scan.py
+
+      - name: Archive results on main (small JSON + universe cache)
+        run: |
+          git config --global user.name  "dc-idea-engine-bot"
+          git config --global user.email "actions@users.noreply.github.com"
+          D=$(date -u +%F)
+          mkdir -p history data
+          cp out/results.json "history/$D.json"
+          [ -f out/universe.csv ] && cp out/universe.csv data/universe.csv
+          git add history data
+          git commit -m "scan $D" || echo "nothing to commit"
+          git push
+
+      - name: Publish charts to 'output' branch (overwritten weekly, no history bloat)
+        run: |
+          D=$(date -u +%F)
+          cd out
+          git init -q -b output
+          git add -A
+          git commit -qm "scan $D"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" output

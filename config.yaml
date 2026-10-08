@@ -1,0 +1,35 @@
+# DC idea engine — all tunables live here.
+
+universe:
+  min_market_cap: 2.0e+9        # USD
+  min_avg_volume: 300000        # 30D average shares; drops illiquid names
+  exchanges: [NYSE, NASDAQ, AMEX]
+
+selection:
+  pool_per_side_per_sector: 25  # names per sector/side pulled for full history + smoothness
+  quota_per_side_per_sector: 6  # charts per sector/side (11 sectors x 2 sides x 6 = 132)
+
+strategies:
+  s1:
+    enabled: true
+    mode: follow                # follow = trade the thrust direction; fade = inverse it
+    bonus_200_over_50: true     # rewards the "21 +++ / 50 + / 200 ++" shape
+  s2:
+    enabled: true
+    perf_field: p3m             # p3m or p1m
+    leader_pct: 0.80            # top 20% of sector on perf -> long pullback candidates
+    laggard_pct: 0.20           # bottom 20% -> short bounce candidates
+  s3:
+    enabled: true
+    band_pct: 3.0               # |distance from 200D| <= this
+    short_breakdowns: true      # also flag breakdowns through the 200D as shorts
+    min_r2: 0.55                # "straight picture" requirement (63D log-price fit)
+    max_sma21_crosses: 6        # in the last 63 sessions
+
+ranking:
+  weight_signal: 0.6
+  weight_smoothness: 0.4
+
+charts:
+  display_sessions: 130         # ~6 months on screen
+  history_sessions: 400         # enough for a valid 200D across the display window
