@@ -13,6 +13,11 @@ import pandas as pd
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scanner"))
 import scan  # noqa: E402
+import tempfile  # noqa: E402
+
+TMP = pathlib.Path(tempfile.mkdtemp(prefix="dcie-"))
+scan.OUT = TMP / "out"
+scan.CACHE = TMP / "universe.csv"   # never touch the real cache
 
 rng = np.random.default_rng(7)
 SECTORS = {v: k for k, v in scan.TV_SECTOR.items()}  # one TV sector per supersector
@@ -86,9 +91,9 @@ def check(res, label):
     assert per.max() <= scan.CFG["selection"]["quota_per_side_per_sector"], per
     assert df.supersector.nunique() == 11, df.supersector.unique()
     assert set(df.side) == {"long", "short"}
-    assert all((ROOT / "out" / x).exists() for x in df.chart)
+    assert all((scan.OUT / x).exists() for x in df.chart)
     assert not df.duplicated(["symbol", "side"]).any()
-    json.loads((ROOT / "out" / "results.json").read_text())  # strict JSON
+    json.loads((scan.OUT / "results.json").read_text())  # strict JSON
     tags = pd.Series([t for ts in df.tags for t in ts]).value_counts().to_dict()
     print(f"[{label}] source={res['source']} universe={res['universe_count']} pool={res['pool_count']} "
           f"charts={len(c)} tags={tags}")
@@ -99,9 +104,7 @@ def check(res, label):
 
 
 if __name__ == "__main__":
-    shutil.rmtree(ROOT / "out", ignore_errors=True)
     check(scan.run(fake_tv, fake_hist), "tradingview path")
-    (ROOT / "data").mkdir(exist_ok=True)
-    shutil.copy(ROOT / "out" / "universe.csv", ROOT / "data" / "universe.csv")
+    shutil.copy(scan.OUT / "universe.csv", scan.CACHE)
     check(scan.run(broken_tv, fake_hist), "fallback path")
     print("OK")

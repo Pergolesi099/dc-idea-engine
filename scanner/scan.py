@@ -27,6 +27,7 @@ import yaml
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
 OUT = ROOT / "out"
+CACHE = ROOT / "data" / "universe.csv"
 log = logging.getLogger("scan")
 
 # ---------------------------------------------------------------- sector mapping
@@ -343,7 +344,7 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     shutil.rmtree(OUT / "charts", ignore_errors=True)
     (OUT / "charts").mkdir(parents=True)
     sel, ch = CFG["selection"], CFG["charts"]
-    cache = ROOT / "data" / "universe.csv"
+    cache = CACHE
     etfs = list(SECTOR_ETF.values())
 
     try:
