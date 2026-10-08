@@ -366,8 +366,25 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     pool = pd.concat(pool, ignore_index=True).drop_duplicates(["symbol", "side"])
     log.info("Candidate pool: %d (side-rows)", len(pool))
 
+    funnel: dict[str, dict] = {}
+
+    def stage(name: str, frame: pd.DataFrame | None, per_side_col: str | None = None) -> None:
+        for side in ("long", "short"):
+            if per_side_col:   # scored universe: one row per symbol, side via score column
+                cnt = frame.dropna(subset=[f"{side}_score"]).groupby("supersector").size()
+            else:
+                cnt = frame[frame.side == side].groupby("supersector").size() if len(frame) else pd.Series(dtype=int)
+            for ss in SECTOR_ETF:
+                funnel.setdefault(f"{ss}|{side}", {})[name] = int(cnt.get(ss, 0))
+
+    stage("triggered", scored, per_side_col="score")
+    stage("pooled", pool)
+
     hist = history_fn(sorted(set(pool.symbol)) + etfs, ch["history_sessions"])
     etf_close = {e: hist[e].Close for e in etfs if e in hist}
+    missing_history = sorted(set(pool.symbol) - set(hist))
+    log.info("History: %d/%d symbols, %d missing, ETFs %d/%d", len(set(pool.symbol)) - len(missing_history),
+             len(set(pool.symbol)), len(missing_history), len(etf_close), len(etfs))
 
     exact = []
     for r in pool.to_dict("records"):
@@ -379,11 +396,13 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
             continue
         exact.append({**r, **m})   # history-based 21/50/200D overwrite TradingView's approximations
     cand = pd.DataFrame(exact)
+    stage("with_history", cand)
 
     s3 = CFG["strategies"]["s3"]
     only_s3 = cand.tags.apply(lambda t: t == ["S3"])
     choppy = (cand.r2_63 < s3["min_r2"]) | (cand.sma21_crosses_63 > s3["max_sma21_crosses"])
     cand = cand[~(only_s3 & choppy)].copy()
+    stage("after_chop_filter", cand)
 
     w = CFG["ranking"]
     cand["smooth_score"] = smoothness_score(cand)
@@ -391,6 +410,7 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     final = (cand.sort_values("final_score", ascending=False)
              .groupby(["supersector", "side"]).head(sel["quota_per_side_per_sector"])
              .sort_values(["supersector", "side", "final_score"], ascending=[True, True, False]))
+    stage("final", final)
 
     records = []
     for r in final.to_dict("records"):
@@ -414,6 +434,8 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
         "universe_count": int(len(uni)),
         "pool_count": int(len(pool)),
         "candidate_count": len(records),
+        "history_missing": missing_history,
+        "funnel": funnel,
         "config": CFG,
         "candidates": records,
     }
