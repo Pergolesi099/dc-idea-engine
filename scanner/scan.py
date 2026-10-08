@@ -462,6 +462,13 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
              .sort_values(["supersector", "side", "final_score"], ascending=[True, True, False]))
     stage("final", final)
 
+    # last 126 daily log returns for finalists + sector ETFs -> pair correlation / vol ratio downstream
+    rets = {}
+    for s in sorted(set(final.symbol)) + [e for e in etfs if e in hist]:
+        c = hist[s].Close.astype(float)
+        rets[s] = np.log(c).diff().iloc[-126:]
+    pd.DataFrame(rets).round(6).to_csv(OUT / "returns.csv")
+
     records = []
     for r in final.to_dict("records"):
         sym = r["symbol"]
