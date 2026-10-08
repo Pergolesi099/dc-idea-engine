@@ -26,6 +26,11 @@ strategies:
     min_r2: 0.55                # "straight picture" requirement (63D log-price fit)
     max_sma21_crosses: 6        # in the last 63 sessions
 
+  mom:
+    enabled: true               # fill tier: only used for slots S1/S2/S3 leave empty
+    leader_pct: 0.80            # avg of 1W/1M/3M sector percentiles >= this, and above 50D -> long
+    laggard_pct: 0.20           # <= this, and below 50D -> short
+
 ranking:
   weight_signal: 0.6
   weight_smoothness: 0.4

@@ -259,6 +259,17 @@ def score_signals(df: pd.DataFrame) -> pd.DataFrame:
 
     for side in ("long", "short"):
         df[f"{side}_score"] = pd.concat(scores[side], axis=1).max(axis=1) if scores[side] else np.nan
+        df[f"{side}_mom"] = np.nan
+
+    if s.get("mom", {}).get("enabled"):
+        comp = (_pct_in_sector(df, "p1w") + _pct_in_sector(df, "p1m") + _pct_in_sector(df, "p3m")) / 3
+        lm = (comp >= s["mom"]["leader_pct"]) & (df.d50 > 0)
+        sm = (comp <= s["mom"]["laggard_pct"]) & (df.d50 < 0)
+        df["long_mom"] = comp.where(lm)
+        df["short_mom"] = (1 - comp).where(sm)
+        for side, mask in (("long", lm), ("short", sm)):
+            for i in df.index[mask.fillna(False)]:
+                df.at[i, f"{side}_tags"].append("MOM")
     return df
 
 
@@ -359,10 +370,12 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
 
     pool = []
     for side in ("long", "short"):
-        top = (scored.dropna(subset=[f"{side}_score"])
-               .sort_values(f"{side}_score", ascending=False)
+        cs = scored[scored[f"{side}_score"].notna() | scored[f"{side}_mom"].notna()].copy()
+        cs["has_rule"] = cs[f"{side}_score"].notna()          # S1/S2/S3 hits outrank MOM fill
+        cs["signal_score"] = cs[f"{side}_score"].fillna(cs[f"{side}_mom"])
+        top = (cs.sort_values(["has_rule", "signal_score"], ascending=False)
                .groupby("supersector").head(sel["pool_per_side_per_sector"]))
-        pool.append(top.assign(side=side, signal_score=top[f"{side}_score"], tags=top[f"{side}_tags"]))
+        pool.append(top.assign(side=side, tags=top[f"{side}_tags"]))
     pool = pd.concat(pool, ignore_index=True).drop_duplicates(["symbol", "side"])
     log.info("Candidate pool: %d (side-rows)", len(pool))
 
@@ -377,7 +390,7 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
             for ss in SECTOR_ETF:
                 funnel.setdefault(f"{ss}|{side}", {})[name] = int(cnt.get(ss, 0))
 
-    stage("triggered", scored, per_side_col="score")
+    stage("triggered_rules", scored, per_side_col="score")
     stage("pooled", pool)
 
     hist = history_fn(sorted(set(pool.symbol)) + etfs, ch["history_sessions"])
@@ -399,15 +412,15 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     stage("with_history", cand)
 
     s3 = CFG["strategies"]["s3"]
-    only_s3 = cand.tags.apply(lambda t: t == ["S3"])
+    soft = cand.tags.apply(lambda t: set(t) <= {"S3", "MOM"})   # S3-only or MOM-only: must look clean
     choppy = (cand.r2_63 < s3["min_r2"]) | (cand.sma21_crosses_63 > s3["max_sma21_crosses"])
-    cand = cand[~(only_s3 & choppy)].copy()
+    cand = cand[~(soft & choppy)].copy()
     stage("after_chop_filter", cand)
 
     w = CFG["ranking"]
     cand["smooth_score"] = smoothness_score(cand)
     cand["final_score"] = w["weight_signal"] * cand.signal_score + w["weight_smoothness"] * cand.smooth_score
-    final = (cand.sort_values("final_score", ascending=False)
+    final = (cand.sort_values(["has_rule", "final_score"], ascending=False)
              .groupby(["supersector", "side"]).head(sel["quota_per_side_per_sector"])
              .sort_values(["supersector", "side", "final_score"], ascending=[True, True, False]))
     stage("final", final)
@@ -423,7 +436,7 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
             continue
         keep = ["symbol", "company", "exchange", "supersector", "industry", "side", "tags", "mcap", "close",
                 "d21", "d50", "d200", "p1w", "p1m", "p3m", "r2_63", "er_63", "sma21_crosses_63",
-                "slope_63_ann", "rs_1m", "rs_3m", "signal_score", "smooth_score", "final_score"]
+                "slope_63_ann", "rs_1m", "rs_3m", "has_rule", "signal_score", "smooth_score", "final_score"]
         rec = {k: r.get(k) for k in keep}
         rec["chart"] = f"charts/{fn}"
         records.append(rec)
