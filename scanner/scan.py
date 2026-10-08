@@ -191,6 +191,8 @@ def metrics_from_history(h: pd.DataFrame, etf: pd.Series | None) -> dict:
         "p1m": (c.iloc[-1] / c.iloc[-22] - 1) * 100,
         "p3m": (c.iloc[-1] / c.iloc[-64] - 1) * 100,
     }
+    m["sessions"] = len(c)
+    m["vol_63_ann"] = float(np.log(c).diff().iloc[-63:].std() * np.sqrt(252) * 100)
     w = c.iloc[-63:]
     y = np.log(w.values)
     x = np.arange(len(y))
@@ -272,6 +274,33 @@ def score_signals(df: pd.DataFrame) -> pd.DataFrame:
             for i in df.index[mask.fillna(False)]:
                 df.at[i, f"{side}_tags"].append("MOM")
     return df
+
+
+def revalidate_tags(r: dict) -> list[str]:
+    """Re-check each tag on exact history-based distances (TradingView only has a 20D SMA)."""
+    s = CFG["strategies"]
+    long_side = r["side"] == "long"
+    d21, d50, d200, p1m = r["d21"], r["d50"], r["d200"], r["p1m"]
+    if None in (d21, d50, d200, p1m):
+        return []
+    keep = []
+    for t in r["tags"]:
+        if t == "S1":
+            up = d21 > 0 and d50 > 0 and d200 > 0 and d21 > max(d50, d200)
+            dn = d21 < 0 and d50 < 0 and d200 < 0 and d21 < min(d50, d200)
+            want_up = long_side if s["s1"]["mode"] == "follow" else not long_side
+            ok = up if want_up else dn
+        elif t == "S2":
+            ok = (d21 < 0 < d50) if long_side else (d50 < 0 < d21)
+        elif t == "S3":
+            ok = abs(d200) <= s["s3"]["band_pct"] and (p1m > 0 if long_side else p1m < 0)
+        elif t == "MOM":
+            ok = d50 > 0 if long_side else d50 < 0
+        else:
+            ok = True
+        if ok:
+            keep.append(t)
+    return keep
 
 
 def smoothness_score(df: pd.DataFrame) -> pd.Series:
@@ -412,6 +441,13 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
     cand = pd.DataFrame(exact)
     stage("with_history", cand)
 
+    u = CFG["universe"]
+    cand = cand[(cand.sessions >= u["min_history_sessions"]) & (cand.vol_63_ann <= u["max_ann_vol_pct"])].copy()
+    cand["tags"] = [revalidate_tags(r) for r in cand.to_dict("records")]
+    cand = cand[cand.tags.str.len() > 0].copy()
+    cand["has_rule"] = cand.tags.apply(lambda t: any(x in ("S1", "S2", "S3") for x in t))
+    stage("after_vol_history_retag", cand)
+
     s3 = CFG["strategies"]["s3"]
     soft = cand.tags.apply(lambda t: set(t) <= {"S3", "MOM"})   # S3-only or MOM-only: must look clean
     choppy = (cand.r2_63 < s3["min_r2"]) | (cand.sma21_crosses_63 > s3["max_sma21_crosses"])
@@ -437,7 +473,7 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
             continue
         keep = ["symbol", "company", "exchange", "supersector", "industry", "side", "tags", "mcap", "close",
                 "d21", "d50", "d200", "p1w", "p1m", "p3m", "r2_63", "er_63", "sma21_crosses_63",
-                "slope_63_ann", "rs_1m", "rs_3m", "has_rule", "signal_score", "smooth_score", "final_score"]
+                "slope_63_ann", "vol_63_ann", "sessions", "rs_1m", "rs_3m", "has_rule", "signal_score", "smooth_score", "final_score"]
         rec = {k: r.get(k) for k in keep}
         rec["chart"] = f"charts/{fn}"
         records.append(rec)

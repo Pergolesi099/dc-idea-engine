@@ -4,6 +4,8 @@ universe:
   min_market_cap: 2.0e+9        # USD
   min_avg_volume: 300000        # 30D average shares; drops illiquid names
   exchanges: [NYSE, NASDAQ, AMEX]
+  min_history_sessions: 250     # excludes recent IPOs (no reliable 200D)
+  max_ann_vol_pct: 80           # 63D annualised vol cap; keeps pair legs balanceable
 
 selection:
   pool_per_side_per_sector: 25  # names per sector/side pulled for full history + smoothness
