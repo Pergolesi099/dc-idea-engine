@@ -2,7 +2,7 @@
 import json, sys, traceback
 import requests
 out = []
-UAS = ["dc-idea-engine research bot pergolesi099@users.noreply.github.com",
+UAS = ["Sample Company Name AdminContact@example.com","dc-idea-engine research bot pergolesi099@users.noreply.github.com",
        "DC Idea Engine pergolesi099@users.noreply.github.com",
        "Pergolesi099 Research pergolesi099@users.noreply.github.com",
        "Mozilla/5.0 (compatible; dc-idea-engine; +https://github.com/Pergolesi099) pergolesi099@users.noreply.github.com"]
@@ -13,7 +13,8 @@ for ua in UAS:
             out.append(f"SEC {r.status_code} {url[-35:]} UA={ua[:40]} body={r.text[:120]!r}")
         except Exception as e:
             out.append(f"SEC err {e}")
-for url in ("https://feeds.finance.yahoo.com/rss/2.0/headline?s=CAT&region=US&lang=en-US",
+for url in ("https://efts.sec.gov/LATEST/search-index?q=%22guidance%22&forms=8-K",
+            "https://feeds.finance.yahoo.com/rss/2.0/headline?s=CAT&region=US&lang=en-US",
             "https://news.google.com/rss/search?q=Caterpillar+CAT+stock+when:21d&hl=en-US&gl=US&ceid=US:en",
             "https://query2.finance.yahoo.com/v1/finance/search?q=CAT&newsCount=8&quotesCount=0"):
     try:
