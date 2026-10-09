@@ -1,0 +1,1565 @@
+symbol,company,exchange,sector,industry,supersector,mcap
+NVDA,NVIDIA Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,5525647897570.095
+AAPL,Apple Inc.,NASDAQ,Electronic Technology,Telecommunications Equipment,Technology,4912984843791.243
+GOOG,Alphabet Inc.,NASDAQ,Technology Services,Internet Software/Services,Communication,4277519071531.4497
+MSFT,Microsoft Corporation,NASDAQ,Technology Services,Packaged Software,Technology,3973186471246.2007
+AMZN,"Amazon.com, Inc.",NASDAQ,Retail Trade,Internet Retail,Consumer Discretionary,2830652474732.0854
+META,"Meta Platforms, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,1830816270501.6697
+AVGO,Broadcom Inc.,NASDAQ,Electronic Technology,Semiconductors,Technology,1725858218029.766
+TSLA,"Tesla, Inc.",NASDAQ,Consumer Durables,Motor Vehicles,Consumer Discretionary,1511491869360.1443
+MU,"Micron Technology, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,1162145426984.6853
+LLY,Eli Lilly and Company,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,1110114111860.2556
+AMD,"Advanced Micro Devices, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,992708020939.4681
+JPM,JP Morgan Chase & Co.,NYSE,Finance,Major Banks,Financials,885149485005.5826
+WMT,Walmart Inc.,NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,883422608031.6625
+V,Visa Inc.,NYSE,Finance,Finance/Rental/Leasing,Financials,719653416042.8834
+XOM,ExxonMobil Holdings Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,694666431758.1257
+JNJ,Johnson & Johnson,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,630043874488.0123
+INTC,Intel Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,553455252042.2404
+MA,Mastercard Incorporated,NYSE,Finance,Finance/Rental/Leasing,Financials,516092502657.43835
+PLTR,Palantir Technologies Inc.,NASDAQ,Technology Services,Packaged Software,Technology,502359331554.2537
+ABBV,AbbVie Inc.,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,488554946658.5307
+CSCO,"Cisco Systems, Inc.",NASDAQ,Electronic Technology,Telecommunications Equipment,Technology,466762833372.4205
+ORCL,Oracle Corporation,NYSE,Technology Services,Packaged Software,Technology,427556289968.20105
+COST,Costco Wholesale Corporation,NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,419608020909.49255
+CVX,Chevron Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,418823993546.5562
+AMAT,"Applied Materials, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,402377701645.2696
+LRCX,Lam Research Corporation,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,399004124485.30444
+BAC,Bank of America Corporation,NYSE,Finance,Major Banks,Financials,379846104754.489
+KO,Coca-Cola Company (The),NYSE,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,378839409826.7979
+DELL,Dell Technologies Inc.,NYSE,Electronic Technology,Computer Processing Hardware,Technology,372624417634.8447
+CAT,"Caterpillar, Inc.",NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,367955936379.80774
+MRK,"Merck & Company, Inc.",NYSE,Health Technology,Pharmaceuticals: Major,Health Care,359220201771.7994
+PG,Procter & Gamble Company (The),NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,351257732957.352
+PANW,"Palo Alto Networks, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,342562040000.0
+UNH,UnitedHealth Group Incorporated,NYSE,Health Services,Managed Health Care,Health Care,340457737289.7159
+GE,GE Aerospace,NYSE,Electronic Technology,Aerospace & Defense,Technology,319776757391.2336
+PM,Philip Morris International Inc,NYSE,Consumer Non-Durables,Tobacco,Consumer Staples,313577455173.52014
+MS,Morgan Stanley,NYSE,Finance,Investment Managers,Financials,298439009206.9613
+NFLX,"Netflix, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,292724976632.95795
+HD,"Home Depot, Inc. (The)",NYSE,Retail Trade,Home Improvement Chains,Consumer Discretionary,290068286036.1319
+CRWD,"CrowdStrike Holdings, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,281623041824.2537
+ANET,"Arista Networks, Inc.",NYSE,Electronic Technology,Computer Peripherals,Technology,273357823417.1895
+GEV,GE Vernova Inc.,NYSE,Producer Manufacturing,Electrical Products,Industrials,267593338978.5318
+GS,"Goldman Sachs Group, Inc. (The)",NYSE,Finance,Investment Banks/Brokers,Financials,260691601212.2011
+TXN,Texas Instruments Incorporated,NASDAQ,Electronic Technology,Semiconductors,Technology,259124907886.72488
+KLAC,KLA Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,255220116868.49966
+WFC,Wells Fargo & Company,NYSE,Finance,Major Banks,Financials,252655135046.3172
+RTX,RTX Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,250642598454.23648
+TMO,Thermo Fisher Scientific Inc,NYSE,Health Technology,Medical Specialties,Health Care,243301100487.07196
+MRVL,"Marvell Technology, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,241393041939.386
+SNDK,Sandisk Corporation,NASDAQ,Electronic Technology,Computer Peripherals,Technology,228616575255.16385
+AMGN,Amgen Inc.,NASDAQ,Health Technology,Biotechnology,Health Care,224292007084.56296
+LIN,Linde plc,NASDAQ,Process Industries,Chemicals: Specialty,Materials,222989940176.77048
+SHOP,Shopify Inc.,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,219823134743.50784
+C,"Citigroup, Inc.",NYSE,Finance,Major Banks,Financials,217462905657.8335
+APH,Amphenol Corporation,NYSE,Electronic Technology,Electronic Components,Technology,215130963888.81717
+IBM,International Business Machines Corporation,NYSE,Technology Services,Information Technology Services,Technology,213986986715.01425
+AXP,American Express Company,NYSE,Finance,Finance/Rental/Leasing,Financials,208110229642.9482
+ADI,"Analog Devices, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,196825640729.38016
+CRM,"Salesforce, Inc.",NYSE,Technology Services,Packaged Software,Technology,188573992526.66617
+GILD,"Gilead Sciences, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,187444016937.35687
+QCOM,QUALCOMM Incorporated,NASDAQ,Electronic Technology,Semiconductors,Technology,187405822459.45117
+DIS,Walt Disney Company (The),NYSE,Consumer Services,Movies/Entertainment,Communication,186568512574.55334
+STX,Seagate Technology Holdings PLC,NASDAQ,Electronic Technology,Computer Peripherals,Technology,178048737957.93243
+SCCO,Southern Copper Corporation,NYSE,Non-Energy Minerals,Other Metals/Minerals,Materials,176645146424.79523
+BLK,"BlackRock, Inc.",NYSE,Finance,Investment Managers,Financials,175862598933.9586
+VZ,Verizon Communications Inc.,NYSE,Communications,Wireless Telecommunications,Communication,173046389322.89966
+ABT,Abbott Laboratories,NYSE,Health Technology,Medical Specialties,Health Care,172346173019.20193
+PEP,"PepsiCo, Inc.",NASDAQ,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,171935374765.89996
+DE,Deere & Company,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,167418501975.05997
+SCHW,Charles Schwab Corporation (The),NYSE,Finance,Investment Banks/Brokers,Financials,167226766288.79428
+ETN,"Eaton Corporation, PLC",NYSE,Producer Manufacturing,Electrical Products,Industrials,166876061216.5539
+MCD,McDonald's Corporation,NYSE,Consumer Services,Restaurants,Consumer Discretionary,166458500932.6922
+UNP,Union Pacific Corporation,NYSE,Transportation,Railroads,Industrials,165354982061.7179
+WELL,Welltower Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,162506355396.10263
+NEE,"NextEra Energy, Inc.",NYSE,Utilities,Electric Utilities,Utilities,161413004377.45535
+PFE,"Pfizer, Inc.",NYSE,Health Technology,Pharmaceuticals: Major,Health Care,161186760282.5665
+COP,ConocoPhillips,NYSE,Energy Minerals,Oil & Gas Production,Energy,161099364954.83566
+TMUS,"T-Mobile US, Inc.",NASDAQ,Communications,Wireless Telecommunications,Communication,159377548642.00058
+DHR,Danaher Corporation,NYSE,Health Technology,Medical Specialties,Health Care,154523375891.36777
+TJX,"TJX Companies, Inc. (The)",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,152632392104.99026
+T,AT&T Inc.,NYSE,Communications,Wireless Telecommunications,Communication,151985920890.49536
+BA,Boeing Company (The),NYSE,Electronic Technology,Aerospace & Defense,Technology,150462735970.20352
+ISRG,"Intuitive Surgical, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,149775761555.97226
+IBKR,"Interactive Brokers Group, Inc.",NASDAQ,Finance,Investment Banks/Brokers,Financials,149494039316.12997
+WDC,Western Digital Corporation,NASDAQ,Electronic Technology,Computer Peripherals,Technology,148711148857.41708
+UBER,"Uber Technologies, Inc.",NYSE,Transportation,Other Transportation,Industrials,146063474076.5413
+NOW,"ServiceNow, Inc.",NYSE,Technology Services,Packaged Software,Technology,145649240000.0
+FTNT,"Fortinet, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,142890732700.00528
+BX,Blackstone Inc.,NYSE,Finance,Investment Managers,Financials,141929535807.79126
+GLW,Corning Incorporated,NYSE,Electronic Technology,Electronic Components,Technology,134962321348.54254
+CB,Chubb Limited,NYSE,Finance,Property/Casualty Insurance,Financials,131634903304.7042
+SNOW,Snowflake Inc.,NYSE,Technology Services,Packaged Software,Technology,130144385184.02141
+VRTX,Vertex Pharmaceuticals Incorporated,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,129285347216.90897
+NET,"Cloudflare, Inc.",NYSE,Technology Services,Information Technology Services,Technology,128519856829.92372
+ACN,Accenture plc,NYSE,Technology Services,Information Technology Services,Technology,127932623885.32454
+MPC,Marathon Petroleum Corporation,NYSE,Energy Minerals,Oil Refining/Marketing,Energy,127783679316.42207
+PGR,Progressive Corporation (The),NYSE,Finance,Multi-Line Insurance,Financials,126348565223.49522
+PLD,"Prologis, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,125511428217.07759
+VLO,Valero Energy Corporation,NYSE,Energy Minerals,Oil Refining/Marketing,Energy,124888532217.42903
+NEM,Newmont Corporation,NYSE,Non-Energy Minerals,Precious Metals,Materials,124167099284.82007
+COF,Capital One Financial Corporation,NYSE,Finance,Major Banks,Financials,122242977953.31483
+PH,Parker-Hannifin Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,121390765629.03166
+BMY,Bristol-Myers Squibb Company,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,120765290840.30212
+BKNG,Booking Holdings Inc. Common Stock,NASDAQ,Consumer Services,Other Consumer Services,Consumer Discretionary,120476349193.59293
+SPGI,S&P Global Inc.,NYSE,Commercial Services,Financial Publishing/Services,Industrials,120225334301.80484
+MO,"Altria Group, Inc.",NYSE,Consumer Non-Durables,Tobacco,Consumer Staples,119687239431.95743
+LMT,Lockheed Martin Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,117608664856.89893
+MDT,Medtronic plc.,NYSE,Health Technology,Medical Specialties,Health Care,113180954687.97267
+PSX,Phillips 66,NYSE,Energy Minerals,Oil Refining/Marketing,Energy,110999637630.89389
+CVS,CVS Health Corporation,NYSE,Retail Trade,Drugstore Chains,Health Care,110196088058.55853
+MCK,McKesson Corporation,NYSE,Distribution Services,Medical Distributors,Health Care,109459695975.29399
+SPOT,Spotify Technology S.A.,NYSE,Technology Services,Internet Software/Services,Communication,108940577574.19754
+ADP,"Automatic Data Processing, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,107336625952.87172
+SYK,Stryker Corporation,NYSE,Health Technology,Medical Specialties,Health Care,106376308480.89214
+PWR,"Quanta Services, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,106133410999.1757
+FCX,"Freeport-McMoRan, Inc.",NYSE,Non-Energy Minerals,Other Metals/Minerals,Materials,105820125428.51323
+CEG,Constellation Energy Corporation,NASDAQ,Utilities,Electric Utilities,Utilities,105608401396.92719
+DDOG,"Datadog, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,105302342288.84848
+TT,Trane Technologies plc,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,104946656035.87889
+LOW,"Lowe's Companies, Inc.",NYSE,Retail Trade,Home Improvement Chains,Consumer Discretionary,104356050369.4043
+SBUX,Starbucks Corporation,NASDAQ,Consumer Services,Restaurants,Consumer Discretionary,103454998983.55328
+EQIX,"Equinix, Inc.",NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,101243065668.50818
+CME,CME Group Inc.,NASDAQ,Finance,Investment Banks/Brokers,Financials,100883554945.3014
+LITE,Lumentum Holdings Inc.,NASDAQ,Producer Manufacturing,Electrical Products,Industrials,99945052317.08168
+ABNB,"Airbnb, Inc.",NASDAQ,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,99320581050.11029
+SO,Southern Company (The),NYSE,Utilities,Electric Utilities,Utilities,99126784663.14963
+HOOD,"Robinhood Markets, Inc.",NASDAQ,Finance,Investment Banks/Brokers,Financials,98017952997.00252
+SNPS,"Synopsys, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,97732771286.67438
+HCA,"HCA Healthcare, Inc.",NYSE,Health Services,Hospital/Nursing Management,Health Care,97661661685.68314
+HPE,Hewlett Packard Enterprise Company,NYSE,Electronic Technology,Computer Processing Hardware,Technology,97515558454.32309
+CDNS,"Cadence Design Systems, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,97169666994.9186
+BNY,The Bank of New York Mellon Corporation,NYSE,Finance,Investment Banks/Brokers,Financials,96829327714.05138
+MELI,"MercadoLibre, Inc.",NASDAQ,Retail Trade,Internet Retail,Consumer Discretionary,95809349681.66618
+MAR,Marriott International,NASDAQ,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,95409168974.11166
+JCI,Johnson Controls International plc,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,95367944296.41974
+ADBE,Adobe Inc.,NASDAQ,Technology Services,Packaged Software,Technology,94291488150.90274
+VRT,"Vertiv Holdings, LLC",NYSE,Electronic Technology,Electronic Production Equipment,Technology,93467431056.19908
+APP,Applovin Corporation,NASDAQ,Technology Services,Packaged Software,Technology,92711709530.02228
+DUK,Duke Energy Corporation (Holding Company),NYSE,Utilities,Electric Utilities,Utilities,90952259883.84415
+BN,Brookfield Corporation,NYSE,Finance,Investment Managers,Financials,90948245380.02678
+EMR,Emerson Electric Company,NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,90268770639.47887
+HWM,Howmet Aerospace Inc.,NYSE,Electronic Technology,Aerospace & Defense,Technology,89834000486.50996
+MRNA,"Moderna, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,89828070831.09137
+GD,General Dynamics Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,89627478653.36073
+ELV,"Elevance Health, Inc.",NYSE,Health Services,Managed Health Care,Health Care,89501957853.70628
+USB,U.S. Bancorp,NYSE,Finance,Major Banks,Financials,88933578497.01631
+WMB,"Williams Companies, Inc. (The)",NYSE,Industrial Services,Oil & Gas Pipelines,Energy,88887576306.12193
+ICE,Intercontinental Exchange Inc.,NYSE,Finance,Investment Banks/Brokers,Financials,87684205747.50601
+CSX,CSX Corporation,NASDAQ,Transportation,Railroads,Industrials,87547961859.24121
+PNC,"PNC Financial Services Group, Inc. (The)",NYSE,Finance,Major Banks,Financials,87452437790.91164
+MNST,Monster Beverage Corporation,NASDAQ,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,85493021699.737
+DASH,"DoorDash, Inc.",NASDAQ,Transportation,Air Freight/Couriers,Industrials,85148153247.12846
+AMT,American Tower Corporation (REIT),NYSE,Finance,Real Estate Investment Trusts,Real Estate,84916557789.93967
+MRSH,Marsh,NYSE,Finance,Insurance Brokers/Services,Financials,83874652506.89627
+WM,"Waste Management, Inc.",NYSE,Industrial Services,Environmental Services,Industrials,83472523348.35806
+BE,Bloom Energy Corporation,NYSE,Electronic Technology,Electronic Production Equipment,Technology,82614922139.72398
+MMM,3M Company,NYSE,Producer Manufacturing,Industrial Conglomerates,Industrials,82494957964.2702
+KKR,KKR & Co. Inc.,NYSE,Finance,Investment Managers,Financials,81639957423.94708
+INTU,Intuit Inc.,NASDAQ,Technology Services,Packaged Software,Technology,80905698008.69998
+UPS,"United Parcel Service, Inc.",NYSE,Transportation,Air Freight/Couriers,Industrials,80458408101.66133
+MCO,Moody's Corporation,NYSE,Commercial Services,Financial Publishing/Services,Industrials,80404635011.19994
+CTAS,Cintas Corporation,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,80371969800.41214
+ECL,Ecolab Inc.,NYSE,Process Industries,Chemicals: Specialty,Materials,79005005164.927
+EPD,Enterprise Products Partners L.P.,NYSE,Industrial Services,Oil & Gas Pipelines,Energy,77913940800.40924
+NU,Nu Holdings Ltd.,NYSE,Finance,Regional Banks,Financials,77867410511.03252
+EOG,"EOG Resources, Inc.",NYSE,Energy Minerals,Integrated Oil,Energy,77714239664.60872
+SHW,Sherwin-Williams Company (The),NYSE,Process Industries,Industrial Specialties,Materials,77527246785.57494
+MDLZ,"Mondelez International, Inc.",NASDAQ,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,77101762950.33063
+TRV,"The Travelers Companies, Inc.",NYSE,Finance,Property/Casualty Insurance,Financials,76912033468.8538
+REGN,"Regeneron Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,76860016212.4201
+RCL,Royal Caribbean Cruises Ltd.,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,75491027172.24937
+ITW,Illinois Tool Works Inc.,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,75224218347.41246
+BAM,Brookfield Asset Management Inc,NYSE,Finance,Investment Managers,Financials,75162087466.84691
+CI,The Cigna Group,NYSE,Health Services,Managed Health Care,Health Care,74629446642.0394
+MSI,"Motorola Solutions, Inc.",NYSE,Electronic Technology,Telecommunications Equipment,Technology,73509023916.53569
+HLT,Hilton Worldwide Holdings Inc.,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,73497199242.05463
+CMCSA,Comcast Corporation,NASDAQ,Consumer Services,Cable/Satellite TV,Communication,73314827207.73032
+SLB,SLB Limited,NYSE,Industrial Services,Contract Drilling,Energy,72648814372.09985
+GM,General Motors Company,NYSE,Consumer Durables,Motor Vehicles,Consumer Discretionary,72591565746.28378
+KMI,"Kinder Morgan, Inc.",NYSE,Industrial Services,Oil & Gas Pipelines,Energy,72348797043.46884
+CMI,Cummins Inc.,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,72052220668.65248
+NSC,Norfolk Southern Corporation,NYSE,Transportation,Railroads,Industrials,71378291041.79901
+ROST,"Ross Stores, Inc.",NASDAQ,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,71049568568.32927
+CL,Colgate-Palmolive Company,NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,70366441001.04234
+ET,Energy Transfer LP,AMEX,Industrial Services,Oil & Gas Pipelines,Energy,70277746890.8574
+CVNA,Carvana Co.,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,70132558684.91217
+APO,"Apollo Global Management, Inc. (New)",NYSE,Finance,Investment Managers,Financials,70067954063.53166
+ORLY,"O'Reilly Automotive, Inc.",NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,69934664230.6284
+TGT,Target Corporation,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,69798150642.77798
+FDX,FedEx Corporation,NYSE,Transportation,Air Freight/Couriers,Industrials,69039136849.00826
+NOC,Northrop Grumman Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,68292543280.830414
+MPWR,"Monolithic Power Systems, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,68126454056.55736
+AEP,"American Electric Power Company, Inc.",NASDAQ,Utilities,Electric Utilities,Utilities,66857444515.286964
+RSG,"Republic Services, Inc.",NYSE,Industrial Services,Environmental Services,Industrials,66411470453.08024
+DLR,"Digital Realty Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,66319733635.64447
+HON,Honeywell International Inc.,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,65837948652.340126
+URI,"United Rentals, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,65751099486.71607
+KEYS,Keysight Technologies Inc.,NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,65161180771.18131
+MSTR,Strategy Inc,NASDAQ,Technology Services,Internet Software/Services,Communication,65128030483.16842
+SPG,"Simon Property Group, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,64522643054.21391
+CIEN,Ciena Corporation,NYSE,Electronic Technology,Telecommunications Equipment,Technology,63781222662.81024
+TEL,TE Connectivity plc,NYSE,Electronic Technology,Semiconductors,Technology,63197838788.02953
+TER,"Teradyne, Inc.",NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,62955290994.209656
+APD,"Air Products and Chemicals, Inc.",NYSE,Process Industries,Chemicals: Specialty,Materials,62632533721.30734
+MET,"MetLife, Inc.",NYSE,Finance,Multi-Line Insurance,Financials,62486447174.877426
+BSX,Boston Scientific Corporation,NYSE,Health Technology,Medical Specialties,Health Care,61925577549.38011
+COR,"Cencora, Inc.",NYSE,Distribution Services,Medical Distributors,Health Care,61799383078.449356
+TRGP,"Targa Resources, Inc.",NYSE,Utilities,Gas Distributors,Utilities,61477369924.11383
+TDG,Transdigm Group Inc.,NYSE,Electronic Technology,Aerospace & Defense,Technology,61245838118.21311
+COHR,Coherent Corp.,NYSE,Electronic Technology,Semiconductors,Technology,61221077628.4586
+FIX,"Comfort Systems USA, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,60382557653.07399
+NBIS,Nebius Group N.V.,NASDAQ,Technology Services,Packaged Software,Technology,60099037533.10103
+OXY,Occidental Petroleum Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,60088202304.118614
+AJG,Arthur J. Gallagher & Co.,NYSE,Finance,Insurance Brokers/Services,Financials,59641007936.96859
+ALAB,"Astera Labs, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,59368336522.61268
+FAST,Fastenal Company,NASDAQ,Distribution Services,Wholesale Distributors,Industrials,58235509229.89206
+ALL,Allstate Corporation (The),NYSE,Finance,Multi-Line Insurance,Financials,58013202057.45883
+AON,Aon plc,NYSE,Finance,Insurance Brokers/Services,Financials,58009943739.501915
+NTRA,"Natera, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,57760009635.44555
+LNG,"Cheniere Energy, Inc.",NYSE,Industrial Services,Oil & Gas Pipelines,Energy,57453670625.839935
+AFL,AFLAC Incorporated,NYSE,Finance,Multi-Line Insurance,Financials,57423865407.639984
+NXPI,NXP Semiconductors N.V.,NASDAQ,Electronic Technology,Semiconductors,Technology,57372393620.56519
+MPLX,MPLX LP,NYSE,Industrial Services,Oil & Gas Pipelines,Energy,57080220655.61061
+AME,"AMETEK, Inc.",NYSE,Producer Manufacturing,Electrical Products,Industrials,56989761446.66597
+PCAR,PACCAR Inc.,NASDAQ,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,56868468850.21485
+NUE,Nucor Corporation,NYSE,Non-Energy Minerals,Steel,Materials,56793786677.75904
+OKE,"ONEOK, Inc.",NYSE,Energy Minerals,Integrated Oil,Energy,56610744909.821686
+TFC,Truist Financial Corporation,NYSE,Finance,Regional Banks,Financials,56329185408.9855
+BKR,Baker Hughes Company,NASDAQ,Industrial Services,Contract Drilling,Energy,56284619134.52398
+CAH,"Cardinal Health, Inc.",NYSE,Distribution Services,Medical Distributors,Health Care,55011554289.36771
+CRH,CRH PLC,NYSE,Non-Energy Minerals,Construction Materials,Materials,54247295075.73548
+D,"Dominion Energy, Inc.",NYSE,Utilities,Electric Utilities,Utilities,54213978937.60713
+VST,Vistra Corp.,NYSE,Utilities,Electric Utilities,Utilities,54198370732.92429
+PSA,Public Storage,NYSE,Finance,Real Estate Investment Trusts,Real Estate,54161004121.753235
+DAL,"Delta Air Lines, Inc.",NYSE,Transportation,Airlines,Industrials,54036880345.42878
+FANG,"Diamondback Energy, Inc.",NASDAQ,Energy Minerals,Oil & Gas Production,Energy,53801076891.046585
+SRE,DBA Sempra,NYSE,Utilities,Gas Distributors,Utilities,53188258990.03322
+DVN,Devon Energy Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,53085998013.171715
+NDAQ,"Nasdaq, Inc.",NASDAQ,Finance,Investment Banks/Brokers,Financials,52348230941.89943
+TEAM,Atlassian Corporation,NASDAQ,Technology Services,Packaged Software,Technology,52346578522.526306
+HUM,Humana Inc.,NYSE,Health Services,Managed Health Care,Health Care,51859081532.75971
+GRMN,Garmin Ltd.,NYSE,Electronic Technology,Telecommunications Equipment,Technology,51753903758.9553
+NKE,"Nike, Inc.",NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,51555074222.0095
+P,"Everpure, Inc.",NYSE,Electronic Technology,Computer Peripherals,Technology,51480282582.005585
+O,Realty Income Corporation,NYSE,Finance,Real Estate Investment Trusts,Real Estate,51266093766.46631
+BDX,"Becton, Dickinson and Company",NYSE,Health Technology,Medical Specialties,Health Care,50051076393.30369
+EBAY,eBay Inc.,NASDAQ,Retail Trade,Internet Retail,Consumer Discretionary,49924551496.80175
+ADSK,"Autodesk, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,49188151285.559074
+ETR,Entergy Corporation,NYSE,Utilities,Electric Utilities,Utilities,49115522462.31632
+EW,Edwards Lifesciences Corporation,NYSE,Health Technology,Medical Specialties,Health Care,49115044834.49965
+F,Ford Motor Company,NYSE,Consumer Durables,Motor Vehicles,Consumer Discretionary,48529037042.26694
+WAB,Westinghouse Air Brake Technologies Corporation,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,48212219791.605736
+A,"Agilent Technologies, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,48080142657.957664
+STT,State Street Corporation,NYSE,Finance,Investment Banks/Brokers,Financials,48061817474.02456
+ROK,"Rockwell Automation, Inc.",NYSE,Producer Manufacturing,Electrical Products,Industrials,48038551472.28274
+AZO,"AutoZone, Inc.",NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,47994097097.99619
+VEEV,Veeva Systems Inc.,NYSE,Technology Services,Packaged Software,Technology,47946065355.17799
+MDLN,Medline Inc.,NASDAQ,Health Technology,Medical Specialties,Health Care,47671295111.6592
+AU,AngloGold Ashanti PLC,NYSE,Non-Energy Minerals,Precious Metals,Materials,47551503376.65213
+PYPL,"PayPal Holdings, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,47503742865.629776
+COIN,"Coinbase Global, Inc.",NASDAQ,Finance,Investment Banks/Brokers,Financials,47329719430.0
+VMRK,Vivmark Residential,NYSE,Finance,Real Estate Investment Trusts,Real Estate,47324330237.28576
+NTAP,"NetApp, Inc.",NASDAQ,Electronic Technology,Computer Peripherals,Technology,46580767970.5449
+XYZ,"Block, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,46405560728.67579
+CCEP,Coca-Cola Europacific Partners plc,NASDAQ,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,46205436701.124084
+XEL,Xcel Energy Inc.,NASDAQ,Utilities,Electric Utilities,Utilities,46082398697.58554
+FITB,Fifth Third Bancorp,NYSE,Finance,Regional Banks,Financials,45925040847.49349
+CARR,Carrier Global Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,45799502570.92747
+CRWV,"CoreWeave, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,45270123960.98259
+WDAY,"Workday, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,44968189415.8196
+TWLO,Twilio Inc.,NYSE,Technology Services,Packaged Software,Technology,44455418850.05548
+FLEX,Flex Ltd.,NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,44272444805.50654
+AMP,"Ameriprise Financial, Inc.",NYSE,Finance,Investment Managers,Financials,44211659471.25446
+LHX,"L3Harris Technologies, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,44127276944.67153
+KDP,Keurig Dr Pepper Inc.,NASDAQ,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,43219835657.87844
+EXC,Exelon Corporation,NASDAQ,Utilities,Electric Utilities,Utilities,43106922651.847595
+VTR,"Ventas, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,43017375685.863014
+IQV,"IQVIA Holdings, Inc.",NYSE,Health Technology,Biotechnology,Health Care,42776250393.2089
+WAT,Waters Corporation,NYSE,Health Technology,Medical Specialties,Health Care,42617082252.88791
+FERG,Ferguson Enterprises Inc.,NYSE,Distribution Services,Wholesale Distributors,Industrials,42567334132.45328
+ILMN,"Illumina, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,42003671162.85301
+MSCI,MSCI Inc.,NYSE,Commercial Services,Financial Publishing/Services,Industrials,41084221024.83694
+MCHP,Microchip Technology Incorporated,NASDAQ,Electronic Technology,Semiconductors,Technology,41024302967.285484
+RKLB,Rocket Lab Corporation,NASDAQ,Electronic Technology,Aerospace & Defense,Technology,40820942356.674995
+IDXX,"IDEXX Laboratories, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,40808621480.590096
+CRDO,Credo Technology Group Holding Ltd,NASDAQ,Technology Services,Information Technology Services,Technology,40700988297.26045
+RVMD,"Revolution Medicines, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Other,Health Care,40672479100.15394
+OKTA,"Okta, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,40581143153.09618
+AIG,"American International Group, Inc. New",NYSE,Finance,Multi-Line Insurance,Financials,40283688133.5185
+LYV,"Live Nation Entertainment, Inc.",NYSE,Consumer Services,Movies/Entertainment,Communication,40135515428.07815
+CMG,"Chipotle Mexican Grill, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,39974554006.17962
+TTWO,"Take-Two Interactive Software, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,39909103805.863304
+YUM,"Yum! Brands, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,39521536220.407265
+ED,"Consolidated Edison, Inc.",NYSE,Utilities,Electric Utilities,Utilities,39101002940.83593
+PRU,"Prudential Financial, Inc.",NYSE,Finance,Life/Health Insurance,Financials,39016049580.631645
+ADM,Archer-Daniels-Midland Company,NYSE,Process Industries,Agricultural Commodities/Milling,Materials,38503750597.17962
+SYY,Sysco Corporation,NYSE,Distribution Services,Food Distributors,Consumer Staples,38438156189.89488
+ZS,"Zscaler, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,38110775246.60813
+CBRE,CBRE Group Inc,NYSE,Finance,Real Estate Development,Real Estate,37876452042.99969
+ODFL,"Old Dominion Freight Line, Inc.",NASDAQ,Transportation,Trucking,Industrials,37732684405.86507
+DHI,"D.R. Horton, Inc.",NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,37726112561.514946
+PAYX,"Paychex, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,37014848816.49627
+VIK,Viking Holdings Ltd,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,36415343072.86012
+KR,Kroger Company (The),NYSE,Retail Trade,Food Retail,Consumer Staples,36403886396.0
+PEG,Public Service Enterprise Group Incorporated,NYSE,Utilities,Electric Utilities,Utilities,36025798940.15813
+ROP,"Roper Technologies, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,36008819309.60349
+EL,"Estee Lauder Companies, Inc. (The)",NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,35525749341.403206
+CCL,Carnival Corporation Ltd.,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,35430475192.12782
+HEI,Heico Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,35311020895.41792
+HIG,"The Hartford Insurance Group, Inc.",NYSE,Finance,Property/Casualty Insurance,Financials,34972283963.874275
+UAL,"United Airlines Holdings, Inc.",NASDAQ,Transportation,Airlines,Industrials,34878149878.671906
+EME,"EMCOR Group, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,34822561245.809326
+AXON,"Axon Enterprise, Inc.",NASDAQ,Electronic Technology,Aerospace & Defense,Technology,34354488747.50823
+RBLX,Roblox Corporation,NYSE,Technology Services,Packaged Software,Technology,34354339009.747147
+STLD,"Steel Dynamics, Inc.",NASDAQ,Non-Energy Minerals,Steel,Materials,34166550896.06158
+IRM,Iron Mountain Incorporated (Delaware),NYSE,Finance,Real Estate Investment Trusts,Real Estate,34089950266.483936
+KVUE,Kenvue Inc.,NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,33997691126.700504
+MLM,"Martin Marietta Materials, Inc.",NYSE,Non-Energy Minerals,Construction Materials,Materials,33972572839.967503
+CCI,Crown Castle Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,33883271287.148205
+WEC,"WEC Energy Group, Inc.",NYSE,Utilities,Electric Utilities,Utilities,33803613348.73024
+TKO,"TKO Group Holdings, Inc.",NYSE,Consumer Services,Movies/Entertainment,Communication,33691902738.023567
+BIIB,Biogen Inc.,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,33349553725.94048
+EQT,EQT Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,33046008958.75104
+EXPE,"Expedia Group, Inc.",NASDAQ,Consumer Services,Other Consumer Services,Consumer Discretionary,32911579995.801727
+VG,"Venture Global, Inc.",NYSE,Industrial Services,Oil & Gas Pipelines,Energy,32901221960.95711
+RPRX,Royalty Pharma plc,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,32737672466.76001
+HSY,The Hershey Company,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,32698681371.49834
+ACGL,Arch Capital Group Ltd.,NASDAQ,Finance,Multi-Line Insurance,Financials,32611268191.433487
+RKT,"Rocket Companies, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,32507254838.88096
+KMB,Kimberly-Clark Corporation,NASDAQ,Consumer Non-Durables,Household/Personal Care,Consumer Staples,32456387856.010746
+RMD,ResMed Inc.,NYSE,Health Technology,Medical Specialties,Health Care,32354059245.873726
+CNC,Centene Corporation,NYSE,Health Services,Managed Health Care,Health Care,32287513338.74062
+QSR,Restaurant Brands International Inc.,NYSE,Consumer Services,Restaurants,Consumer Discretionary,32247587675.71894
+JBL,Jabil Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,32094189241.91589
+DXCM,"DexCom, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,31739813915.60182
+VMC,Vulcan Materials Company (Holding Company),NYSE,Non-Energy Minerals,Construction Materials,Materials,31692366385.464478
+MTB,M&T Bank Corporation,NYSE,Finance,Regional Banks,Financials,31409091983.92986
+ALNY,"Alnylam Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,31134707688.69212
+MDB,"MongoDB, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,31089109995.393616
+HBAN,Huntington Bancshares Incorporated,NASDAQ,Finance,Major Banks,Financials,30952756297.90241
+ZTS,Zoetis Inc.,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,30913258461.873566
+NTRS,Northern Trust Corporation,NASDAQ,Finance,Investment Managers,Financials,30774971225.192047
+RDDT,"Reddit, Inc.",NYSE,Technology Services,Internet Software/Services,Communication,30766127825.51863
+IR,Ingersoll Rand Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,30554956741.009613
+RJF,"Raymond James Financial, Inc.",NYSE,Finance,Investment Managers,Financials,30466251154.903408
+BAP,Credicorp Ltd.,NYSE,Finance,Major Banks,Financials,30275316889.781796
+ON,ON Semiconductor Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,30183337999.952904
+GEHC,GE HealthCare Technologies Inc.,NASDAQ,Health Technology,Medical Specialties,Health Care,29693854559.195263
+PCG,Pacific Gas & Electric Co.,NYSE,Utilities,Electric Utilities,Utilities,28917078140.031574
+ZM,"Zoom Communications, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,28518940661.268616
+WSM,"Williams-Sonoma, Inc.",NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,28476648883.953304
+EXR,Extra Space Storage Inc,NYSE,Finance,Real Estate Investment Trusts,Real Estate,28447445448.648964
+CPNG,"Coupang, Inc.",NYSE,Retail Trade,Internet Retail,Consumer Discretionary,28436635291.10837
+AEE,Ameren Corporation,NYSE,Utilities,Electric Utilities,Utilities,28290611898.11861
+DG,Dollar General Corporation,NYSE,Retail Trade,Discount Stores,Consumer Discretionary,28069073532.053352
+ECHO,EchoStar Corporation,NASDAQ,Communications,Specialty Telecommunications,Communication,27580974987.464867
+WTW,Willis Towers Watson Public Limited Company,NASDAQ,Finance,Insurance Brokers/Services,Financials,27514239772.32995
+SMCI,"Super Micro Computer, Inc.",NASDAQ,Electronic Technology,Computer Processing Hardware,Technology,27497286820.914425
+VRSN,"VeriSign, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,27427723713.567276
+ATO,Atmos Energy Corporation,NYSE,Utilities,Gas Distributors,Utilities,27318688104.50392
+FTI,TechnipFMC plc,NYSE,Industrial Services,Oilfield Services/Equipment,Energy,27282873982.867725
+HPQ,HP Inc.,NYSE,Technology Services,Information Technology Services,Technology,27234087518.54501
+AFRM,"Affirm Holdings, Inc.",NASDAQ,Finance,Finance/Rental/Leasing,Financials,27229895575.30654
+FFIV,"F5, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,27171420958.239807
+HAL,Halliburton Company,NYSE,Industrial Services,Oilfield Services/Equipment,Energy,27118393324.734413
+NVT,nVent Electric plc,NYSE,Electronic Technology,Electronic Components,Technology,27099874503.66596
+CFG,"Citizens Financial Group, Inc.",NYSE,Finance,Major Banks,Financials,26774206904.58012
+WRB,W.R. Berkley Corporation,NYSE,Finance,Multi-Line Insurance,Financials,26694973464.330605
+CTSH,Cognizant Technology Solutions Corporation,NASDAQ,Technology Services,Information Technology Services,Technology,26666296714.97417
+Q,"Qnity Electronics, Inc.",NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,26485801464.61004
+GFS,GlobalFoundries Inc.,NASDAQ,Electronic Technology,Semiconductors,Technology,26471750381.28525
+KHC,The Kraft Heinz Company,NYSE,Consumer Non-Durables,Food: Major Diversified,Consumer Staples,26408293939.67349
+DTE,DTE Energy Company,NYSE,Utilities,Electric Utilities,Utilities,26406374302.805664
+ARES,Ares Management Corporation,NYSE,Finance,Investment Managers,Financials,26252325962.779114
+CPAY,"Corpay, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,26127266883.01194
+ATI,ATI Inc.,NYSE,Non-Energy Minerals,Other Metals/Minerals,Materials,26122929235.182476
+SN,"SharkNinja, Inc.",NYSE,Consumer Durables,Electronics/Appliances,Consumer Discretionary,26058418910.25693
+LPLA,LPL Financial Holdings Inc.,NASDAQ,Finance,Investment Banks/Brokers,Financials,26054247817.64683
+FE,FirstEnergy Corp.,NYSE,Utilities,Electric Utilities,Utilities,26038797027.0903
+TW,Tradeweb Markets Inc.,NASDAQ,Finance,Investment Banks/Brokers,Financials,25995859235.444923
+RBRK,"Rubrik, Inc.",NYSE,Technology Services,Information Technology Services,Technology,25942076455.39333
+TSEM,Tower Semiconductor Ltd.,NASDAQ,Electronic Technology,Semiconductors,Technology,25804192837.258366
+SYM,Symbotic Inc.,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,25782697720.7097
+PPL,PPL Corporation,NYSE,Utilities,Electric Utilities,Utilities,25774658239.919353
+WST,"West Pharmaceutical Services, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,25757528457.015446
+AWK,"American Water Works Company, Inc.",NYSE,Utilities,Water Utilities,Utilities,25612190593.10282
+ROIV,Roivant Sciences Ltd.,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,25599126365.825195
+DGX,Quest Diagnostics Incorporated,NYSE,Health Services,Services to the Health Industry,Health Care,25492934615.361813
+CHRW,"C.H. Robinson Worldwide, Inc.",NASDAQ,Transportation,Air Freight/Couriers,Industrials,25435699104.260715
+DOV,Dover Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,25431667140.575253
+CNP,"CenterPoint Energy, Inc (Holding Co)",NYSE,Utilities,Electric Utilities,Utilities,25426603792.993233
+ENTG,"Entegris, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,25332712887.266293
+LH,Labcorp Holdings Inc.,NYSE,Health Services,Medical/Nursing Services,Health Care,25315365507.665977
+CPRT,"Copart, Inc.",NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,25307347317.377003
+MTSI,"MACOM Technology Solutions Holdings, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,25206987135.44887
+VICI,VICI Properties Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,25192654547.299694
+EXPD,"Expeditors International of Washington, Inc.",NYSE,Transportation,Air Freight/Couriers,Industrials,25119390425.263332
+OTIS,Otis Worldwide Corporation,NYSE,Industrial Services,Engineering & Construction,Industrials,25105143339.710335
+CINF,Cincinnati Financial Corporation,NASDAQ,Finance,Multi-Line Insurance,Financials,25076777380.760056
+HUBB,Hubbell Inc,NYSE,Producer Manufacturing,Electrical Products,Industrials,25048449024.707996
+FOX,Fox Corporation,NASDAQ,Consumer Services,Broadcasting,Communication,24871541511.199055
+ES,Eversource Energy (D/B/A),NYSE,Utilities,Electric Utilities,Utilities,24758831820.305984
+ULTA,"Ulta Beauty, Inc.",NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,24387580819.88465
+IOT,Samsara Inc.,NYSE,Technology Services,Packaged Software,Technology,24331897353.271473
+FISV,"Fiserv, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,24264514873.604485
+BIP,Brookfield Infrastructure Partners LP Limited Partnership,NYSE,Utilities,Alternative Power Generation,Utilities,24144261318.10247
+XYL,Xylem Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,23981430410.28787
+CASY,"Caseys General Stores, Inc.",NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,23886248171.7798
+SYF,Synchrony Financial,NYSE,Finance,Finance/Rental/Leasing,Financials,23686998243.407486
+VLTO,Veralto Corp,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,23630890259.41791
+UTHR,United Therapeutics Corporation,NASDAQ,Health Technology,Biotechnology,Health Care,23553852533.380005
+LVS,Las Vegas Sands Corp.,NYSE,Consumer Services,Casinos/Gaming,Consumer Discretionary,23427350396.11413
+CHD,"Church & Dwight Company, Inc.",NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,23272075742.312084
+TPR,"Tapestry, Inc.",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,23218989602.22345
+VRSK,"Verisk Analytics, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,23119614754.911556
+PPG,"PPG Industries, Inc.",NYSE,Process Industries,Industrial Specialties,Materials,23110308116.32164
+RF,Regions Financial Corporation,NYSE,Finance,Major Banks,Financials,23027654244.208347
+PFG,Principal Financial Group Inc,NASDAQ,Finance,Investment Managers,Financials,22960581403.289787
+INCY,Incyte Corporation,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,22862279663.156277
+ROKU,"Roku, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,22699543424.41486
+NRG,"NRG Energy, Inc.",NYSE,Utilities,Electric Utilities,Utilities,22696425431.562923
+GH,"Guardant Health, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,22473831755.179996
+TROW,"T. Rowe Price Group, Inc.",NASDAQ,Finance,Investment Managers,Financials,22432294633.148228
+DRI,"Darden Restaurants, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,22363890650.9613
+AER,AerCap Holdings N.V.,NYSE,Finance,Finance/Rental/Leasing,Financials,22349119199.69582
+DLTR,"Dollar Tree, Inc.",NASDAQ,Retail Trade,Discount Stores,Consumer Discretionary,22260458689.9828
+RL,Ralph Lauren Corporation,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,22104181968.653255
+INSM,Insmed Incorporated,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,21969179658.905254
+L,Loews Corporation,NYSE,Finance,Property/Casualty Insurance,Financials,21810393043.242104
+SNX,TD SYNNEX Corporation,NYSE,Distribution Services,Electronics Distributors,Technology,21808777648.474167
+GPN,Global Payments Inc.,NYSE,Finance,Finance/Rental/Leasing,Financials,21751629763.834724
+SW,Smurfit WestRock plc,NYSE,Process Industries,Containers/Packaging,Materials,21590093819.83667
+IFF,"International Flavors & Fragrances, Inc.",NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,21572929792.2026
+DINO,HF Sinclair Corporation,NYSE,Energy Minerals,Oil Refining/Marketing,Energy,21565180494.55931
+CRCL,"Circle Internet Group, Inc.",NYSE,Technology Services,Packaged Software,Technology,21559590345.81754
+JBHT,"J.B. Hunt Transport Services, Inc.",NASDAQ,Transportation,Trucking,Industrials,21530938944.868923
+XPO,"XPO, Inc.",NYSE,Transportation,Trucking,Industrials,21481854576.785984
+KEY,KeyCorp,NYSE,Finance,Major Banks,Financials,21310557349.161194
+EIX,Edison International,NYSE,Utilities,Electric Utilities,Utilities,21280211956.429096
+THC,Tenet Healthcare Corporation,NYSE,Health Services,Hospital/Nursing Management,Health Care,21239301676.25068
+PTC,PTC Inc.,NASDAQ,Technology Services,Packaged Software,Technology,21123535692.300625
+USFD,US Foods Holding Corp.,NYSE,Distribution Services,Food Distributors,Consumer Staples,21077102547.78511
+BRO,"Brown & Brown, Inc.",NYSE,Finance,Insurance Brokers/Services,Financials,21040298906.142117
+PHM,"PulteGroup, Inc.",NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,21017179138.156258
+OMC,Omnicom Group Inc.,NYSE,Commercial Services,Advertising/Marketing Services,Industrials,20981979543.00484
+STE,STERIS plc (Ireland),NYSE,Health Technology,Medical Specialties,Health Care,20904022355.543747
+STZ,"Constellation Brands, Inc.",NYSE,Consumer Non-Durables,Beverages: Alcoholic,Consumer Staples,20753342208.15142
+U,Unity Software Inc.,NYSE,Technology Services,Packaged Software,Technology,20631368681.15581
+PKG,Packaging Corporation of America,NYSE,Process Industries,Containers/Packaging,Materials,20538048686.896885
+CMS,CMS Energy Corporation,NYSE,Utilities,Electric Utilities,Utilities,20536164302.0528
+DOW,Dow Inc.,NYSE,Process Industries,Chemicals: Specialty,Materials,20528922753.643234
+EXE,Expand Energy Corporation,NASDAQ,Energy Minerals,Integrated Oil,Energy,20423263981.103764
+SOFI,"SoFi Technologies, Inc.",NASDAQ,Finance,Finance/Rental/Leasing,Financials,20406812417.16848
+LUV,Southwest Airlines Company,NYSE,Transportation,Airlines,Industrials,20380413534.44149
+VTRS,Viatris Inc.,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,20261142691.100918
+RIVN,"Rivian Automotive, Inc.",NASDAQ,Consumer Durables,Motor Vehicles,Consumer Discretionary,20212134149.40405
+NTNX,"Nutanix, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,20192653479.877033
+RGLD,"Royal Gold, Inc.",NASDAQ,Non-Energy Minerals,Precious Metals,Materials,20015261614.905006
+ASTS,"AST SpaceMobile, Inc.",NASDAQ,Communications,Specialty Telecommunications,Communication,19833921522.01634
+WWD,"Woodward, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,19810464534.92172
+AMRZ,Amrize Ltd,NYSE,Non-Energy Minerals,Construction Materials,Materials,19798706652.558903
+BG,Bunge Limited,NYSE,Process Industries,Agricultural Commodities/Milling,Materials,19736397692.670567
+NI,NiSource Inc,NYSE,Utilities,Gas Distributors,Utilities,19546868643.17197
+LYB,LyondellBasell Industries NV,NYSE,Process Industries,Chemicals: Specialty,Materials,19391967188.406364
+SBAC,SBA Communications Corporation,NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,19360018911.4865
+AMCR,Amcor plc,NYSE,Process Industries,Containers/Packaging,Materials,19289061953.494743
+PR,Permian Resources Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,19288937996.362526
+CRS,Carpenter Technology Corporation,NYSE,Non-Energy Minerals,Other Metals/Minerals,Materials,19120191053.50261
+FSLR,"First Solar, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,19110278282.995583
+SSNC,"SS&C Technologies Holdings, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,19014094911.225044
+CW,Curtiss-Wright Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,18932596532.211163
+WES,"Western Midstream Partners, LP",NYSE,Industrial Services,Oil & Gas Pipelines,Energy,18849024718.339592
+BR,"Broadridge Financial Solutions, Inc.",NYSE,Technology Services,Information Technology Services,Technology,18679311060.791714
+EVRG,"Evergy, Inc.",NASDAQ,Utilities,Electric Utilities,Utilities,18662334212.4153
+GFL,"GFL Environmental Inc. Subordinate voting shares, no par value",NYSE,Industrial Services,Environmental Services,Industrials,18652789914.085754
+TSN,"Tyson Foods, Inc.",NYSE,Consumer Non-Durables,Food: Meat/Fish/Dairy,Consumer Staples,18422696938.972298
+SITM,SiTime Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,18414599868.986515
+DT,"Dynatrace, Inc.",NYSE,Technology Services,Packaged Software,Technology,18351635330.219246
+ZBRA,Zebra Technologies Corporation,NASDAQ,Electronic Technology,Computer Processing Hardware,Technology,18317742550.168633
+NDSN,Nordson Corporation,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,18278861166.69716
+BBY,"Best Buy Co., Inc.",NYSE,Retail Trade,Electronics/Appliance Stores,Consumer Discretionary,18248408093.36097
+LEN,Lennar Corporation,NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,18228546026.279385
+CHTR,"Charter Communications, Inc.",NASDAQ,Consumer Services,Cable/Satellite TV,Communication,18207571112.427464
+TOST,"Toast, Inc.",NYSE,Technology Services,Packaged Software,Technology,18191110409.193905
+ITT,ITT Inc.,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,18002478030.403126
+SWKS,"Skyworks Solutions, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,17954889177.557274
+TLN,Talen Energy Corporation,NASDAQ,Utilities,Alternative Power Generation,Utilities,17906360772.364788
+LSCC,Lattice Semiconductor Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,17902914524.333492
+MKSI,MKS Inc.,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,17884843291.506645
+WCC,"WESCO International, Inc.",NYSE,Distribution Services,Wholesale Distributors,Industrials,17821118018.089905
+CDW,CDW Corporation,NASDAQ,Technology Services,Information Technology Services,Technology,17773729093.94867
+CDE,"Coeur Mining, Inc.",NYSE,Non-Energy Minerals,Precious Metals,Materials,17608528429.52756
+OVV,Ovintiv Inc. (DE),NYSE,Energy Minerals,Integrated Oil,Energy,17599169740.181164
+APG,APi Group Corporation,NYSE,Industrial Services,Engineering & Construction,Industrials,17585983451.309654
+TSCO,Tractor Supply Company,NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,17559051133.455795
+DD,"DuPont de Nemours, Inc.",NYSE,Process Industries,Chemicals: Major Diversified,Materials,17555585371.301327
+FIS,"Fidelity National Information Services, Inc.",NYSE,Technology Services,Packaged Software,Technology,17554630024.52533
+GPC,Genuine Parts Company,NYSE,Distribution Services,Wholesale Distributors,Industrials,17510947954.777252
+SMTC,Semtech Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,17479889617.194515
+FTAI,FTAI Aviation Ltd.,NASDAQ,Electronic Technology,Aerospace & Defense,Technology,17456610691.549984
+ESS,"Essex Property Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,17453379444.725075
+FN,Fabrinet,NYSE,Electronic Technology,Semiconductors,Technology,17425776094.193752
+TPG,TPG Inc.,NASDAQ,Finance,Investment Managers,Financials,17403590415.10168
+BURL,"Burlington Stores, Inc.",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,17397924880.50083
+FTV,Fortive Corporation,NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,17293496255.598015
+IEX,IDEX Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,17271835848.17316
+GIS,"General Mills, Inc.",NYSE,Consumer Non-Durables,Food: Major Diversified,Consumer Staples,17265047631.110153
+RVTY,"Revvity, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,17204390835.858047
+EWBC,"East West Bancorp, Inc.",NASDAQ,Finance,Regional Banks,Financials,17199098293.62297
+PAA,"Plains All American Pipeline, L.P.",NASDAQ,Industrial Services,Oil & Gas Pipelines,Energy,17173487867.440624
+EFX,"Equifax, Inc.",NYSE,Commercial Services,Financial Publishing/Services,Industrials,17126948140.041916
+MTZ,"MasTec, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,17076847246.49612
+LNT,Alliant Energy Corporation,NASDAQ,Utilities,Electric Utilities,Utilities,17073897395.470991
+IP,International Paper Company,NYSE,Process Industries,Pulp & Paper,Materials,17009784266.111666
+ZBH,"Zimmer Biomet Holdings, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,17002356818.869038
+CF,"CF Industries Holdings, Inc.",NYSE,Process Industries,Chemicals: Agricultural,Materials,16880254122.223455
+CLH,"Clean Harbors, Inc.",NYSE,Industrial Services,Environmental Services,Industrials,16729861905.100777
+RGA,"Reinsurance Group of America, Incorporated",NYSE,Finance,Life/Health Insurance,Financials,16715920051.219627
+XP,XP Inc.,NASDAQ,Finance,Investment Banks/Brokers,Financials,16658239888.873882
+AS,"Amer Sports, Inc.",NYSE,Consumer Durables,Recreational Products,Consumer Discretionary,16372472139.991257
+J,Jacobs Solutions Inc.,NYSE,Technology Services,Data Processing Services,Technology,16285922480.192297
+BEN,"Franklin Templeton, Inc.",NYSE,Finance,Investment Managers,Financials,16258461702.71605
+NWS,News Corporation,NASDAQ,Consumer Services,Publishing: Newspapers,Communication,16233108388.419168
+IONQ,"IonQ, Inc.",NYSE,Electronic Technology,Computer Processing Hardware,Technology,16160958803.944233
+APA,APA Corporation,NASDAQ,Energy Minerals,Integrated Oil,Energy,16074127318.454367
+DOCN,"DigitalOcean Holdings, Inc.",NYSE,Technology Services,Packaged Software,Technology,15852074325.996607
+INVH,Invitation Homes Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,15822796058.13444
+STRL,"Sterling Infrastructure, Inc.",NASDAQ,Industrial Services,Engineering & Construction,Industrials,15691908994.419476
+HST,"Host Hotels & Resorts, Inc.",NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,15518068055.922804
+SUN,Sunoco LP,AMEX,Distribution Services,Wholesale Distributors,Industrials,15484742814.379581
+BALL,Ball Corporation,NYSE,Process Industries,Containers/Packaging,Materials,15474556893.040604
+ROL,"Rollins, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,15387029611.456293
+AKAM,"Akamai Technologies, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,15370492075.476212
+H,Hyatt Hotels Corporation,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,15280129168.134853
+LDOS,"Leidos Holdings, Inc.",NYSE,Technology Services,Packaged Software,Technology,15269892316.722698
+CRBG,Corebridge Financial Inc.,NYSE,Finance,Life/Health Insurance,Financials,15196385610.53643
+WMG,Warner Music Group Corp.,NASDAQ,Commercial Services,Commercial Printing/Forms,Industrials,15023712211.234865
+PFGC,Performance Food Group Company,NYSE,Transportation,Other Transportation,Industrials,14946734579.969593
+LAMR,Lamar Advertising Company,NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,14873982127.215994
+KIM,Kimco Realty Corporation (HC),NYSE,Finance,Real Estate Investment Trusts,Real Estate,14864692490.060663
+SOLV,Solventum Corporation,NYSE,Health Services,Medical/Nursing Services,Health Care,14858830861.214676
+EXEL,"Exelixis, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,14832212228.317518
+OWL,Blue Owl Capital Inc.,NYSE,Finance,Investment Managers,Financials,14795786253.570658
+YUMC,"Yum China Holdings, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,14698302504.647202
+JHX,James Hardie Industries plc.,NYSE,Non-Energy Minerals,Construction Materials,Materials,14582725530.605171
+UNM,Unum Group,NYSE,Finance,Multi-Line Insurance,Financials,14511983638.591213
+BMNR,"BitMine Immersion Technologies, Inc.",NYSE,Finance,Financial Conglomerates,Financials,14495530448.97629
+ARMK,Aramark,NYSE,Consumer Services,Restaurants,Consumer Discretionary,14483559415.085342
+W,Wayfair Inc.,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,14483012829.239607
+NBIX,"Neurocrine Biosciences, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,14478908850.285025
+ONTO,Onto Innovation Inc.,NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,14453838176.732426
+EQH,"Equitable Holdings, Inc.",NYSE,Finance,Life/Health Insurance,Financials,14449020344.811518
+WPC,W. P. Carey Inc. REIT,NYSE,Finance,Real Estate Investment Trusts,Real Estate,14436755883.95121
+FICO,Fair Isaac Corporation,NYSE,Commercial Services,Financial Publishing/Services,Industrials,14418149203.450235
+CRL,"Charles River Laboratories International, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,14407114339.876747
+SGI,Somnigroup International Inc.,NYSE,Consumer Durables,Home Furnishings,Consumer Discretionary,14318574733.68768
+ASND,Ascendis Pharma A/S,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,14298644637.367373
+LECO,"Lincoln Electric Holdings, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,14233088095.88442
+PNFP,"Pinnacle Financial Partners, Inc.",NYSE,Finance,Regional Banks,Financials,14203076794.52963
+JAZZ,Jazz Pharmaceuticals plc,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,14178642652.951405
+ULS,UL Solutions Inc.,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,14130853448.797451
+EG,"Everest Group, Ltd.",NYSE,Finance,Property/Casualty Insurance,Financials,14124313630.107931
+WSE,Wise Group plc,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,14121531631.70976
+CNH,CNH Industrial N.V.,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,14097698727.781534
+SMMT,Summit Therapeutics Inc.,NASDAQ,Health Technology,Biotechnology,Health Care,14067188149.468258
+TRMB,Trimble Inc.,NASDAQ,Technology Services,Packaged Software,Technology,14011776233.192482
+CHKP,Check Point Software Technologies Ltd.,NASDAQ,Technology Services,Internet Software/Services,Communication,14006165229.538664
+GEN,Gen Digital Inc.,NASDAQ,Technology Services,Packaged Software,Technology,13917148590.065933
+JBS,JBS N.V.,NYSE,Consumer Non-Durables,Food: Meat/Fish/Dairy,Consumer Staples,13900659692.54902
+SUI,"Sun Communities, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,13885309446.118069
+IREN,IREN Limited,NASDAQ,Technology Services,Data Processing Services,Technology,13848582407.76393
+FLUT,Flutter Entertainment plc,NYSE,Consumer Services,Casinos/Gaming,Consumer Discretionary,13844950369.09022
+JLL,Jones Lang LaSalle Incorporated,NYSE,Finance,Real Estate Development,Real Estate,13796330227.602428
+NLY,Annaly Capital Management Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,13792974168.062399
+RNR,RenaissanceRe Holdings Ltd.,NYSE,Finance,Property/Casualty Insurance,Financials,13769466859.787287
+WY,Weyerhaeuser Company,NYSE,Finance,Real Estate Investment Trusts,Real Estate,13766058093.192488
+GWRE,"Guidewire Software, Inc.",NYSE,Technology Services,Information Technology Services,Technology,13719013133.563295
+CG,The Carlyle Group Inc.,NASDAQ,Finance,Investment Managers,Financials,13690306907.571241
+MAA,"Mid-America Apartment Communities, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,13558325334.979086
+MAS,Masco Corporation,NYSE,Producer Manufacturing,Building Products,Industrials,13556636428.776976
+TYL,"Tyler Technologies, Inc.",NYSE,Technology Services,Data Processing Services,Technology,13495821754.291409
+OHI,"Omega Healthcare Investors, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,13456807166.002945
+MLI,"Mueller Industries, Inc.",NYSE,Producer Manufacturing,Metal Fabrication,Industrials,13427922953.578278
+GME,GameStop Corporation,NYSE,Retail Trade,Electronics/Appliance Stores,Consumer Discretionary,13399547111.582277
+SWK,"Stanley Black & Decker, Inc.",NYSE,Consumer Durables,Tools & Hardware,Consumer Discretionary,13375544180.455196
+EQX,Equinox Gold Corp.,AMEX,Non-Energy Minerals,Precious Metals,Materials,13332391134.55767
+ARCC,Ares Capital Corporation,NASDAQ,Finance,Financial Conglomerates,Financials,13326504641.707579
+TIGO,Millicom International Cellular S.A.,NASDAQ,Communications,Wireless Telecommunications,Communication,13316144906.780216
+GNRC,Generac Holdings Inc.,NYSE,Producer Manufacturing,Electrical Products,Industrials,13285841025.667915
+DOCU,"DocuSign, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,13285026243.022259
+DOC,"Healthpeak Properties, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,13282712095.961123
+GDDY,GoDaddy Inc.,NYSE,Technology Services,Data Processing Services,Technology,13215688337.364086
+CPT,Camden Property Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,13196656300.432201
+REG,Regency Centers Corporation,NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,13193835846.230412
+BWXT,"BWX Technologies, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,13177989318.068697
+HAS,"Hasbro, Inc.",NASDAQ,Consumer Durables,Recreational Products,Consumer Discretionary,13162269390.568644
+AIZ,"Assurant, Inc.",NYSE,Finance,Property/Casualty Insurance,Financials,13144289376.086967
+CORT,Corcept Therapeutics Incorporated,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,13100444749.421545
+NXT,Nextpower Inc.,NASDAQ,Electronic Technology,Electronic Equipment/Instruments,Technology,13065429527.53108
+COKE,"Coca-Cola Consolidated, Inc.",NASDAQ,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,13062577841.279266
+IVZ,Invesco Ltd,NYSE,Finance,Investment Managers,Financials,13028658761.6115
+GRAB,Grab Holdings Limited,NASDAQ,Transportation,Air Freight/Couriers,Industrials,13010469078.192926
+PAG,"Penske Automotive Group, Inc.",NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,12880429231.415905
+SJM,The J.M. Smucker Company,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,12800622190.461351
+TEM,"Tempus AI, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,12798237652.934183
+ALLE,Allegion plc,NYSE,Consumer Durables,Tools & Hardware,Consumer Discretionary,12796336468.10587
+BBIO,"BridgeBio Pharma, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,12775467482.680656
+TXT,Textron Inc.,NYSE,Electronic Technology,Aerospace & Defense,Technology,12754550438.520622
+TTMI,"TTM Technologies, Inc.",NASDAQ,Electronic Technology,Electronic Components,Technology,12748266677.340088
+CSL,Carlisle Companies Incorporated,NYSE,Producer Manufacturing,Building Products,Industrials,12722820037.547455
+AVY,Avery Dennison Corporation,NYSE,Process Industries,Pulp & Paper,Materials,12718765174.427513
+GGG,Graco Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,12666409245.7878
+ICLR,ICON plc,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,12666407140.725046
+DTM,"DT Midstream, Inc.",NYSE,Industrial Services,Oil & Gas Pipelines,Energy,12650917191.674772
+GL,Globe Life Inc.,NYSE,Finance,Multi-Line Insurance,Financials,12616372955.059607
+BTSG,"BrightSpring Health Services, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,12611865817.145147
+FROG,JFrog Ltd.,NASDAQ,Technology Services,Packaged Software,Technology,12605093464.249048
+BAX,Baxter International Inc.,NYSE,Health Technology,Medical Specialties,Health Care,12588851709.543934
+PEN,"Penumbra, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,12580981389.375158
+SEIC,SEI Investments Company,NASDAQ,Finance,Investment Managers,Financials,12566008177.43535
+TRU,TransUnion,NYSE,Commercial Services,Financial Publishing/Services,Industrials,12545967688.769777
+HALO,"Halozyme Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,12532448863.44228
+CNA,CNA Financial Corporation,NYSE,Finance,Multi-Line Insurance,Financials,12493645593.023773
+FRO,Frontline Plc,NYSE,Transportation,Marine Shipping,Industrials,12489143996.976538
+BWA,BorgWarner Inc.,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,12484748518.344133
+RPM,RPM International Inc.,NYSE,Process Industries,Industrial Specialties,Materials,12463866953.911394
+BJ,"BJ's Wholesale Club Holdings, Inc.",NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,12452102971.71991
+LII,"Lennox International, Inc.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,12318807849.305082
+VICR,Vicor Corporation,NASDAQ,Electronic Technology,Electronic Components,Technology,12267618844.317245
+TOL,"Toll Brothers, Inc.",NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,12267530699.472744
+AMKR,"Amkor Technology, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,12203985270.538038
+EHC,Encompass Health Corporation,NYSE,Health Services,Medical/Nursing Services,Health Care,12166921612.849112
+DKS,Dick's Sporting Goods Inc,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,12151863906.667164
+PINS,"Pinterest, Inc.",NYSE,Technology Services,Internet Software/Services,Communication,12119098970.316607
+MKC,"McCormick & Company, Incorporated",NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,12082276964.304531
+IT,"Gartner, Inc.",NYSE,Technology Services,Internet Software/Services,Communication,12070926868.867256
+CSGP,"CoStar Group, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,12022212615.831264
+FIG,FIGMA INC,NYSE,Technology Services,Packaged Software,Technology,11992715936.367655
+PNW,Pinnacle West Capital Corporation,NYSE,Utilities,Electric Utilities,Utilities,11988830907.907328
+ALB,Albemarle Corporation,NYSE,Process Industries,Chemicals: Specialty,Materials,11950372074.085896
+MANH,"Manhattan Associates, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,11946105970.545023
+SAIL,"SailPoint, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,11857834641.624376
+CR,Crane Company,NYSE,Electronic Technology,Aerospace & Defense,Technology,11834622196.357363
+FIVE,"Five Below, Inc.",NASDAQ,Retail Trade,Discount Stores,Consumer Discretionary,11821752735.338055
+CCK,"Crown Holdings, Inc.",NYSE,Process Industries,Containers/Packaging,Materials,11774412047.183506
+AFG,"American Financial Group, Inc.",NYSE,Finance,Property/Casualty Insurance,Financials,11698560725.670942
+AUR,"Aurora Innovation, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,11684171907.478184
+SANM,Sanmina Corporation,NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,11656888478.143864
+RMBS,"Rambus, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,11656368418.520052
+ARW,"Arrow Electronics, Inc.",NYSE,Distribution Services,Electronics Distributors,Technology,11601345721.540905
+AEIS,"Advanced Energy Industries, Inc.",NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,11560960116.423443
+ONON,On Holding AG,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,11557682039.352528
+WSO,"Watsco, Inc.",NYSE,Producer Manufacturing,Building Products,Industrials,11552583715.954361
+HL,Hecla Mining Company,NYSE,Non-Energy Minerals,Precious Metals,Materials,11467086830.836819
+ELS,"Equity Lifestyle Properties, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,11451753283.696922
+ELAN,Elanco Animal Health Incorporated,NYSE,Health Technology,Biotechnology,Health Care,11451333420.250223
+DVA,DaVita Inc.,NYSE,Health Services,Medical/Nursing Services,Health Care,11436150139.738447
+ALLY,Ally Financial Inc.,NYSE,Finance,Finance/Rental/Leasing,Financials,11434866394.099924
+CHYM,"Chime Financial, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,11387839310.475138
+HUBS,"HubSpot, Inc.",NYSE,Technology Services,Packaged Software,Technology,11384453164.580746
+TECH,Bio-Techne Corp,NASDAQ,Health Technology,Biotechnology,Health Care,11363048996.30697
+DECK,Deckers Outdoor Corporation,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,11288113564.571949
+NVMI,Nova Ltd.,NASDAQ,Electronic Technology,Electronic Equipment/Instruments,Technology,11227574354.166784
+QXO,"QXO, Inc.",NYSE,Distribution Services,Wholesale Distributors,Industrials,11215274596.292269
+VIAV,Viavi Solutions Inc.,NASDAQ,Technology Services,Information Technology Services,Technology,11179619574.375143
+AHR,"American Healthcare REIT, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,11152725573.116575
+IBRX,"ImmunityBio, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,11138879380.431887
+AA,Alcoa Corporation,NYSE,Non-Energy Minerals,Aluminum,Materials,11136978161.877192
+GLPI,"Gaming and Leisure Properties, Inc.",NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,11136418793.62363
+AMH,American Homes 4 Rent,NYSE,Finance,Real Estate Investment Trusts,Real Estate,11100292871.41686
+WTRG,"Essential Utilities, Inc.",NYSE,Utilities,Water Utilities,Utilities,11061689981.02066
+CART,Maplebear Inc.,NASDAQ,Transportation,Air Freight/Couriers,Industrials,11056442732.53218
+RGEN,Repligen Corporation,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,11039704258.031982
+AR,Antero Resources Corporation,NYSE,Energy Minerals,Oil & Gas Production,Energy,11037060353.868551
+RRX,Regal Rexnord Corporation,NYSE,Producer Manufacturing,Electrical Products,Industrials,10989655192.52653
+UDR,"UDR, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,10961535127.043194
+LULU,lululemon athletica inc.,NASDAQ,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,10945562970.996977
+FHN,First Horizon Corporation,NYSE,Finance,Regional Banks,Financials,10934776617.544401
+FORM,"FormFactor, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,10911122404.016846
+GSAT,"Globalstar, Inc.",NASDAQ,Communications,Wireless Telecommunications,Communication,10860003091.14852
+NYT,New York Times Company (The),NYSE,Consumer Services,Publishing: Newspapers,Communication,10696326607.365765
+AES,The AES Corporation,NYSE,Utilities,Electric Utilities,Utilities,10658772881.131948
+PCVX,"Vaxcyte, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,10621720971.816658
+SF,Stifel Financial Corporation,NYSE,Finance,Investment Managers,Financials,10621462449.38896
+BMRN,BioMarin Pharmaceutical Inc.,NASDAQ,Health Technology,Biotechnology,Health Care,10606874114.91146
+TXRH,"Texas Roadhouse, Inc.",NASDAQ,Consumer Services,Restaurants,Consumer Discretionary,10601009865.768616
+AVTR,"Avantor, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,10598543034.407408
+CGNX,Cognex Corporation,NASDAQ,Electronic Technology,Electronic Equipment/Instruments,Technology,10584644391.497622
+BSY,"Bentley Systems, Incorporated",NASDAQ,Technology Services,Information Technology Services,Technology,10564188123.471281
+HRL,Hormel Foods Corporation,NYSE,Consumer Non-Durables,Food: Meat/Fish/Dairy,Consumer Staples,10561232470.585993
+EGP,"EastGroup Properties, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,10538494094.11193
+SNAP,Snap Inc.,NYSE,Technology Services,Packaged Software,Technology,10536162380.114336
+TWST,Twist Bioscience Corporation,NASDAQ,Health Technology,Biotechnology,Health Care,10518704334.512989
+TXG,"10x Genomics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,10507982495.654762
+KNX,Knight-Swift Transportation Holdings Inc.,NYSE,Transportation,Trucking,Industrials,10492879599.485628
+SCI,Service Corporation International,NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,10482186148.530155
+JKHY,"Jack Henry & Associates, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,10468422861.245956
+EVR,Evercore Inc.,NYSE,Finance,Investment Banks/Brokers,Financials,10455144285.390816
+UHS,"Universal Health Services, Inc.",NYSE,Health Services,Hospital/Nursing Management,Health Care,10450181908.582972
+HII,"Huntington Ingalls Industries, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,10434337180.747116
+FNF,"Fidelity National Financial, Inc.",NYSE,Finance,Specialty Insurance,Financials,10405881150.2439
+HUT,Hut 8 Corp.,NASDAQ,Technology Services,Data Processing Services,Technology,10387074897.066338
+COO,"The Cooper Companies, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,10338743731.090239
+ESTC,Elastic N.V.,NYSE,Technology Services,Packaged Software,Technology,10313293626.405312
+SKYD,Skydance Corporation,NYSE,Consumer Services,Cable/Satellite TV,Communication,10300610588.211206
+PAYC,"Paycom Software, Inc.",NYSE,Technology Services,Packaged Software,Technology,10283927944.830189
+MOH,Molina Healthcare Inc,NYSE,Health Services,Managed Health Care,Health Care,10279745862.181192
+AGNC,AGNC Investment Corp.,NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,10278124492.130184
+DPZ,Domino's Pizza Inc,NASDAQ,Consumer Services,Restaurants,Consumer Discretionary,10235153960.335655
+JEF,Jefferies Financial Group Inc.,NYSE,Finance,Investment Banks/Brokers,Financials,10231910184.400902
+FDS,FactSet Research Systems Inc.,NYSE,Commercial Services,Financial Publishing/Services,Industrials,10213712571.224838
+ALGN,"Align Technology, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,10138096667.158264
+CLX,Clorox Company (The),NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,10134018714.930489
+DCI,"Donaldson Company, Inc.",NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,10068279422.117714
+GMED,"Globus Medical, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,10022652176.72508
+ENSG,"The Ensign Group, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,10012922233.670769
+AM,Antero Midstream Corporation,NYSE,Industrial Services,Oil & Gas Pipelines,Energy,10010875148.682867
+PBF,PBF Energy Inc.,NYSE,Energy Minerals,Oil Refining/Marketing,Energy,9989099578.864338
+BPOP,"Popular, Inc.",NASDAQ,Finance,Regional Banks,Financials,9967941273.427372
+VSAT,"ViaSat, Inc.",NASDAQ,Electronic Technology,Telecommunications Equipment,Technology,9919796675.967808
+UMBF,UMB Financial Corporation,NASDAQ,Finance,Major Banks,Financials,9896288532.560017
+GKOS,Glaukos Corporation,NYSE,Health Technology,Medical Specialties,Health Care,9773047999.949097
+SOLS,Solstice Advanced Materials Inc.,NASDAQ,Process Industries,Chemicals: Major Diversified,Materials,9747866751.637058
+SSB,SouthState Bank Corporation,NYSE,Finance,Major Banks,Financials,9721696911.5094
+DKNG,DraftKings Inc.,NASDAQ,Consumer Services,Movies/Entertainment,Communication,9720571121.320583
+DRS,"Leonardo DRS, Inc.",NASDAQ,Electronic Technology,Aerospace & Defense,Technology,9672148034.763313
+WTFC,Wintrust Financial Corporation,NASDAQ,Finance,Regional Banks,Financials,9664499320.350208
+MOD,Modine Manufacturing Company,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,9643142729.332674
+OGE,OGE Energy Corp,NYSE,Utilities,Electric Utilities,Utilities,9606029812.65452
+RRC,Range Resources Corporation,NYSE,Energy Minerals,Oil & Gas Production,Energy,9555155665.672552
+DAR,Darling Ingredients Inc.,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,9509203807.218956
+WMS,"Advanced Drainage Systems, Inc.",NYSE,Producer Manufacturing,Miscellaneous Manufacturing,Industrials,9485237914.545757
+RYAN,"Ryan Specialty Holdings, Inc.",NYSE,Finance,Insurance Brokers/Services,Financials,9467705547.231277
+MTCH,"Match Group, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,9432249752.358072
+BXP,"BXP, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,9428015073.00573
+ONB,Old National Bancorp,NASDAQ,Finance,Major Banks,Financials,9403570605.963606
+PODD,Insulet Corporation,NASDAQ,Health Technology,Medical Specialties,Health Care,9382235536.16896
+HSIC,"Henry Schein, Inc.",NASDAQ,Distribution Services,Medical Distributors,Health Care,9362623591.923079
+QGEN,Qiagen N.V.,NYSE,Health Technology,Medical Specialties,Health Care,9351672026.085335
+KYMR,"Kymera Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,9346129893.672462
+CFR,"Cullen/Frost Bankers, Inc.",NYSE,Finance,Regional Banks,Financials,9337233441.044893
+AAOI,"Applied Optoelectronics, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,9309125566.233805
+PTGX,"Protagonist Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,9300521682.49596
+FRT,Federal Realty Investment Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,9280033394.813578
+FCFS,"FirstCash Holdings, Inc.",NASDAQ,Finance,Finance/Rental/Leasing,Financials,9268553787.316656
+ORI,Old Republic International Corporation,NYSE,Finance,Specialty Insurance,Financials,9215494464.316732
+FLS,Flowserve Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,9187711773.683847
+GTLB,GitLab Inc.,NASDAQ,Technology Services,Packaged Software,Technology,9178820585.541636
+S,"SentinelOne, Inc.",NYSE,Technology Services,Packaged Software,Technology,9143250593.387403
+OSCR,"Oscar Health, Inc.",NYSE,Health Services,Managed Health Care,Health Care,9125659914.01601
+HLI,"Houlihan Lokey, Inc.",NYSE,Finance,Investment Banks/Brokers,Financials,9097863754.348444
+APTV,Aptiv PLC,NYSE,Producer Manufacturing,Electrical Products,Industrials,9094339722.926937
+LTH,"Life Time Group Holdings, Inc.",NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,9077024534.046673
+ALSN,"Allison Transmission Holdings, Inc.",NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,9072023643.152048
+TTC,Toro Company (The),NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,9067804544.067245
+OC,Owens Corning Inc,NYSE,Process Industries,Containers/Packaging,Materials,9024197435.427984
+SAIA,"Saia, Inc.",NASDAQ,Transportation,Trucking,Industrials,8982688709.191671
+BRKR,Bruker Corporation,NASDAQ,Health Technology,Medical Specialties,Health Care,8964821750.418507
+SIRI,SiriusXM Holdings Inc.,NASDAQ,Consumer Services,Broadcasting,Communication,8935643347.837828
+AYI,Acuity Inc.,NYSE,Producer Manufacturing,Electrical Products,Industrials,8930970836.55933
+VIRT,"Virtu Financial, Inc.",NYSE,Finance,Investment Banks/Brokers,Financials,8925565500.574469
+BAH,Booz Allen Hamilton Holding Corporation,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,8893871249.109646
+ARWR,"Arrowhead Pharmaceuticals, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,8863718289.203983
+ESI,Element Solutions Inc.,NYSE,Process Industries,Chemicals: Major Diversified,Materials,8850853365.31735
+CTVA,"Corteva, Inc.",NYSE,Process Industries,Agricultural Commodities/Milling,Materials,8835051838.231272
+AXSM,"Axsome Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,8818310706.894989
+SM,SM Energy Company,NYSE,Energy Minerals,Integrated Oil,Energy,8800600837.864077
+JXN,Jackson Financial Inc.,NYSE,Finance,Life/Health Insurance,Financials,8785095289.058245
+CYTK,"Cytokinetics, Incorporated",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,8745963256.632801
+MXL,"MaxLinear, Inc",NASDAQ,Electronic Technology,Semiconductors,Technology,8721056280.136606
+KNTK,Kinetik Holdings Inc.,NYSE,Industrial Services,Oil & Gas Pipelines,Energy,8680788498.786253
+VOYA,"Voya Financial, Inc.",NYSE,Finance,Life/Health Insurance,Financials,8576756554.420736
+CUBE,CubeSmart,NYSE,Finance,Real Estate Investment Trusts,Real Estate,8549410124.849907
+PCOR,"Procore Technologies, Inc.",NYSE,Technology Services,Packaged Software,Technology,8541409331.81526
+TTEK,"Tetra Tech, Inc.",NASDAQ,Industrial Services,Engineering & Construction,Industrials,8536521376.730922
+CTRE,"CareTrust REIT, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,8513644128.885163
+SPXC,"SPX Technologies, Inc.",NYSE,Producer Manufacturing,Building Products,Industrials,8487550132.340965
+NTSK,"Netskope, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,8480238467.072666
+TGTX,"TG Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,8475433102.307086
+AAL,"American Airlines Group, Inc.",NASDAQ,Transportation,Airlines,Industrials,8446736173.218751
+CAI,"Caris Life Sciences, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,8393076974.5199995
+BRX,Brixmor Property Group Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,8377614160.989661
+PNR,Pentair plc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,8376203361.906309
+ZETA,Zeta Global Holdings Corp.,NYSE,Technology Services,Packaged Software,Technology,8306039513.073571
+HNGE,"Hinge Health, Inc.",NYSE,Technology Services,Packaged Software,Technology,8303455745.55
+MP,MP Materials Corp.,NYSE,Non-Energy Minerals,Other Metals/Minerals,Materials,8217607393.0
+RHP,"Ryman Hospitality Properties, Inc. (REIT)",NYSE,Finance,Real Estate Investment Trusts,Real Estate,8205416195.684869
+ADC,Agree Realty Corporation,NYSE,Finance,Real Estate Investment Trusts,Real Estate,8202815496.3035555
+REXR,"Rexford Industrial Realty, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,8192583746.299221
+AVT,"Avnet, Inc.",NASDAQ,Distribution Services,Electronics Distributors,Technology,8170656446.053837
+PCTY,Paylocity Holding Corporation,NASDAQ,Technology Services,Packaged Software,Technology,8168650540.375898
+GAP,"Gap, Inc. (The)",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,8160004893.367722
+FR,"First Industrial Realty Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,8143749091.916863
+DY,"Dycom Industries, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,8120234293.860179
+EAT,"Brinker International, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,8119519730.440747
+WAL,Western Alliance Bancorporation,NYSE,Finance,Regional Banks,Financials,8102921483.083047
+RAL,Ralliant Corporation,NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,8098848582.666296
+TKR,Timken Company (The),NYSE,Producer Manufacturing,Industrial Machinery,Industrials,8046748437.647717
+ALV,"Autoliv, Inc.",NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,8038517262.6526165
+COLB,"Columbia Banking System, Inc.",NASDAQ,Finance,Regional Banks,Financials,8025937953.676831
+UGI,UGI Corporation,NYSE,Distribution Services,Wholesale Distributors,Industrials,7962052790.193829
+WLK,Westlake Corporation,NYSE,Process Industries,Chemicals: Specialty,Materials,7960447084.004974
+KTOS,"Kratos Defense & Security Solutions, Inc.",NASDAQ,Electronic Technology,Aerospace & Defense,Technology,7951875542.942046
+GLXY,Galaxy Digital Inc.,NASDAQ,Finance,Investment Banks/Brokers,Financials,7946774774.931042
+PB,"Prosperity Bancshares, Inc.",NYSE,Finance,Regional Banks,Financials,7944886759.062828
+ARE,"Alexandria Real Estate Equities, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,7930006126.251316
+SYRE,"Spyre Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,7908450621.53717
+LINE,"Lineage, Inc.",NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,7840055743.871079
+IDA,"IDACORP, Inc.",NYSE,Utilities,Electric Utilities,Utilities,7832969818.1335
+CBSH,"Commerce Bancshares, Inc.",NASDAQ,Finance,Regional Banks,Financials,7801276068.216992
+CBC,"Central Bancompany, Inc.",NASDAQ,Finance,Regional Banks,Financials,7764756454.716095
+CHRD,Chord Energy Corporation,NASDAQ,Energy Minerals,Integrated Oil,Energy,7741936626.397498
+WYNN,"Wynn Resorts, Limited",NASDAQ,Consumer Services,Casinos/Gaming,Consumer Discretionary,7738488093.914863
+OSK,Oshkosh Corporation (Holding Company),NYSE,Consumer Durables,Motor Vehicles,Consumer Discretionary,7731668788.756262
+ZWS,Zurn Elkay Water Solutions Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,7724290949.672577
+NNN,"NNN REIT, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,7723320096.58207
+LNC,Lincoln National Corporation,NYSE,Finance,Multi-Line Insurance,Financials,7701926881.176139
+CNM,"Core & Main, Inc.",NYSE,Distribution Services,Wholesale Distributors,Industrials,7686434522.195938
+MORN,"Morningstar, Inc.",NASDAQ,Commercial Services,Financial Publishing/Services,Industrials,7669649364.516129
+AOS,A.O. Smith Corporation,NYSE,Producer Manufacturing,Building Products,Industrials,7662525344.8628
+HQY,"HealthEquity, Inc.",NASDAQ,Finance,Investment Managers,Financials,7660263617.49898
+ATR,"AptarGroup, Inc.",NYSE,Process Industries,Containers/Packaging,Materials,7653895934.973318
+AUGO,Aura Minerals Inc.,NASDAQ,Non-Energy Minerals,Other Metals/Minerals,Materials,7646604963.078193
+ACM,AECOM,NYSE,Industrial Services,Engineering & Construction,Industrials,7629124038.607467
+CHWY,"Chewy, Inc.",NYSE,Retail Trade,Internet Retail,Consumer Discretionary,7616521314.846642
+CDP,COPT Defense Properties,NYSE,Finance,Real Estate Investment Trusts,Real Estate,7570294365.296683
+IONS,"Ionis Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,7524826156.001847
+NFG,National Fuel Gas Company,NYSE,Energy Minerals,Integrated Oil,Energy,7476247870.743383
+DBX,"Dropbox, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,7471328235.19625
+KMX,CarMax Inc,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,7467611364.280164
+SLAB,"Silicon Laboratories, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,7408755446.473234
+CLF,Cleveland-Cliffs Inc.,NYSE,Non-Energy Minerals,Steel,Materials,7405609452.359311
+SNEX,StoneX Group Inc.,NASDAQ,Finance,Investment Banks/Brokers,Financials,7385965725.441264
+MGM,MGM Resorts International,NYSE,Consumer Services,Casinos/Gaming,Consumer Discretionary,7364119641.809731
+SFD,"Smithfield Foods, Inc.",NASDAQ,Consumer Non-Durables,Food: Meat/Fish/Dairy,Consumer Staples,7328011463.826271
+PRAX,"Praxis Precision Medicines, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,7255287909.721798
+SSRM,SSR Mining Inc.,NASDAQ,Non-Energy Minerals,Precious Metals,Materials,7240819616.900655
+AGCO,AGCO Corporation,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,7232876169.971702
+MSM,"MSC Industrial Direct Company, Inc.",NYSE,Distribution Services,Wholesale Distributors,Industrials,7232653979.480609
+CELH,"Celsius Holdings, Inc.",NASDAQ,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,7231741612.176642
+ACA,"Arcosa, Inc.",NYSE,Non-Energy Minerals,Construction Materials,Materials,7227539958.240411
+HIMS,"Hims & Hers Health, Inc.",NYSE,Health Services,Medical/Nursing Services,Health Care,7214050624.417677
+COMP,"Compass, Inc.",NYSE,Finance,Real Estate Development,Real Estate,7208183607.734244
+KEX,Kirby Corporation,NYSE,Transportation,Marine Shipping,Industrials,7193999927.983129
+LEVI,Levi Strauss & Co,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,7170883723.753282
+EMN,Eastman Chemical Company,NYSE,Process Industries,Chemicals: Specialty,Materials,7170320178.402917
+APPF,"AppFolio, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,7161391701.45961
+APLD,Applied Digital Corporation,NASDAQ,Technology Services,Data Processing Services,Technology,7160527009.542975
+VFS,VinFast Auto Ltd.,NASDAQ,Consumer Durables,Motor Vehicles,Consumer Discretionary,7158979663.62215
+NCLH,Norwegian Cruise Line Holdings Ltd.,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,7149554496.313751
+MHK,"Mohawk Industries, Inc.",NYSE,Producer Manufacturing,Building Products,Industrials,7135931889.085985
+CAMT,Camtek Ltd.,NASDAQ,Electronic Technology,Electronic Components,Technology,7131363782.659069
+AAON,"AAON, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,7104205697.583245
+CMC,Commercial Metals Company,NYSE,Non-Energy Minerals,Steel,Materials,7067788671.516958
+TRNO,Terreno Realty Corporation,NYSE,Finance,Real Estate Investment Trusts,Real Estate,7060187013.105769
+AXS,Axis Capital Holdings Limited,NYSE,Finance,Multi-Line Insurance,Financials,7058032506.630564
+ETSY,"Etsy, Inc.",NYSE,Retail Trade,Internet Retail,Consumer Discretionary,7040578256.887809
+URBN,"Urban Outfitters, Inc.",NASDAQ,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,7039553442.372778
+PATH,"UiPath, Inc.",NYSE,Technology Services,Packaged Software,Technology,7025178716.969057
+DUOL,"Duolingo, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,7014159048.279328
+SSD,"Simpson Manufacturing Company, Inc.",NYSE,Producer Manufacturing,Building Products,Industrials,7013298999.892062
+QLYS,"Qualys, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,7002720169.392138
+TTAN,"ServiceTitan, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,7002604828.153847
+POWL,"Powell Industries, Inc.",NASDAQ,Producer Manufacturing,Electrical Products,Industrials,6992502124.852274
+AXTA,Axalta Coating Systems Ltd.,NYSE,Process Industries,Industrial Specialties,Materials,6983473031.619018
+PRMB,Primo Brands Corporation,NYSE,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,6974655647.009307
+VLY,Valley National Bancorp,NASDAQ,Finance,Major Banks,Financials,6973877934.79843
+AVAV,"AeroVironment, Inc.",NASDAQ,Electronic Technology,Aerospace & Defense,Technology,6968026705.112646
+TAP,Molson Coors Beverage Company,NYSE,Consumer Non-Durables,Beverages: Alcoholic,Consumer Staples,6964834226.898734
+STAG,"Stag Industrial, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,6943028326.210143
+FSS,Federal Signal Corporation,NYSE,Consumer Durables,Motor Vehicles,Consumer Discretionary,6932495766.605096
+VCTR,"Victory Capital Holdings, Inc. Class A Common Stock",NASDAQ,Finance,Investment Managers,Financials,6916136247.66058
+WULF,TeraWulf Inc.,NASDAQ,Technology Services,Data Processing Services,Technology,6870798655.002196
+PACS,"PACS Group, Inc.",NYSE,Health Services,Hospital/Nursing Management,Health Care,6855931486.931169
+AWI,Armstrong World Industries Inc,NYSE,Producer Manufacturing,Miscellaneous Manufacturing,Industrials,6841083740.293011
+PPC,Pilgrim's Pride Corporation,NASDAQ,Process Industries,Agricultural Commodities/Milling,Materials,6821809549.363158
+ALKS,Alkermes plc,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,6812866087.214162
+GLBE,Global-E Online Ltd.,NASDAQ,Retail Trade,Internet Retail,Consumer Discretionary,6784203219.605479
+FLR,Fluor Corporation,NYSE,Industrial Services,Engineering & Construction,Industrials,6777996614.196431
+NE,Noble Corporation plc A,NYSE,Industrial Services,Contract Drilling,Energy,6762444341.716725
+NOV,NOV Inc.,NYSE,Industrial Services,Oilfield Services/Equipment,Energy,6762389833.708267
+GTES,Gates Industrial Corporation Ltd.,NYSE,Producer Manufacturing,Electrical Products,Industrials,6751541614.33508
+MTDR,Matador Resources Company,NYSE,Energy Minerals,Integrated Oil,Energy,6717378953.398679
+SARO,"StandardAero, Inc.",NYSE,Transportation,Other Transportation,Industrials,6674644950.821447
+HESM,Hess Midstream LP,NYSE,Energy Minerals,Integrated Oil,Energy,6651313921.115882
+BROS,Dutch Bros Inc.,NYSE,Consumer Services,Restaurants,Consumer Discretionary,6647555330.351935
+ALGM,"Allegro MicroSystems, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,6630321138.667218
+IOVA,"Iovance Biotherapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,6622442596.253943
+RNG,"RingCentral, Inc.",NYSE,Technology Services,Packaged Software,Technology,6619533465.078749
+VSXY,Victorias Secret & Co.,NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,6610045882.469577
+LW,"Lamb Weston Holdings, Inc.",NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,6595550332.167004
+Z,"Zillow Group, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,6553679977.699006
+LNTH,"Lantheus Holdings, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,6539782495.254195
+CVLT,"Commvault Systems, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,6517157218.29139
+ENS,EnerSys,NYSE,Producer Manufacturing,Electrical Products,Industrials,6484887783.600022
+OKLO,Oklo Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,6454812550.859128
+TXNM,"TXNM Energy, Inc.",NYSE,Utilities,Electric Utilities,Utilities,6454470720.762718
+OMF,"OneMain Holdings, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,6450374775.2940445
+ELF,"e.l.f. Beauty, Inc.",NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,6445443303.952435
+CAG,"ConAgra Brands, Inc.",NYSE,Consumer Non-Durables,Food: Major Diversified,Consumer Staples,6440281388.496683
+HXL,Hexcel Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,6424968209.704686
+ANDG,Andersen Group Inc.,NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,6420004094.733287
+FIGR,"Figure Technology Solutions, Inc.",NASDAQ,Finance,Finance/Rental/Leasing,Financials,6403744460.468841
+INGM,Ingram Micro Holding Corporation,NYSE,Technology Services,Information Technology Services,Technology,6376623261.704347
+XMTR,"Xometry, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,6366929540.96572
+AMRX,"Amneal Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,6358336271.601019
+RIOT,"Riot Platforms, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,6336247287.528207
+DOX,Amdocs Limited,NASDAQ,Technology Services,Information Technology Services,Technology,6329477477.87136
+ACT,"Enact Holdings, Inc.",NASDAQ,Finance,Multi-Line Insurance,Financials,6320124369.235206
+MAC,Macerich Company (The),NYSE,Finance,Real Estate Investment Trusts,Real Estate,6309196581.846847
+IMVT,"Immunovant, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,6293660468.931923
+VNO,Vornado Realty Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,6279411856.285714
+GRAL,"GRAIL, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,6279179073.165824
+KOD,Kodiak Sciences Inc,NASDAQ,Health Technology,Biotechnology,Health Care,6276775391.565563
+CAVA,"CAVA Group, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,6265484625.284477
+ECG,"Everus Construction Group, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,6252255881.282148
+PL,Planet Labs PBC,NYSE,Technology Services,Packaged Software,Technology,6250908542.057009
+RYTM,"Rhythm Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,6250391898.151273
+FAF,First American Corporation (New),NYSE,Finance,Specialty Insurance,Financials,6248520042.872155
+KNSA,"Kiniksa Pharmaceuticals International, plc",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,6224755701.673905
+UBSI,"United Bankshares, Inc.",NASDAQ,Finance,Regional Banks,Financials,6192224237.946171
+BLCO,Bausch + Lomb Corporation,NYSE,Health Technology,Medical Specialties,Health Care,6178958733.708456
+NAVN,"Navan, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,6161422993.637782
+ST,Sensata Technologies Holding plc,NYSE,Electronic Technology,Electronic Equipment/Instruments,Technology,6154711374.39427
+RIG,Transocean Ltd (Switzerland),NYSE,Industrial Services,Contract Drilling,Energy,6154009457.420577
+LYFT,"Lyft, Inc.",NASDAQ,Transportation,Other Transportation,Industrials,6139922578.968382
+SEI,"Solaris Energy Infrastructure, Inc.",NYSE,Industrial Services,Oilfield Services/Equipment,Energy,6124662716.650247
+SWX,"Southwest Gas Holdings, Inc.",NYSE,Utilities,Gas Distributors,Utilities,6095594327.305949
+SFM,"Sprouts Farmers Market, Inc.",NASDAQ,Retail Trade,Food Retail,Consumer Staples,6074150636.653537
+ANF,Abercrombie & Fitch Company,NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,6050293996.387668
+MBLY,Mobileye Global Inc.,NASDAQ,Technology Services,Packaged Software,Technology,6036331811.161473
+TBBB,BBB Foods Inc.,NYSE,Retail Trade,Food Retail,Consumer Staples,6036162195.159412
+FNB,F.N.B. Corporation,NYSE,Finance,Major Banks,Financials,6022196899.07523
+CZR,"Caesars Entertainment, Inc.",NASDAQ,Consumer Services,Casinos/Gaming,Consumer Discretionary,6011513658.519648
+INGR,Ingredion Incorporated,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,5996753906.389864
+BIRK,Birkenstock Holding plc,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,5985924862.176932
+MOS,Mosaic Company (The),NYSE,Process Industries,Chemicals: Agricultural,Materials,5957364537.514445
+INSW,"International Seaways, Inc.",NYSE,Transportation,Marine Shipping,Industrials,5934841673.180923
+M,Macy's Inc,NYSE,Retail Trade,Department Stores,Consumer Discretionary,5920874570.450197
+ACI,"Albertsons Companies, Inc.",NYSE,Retail Trade,Food Retail,Consumer Staples,5916120156.555915
+VFC,V.F. Corporation,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,5897018172.057812
+HR,Healthcare Realty Trust Incorporated,NYSE,Finance,Real Estate Investment Trusts,Real Estate,5877644016.291448
+WEX,WEX Inc.,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,5876691759.107391
+YOU,"Clear Secure, Inc.",NYSE,Technology Services,Packaged Software,Technology,5875561646.67781
+PEGA,Pegasystems Inc.,NASDAQ,Technology Services,Information Technology Services,Technology,5861036307.280923
+EPAM,"EPAM Systems, Inc.",NYSE,Technology Services,Information Technology Services,Technology,5841709522.905321
+CVI,CVR Energy Inc.,NYSE,Energy Minerals,Oil Refining/Marketing,Energy,5832785588.379241
+LEA,Lear Corporation,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,5821801865.126212
+LOAR,Loar Holdings Inc.,NYSE,Electronic Technology,Aerospace & Defense,Technology,5815243166.292113
+VAL,Valaris Limited,NYSE,Industrial Services,Contract Drilling,Energy,5808305131.290496
+HWC,Hancock Whitney Corporation,NASDAQ,Finance,Regional Banks,Financials,5808148962.888186
+BKH,Black Hills Corporation,NYSE,Utilities,Gas Distributors,Utilities,5801338888.4161005
+POOL,Pool Corporation,NASDAQ,Distribution Services,Wholesale Distributors,Industrials,5797802886.768686
+PI,"Impinj, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,5794033211.23516
+MKTX,"MarketAxess Holdings, Inc.",NASDAQ,Finance,Investment Banks/Brokers,Financials,5792754590.038709
+TEX,Terex Corporation,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,5791580985.481376
+G,Genpact Limited,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,5780383349.085665
+VRNS,"Varonis Systems, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,5756807446.8829775
+LSTR,"Landstar System, Inc.",NASDAQ,Transportation,Trucking,Industrials,5739073255.279873
+SGHC,Super Group (SGHC) Limited,NYSE,Consumer Services,Casinos/Gaming,Consumer Discretionary,5736411150.128249
+CPB,The Campbell's Company,NASDAQ,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,5729088454.106866
+TTD,"The Trade Desk, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,5711369256.25932
+MGY,Magnolia Oil & Gas Corporation,NYSE,Energy Minerals,Oil & Gas Production,Energy,5710943090.669935
+MCY,Mercury General Corporation,NYSE,Finance,Property/Casualty Insurance,Financials,5691181774.990224
+BLDR,"Builders FirstSource, Inc.",NYSE,Retail Trade,Home Improvement Chains,Consumer Discretionary,5686472570.583534
+RYN,Rayonier Inc. REIT,NYSE,Finance,Real Estate Investment Trusts,Real Estate,5678392677.631183
+WFRD,Weatherford International plc,NASDAQ,Industrial Services,Oilfield Services/Equipment,Energy,5663879666.96489
+CGON,"CG Oncology, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,5657028469.693962
+HOMB,"Home BancShares, Inc.",NYSE,Finance,Regional Banks,Financials,5651401718.776335
+SAIC,Science Applications International Corporation,NASDAQ,Technology Services,Information Technology Services,Technology,5641936010.962916
+MTG,MGIC Investment Corporation,NYSE,Finance,Property/Casualty Insurance,Financials,5626574734.413348
+ESNT,Essent Group Ltd.,NYSE,Finance,Specialty Insurance,Financials,5616382208.8608265
+CIFR,Cipher Digital Inc.,NASDAQ,Technology Services,Data Processing Services,Technology,5611215485.623704
+ERAS,"Erasca, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,5606685257.120957
+MIRM,"Mirum Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,5584818864.559804
+RDNT,"RadNet, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,5580458195.282511
+EXLS,"ExlService Holdings, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,5577823826.10632
+CHDN,"Churchill Downs, Incorporated",NASDAQ,Consumer Services,Movies/Entertainment,Communication,5573231545.894432
+LGN,Legence Corp.,NASDAQ,Industrial Services,Engineering & Construction,Industrials,5569129229.498933
+GBCI,"Glacier Bancorp, Inc.",NYSE,Finance,Regional Banks,Financials,5563956984.388553
+JBTM,JBT Marel Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,5554969467.687167
+SXT,Sensient Technologies Corporation,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,5548913854.393017
+MUR,Murphy Oil Corporation,NYSE,Energy Minerals,Oil & Gas Production,Energy,5545981455.048704
+EPRT,"Essential Properties Realty Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,5531906918.789223
+QBTS,D-Wave Quantum Inc.,NASDAQ,Electronic Technology,Computer Processing Hardware,Technology,5531160099.892467
+LKQ,LKQ Corporation,NASDAQ,Consumer Durables,Automotive Aftermarket,Consumer Discretionary,5525565713.17401
+CPA,"Copa Holdings, S.A.",NYSE,Transportation,Airlines,Industrials,5522028146.247472
+SNDR,"Schneider National, Inc.",NYSE,Transportation,Trucking,Industrials,5521978284.478412
+CROX,"Crocs, Inc.",NASDAQ,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,5512724664.4551525
+AGX,"Argan, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,5508256091.6122265
+DLB,Dolby Laboratories,NYSE,Technology Services,Packaged Software,Technology,5502105031.61574
+FTDR,"Frontdoor, Inc.",NASDAQ,Consumer Durables,Homebuilding,Consumer Discretionary,5497685928.548813
+WH,"Wyndham Hotels & Resorts, Inc.",NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,5496076203.200383
+ORA,"Ormat Technologies, Inc.",NYSE,Utilities,Electric Utilities,Utilities,5468307921.251805
+RUSHA,"Rush Enterprises, Inc.",NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,5467374768.523473
+BGC,"BGC Group, Inc.",NASDAQ,Finance,Investment Banks/Brokers,Financials,5458355229.859305
+LAUR,"Laureate Education, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,5436967310.68903
+DOCS,"Doximity, Inc.",NYSE,Technology Services,Packaged Software,Technology,5436502119.673247
+ORKA,"Oruka Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,5436477880.5
+ASB,Associated Banc-Corp,NYSE,Finance,Major Banks,Financials,5410542662.76947
+JOBY,"Joby Aviation, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,5406677011.311305
+KGS,"Kodiak Gas Services, Inc.",NYSE,Industrial Services,Oilfield Services/Equipment,Energy,5406032689.615643
+HAE,Haemonetics Corporation,NYSE,Health Technology,Medical Specialties,Health Care,5400045066.671382
+PTCT,"PTC Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,5399914383.626919
+AUB,Atlantic Union Bankshares Corporation,NYSE,Finance,Regional Banks,Financials,5398402794.351265
+CAKE,The Cheesecake Factory Incorporated,NASDAQ,Consumer Services,Restaurants,Consumer Discretionary,5396540677.2228985
+HRB,"H&R Block, Inc.",NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,5395819526.734694
+COGT,"Cogent Biosciences, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,5379274323.936172
+ZGN,Ermenegildo Zegna N.V.,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,5374680974.28754
+CRUS,"Cirrus Logic, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,5356063636.2559185
+NOVT,Novanta Inc.,NASDAQ,Electronic Technology,Electronic Equipment/Instruments,Technology,5342894348.597667
+GXO,"GXO Logistics, Inc.",NYSE,Transportation,Air Freight/Couriers,Industrials,5339714018.888698
+POR,Portland General Electric Co,NYSE,Utilities,Electric Utilities,Utilities,5338215243.533848
+NIQ,NIQ Global Intelligence plc,NYSE,Technology Services,Packaged Software,Technology,5335751671.43216
+CWST,"Casella Waste Systems, Inc.",NASDAQ,Industrial Services,Environmental Services,Industrials,5331746645.459846
+STEP,StepStone Group Inc.,NASDAQ,Finance,Investment Managers,Financials,5321841168.392166
+AROC,"Archrock, Inc.",NYSE,Industrial Services,Oilfield Services/Equipment,Energy,5309240133.11536
+KLAR,Klarna Group plc,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,5307761146.07578
+ABCB,Ameris Bancorp,NYSE,Finance,Regional Banks,Financials,5302814251.21416
+TFX,Teleflex Incorporated,NYSE,Health Technology,Medical Specialties,Health Care,5301634589.266125
+PECO,"Phillips Edison & Company, Inc.",NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,5301126799.037175
+STVN,Stevanato Group S.p.A.,NYSE,Health Technology,Medical Specialties,Health Care,5296271461.884436
+OUT,OUTFRONT Media Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,5280534898.37931
+PAGP,"Plains GP Holdings, L.P.",NASDAQ,Industrial Services,Oil & Gas Pipelines,Energy,5268207854.3379755
+VSH,"Vishay Intertechnology, Inc.",NYSE,Electronic Technology,Electronic Production Equipment,Technology,5221035730.420137
+MMSI,"Merit Medical Systems, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,5207345947.120117
+MTN,"Vail Resorts, Inc.",NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,5203822125.301459
+AN,"AutoNation, Inc.",NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,5203109934.423634
+RRR,"Red Rock Resorts, Inc.",NASDAQ,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,5199351474.210047
+NJR,NewJersey Resources Corporation,NYSE,Utilities,Gas Distributors,Utilities,5196173493.11586
+MRX,Marex Group Limited,NASDAQ,Technology Services,Internet Software/Services,Communication,5173268041.152171
+CRSP,CRISPR Therapeutics AG,NASDAQ,Health Technology,Biotechnology,Health Care,5162420841.770421
+SHC,Sotera Health Company,NASDAQ,Health Technology,Medical Specialties,Health Care,5153868619.581603
+SRRK,Scholar Rock Holding Corporation,NASDAQ,Health Technology,Biotechnology,Health Care,5138120985.194785
+ACIW,"ACI Worldwide, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,5135593331.92618
+WAY,Waystar Holding Corp.,NASDAQ,Technology Services,Packaged Software,Technology,5115847980.007552
+RLI,RLI Corp.,NYSE,Finance,Multi-Line Insurance,Financials,5112672207.1865015
+MAAS,Maase Inc.,NASDAQ,Technology Services,Packaged Software,Technology,5112067564.393816
+RELY,"Remitly Global, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,5107936262.949405
+WHD,"Cactus, Inc. Class A Common Stock",NYSE,Industrial Services,Oilfield Services/Equipment,Energy,5085780617.221924
+OLLI,"Ollie's Bargain Outlet Holdings, Inc.",NASDAQ,Retail Trade,Department Stores,Consumer Discretionary,5068806821.522547
+EXP,Eagle Materials Inc,NYSE,Non-Energy Minerals,Construction Materials,Materials,5052225870.478781
+CNX,CNX Resources Corporation,NYSE,Energy Minerals,Oil & Gas Production,Energy,5034522138.40674
+IRDM,Iridium Communications Inc,NASDAQ,Communications,Specialty Telecommunications,Communication,5030944425.03259
+AX,"Axos Financial, Inc.",NYSE,Finance,Major Banks,Financials,5028521956.901198
+MAIN,Main Street Capital Corporation,NYSE,Finance,Financial Conglomerates,Financials,5025144806.937764
+SIGI,"Selective Insurance Group, Inc.",NASDAQ,Finance,Property/Casualty Insurance,Financials,5016910997.9170685
+BYD,Boyd Gaming Corporation,NYSE,Consumer Services,Casinos/Gaming,Consumer Discretionary,5008137464.474573
+BOX,"Box, Inc.",NYSE,Technology Services,Information Technology Services,Technology,4992735841.206279
+OBDC,Blue Owl Capital Corporation,NYSE,Finance,Financial Conglomerates,Financials,4985671193.920354
+NXST,"Nexstar Media Group, Inc.",NASDAQ,Consumer Services,Broadcasting,Communication,4974000056.91043
+ACMR,"ACM Research, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,4970863245.736018
+CLMT,"Calumet, Inc",NASDAQ,Energy Minerals,Oil Refining/Marketing,Energy,4959218221.10788
+DFTX,"Definium Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,4958140817.738443
+CORZ,"Core Scientific, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,4951855816.8203125
+CE,Celanese Corporation,NYSE,Process Industries,Chemicals: Specialty,Materials,4940897064.399911
+KVYO,"Klaviyo, Inc. Series A",NYSE,Technology Services,Packaged Software,Technology,4931479023.426296
+IBP,"Installed Building Products, Inc.",NYSE,Industrial Services,Engineering & Construction,Industrials,4928842789.309482
+ROAD,"Construction Partners, Inc.",NASDAQ,Industrial Services,Engineering & Construction,Industrials,4926949758.886336
+GVA,Granite Construction Incorporated,NYSE,Industrial Services,Engineering & Construction,Industrials,4923507579.284899
+HCC,"Warrior Met Coal, Inc.",NYSE,Energy Minerals,Coal,Energy,4914290299.68942
+TVTX,"Travere Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,4913358770.760473
+BETA,"Beta Technologies, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,4908083422.425366
+CNO,"CNO Financial Group, Inc.",NYSE,Finance,Multi-Line Insurance,Financials,4902707322.579084
+BLSH,Bullish,NYSE,Technology Services,Packaged Software,Technology,4898348684.511621
+GTX,Garrett Motion Inc.,NASDAQ,Producer Manufacturing,Auto Parts: OEM,Industrials,4893587031.015144
+GLNG,Golar LNG Limited,NASDAQ,Industrial Services,Oil & Gas Pipelines,Energy,4892631741.695167
+HGTY,"Hagerty, Inc.",NYSE,Finance,Property/Casualty Insurance,Financials,4882878247.7753525
+VSEC,VSE Corporation,NASDAQ,Industrial Services,Engineering & Construction,Industrials,4872921109.975642
+OZK,Bank OZK,NASDAQ,Finance,Regional Banks,Financials,4848056721.098306
+FND,"Floor & Decor Holdings, Inc.",NYSE,Retail Trade,Home Improvement Chains,Consumer Discretionary,4845293514.645162
+SBRA,"Sabra Health Care REIT, Inc.",NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,4843573841.643312
+MRCY,Mercury Systems Inc,NASDAQ,Electronic Technology,Aerospace & Defense,Technology,4838046278.311003
+RITM,Rithm Capital Corp.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4824636264.501162
+KLIC,"Kulicke and Soffa Industries, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,4814801591.031568
+PSN,Parsons Corporation,NYSE,Technology Services,Information Technology Services,Technology,4814787005.510924
+EBC,"Eastern Bankshares, Inc.",NASDAQ,Finance,Regional Banks,Financials,4805597898.495257
+NSIT,"Insight Enterprises, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,4801618500.3303585
+RXO,"RXO, Inc.",NYSE,Technology Services,Packaged Software,Technology,4797067663.198065
+MIDD,The Middleby Corporation,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,4791307761.351993
+KRG,Kite Realty Group Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4790295298.462625
+MAT,"Mattel, Inc.",NASDAQ,Consumer Durables,Recreational Products,Consumer Discretionary,4768333182.200846
+SYNA,Synaptics Incorporated,NASDAQ,Electronic Technology,Semiconductors,Technology,4757020083.721532
+CHH,"Choice Hotels International, Inc.",NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,4754710731.288686
+LFST,"LifeStance Health Group, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,4746354636.716417
+CON,"Concentra Group Holdings Parent, Inc.",NYSE,Health Services,Medical/Nursing Services,Health Care,4742384484.042885
+SON,Sonoco Products Company,NYSE,Process Industries,Containers/Packaging,Materials,4738090149.50248
+HLNE,Hamilton Lane Incorporated,NASDAQ,Finance,Investment Managers,Financials,4727751999.192271
+AMTM,"Amentum Holdings, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,4716528452.949393
+USAR,"USA Rare Earth, Inc.",NASDAQ,Producer Manufacturing,Metal Fabrication,Industrials,4710961743.961996
+STWD,Starwood Property Trust Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4704847295.1866665
+CRC,California Resources Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,4703901459.754948
+DAVE,Dave Inc.,NASDAQ,Finance,Major Banks,Financials,4699383575.355575
+FLG,"Flagstar Bank, N.A.",NYSE,Finance,Major Banks,Financials,4698851044.546256
+HASI,"HA Sustainable Infrastructure Capital, Inc.",NYSE,Finance,Investment Managers,Financials,4688811128.646768
+RGTI,"Rigetti Computing, Inc.",NASDAQ,Electronic Technology,Computer Processing Hardware,Technology,4682775504.951201
+FSLY,"Fastly, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,4667490258.3590355
+CHEF,"The Chefs' Warehouse, Inc.",NASDAQ,Distribution Services,Food Distributors,Consumer Staples,4663808105.733572
+IEP,Icahn Enterprises L.P.,NASDAQ,Energy Minerals,Oil Refining/Marketing,Energy,4663602562.0240965
+FBIN,"Fortune Brands Innovations, Inc.",NYSE,Producer Manufacturing,Building Products,Industrials,4656681411.181633
+OPCH,"Option Care Health, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,4653827534.882448
+REYN,Reynolds Consumer Products Inc.,NASDAQ,Consumer Non-Durables,Household/Personal Care,Consumer Staples,4639509485.421292
+SR,Spire Inc.,NYSE,Utilities,Gas Distributors,Utilities,4635938903.973074
+MC,Moelis & Company,NYSE,Finance,Investment Banks/Brokers,Financials,4630542633.069131
+BLLN,"BillionToOne, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,4628576567.104602
+GOLF,Acushnet Holdings Corp.,NYSE,Consumer Durables,Recreational Products,Consumer Discretionary,4624511391.763963
+PIPR,Piper Sandler Companies,NYSE,Finance,Investment Banks/Brokers,Financials,4613356209.565704
+DNTH,"Dianthus Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,4607314863.212665
+LPX,Louisiana-Pacific Corporation,NYSE,Non-Energy Minerals,Forest Products,Materials,4593268532.70873
+TENB,"Tenable Holdings, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,4580721742.825943
+DK,"Delek US Holdings, Inc.",NYSE,Energy Minerals,Oil Refining/Marketing,Energy,4562409188.05209
+NWE,"NorthWestern Energy Group, Inc.",NASDAQ,Utilities,Electric Utilities,Utilities,4561548615.752378
+TREX,"Trex Company, Inc.",NYSE,Non-Energy Minerals,Forest Products,Materials,4561523004.049955
+OGS,"ONE Gas, Inc.",NYSE,Utilities,Gas Distributors,Utilities,4557079601.851851
+UEC,Uranium Energy Corp.,AMEX,Non-Energy Minerals,Other Metals/Minerals,Materials,4554423157.719913
+CUZ,Cousins Properties Incorporated,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4546308951.802309
+PRM,"Perimeter Solutions, SA",NYSE,Process Industries,Chemicals: Major Diversified,Materials,4542312159.232853
+UNF,Unifirst Corporation,NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,4531987253.059321
+OPLN,"OPENLANE, Inc.",NYSE,Technology Services,Packaged Software,Technology,4507894605.56222
+TFSL,TFS Financial Corporation,NASDAQ,Finance,Savings Banks,Financials,4506715125.0105
+PRIM,Primoris Services Corporation,NYSE,Industrial Services,Engineering & Construction,Industrials,4500382886.3053465
+AXTI,AXT Inc,NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,4489142299.950879
+RDN,Radian Group Inc.,NYSE,Finance,Specialty Insurance,Financials,4488983388.026339
+BWIN,"The Baldwin Insurance Group, Inc.",NASDAQ,Finance,Insurance Brokers/Services,Financials,4470639321.110831
+BEPC,Brookfield Renewable Corporation,NYSE,Utilities,Electric Utilities,Utilities,4470561757.328795
+OII,"Oceaneering International, Inc.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,4459923701.938539
+KBR,"KBR, Inc.",NYSE,Technology Services,Information Technology Services,Technology,4455234559.241615
+ENVA,"Enova International, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,4433652789.493455
+GNTX,Gentex Corporation,NASDAQ,Producer Manufacturing,Auto Parts: OEM,Industrials,4432777274.64019
+FFIN,"First Financial Bankshares, Inc.",NASDAQ,Finance,Major Banks,Financials,4410187199.475023
+HHH,Howard Hughes Holdings Inc.,NYSE,Finance,Real Estate Development,Real Estate,4403115769.604615
+ALK,"Alaska Air Group, Inc.",NYSE,Transportation,Airlines,Industrials,4392698810.76923
+CNR,"Core Natural Resources, Inc.",NYSE,Energy Minerals,Coal,Energy,4390823460.700622
+TPC,Tutor Perini Corporation,NYSE,Industrial Services,Engineering & Construction,Industrials,4382161606.894587
+CVSA,Covista Inc.,NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,4380833304.578862
+RSI,"Rush Street Interactive, Inc.",NYSE,Consumer Services,Casinos/Gaming,Consumer Discretionary,4380516320.580708
+DIOD,Diodes Incorporated,NASDAQ,Electronic Technology,Semiconductors,Technology,4372148719.596426
+VNT,Vontier Corporation,NYSE,Transportation,Other Transportation,Industrials,4358848005.006211
+ADT,ADT Inc.,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,4345488895.918461
+ENPH,"Enphase Energy, Inc.",NASDAQ,Producer Manufacturing,Electrical Products,Industrials,4335665554.256457
+GEF,Greif Inc.,NYSE,Process Industries,Containers/Packaging,Materials,4332863603.298973
+SEZL,Sezzle Inc.,NASDAQ,Technology Services,Packaged Software,Technology,4331953909.517147
+HTFL,"Heartflow, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,4325073580.323326
+SKY,"Champion Homes, Inc.",NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,4322326999.088253
+FELE,"Franklin Electric Co., Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,4320344377.403118
+KRMN,Karman Holdings Inc.,NYSE,Electronic Technology,Aerospace & Defense,Technology,4319273573.008836
+PTEN,"Patterson-UTI Energy, Inc.",NASDAQ,Energy Minerals,Oil & Gas Production,Energy,4313462907.679442
+ITGR,Integer Holdings Corporation,NYSE,Health Technology,Medical Specialties,Health Care,4304368641.3236475
+ARX,Accelerant Holdings,NYSE,Finance,Property/Casualty Insurance,Financials,4300333411.807595
+DLO,DLocal Limited,NASDAQ,Technology Services,Packaged Software,Technology,4296552629.709332
+OTF,Blue Owl Technology Finance Corp.,NYSE,Finance,Finance/Rental/Leasing,Financials,4288615161.584664
+BDC,Belden Inc,NYSE,Producer Manufacturing,Electrical Products,Industrials,4265384518.7900686
+STNG,Scorpio Tankers Inc.,NYSE,Transportation,Marine Shipping,Industrials,4263926403.1609755
+BCO,Brinks Company (The),NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,4259008016.965612
+VSNT,"Versant Media Group, Inc.",NASDAQ,Consumer Services,Cable/Satellite TV,Communication,4252596052.711363
+TDW,Tidewater Inc.,NYSE,Transportation,Marine Shipping,Industrials,4250176961.8743796
+EWTX,"Edgewise Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,4242077409.5008926
+SLM,SLM Corporation,NASDAQ,Finance,Finance/Rental/Leasing,Financials,4232565563.8359065
+INDV,"Indivior Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,4229084380.8891387
+ALH,Alliance Laundry Holdings Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,4228243962.725989
+ADPT,Adaptive Biotechnologies Corporation,NASDAQ,Health Technology,Biotechnology,Health Care,4227693838.5580683
+IBOC,International Bancshares Corporation,NASDAQ,Finance,Regional Banks,Financials,4224047920.235088
+FHI,"Federated Hermes, Inc.",NYSE,Finance,Investment Managers,Financials,4219799268.0450406
+FULT,Fulton Financial Corporation,NASDAQ,Finance,Major Banks,Financials,4219211996.106871
+CNK,"Cinemark Holdings, Inc.",NYSE,Consumer Services,Movies/Entertainment,Communication,4219191391.9717155
+LIVN,LivaNova PLC,NASDAQ,Health Technology,Medical Specialties,Health Care,4208593406.918588
+MMYT,MakeMyTrip Limited,NASDAQ,Technology Services,Internet Software/Services,Communication,4207243742.807718
+SFBS,"ServisFirst Bancshares, Inc.",NYSE,Finance,Regional Banks,Financials,4198212951.241192
+EPR,EPR Properties,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4193572535.1332474
+CRGY,Crescent Energy Company,NYSE,Energy Minerals,Integrated Oil,Energy,4182910744.690239
+LOPE,"Grand Canyon Education, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,4165192955.3661885
+ACLS,"Axcelis Technologies, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,4160045223.0074177
+ESAB,ESAB Corporation,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,4155917824.629316
+MIR,"Mirion Technologies, Inc.",NYSE,Electronic Technology,Aerospace & Defense,Technology,4139005508.3526516
+CCC,CCC Intelligent Solutions Holdings Inc.,NASDAQ,Technology Services,Packaged Software,Technology,4134742831.3972597
+HRI,Herc Holdings Inc.,NYSE,Finance,Finance/Rental/Leasing,Financials,4127446352.504925
+GFF,Griffon Corporation,NYSE,Producer Manufacturing,Building Products,Industrials,4103248380.047965
+PARR,"Par Pacific Holdings, Inc. Common Stock",NYSE,Energy Minerals,Oil Refining/Marketing,Energy,4102658645.1100965
+XXI,"Twenty One Capital, Inc.",NYSE,Finance,Regional Banks,Financials,4097802954.7863917
+GEO,Geo Group Inc (The) REIT,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,4097317501.4693146
+UFPI,"UFP Industries, Inc.",NASDAQ,Non-Energy Minerals,Forest Products,Materials,4093534113.2019615
+FBP,First BanCorp. New,NYSE,Finance,Regional Banks,Financials,4073189152.590926
+ABCL,AbCellera Biologics Inc.,NASDAQ,Health Technology,Biotechnology,Health Care,4065174327.202579
+AIR,AAR Corp.,NYSE,Electronic Technology,Aerospace & Defense,Technology,4036704588.6033673
+SKT,Tanger Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4029955046.3334303
+CRK,"Comstock Resources, Inc.",NYSE,Energy Minerals,Oil & Gas Production,Energy,4025538093.9999995
+UCB,"United Community Banks, Inc.",NYSE,Finance,Regional Banks,Financials,4024810425.588446
+KRC,Kilroy Realty Corporation,NYSE,Finance,Real Estate Investment Trusts,Real Estate,4022406999.407722
+PAY,"Paymentus Holdings, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,4014955945.121554
+TNGX,"Tango Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,4014612780.0478506
+COLD,"Americold Realty Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,3993873160.421434
+WK,Workiva Inc.,NYSE,Technology Services,Information Technology Services,Technology,3986007859.5976386
+HP,"Helmerich & Payne, Inc.",NYSE,Industrial Services,Contract Drilling,Energy,3985564869.052003
+BC,Brunswick Corporation,NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,3983746018.5860457
+DHT,"DHT Holdings, Inc.",NYSE,Transportation,Marine Shipping,Industrials,3972844751.095066
+CATY,Cathay General Bancorp,NASDAQ,Finance,Regional Banks,Financials,3944121020.5449667
+NP,Neptune Insurance Holdings Inc.,NYSE,Finance,Insurance Brokers/Services,Financials,3944079244.4831223
+MDU,"MDU Resources Group, Inc.",NYSE,Utilities,Gas Distributors,Utilities,3941948708.4423175
+EE,"Excelerate Energy, Inc.",NYSE,Utilities,Gas Distributors,Utilities,3941856972.940294
+SIG,Signet Jewelers Limited,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,3924100211.425819
+ONDS,Ondas Inc,NASDAQ,Electronic Technology,Telecommunications Equipment,Technology,3918896937.1693435
+RLAY,"Relay Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,3918252347.1728888
+PLSE,"Pulse Biosciences, Inc",NASDAQ,Health Technology,Medical Specialties,Health Care,3912123097.9573836
+KFY,Korn Ferry,NYSE,Commercial Services,Personnel Services,Industrials,3909687433.207459
+PENG,"Penguin Solutions, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,3908793037.6951237
+SRAD,Sportradar Group AG,NASDAQ,Technology Services,Packaged Software,Technology,3893849287.4437294
+CBT,Cabot Corporation,NYSE,Process Industries,Chemicals: Specialty,Materials,3867678852.000793
+BFH,"Bread Financial Holdings, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,3864210261.373573
+VVV,Valvoline Inc.,NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,3862040896.2986383
+SUNC,SunocoCorp LLC,AMEX,Distribution Services,Wholesale Distributors,Industrials,3856062634.508514
+CECO,CECO Environmental Corp.,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,3855066260.30389
+WSFS,WSFS Financial Corporation,NASDAQ,Finance,Savings Banks,Financials,3851721025.8164706
+APLE,"Apple Hospitality REIT, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,3850508717.3397036
+MTH,Meritage Homes Corporation,NYSE,Finance,Real Estate Development,Real Estate,3832888603.724064
+TNL,Travel Leisure Co.,NYSE,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,3832608999.3186393
+MSGE,Madison Square Garden Entertainment Corp.,NYSE,Consumer Services,Movies/Entertainment,Communication,3824175205.3494983
+BILL,"BILL Holdings, Inc.",NYSE,Technology Services,Packaged Software,Technology,3822957971.2547793
+SPHR,Sphere Entertainment Co.,NYSE,Consumer Services,Media Conglomerates,Consumer Discretionary,3821567029.2280087
+ACHR,Archer Aviation Inc.,NYSE,Electronic Technology,Aerospace & Defense,Technology,3819317896.6779666
+BMI,"Badger Meter, Inc.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,3808292057.6368475
+SITE,"SiteOne Landscape Supply, Inc.",NYSE,Distribution Services,Wholesale Distributors,Industrials,3805003847.4337816
+CVBF,CVB Financial Corporation,NASDAQ,Finance,Regional Banks,Financials,3782184910.5085053
+USAC,"USA Compression Partners, LP",AMEX,Industrial Services,Oilfield Services/Equipment,Energy,3761279655.4137115
+MNDY,monday.com Ltd.,NASDAQ,Technology Services,Packaged Software,Technology,3760705559.91272
+FCN,"FTI Consulting, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3759591939.098648
+PVH,PVH Corp.,NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,3753312656.780873
+SKYW,"SkyWest, Inc.",NASDAQ,Transportation,Airlines,Industrials,3747709900.81133
+ITRI,"Itron, Inc.",NASDAQ,Electronic Technology,Electronic Equipment/Instruments,Technology,3747270609.082749
+SLGN,Silgan Holdings Inc.,NYSE,Process Industries,Containers/Packaging,Materials,3745370782.8603354
+CAR,"Avis Budget Group, Inc.",NASDAQ,Finance,Finance/Rental/Leasing,Financials,3743823223.9367275
+MARA,"MARA Holdings, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,3727788346.271443
+WBI,WaterBridge Infrastructure LLC,NYSE,Industrial Services,Oilfield Services/Equipment,Energy,3701217212.2431164
+SLG,SL Green Realty Corp,NYSE,Finance,Real Estate Investment Trusts,Real Estate,3698374160.465876
+NVST,Envista Holdings Corporation,NYSE,Health Technology,Medical Specialties,Health Care,3694207133.40669
+TNK,Teekay Tankers Ltd.,NYSE,Transportation,Marine Shipping,Industrials,3680947213.6702304
+QTWO,"Q2 Holdings, Inc.",NYSE,Technology Services,Information Technology Services,Technology,3653985004.6379285
+GPGI,"GPGI, Inc.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,3652615225.4516125
+MGNI,"Magnite, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,3642973870.59332
+INDB,Independent Bank Corp.,NASDAQ,Finance,Regional Banks,Financials,3642722294.2878623
+CENX,Century Aluminum Company,NASDAQ,Non-Energy Minerals,Aluminum,Materials,3638993585.736119
+VCYT,"Veracyte, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,3636072672.255046
+BOOT,"Boot Barn Holdings, Inc.",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,3632969774.3694077
+FRSH,Freshworks Inc.,NASDAQ,Technology Services,Packaged Software,Technology,3632017322.7096777
+OGN,Organon & Co.,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,3626636311.1600003
+VKTX,"Viking Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3625481294.4641185
+PLNT,"Planet Fitness, Inc.",NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,3624071912.477855
+VAC,Marriott Vacations Worldwide Corporation,NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,3623203071.270128
+ZIM,ZIM Integrated Shipping Services Ltd.,NYSE,Transportation,Marine Shipping,Industrials,3614384659.2967606
+TDS,"Telephone and Data Systems, Inc.",NYSE,Communications,Wireless Telecommunications,Communication,3607828061.8924694
+LXP,LXP Industrial Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,3596393001.376824
+LMND,"Lemonade, Inc.",NYSE,Finance,Multi-Line Insurance,Financials,3595846677.783842
+KTB,"Kontoor Brands, Inc.",NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,3586370456.5637627
+LAZ,"Lazard, Inc.",NYSE,Finance,Investment Banks/Brokers,Financials,3581308385.531826
+ECO,Okeanis Eco Tankers Corp.,NYSE,Transportation,Marine Shipping,Industrials,3570653369.5441546
+IRT,"Independence Realty Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,3569705418.148907
+RNST,Renasant Corporation,NYSE,Finance,Regional Banks,Financials,3565688549.147875
+LIF,"Life360, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,3562321848.8490925
+LRN,"Stride, Inc.",NYSE,Consumer Services,Other Consumer Services,Consumer Discretionary,3557107157.5353985
+GNW,Genworth Financial Inc,NYSE,Finance,Multi-Line Insurance,Financials,3551799727.1663246
+MANU,Manchester,NYSE,Consumer Services,Movies/Entertainment,Communication,3537798396.989665
+AMLX,"Amylyx Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3531937220.792647
+XENE,Xenon Pharmaceuticals Inc.,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3528865298.626106
+IRTC,"iRhythm Holdings, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,3517152587.741716
+PJT,PJT Partners Inc.,NYSE,Finance,Investment Banks/Brokers,Financials,3509555924.564359
+WSBC,"WesBanco, Inc.",NASDAQ,Finance,Regional Banks,Financials,3509196480.0543833
+BNL,"Broadstone Net Lease, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,3503965676.448466
+CSTM,Constellium SE,NYSE,Non-Energy Minerals,Aluminum,Materials,3497971033.9249997
+BBWI,"Bath & Body Works, Inc.",NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,3496529485.355166
+ATMU,Atmus Filtration Technologies Inc.,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,3493104124.4148297
+IDYA,"IDEAYA Biosciences, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3484235497.5188575
+RHI,Robert Half Inc.,NYSE,Commercial Services,Personnel Services,Industrials,3473136793.3935485
+AVNT,Avient Corporation,NYSE,Process Industries,Chemicals: Major Diversified,Materials,3466081508.631284
+RUM,RUM Group Inc.,NASDAQ,Technology Services,Internet Software/Services,Communication,3450838850.8114285
+MRP,"Millrose Properties, Inc.",NYSE,Finance,Real Estate Development,Real Estate,3448540269.5607605
+OLED,Universal Display Corporation,NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,3445674025.1204386
+WT,"WisdomTree, Inc.",NYSE,Finance,Investment Managers,Financials,3425688976.774691
+ALM,Almonty Industries Inc.,NASDAQ,Non-Energy Minerals,Other Metals/Minerals,Materials,3424266333.7346582
+TARS,"Tarsus Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3423279879.5330935
+BULL,Webull Corporation,NASDAQ,Technology Services,Packaged Software,Technology,3410906299.440336
+ACAD,ACADIA Pharmaceuticals Inc.,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3408203004.1654754
+HG,"Hamilton Insurance Group, Ltd.",NYSE,Finance,Multi-Line Insurance,Financials,3404168336.624502
+NATL,NCR Atleos Corporation,NYSE,Electronic Technology,Computer Processing Hardware,Technology,3383740551.571021
+MWA,MUELLER WATER PRODUCTS,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,3383243215.428572
+HNI,HNI Corporation,NYSE,Producer Manufacturing,Office Equipment/Supplies,Industrials,3382438819.350672
+INTR,Inter & Co. Inc.,NASDAQ,Finance,Major Banks,Financials,3379240224.530387
+BFAM,Bright Horizons Family Solutions Inc.,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3377721797.715198
+COCO,"The Vita Coco Company, Inc.",NASDAQ,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,3351415665.584852
+FLY,Firefly Aerospace Inc.,NASDAQ,Electronic Technology,Aerospace & Defense,Technology,3348092968.553458
+ARQT,"Arcutis Biotherapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,3340892350.6329117
+WING,Wingstop Inc.,NASDAQ,Consumer Services,Restaurants,Consumer Discretionary,3330673684.2773004
+IPGP,IPG Photonics Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,3329178218.66195
+SBLK,Star Bulk Carriers Corp.,NASDAQ,Transportation,Marine Shipping,Industrials,3325962827.1119137
+AAMI,Acadian Asset Management Inc.,NYSE,Finance,Investment Managers,Financials,3325779962.777063
+CELC,Celcuity Inc.,NASDAQ,Health Technology,Medical Specialties,Health Care,3324433940.674525
+EXPO,"Exponent, Inc.",NASDAQ,Industrial Services,Engineering & Construction,Industrials,3319192160.5356836
+LION,Lionsgate Studios Corp,NYSE,Consumer Services,Movies/Entertainment,Communication,3311839298.1941495
+BRZE,"Braze, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,3300763338.9353476
+MCHB,Mechanics Bancorp,NASDAQ,Finance,Regional Banks,Financials,3300570276.71399
+THO,"Thor Industries, Inc.",NYSE,Consumer Durables,Recreational Products,Consumer Discretionary,3296609255.7063985
+CDNA,"CareDx, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,3293918038.0676794
+ASO,"Academy Sports and Outdoors, Inc.",NASDAQ,Retail Trade,Specialty Stores,Consumer Discretionary,3293854815.556103
+FIBK,"First Interstate BancSystem, Inc.",NASDAQ,Finance,Regional Banks,Financials,3289915049.8626227
+POST,"Post Holdings, Inc.",NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,3288848387.824599
+FA,First Advantage Corporation,NASDAQ,Technology Services,Packaged Software,Technology,3270190227.4084353
+PTRN,Pattern Group Inc. - Series A,NASDAQ,Commercial Services,Advertising/Marketing Services,Industrials,3267691323.6261578
+CXW,"CoreCivic, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3256562654.9957204
+AB,AllianceBernstein Holding L.P.,NYSE,Finance,Investment Managers,Financials,3251815044.5297456
+FFBC,First Financial Bancorp.,NASDAQ,Finance,Regional Banks,Financials,3243540348.009615
+SHOO,"Steven Madden, Ltd.",NASDAQ,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,3241745298.4773755
+ASH,Ashland Inc.,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,3231638182.4952607
+TOWN,Towne Bank,NASDAQ,Finance,Regional Banks,Financials,3231607040.5783954
+COHU,"Cohu, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,3228007828.8420353
+KN,Knowles Corporation,NYSE,Electronic Technology,Electronic Components,Technology,3208012006.7334414
+SFNC,Simmons First National Corporation,NASDAQ,Finance,Major Banks,Financials,3205315491.344057
+WIX,Wix.com Ltd.,NASDAQ,Technology Services,Packaged Software,Technology,3203998382.012141
+HIW,"Highwoods Properties, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,3203292469.96573
+ATKR,Atkore Inc.,NYSE,Producer Manufacturing,Electrical Products,Industrials,3203037234.0
+EXTR,"Extreme Networks, Inc.",NASDAQ,Electronic Technology,Computer Peripherals,Technology,3197208905.864764
+VECO,Veeco Instruments Inc.,NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,3195857757.023129
+NHI,"National Health Investors, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,3184811831.9588103
+FOUR,"Shift4 Payments, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3158404577.9352217
+DAN,Dana Incorporated,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,3156299930.115093
+GBDC,"Golub Capital BDC, Inc.",NASDAQ,Finance,Financial Conglomerates,Financials,3141784138.018018
+WRBY,Warby Parker Inc.,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,3127283700.9979963
+PFSI,"PennyMac Financial Services, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,3111898967.02641
+MMS,"Maximus, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3109527472.3055983
+DNLI,Denali Therapeutics Inc.,NASDAQ,Health Technology,Biotechnology,Health Care,3109032177.943224
+RCUS,"Arcus Biosciences, Inc.",NYSE,Health Technology,Biotechnology,Health Care,3108207649.690726
+DYN,"Dyne Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,3107460998.646304
+CURB,Curbline Properties Corp.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,3107176974.3787656
+UCTT,"Ultra Clean Holdings, Inc.",NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,3105551374.635099
+LBRT,Liberty Energy Inc.,NYSE,Industrial Services,Oilfield Services/Equipment,Energy,3100637071.724138
+PAGS,PagSeguro Digital Ltd.,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3097087289.4606743
+AVPT,"AvePoint, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,3095201980.6870227
+SMR,NuScale Power Corporation,NYSE,Producer Manufacturing,Electrical Products,Industrials,3094007662.622951
+WSC,WillScot Holdings Corporation,NASDAQ,Finance,Finance/Rental/Leasing,Financials,3092929560.5679526
+PURR,Hyperliquid Strategies Inc,NASDAQ,Finance,Financial Conglomerates,Financials,3091593870.6575217
+HTGC,"Hercules Capital, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,3090077521.287613
+AGO,Assured Guaranty Ltd.,NYSE,Finance,Specialty Insurance,Financials,3079863855.277715
+FRPT,"Freshpet, Inc.",NASDAQ,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,3079080876.554157
+SBCF,Seacoast Banking Corporation of Florida,NASDAQ,Finance,Regional Banks,Financials,3073155742.710386
+BTU,Peabody Energy Corporation,NYSE,Energy Minerals,Coal,Energy,3063347038.1976004
+WOR,"Worthington Enterprises, Inc.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,3055477754.1587715
+PK,Park Hotels & Resorts Inc.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,3054302521.6535172
+MIAX,"Miami International Holdings, Inc.",NYSE,Finance,Investment Banks/Brokers,Financials,3047380891.9846907
+SPSC,"SPS Commerce, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,3045254832.692031
+PPLI,People Incorporated,NASDAQ,Technology Services,Internet Software/Services,Communication,3044809709.7441974
+AEO,"American Eagle Outfitters, Inc.",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,3044807357.4646635
+INTA,"Intapp, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,3037880294.215782
+STNE,StoneCo Ltd.,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,3030623808.1000004
+LUNR,"Intuitive Machines, Inc.",NASDAQ,Electronic Technology,Aerospace & Defense,Technology,3019508355.251095
+CBZ,"CBIZ, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3011837032.570438
+BKU,"BankUnited, Inc.",NYSE,Finance,Major Banks,Financials,3011699421.3480406
+NMIH,NMI Holdings Inc,NASDAQ,Finance,Property/Casualty Insurance,Financials,3009466213.475498
+CALM,"Cal-Maine Foods, Inc.",NASDAQ,Process Industries,Agricultural Commodities/Milling,Materials,3005828048.0032387
+TNET,"TriNet Group, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,3004465095.583547
+FHB,"First Hawaiian, Inc.",NASDAQ,Finance,Regional Banks,Financials,3004312438.516827
+ELVN,"Enliven Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,3002635806.5271964
+AMBA,"Ambarella, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,2976425722.5748134
+AVA,Avista Corporation,NYSE,Utilities,Electric Utilities,Utilities,2972387916.2942505
+LBTYA,Liberty Global Ltd.,NASDAQ,Communications,Major Telecommunications,Communication,2970779923.260918
+NTCT,"NetScout Systems, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2958460530.8709927
+NG,Novagold Resources Inc.,AMEX,Non-Energy Minerals,Precious Metals,Materials,2944455522.407643
+SLDE,"Slide Insurance Holdings, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2936646597.0782604
+PII,Polaris Inc.,NYSE,Consumer Durables,Recreational Products,Consumer Discretionary,2936221836.9929934
+BHE,"Benchmark Electronics, Inc.",NYSE,Electronic Technology,Electronic Production Equipment,Technology,2926397099.8324294
+COLM,Columbia Sportswear Company,NASDAQ,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,2920059776.273432
+LEU,Centrus Energy Corp.,NYSE,Non-Energy Minerals,Other Metals/Minerals,Materials,2913340585.510029
+CLBK,"Columbia Financial, Inc.",NASDAQ,Finance,Savings Banks,Financials,2911087524.3596735
+ABM,ABM Industries Incorporated,NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,2909042239.8761277
+YETI,"YETI Holdings, Inc.",NYSE,Producer Manufacturing,Miscellaneous Manufacturing,Industrials,2904224242.4770193
+CXT,"Crane NXT, Co.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,2903967906.464301
+SMG,Scotts Miracle-Gro Company (The),NYSE,Process Industries,Chemicals: Agricultural,Materials,2902862782.7221894
+SPNT,SiriusPoint Ltd.,NYSE,Finance,Property/Casualty Insurance,Financials,2899478883.6436276
+PFS,"Provident Financial Services, Inc",NYSE,Finance,Savings Banks,Financials,2881035645.5778584
+OUST,"Ouster, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,2877282086.2054133
+SDRL,Seadrill Limited,NYSE,Industrial Services,Contract Drilling,Energy,2875288376.578255
+APPN,Appian Corporation,NASDAQ,Technology Services,Packaged Software,Technology,2872294647.4443874
+DGII,Digi International Inc.,NASDAQ,Electronic Technology,Telecommunications Equipment,Technology,2870016336.1905775
+SHAK,"Shake Shack, Inc.",NYSE,Consumer Services,Restaurants,Consumer Discretionary,2863248896.7597685
+FIZZ,National Beverage Corp.,NASDAQ,Consumer Non-Durables,Beverages: Non-Alcoholic,Consumer Staples,2857139062.879378
+IHS,IHS Holding Limited,NYSE,Industrial Services,Engineering & Construction,Industrials,2852212201.8803315
+TDC,Teradata Corporation,NYSE,Technology Services,Packaged Software,Technology,2844870085.841862
+CWT,California Water Service Group,NYSE,Utilities,Water Utilities,Utilities,2840888153.254386
+ATRC,"AtriCure, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,2838847924.1612415
+QS,QuantumScape Corporation,NASDAQ,Producer Manufacturing,Electrical Products,Industrials,2835539875.0
+CLBT,Cellebrite DI Ltd.,NASDAQ,Technology Services,Packaged Software,Technology,2830100423.574956
+KNF,Knife Riv Holding Co.,NYSE,Non-Energy Minerals,Construction Materials,Materials,2829088882.9309354
+ASST,"Strive, Inc.",NASDAQ,Finance,Financial Conglomerates,Financials,2821737102.1183143
+DNOW,DNOW Inc.,NYSE,Distribution Services,Wholesale Distributors,Industrials,2814836218.2575083
+NVTS,Navitas Semiconductor Corporation,NASDAQ,Electronic Technology,Semiconductors,Technology,2814587742.6075025
+KYIV,Kyivstar Group Ltd.,NASDAQ,Finance,Financial Conglomerates,Financials,2805549906.139344
+TALO,"Talos Energy, Inc.",NYSE,Energy Minerals,Oil & Gas Production,Energy,2805020011.4690266
+HOG,"Harley-Davidson, Inc.",NYSE,Consumer Durables,Motor Vehicles,Consumer Discretionary,2799550512.463551
+PGEN,"Precigen, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2796255250.0907893
+BHF,"Brighthouse Financial, Inc.",NASDAQ,Finance,Life/Health Insurance,Financials,2791036216.4131455
+IMAX,Imax Corporation,NYSE,Consumer Durables,Electronics/Appliances,Consumer Discretionary,2785979440.3664
+AEHR,Aehr Test Systems,NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,2764303935.9192758
+ATRO,Astronics Corporation,NASDAQ,Electronic Technology,Aerospace & Defense,Technology,2758947497.3743987
+POWI,"Power Integrations, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,2744496395.574263
+BANC,"Banc of California, Inc.",NYSE,Finance,Regional Banks,Financials,2740801900.224784
+ALRM,"Alarm.com Holdings, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2731870950.252443
+CWK,Cushman & Wakefield Ltd.,NYSE,Finance,Real Estate Development,Real Estate,2727373168.461538
+ACHC,"Acadia Healthcare Company, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,2723182945.1544943
+FIVN,"Five9, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2719936742.088193
+APAM,Artisan Partners Asset Management Inc.,NYSE,Finance,Investment Managers,Financials,2712691508.866568
+MZTI,The Marzetti Company,NASDAQ,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,2709996401.058812
+GRBK,"Green Brick Partners, Inc.",NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,2703652350.125392
+TMDX,"TransMedics Group, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,2700153478.0654426
+CLSK,"CleanSpark, Inc.",NASDAQ,Technology Services,Data Processing Services,Technology,2695295259.1415796
+DX,"Dynex Capital, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,2695092658.8392525
+UNFI,"United Natural Foods, Inc.",NYSE,Distribution Services,Food Distributors,Consumer Staples,2684713446.3306103
+HGV,Hilton Grand Vacations Inc.,NYSE,Finance,Real Estate Development,Real Estate,2683815061.3593745
+GCMG,GCM Grosvenor Inc.,NASDAQ,Finance,Investment Managers,Financials,2676855792.259059
+AVAH,Aveanna Healthcare Holdings Inc.,NASDAQ,Health Services,Medical/Nursing Services,Health Care,2674060778.7581697
+FUL,H. B. Fuller Company,NYSE,Process Industries,Industrial Specialties,Materials,2667770957.4789853
+PRVA,"Privia Health Group, Inc.",NASDAQ,Finance,Life/Health Insurance,Financials,2663258130.928677
+AMC,"AMC Entertainment Holdings, Inc.",NYSE,Consumer Services,Movies/Entertainment,Communication,2659961855.965278
+BEAM,Beam Therapeutics Inc.,NASDAQ,Health Technology,Biotechnology,Health Care,2654493065.7195125
+BKV,BKV Corporation,NYSE,Energy Minerals,Integrated Oil,Energy,2652773011.1478696
+VIA,"Via Transportation, Inc.",NYSE,Technology Services,Packaged Software,Technology,2638336765.9747815
+NOG,"Northern Oil and Gas, Inc.",NYSE,Energy Minerals,Oil & Gas Production,Energy,2638156287.2330947
+BOH,Bank of Hawaii Corporation,NYSE,Finance,Regional Banks,Financials,2635680766.167479
+ADEA,Adeia Inc.,NASDAQ,Technology Services,Packaged Software,Technology,2634592791.1776905
+FBK,FB Financial Corporation,NYSE,Finance,Major Banks,Financials,2631348956.167076
+AMBP,Ardagh Metal Packaging S.A.,NYSE,Process Industries,Containers/Packaging,Materials,2629907737.757848
+KBH,KB Home,NYSE,Consumer Durables,Homebuilding,Consumer Discretionary,2622303903.7667346
+FIGS,"FIGS, Inc.",NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,2621692890.0761013
+BTDR,Bitdeer Technologies Group,NASDAQ,Technology Services,Data Processing Services,Technology,2617263103.1666665
+GRDN,"Guardian Pharmacy Services, Inc.",NYSE,Retail Trade,Drugstore Chains,Health Care,2614607140.592308
+GRND,Grindr Inc.,NYSE,Technology Services,Internet Software/Services,Communication,2612523810.1506023
+NBTB,NBT Bancorp Inc.,NASDAQ,Finance,Major Banks,Financials,2601120737.5424504
+REZI,"Resideo Technologies, Inc.",NYSE,Distribution Services,Electronics Distributors,Technology,2592034918.519186
+DRH,Diamondrock Hospitality Company,NASDAQ,Finance,Real Estate Investment Trusts,Real Estate,2590058413.4523807
+SKWD,"Skyward Specialty Insurance Group, Inc.",NASDAQ,Finance,Multi-Line Insurance,Financials,2589203473.893779
+NEOG,Neogen Corporation,NASDAQ,Health Technology,Medical Specialties,Health Care,2586926467.3398805
+PPTA,Perpetua Resources Corp.,NASDAQ,Non-Energy Minerals,Precious Metals,Materials,2581977438.241671
+NAMS,NewAmsterdam Pharma Company N.V.,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2579014479.080433
+CARG,"CarGurus, Inc.",NASDAQ,Technology Services,Internet Software/Services,Communication,2569769902.7359786
+TRMK,Trustmark Corporation,NASDAQ,Finance,Regional Banks,Financials,2567300277.296072
+BCC,"Boise Cascade, L.L.C.",NYSE,Distribution Services,Wholesale Distributors,Industrials,2566956646.2635403
+MBX,"MBX Biosciences, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2564043672.0097656
+KD,"Kyndryl Holdings, Inc.",NYSE,Technology Services,Data Processing Services,Technology,2559364671.9065657
+MH,"McGraw Hill, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,2557798733.0
+AAP,Advance Auto Parts Inc.,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,2554920156.629717
+WTTR,"Select Water Solutions, Inc.",NYSE,Energy Minerals,Oil & Gas Production,Energy,2547911484.2204084
+CLOV,"Clover Health Investments, Corp.",NASDAQ,Finance,Life/Health Insurance,Financials,2544242951.3951964
+FG,"F&G Annuities & Life, Inc.",NYSE,Finance,Multi-Line Insurance,Financials,2521812255.7419357
+WLY,"John Wiley & Sons, Inc.",NYSE,Consumer Services,Publishing: Books/Magazines,Consumer Discretionary,2517270461.0000005
+COTY,Coty Inc.,NYSE,Consumer Non-Durables,Household/Personal Care,Consumer Staples,2509956384.032258
+RNW,ReNew Energy Global plc,NASDAQ,Utilities,Alternative Power Generation,Utilities,2507090564.0347824
+AKR,Acadia Realty Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,2504948816.211221
+INFQ,"Infleqtion, Inc.",NYSE,Electronic Technology,Computer Processing Hardware,Technology,2487941692.5161285
+SUPN,"Supernus Pharmaceuticals, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2484424187.865211
+GPK,Graphic Packaging Holding Company,NYSE,Process Industries,Containers/Packaging,Materials,2472197534.95338
+LPG,Dorian LPG Ltd.,NYSE,Transportation,Marine Shipping,Industrials,2465993685.6925983
+MAN,ManpowerGroup,NYSE,Commercial Services,Personnel Services,Industrials,2454563983.434879
+LQDA,Liquidia Corporation,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2450753400.5781584
+FRME,First Merchants Corporation,NASDAQ,Finance,Major Banks,Financials,2449255471.811063
+HTO,H2O America,NASDAQ,Utilities,Water Utilities,Utilities,2447785878.5038743
+CALY,Callaway Golf Company,NYSE,Consumer Durables,Recreational Products,Consumer Discretionary,2440238696.635184
+UE,Urban Edge Properties,NYSE,Finance,Real Estate Investment Trusts,Real Estate,2439747102.648004
+KMT,Kennametal Inc.,NYSE,Producer Manufacturing,Industrial Machinery,Industrials,2438369683.8145695
+SOUN,"SoundHound AI, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2424839112.7663045
+PAYO,Payoneer Global Inc.,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,2419394875.5418987
+BKD,Brookdale Senior Living Inc.,NYSE,Health Services,Hospital/Nursing Management,Health Care,2416830600.2020197
+EEFT,"Euronet Worldwide, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,2416272229.186302
+OSW,OneSpaWorld Holdings Limited,NASDAQ,Consumer Services,Other Consumer Services,Consumer Discretionary,2409579390.5531917
+HAYW,"Hayward Holdings, Inc.",NYSE,Consumer Durables,Recreational Products,Consumer Discretionary,2407557180.2185316
+NWL,Newell Brands Inc.,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,2402075973.4240837
+RDW,Redwire Corporation,NYSE,Electronic Technology,Aerospace & Defense,Technology,2394929305.2930326
+BUSE,First Busey Corporation,NASDAQ,Finance,Regional Banks,Financials,2388951109.045859
+IRON,"Disc Medicine, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2382659988.6305747
+SLS,"SELLAS Life Sciences Group, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2352667560.195382
+LIND,Lindblad Expeditions Holdings Inc.,NASDAQ,Consumer Services,Hotels/Resorts/Cruise lines,Consumer Discretionary,2350497354.6601014
+PLUG,"Plug Power, Inc.",NASDAQ,Electronic Technology,Electronic Production Equipment,Technology,2347287945.710983
+CLDX,"Celldex Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2347247691.4853244
+HRMY,"Harmony Biosciences Holdings, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2345761818.69798
+UPST,"Upstart Holdings, Inc.",NASDAQ,Finance,Finance/Rental/Leasing,Financials,2345244540.367921
+CALX,"Calix, Inc",NYSE,Electronic Technology,Telecommunications Equipment,Technology,2344779079.254989
+STUB,"StubHub Holdings, Inc.",NYSE,Technology Services,Internet Software/Services,Communication,2338390539.850163
+RXRX,"Recursion Pharmaceuticals, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2338141937.498734
+FCPT,"Four Corners Property Trust, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,2335616377.2611766
+IVT,InvenTrust Properties Corp.,NYSE,Finance,Real Estate Investment Trusts,Real Estate,2322197708.100034
+ADMA,ADMA Biologics Inc,NASDAQ,Health Technology,Biotechnology,Health Care,2320481269.3552756
+NRIX,"Nurix Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2319520391.21792
+KSS,Kohl's Corporation,NYSE,Retail Trade,Department Stores,Consumer Discretionary,2307210663.896072
+IMNM,"Immunome, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2306960940.1139307
+ASAN,"Asana, Inc.",NYSE,Technology Services,Packaged Software,Technology,2305729083.505573
+PBI,Pitney Bowes Inc.,NYSE,Technology Services,Packaged Software,Technology,2303115721.130742
+AMR,"Alpha Metallurgical Resources, Inc.",NYSE,Energy Minerals,Coal,Energy,2302134134.3896604
+NESR,National Energy Services Reunited Corp,NASDAQ,Industrial Services,Oilfield Services/Equipment,Energy,2297403089.467298
+PDFS,"PDF Solutions, Inc.",NASDAQ,Technology Services,Information Technology Services,Technology,2297160499.4403987
+HLIO,"Helios Technologies, Inc.",NYSE,Producer Manufacturing,Industrial Machinery,Industrials,2291053500.9824867
+LTC,"LTC Properties, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,2288830178.5750294
+PBH,Prestige Consumer Healthcare Inc.,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,2284873200.9565487
+RAMP,"LiveRamp Holdings, Inc.",NYSE,Technology Services,Packaged Software,Technology,2283459396.214
+FLYW,Flywire Corporation - Voting,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,2282485549.1546392
+VC,Visteon Corporation,NASDAQ,Producer Manufacturing,Auto Parts: OEM,Industrials,2280590526.8889146
+BBT,Beacon Financial Corporation,NYSE,Finance,Regional Banks,Financials,2278959335.51674
+BKE,"Buckle, Inc. (The)",NYSE,Retail Trade,Apparel/Footwear Retail,Consumer Discretionary,2274789073.6735163
+ALVO,Alvotech,NASDAQ,Health Technology,Biotechnology,Health Care,2256693854.9065256
+SECZ,Securitize Corp.,NYSE,Technology Services,Packaged Software,Technology,2256331753.491311
+DJT,Trump Media & Technology Group Corp.,NASDAQ,Commercial Services,Advertising/Marketing Services,Industrials,2254103762.0085363
+PTON,"Peloton Interactive, Inc.",NASDAQ,Consumer Services,Other Consumer Services,Consumer Discretionary,2247023593.105691
+ICHR,Ichor Holdings,NASDAQ,Producer Manufacturing,Industrial Machinery,Industrials,2243883065.027027
+VVX,"V2X, Inc.",NYSE,Commercial Services,Miscellaneous Commercial Services,Industrials,2239312406.4635763
+BFLY,"Butterfly Network, Inc.",NYSE,Health Technology,Medical Specialties,Health Care,2238102684.2465754
+LASR,"nLIGHT, Inc.",NASDAQ,Electronic Technology,Semiconductors,Technology,2219918859.8402505
+AUPH,Aurinia Pharmaceuticals Inc,NASDAQ,Health Technology,Biotechnology,Health Care,2215302019.0967946
+RH,RH,NYSE,Retail Trade,Specialty Stores,Consumer Discretionary,2214990221.462567
+FRMI,Fermi Inc.,NASDAQ,Finance,Real Estate Development,Real Estate,2199520838.4754095
+NMRK,"Newmark Group, Inc.",NASDAQ,Finance,Real Estate Development,Real Estate,2196484652.3482428
+BCRX,"BioCryst Pharmaceuticals, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2184825184.414958
+WAFD,"WaFd, Inc.",NASDAQ,Finance,Major Banks,Financials,2178159027.8604574
+PHVS,Pharvaris N.V.,NASDAQ,Health Technology,Biotechnology,Health Care,2172760681.25
+ANDE,"The Andersons, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,2170699171.045243
+MD,"Pediatrix Medical Group, Inc.",NYSE,Health Services,Medical/Nursing Services,Health Care,2164587173.917683
+IDT,IDT Corporation,NYSE,Communications,Major Telecommunications,Communication,2162447896.577185
+PEB,Pebblebrook Hotel Trust,NYSE,Finance,Real Estate Investment Trusts,Real Estate,2157552755.426765
+OPEN,Opendoor Technologies Inc,NASDAQ,Finance,Real Estate Development,Real Estate,2155822127.6069875
+VERA,"Vera Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2153252542.716448
+ATEN,"A10 Networks, Inc.",NYSE,Technology Services,Information Technology Services,Technology,2151405312.1952786
+NWBI,"Northwest Bancshares, Inc.",NASDAQ,Finance,Savings Banks,Financials,2148555370.4181814
+PGNY,"Progyny, Inc.",NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,2142979490.881423
+INOD,Innodata Inc.,NASDAQ,Technology Services,Data Processing Services,Technology,2133099774.278431
+AXGN,"Axogen, Inc.",NASDAQ,Health Technology,Medical Specialties,Health Care,2119801768.3449423
+PHIN,PHINIA Inc.,NYSE,Producer Manufacturing,Auto Parts: OEM,Industrials,2118780608.7807045
+ECPG,Encore Capital Group Inc,NASDAQ,Finance,Finance/Rental/Leasing,Financials,2116058379.0540676
+STGW,Stagwell Inc.,NASDAQ,Commercial Services,Miscellaneous Commercial Services,Industrials,2114712685.9474885
+VRDN,"Viridian Therapeutics, Inc.",NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2114033716.6881132
+CTRI,"Centuri Holdings, Inc.",NYSE,Utilities,Gas Distributors,Utilities,2110127868.0297935
+PRDO,Perdoceo Education Corporation,NASDAQ,Consumer Services,Other Consumer Services,Consumer Discretionary,2109472478.0176487
+DV,"DoubleVerify Holdings, Inc.",NYSE,Technology Services,Packaged Software,Technology,2106901035.6592596
+CTOS,"Custom Truck One Source, Inc.",NYSE,Finance,Finance/Rental/Leasing,Financials,2104426068.4898615
+NVAX,"Novavax, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2103058030.5177114
+SHO,"Sunstone Hotel Investors, Inc.",NYSE,Finance,Real Estate Investment Trusts,Real Estate,2103026023.1814978
+VERX,"Vertex, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2100727476.8363352
+NEO,"NeoGenomics, Inc.",NASDAQ,Health Services,Medical/Nursing Services,Health Care,2100573395.2153559
+ETOR,eToro Group Ltd.,NASDAQ,Technology Services,Packaged Software,Technology,2098162337.4703083
+PRGO,Perrigo Company plc,NYSE,Health Technology,Pharmaceuticals: Major,Health Care,2089865004.7075863
+ALGT,Allegiant Travel Company,NASDAQ,Transportation,Airlines,Industrials,2089424655.3329844
+NCNO,"nCino, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2086174775.8592482
+NN,NextNav Inc.,NASDAQ,Technology Services,Packaged Software,Technology,2084802407.6637933
+UA,"Under Armour, Inc.",NYSE,Consumer Non-Durables,Apparel/Footwear,Consumer Discretionary,2084751894.548523
+HTH,Hilltop Holdings Inc.,NYSE,Finance,Regional Banks,Financials,2084079937.184842
+PENN,"PENN Entertainment, Inc.",NASDAQ,Consumer Services,Casinos/Gaming,Consumer Discretionary,2075350833.43401
+MLYS,"Mineralys Therapeutics, Inc.",NASDAQ,Health Technology,Biotechnology,Health Care,2066068784.1380699
+BLKB,"Blackbaud, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2064341690.1864405
+UTZ,Utz Brands Inc,NYSE,Consumer Non-Durables,Food: Specialty/Candy,Consumer Staples,2058659595.8100562
+TRLV,Trulieve Cannabis Corp. Subordinate Voting Shares,NYSE,Process Industries,Agricultural Commodities/Milling,Materials,2054671795.243973
+VCEL,Vericel Corporation,NASDAQ,Health Technology,Pharmaceuticals: Major,Health Care,2053385087.533084
+CC,Chemours Company (The),NYSE,Process Industries,Chemicals: Specialty,Materials,2048291282.733912
+GCT,GigaCloud Technology Inc,NASDAQ,Distribution Services,Wholesale Distributors,Industrials,2044768125.4168735
+SONO,"Sonos, Inc.",NASDAQ,Consumer Durables,Electronics/Appliances,Consumer Discretionary,2041754115.165782
+SDGR,"Schrodinger, Inc.",NASDAQ,Technology Services,Packaged Software,Technology,2040697449.2247064
+PATK,"Patrick Industries, Inc.",NASDAQ,Consumer Durables,Home Furnishings,Consumer Discretionary,2038224976.4069467
+TRN,"Trinity Industries, Inc.",NYSE,Producer Manufacturing,Trucks/Construction/Farm Machinery,Industrials,2033165277.2944884
+FCF,First,NYSE,Finance,Regional Banks,Financials,2010002264.4661016
+PLGO,Pelagos Insurance Capital Limited,NYSE,Finance,Multi-Line Insurance,Financials,2008643976.0343559
+WGS,GeneDx Holdings Corp.,NASDAQ,Health Services,Medical/Nursing Services,Health Care,2007951736.2983906
+TILE,"Interface, Inc.",NASDAQ,Producer Manufacturing,Building Products,Industrials,2007410109.6146998
+SFL,SFL Corporation Ltd,NYSE,Transportation,Marine Shipping,Industrials,2006808628.5265486
+XIFR,"XPLR Infrastructure, LP",NYSE,Utilities,Alternative Power Generation,Utilities,2001976517.9139261
