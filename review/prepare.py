@@ -5,8 +5,8 @@ Usage: python review/prepare.py <scan_output_dir> <work_dir>
   scan_output_dir: checkout of the `output` branch (results.json, charts/, returns.csv)
 
 Writes to work_dir:
-  candidates.tsv      one line per candidate, the numbers that matter for a chart read
-  sheets/*.png        contact sheets, one per supersector+side (up to 6 charts, 2x3 grid)
+  candidates.tsv      one line per candidate: family, tags, weekly regime, sector state, key numbers
+  sheets/*.png        contact sheets, 3 charts per sheet, grouped by supersector + side
   pair_matrix.tsv     every long x short within a supersector: 60D correlation, vol ratio, beta
 """
 import json
@@ -24,30 +24,28 @@ cands = pd.DataFrame(res["candidates"])
 cands["key"] = cands.symbol + "|" + cands.side
 cands["tags"] = cands.tags.apply(",".join)
 
-cols = ["key", "supersector", "industry", "tags", "d21", "d50", "d200", "p1w", "p1m", "p3m",
-        "r2_63", "er_63", "sma21_crosses_63", "vol_63_ann", "rs_1m", "final_score"]
-cands[cols].round(2).to_csv(work / "candidates.tsv", sep="\t", index=False)
+cols = ["key", "supersector", "industry", "family", "tags", "regime", "sector_state", "rs_lead", "breakout",
+        "macd_sig", "d21", "d50", "d200", "p1m", "p3m", "p6m", "rs_vs_ma", "rssec_vs_ma", "r2_63", "x21_63",
+        "vol63", "final_score", "next_earnings"]
+cands[[c for c in cols if c in cands]].round(2).to_csv(work / "candidates.tsv", sep="\t", index=False)
 
-# contact sheets
-W, H = 1100, 700
+PER, W = 3, 1200
 for (ss, side), g in cands.groupby(["supersector", "side"]):
     imgs = [Image.open(src / c).convert("RGB") for c in g.chart]
-    for n in range(0, len(imgs), 6):
-        batch = imgs[n:n + 6]
-        sheet = Image.new("RGB", (W, H // 2 * 3), "white")
-        for i, im in enumerate(batch):
-            im = im.resize((W // 2, H // 2), Image.LANCZOS)
-            sheet.paste(im, ((i % 2) * W // 2, (i // 2) * H // 2))
-        name = f"{ss.replace(' ', '_')}_{side}_{n // 6 + 1}.png"
-        sheet.save(work / "sheets" / name, optimize=True)
+    for n in range(0, len(imgs), PER):
+        batch = [im.resize((W, int(im.height * W / im.width)), Image.LANCZOS) for im in imgs[n:n + PER]]
+        sheet = Image.new("RGB", (W, sum(im.height for im in batch)), "white")
+        y = 0
+        for im in batch:
+            sheet.paste(im, (0, y))
+            y += im.height
+        sheet.save(work / "sheets" / f"{ss.replace(' ', '_')}_{side}_{n // PER + 1}.png", optimize=True)
 
-# pair matrix
 rets = pd.read_csv(src / "returns.csv", index_col=0, parse_dates=True).iloc[-60:]
 rows = []
 for ss, g in cands.groupby("supersector"):
-    longs, shorts = g[g.side == "long"].symbol, g[g.side == "short"].symbol
-    for lo in longs:
-        for sh in shorts:
+    for lo in g[g.side == "long"].symbol:
+        for sh in g[g.side == "short"].symbol:
             if lo == sh or lo not in rets or sh not in rets:
                 continue
             a, b = rets[lo].dropna(), rets[sh].dropna()
@@ -55,10 +53,14 @@ for ss, g in cands.groupby("supersector"):
             if len(j) < 40:
                 continue
             a, b = a[j], b[j]
-            rows.append({"supersector": ss, "long": lo, "short": sh,
-                         "corr60": round(float(a.corr(b)), 2),
-                         "vol_ratio": round(float(a.std() / b.std()), 2),        # long vol / short vol
+            rows.append({"supersector": ss, "long": lo, "short": sh, "corr60": round(float(a.corr(b)), 2),
+                         "vol_ratio": round(float(a.std() / b.std()), 2),
                          "beta_long_on_short": round(float(np.cov(a, b)[0, 1] / b.var()), 2)})
 pm = pd.DataFrame(rows)
 pm.to_csv(work / "pair_matrix.tsv", sep="\t", index=False)
 print(f"{len(cands)} candidates, {len(list((work / 'sheets').glob('*.png')))} sheets, {len(pm)} pair combos")
+m = res.get("model", {})
+print("model:", m.get("weights_source"), {s: v.get("holdout_ic") for s, v in m.get("sides", {}).items()})
+fb = pathlib.Path(__file__).resolve().parent.parent / "model" / "feedback_summary.md"
+if fb.exists():
+    print(f"read {fb} before grading")

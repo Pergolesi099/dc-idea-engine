@@ -27,7 +27,8 @@ rs:
   hl_len: 52                    # blue/red dots = 52-week RS high/low
   cross_lookback_weeks: 8       # an RS/MA cross counts as "recent" for this many weeks
   dot_lookback_weeks: 4         # a blue/red dot counts as recent for this many weeks
-  lead_price_band_pct: 5        # RS-leads-price: price still within +/-5% of its 40W MA when RS crosses
+  lead_price_far_pct: 10        # RS-leads-price: price still up to 10% short of its 40W MA...
+  lead_price_near_pct: 3        # ...or at most 3% through it
 
 # Stock vs its own sector ETF, RRG-style (Leading / Improving / Weakening / Lagging).
 sector_rotation:

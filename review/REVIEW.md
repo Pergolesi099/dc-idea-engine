@@ -1,67 +1,92 @@
-# Weekly review procedure (Claude)
+# Weekly review procedure (Claude) — v2
 
-Runs every Saturday after the GitHub scan. Goal: turn ~100 charts into 15–25 pair tickets on the
-DC Idea Desk, ready for Dean's take / watch / pass before Sunday's SCREEN.
+Runs every Saturday after the GitHub scan. Goal: turn ~130 top-down charts into 15–25 pair tickets
+on the DC Idea Desk, ready for Dean's take / watch / pass before Sunday's SCREEN, and keep the
+learning loop fed.
 
-Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k  (collections: `runs`, `decisions`)
-Repo: Pergolesi099/dc-idea-engine — scan output on branch `output`.
+Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k  (collections: `runs`, `decisions`, `chart_feedback`)
+Repo: Pergolesi099/dc-idea-engine — scan output on branch `output`; learning state on `main`
+(`model/`, `history/`, `labels/`).
 
 ## 0. Preconditions
-- `git fetch origin output` and check `results.json` → `run_utc` is from today (UTC). If the scan is
+- `git fetch origin output main` and check `results.json` → `run_id` is today (UTC). If the scan is
   stale or missing, trigger it (`gh workflow run weekly-scan.yml -R Pergolesi099/dc-idea-engine`),
   wait for it, re-check once. Still stale → stop and report; never publish an old scan as new.
 - Work in a scratch dir: `git worktree add <scratch>/scan origin/output`.
 
-## 1. Prepare
+## 1. Export Dean's feedback (feeds next week's learning)
+ArtifactData `list` on `decisions` and on `chart_feedback` with `out_dir=<scratch>/labels_raw`
+(page with `query.cursor` until done), then `python review/export_labels.py <scratch>/labels_raw`.
+This rewrites `labels/*.jsonl`. Commit them in step 7.
+
+## 2. Prepare
 `python review/prepare.py <scratch>/scan <scratch>/work`
-→ `candidates.tsv`, `sheets/*.png` (one contact sheet per supersector+side), `pair_matrix.tsv`.
+→ `candidates.tsv`, `sheets/*.png` (3 charts per sheet), `pair_matrix.tsv`.
+Read `model/feedback_summary.md`: how your grades matched Dean's calls, his pass reasons, what his
+preference model and the outcome model currently reward. Let it shape your eye this week.
 
-## 2. Read every chart
-Read `candidates.tsv`, then every contact sheet (open full charts only to break a tie).
-Write `work/verdicts.json`: `{"SYM|side": ["A"|"B"|"C", "one-line read, <= 12 words"]}` for EVERY candidate.
+## 3. Read every chart, top-down
+Each chart: LEFT = weekly 2Y (10W/40W, then Dean's RS Line – Blue Dot vs S&P: slope-coloured line,
+black 40W MA, blue/red 52W dots, ▲▼ crossovers). RIGHT = daily 6M (21/50/200D, 6M dashed and 3M dotted
+support/resistance, volume), MACD histogram, stock vs sector ETF with rotation shading
+(green Leading, blue Improving, amber Weakening, red Lagging).
 
-Grading — Dean's eye, not a formula:
-- **A**: clean, readable structure. Longs: orderly uptrend, higher lows, pulling back to the 21D or
-  basing above a rising 50D, RS vs sector ETF rising. Shorts: lower highs below a falling 50D,
-  bouncing into the 21D/50D, or a clean break of the 200D after a rolling top.
-- **B**: right direction but a flaw: extended (>10% from the 21D), gap-driven, still choppy,
-  very high vol, or the trigger hasn't happened yet.
-- **C**: reject. Choppy (many 21D crosses, no slope), blow-off or exhaustion bar, news/event gap
-  with no base, binary biotech event, merger-arb pinned (near-zero vol), or indecisive at the 200D.
-Reads describe what the chart shows, in trader shorthand. No predictions, no price targets.
+Read in this order and stop as soon as the chart fails:
+1. **Weekly picture.** Does the long timeframe agree with the side? Longs: price above a rising 40W, or
+   RS crossed up through its MA while price is still at/below the 40W (the early turn Dean values most).
+   Blue dots = leadership. Shorts: the mirror, red dots.
+2. **Sector.** Leading / just turned Leading for longs; Lagging / just turned Lagging for shorts.
+   A long that is Weakening vs its own sector is a yellow flag.
+3. **Daily trigger.** Clean break of 3M/6M resistance (support for shorts) ideally on volume, or a
+   pullback holding the 21D/50D; MACD histogram flipping or turning in the trade's direction.
+   Note how much room there is to the next 6M level.
 
-## 3. Pair
+Write `work/verdicts.json`: `{"SYM|side": ["A"|"B"|"C", "one-line read, <= 14 words"]}` for EVERY candidate.
+- **A**: all three layers agree and the structure is clean.
+- **B**: weekly + sector agree but the daily is extended (>10% from 21D), late, gap-driven, or the
+  trigger hasn't fired yet; or the trigger is great but the weekly is still only "Turning".
+- **C**: reject: weekly fights the side, choppy (many 21D crosses), blow-off/exhaustion bar, event gap
+  with no base, binary biotech event, deal-pinned, or straight into a 6M level.
+Reads say what the chart shows in trader shorthand, weekly first ("RS crossed 40W, price reclaiming
+40W; 6M breakout on volume"). No predictions, no targets.
+
+## 4. Pair
 Write `work/pairs.json`: `{"market_note": "...", "pairs": [{long, short, conviction 1-5, type, thesis}]}`.
 - Both legs from the SAME supersector, graded A or B, never C. Each symbol in at most one pair.
-- Prefer same-industry relative value (`type: "industry"`) where both charts qualify; otherwise `"sector"`.
+- Prefer same-industry relative value (`type: "industry"`) where both charts qualify; else `"sector"`.
+- Prefer a Leading-vs-Lagging sector-rotation contrast between the legs: it is the cleanest pair.
 - Use `pair_matrix.tsv`: prefer corr60 > 0.2; flag vol_ratio outside 0.6–1.6 in the thesis.
-- Conviction: 4 = A/A or A/B same-industry with corr > 0.3; 3 = solid A/B; 2 = tradeable but weak
-  fit (low corr, extended leg); never publish 1. 5 is reserved for exceptional setups.
+- Conviction: 4 = A/A or A/B same-industry, corr > 0.3, rotation contrast; 3 = solid A/B;
+  2 = tradeable but weak fit; never publish 1; 5 reserved for exceptional setups.
 - Aim for 15–25 pairs covering as many supersectors as the charts allow. Fewer good pairs beats padding.
-- Thesis: one line, both legs, what each chart is doing. No narrative about fundamentals unless obvious.
-- market_note: 1–2 sentences on breadth by sector and anything common to many legs (e.g. earnings season).
-- Check `next_earnings`: legs reporting inside the hold window are flagged on the desk automatically;
-  mention it in the thesis only if it changes the trade.
+- Make sure the Lead family (RS leads price) is represented where its charts are A/B.
+- market_note: 1–2 sentences on breadth (`regime_counts`), sector rotation themes, earnings season.
 
-## 4. Upload charts
-Convert `scan/charts/*.png` to WebP into `desk/_assets/` (quality 82; see the snippet below), then
-Artifact publish with `url` = desk, `asset: true`, `file_paths` in batches of ≤ 25.
-Record every result as `SYM_side <asset id>` lines in `work/uploads.txt`.
+## 5. Upload charts
+Convert `scan/charts/*.png` to WebP into `desk/_assets/` (quality 82), then Artifact publish with
+`url` = desk, `asset: true`, `file_paths` in batches of ≤ 25. Record every result as
+`SYM_side <asset id>` lines in `work/uploads.txt`.
 
     python3 -c "from PIL import Image;import glob,os;[Image.open(f).convert('RGB').save('desk/_assets/'+os.path.basename(f)[:-4]+'.webp','WEBP',quality=82,method=6) for f in glob.glob('<scratch>/scan/charts/*.png')]"
 
-## 5. Build and publish the run
-`python review/build_run.py <scratch>/scan <scratch>/work` → `work/run_doc.json`, doc id printed.
-It refuses to build if any candidate lacks a verdict or chart, a pair leg is missing, legs are in
-different sectors, or a symbol is reused. Fix and rerun; never hand-edit around it.
-Then ArtifactData `set` on collection `runs`, doc id = run date, `file_path` = run_doc.json
+## 6. Build and publish the run
+`python review/build_run.py <scratch>/scan <scratch>/work` → `work/run_doc.json` and the archive
+`history/review/<run_id>/{verdicts,pairs}.json`. It refuses to build if any candidate lacks a verdict
+or chart, a pair leg is missing or C-graded, legs are in different sectors, or a symbol is reused.
+Fix and rerun; never hand-edit around it.
+Then ArtifactData `set` on collection `runs`, doc id = run_id, `file_path` = run_doc.json
 (if the doc already exists, `get` it first and pass `if_version`).
 
-## 6. Housekeeping
+## 7. Commit the learning inputs
+On `main`: `git add labels history/review && git commit -m "review <run_id>" && git pull --rebase && git push`.
+Never touch `model/` by hand: the scan owns it.
+
+## 8. Housekeeping
 - Runs older than 26 weeks: delete their chart assets (Artifact delete with `path` = asset id) and
-  `update` the run doc so their `chart_url` fields are null. Never delete `decisions`.
+  `update` the run doc so their `chart_url` fields are null. Never delete `decisions` or `chart_feedback`.
 - Clear `desk/_assets/` locally after upload.
 
-## 7. Report (SendUserMessage)
-Three lines: pairs published (count by conviction), sectors with nothing tradeable, and any
-anomaly (scan fallback used, earnings dates missing, sector mapping oddities). Link the desk.
+## 9. Report (SendUserMessage)
+Four lines: pairs published (count by conviction and by family), sectors with nothing tradeable,
+what the learner changed this week (`model.sides.*.changes`, adopted or kept), and any anomaly
+(scan fallback, missing earnings dates, sector mapping oddities). Link the desk.

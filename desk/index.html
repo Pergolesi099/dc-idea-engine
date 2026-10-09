@@ -96,6 +96,22 @@ nav.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: 
 .decide select, .decide input { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 5px 8px; min-width: 0; }
 .decide input { flex: 1 1 160px; }
 .saved { font-size: 12px; color: var(--muted); margin-left: auto; }
+.badges { display: flex; flex-wrap: wrap; gap: 4px; }
+.bdg { font-size: 11px; padding: 1px 6px; border-radius: 3px; background: var(--sunk); color: var(--muted); white-space: nowrap; }
+.bdg.up { background: var(--long-soft); color: var(--long); }
+.bdg.dn { background: var(--short-soft); color: var(--short); }
+.bdg.turn { background: var(--accent-soft); color: var(--accent); }
+.fbrow { display: flex; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); }
+.fb { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 2px 8px; cursor: pointer; font-size: 12px; }
+.fb[aria-pressed="true"][data-v="good"] { background: var(--long); border-color: var(--long); color: var(--surface); }
+.fb[aria-pressed="true"][data-v="bad"] { background: var(--short); border-color: var(--short); color: var(--surface); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 10px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; display: grid; gap: 2px; }
+.kpi b { font-family: var(--font-data); font-size: 20px; font-weight: 500; }
+.bar { height: 6px; background: var(--sunk); border-radius: 3px; position: relative; min-width: 80px; }
+.bar i { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.learn { display: grid; gap: 16px; max-width: 900px; }
+.learn p { margin: 0; max-width: 75ch; }
 
 /* gallery */
 .sectorblock { display: grid; gap: 8px; }
@@ -149,6 +165,8 @@ dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
     <button role="tab" id="tab-pairs" aria-selected="true" data-tab="pairs">Pairs<span class="count" id="c-pairs"></span></button>
     <button role="tab" id="tab-charts" aria-selected="false" data-tab="charts">All charts<span class="count" id="c-charts"></span></button>
     <button role="tab" id="tab-book" aria-selected="false" data-tab="book">Book<span class="count" id="c-book"></span></button>
+    <button role="tab" id="tab-track" aria-selected="false" data-tab="track">Track record<span class="count" id="c-track"></span></button>
+    <button role="tab" id="tab-learn" aria-selected="false" data-tab="learn">Learning</button>
   </nav>
 
   <section id="view-pairs">
@@ -161,6 +179,12 @@ dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
   </section>
   <section id="view-book" hidden>
     <div class="book" id="book"></div>
+  </section>
+  <section id="view-track" hidden>
+    <div class="book" id="track" style="max-width:980px"></div>
+  </section>
+  <section id="view-learn" hidden>
+    <div class="learn" id="learn"></div>
   </section>
 </div>
 
@@ -176,10 +200,10 @@ dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
 const $ = (s, el = document) => el.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const pct = (v, d = 1) => v == null ? "–" : `<span class="${v >= 0 ? "pos" : "neg"}">${v >= 0 ? "+" : ""}${Number(v).toFixed(d)}%</span>`;
-const REASONS = { pass: ["Chart not clean", "No catalyst", "Already extended", "Bad pair fit", "Earnings risk", "Crowded / consensus", "Other"],
+const REASONS = { pass: ["Long leg weak", "Short leg weak", "Both charts weak", "Already extended", "Bad pair fit", "Earnings risk", "No catalyst", "Crowded / consensus", "Other"],
                   watch: ["Wait for pullback", "Wait for breakout", "Wait for earnings", "Other"] };
 
-const S = { db: null, user: null, uid: null, canWrite: true, runs: [], run: null, decisions: {}, unsub: null,
+const S = { db: null, user: null, uid: null, canWrite: true, runs: [], run: null, decisions: {}, unsub: null, chartfb: {}, unsub2: null,
             tab: "pairs", fSector: "All", fConv: 0, fHide: false, gSide: "all", gGrade: "all" };
 try { const t = localStorage.getItem("desk.tab"); if (t) S.tab = t; } catch (e) {}
 
@@ -223,6 +247,14 @@ function selectRun(id) {
     S.decisions = m;
     render();
   }, err => showBanner("Live decision updates stopped. Reload to reconnect."));
+  S.chartfb = {};
+  if (S.unsub2) S.unsub2();
+  S.unsub2 = S.db.collection("chart_feedback").where("run_id", "==", id).onSnapshot(snap => {
+    const m = {};
+    snap.docs.forEach(d => { const x = d.data(); m[`${x.symbol}|${x.side}`] = x.verdict; });
+    S.chartfb = m;
+    render();
+  }, err => {});
   render();
 }
 
@@ -245,13 +277,16 @@ function render() {
   $("#c-pairs").textContent = pairs.length;
   $("#c-charts").textContent = cands.length;
   $("#c-book").textContent = taken;
-  for (const t of ["pairs", "charts", "book"]) {
+  $("#c-track").textContent = (r.track_record || []).filter(x => x.ret5 != null).length || "";
+  for (const t of ["pairs", "charts", "book", "track", "learn"]) {
     $("#tab-" + t).setAttribute("aria-selected", String(S.tab === t));
     $("#view-" + t).hidden = S.tab !== t;
   }
   if (S.tab === "pairs") renderPairs(r);
   if (S.tab === "charts") renderCharts(r);
   if (S.tab === "book") renderBook(r);
+  if (S.tab === "track") renderTrack(r);
+  if (S.tab === "learn") renderLearn(r);
   if (!S.canWrite) showBanner("You can view this desk but not record decisions.");
 }
 
@@ -270,6 +305,27 @@ function renderPairs(r) {
   $("#pairs").innerHTML = list.length ? list.map(ticket).join("") : `<div class="empty">No pairs match these filters.</div>`;
 }
 
+const TAGNAME = { S1: "21D thrust ahead of 50D/200D", S2: "Momentum pullback (3M leader, 21D/50D diverging)", S3: "Smooth approach to the 200D",
+  MOM: "Top/bottom of sector on 1W/1M/3M", LEAD: "RS line crossed its 40W MA before price crossed its 40W", SECT: "Just turned Leading/Lagging vs its sector",
+  BO: "3M/6M range breakout or breakdown", MACD: "MACD histogram flip or turn" };
+function badges(l) {
+  const rg = l.regime || "";
+  const rc = rg === "Uptrend" ? "up" : rg === "Downtrend" ? "dn" : rg.startsWith("Turning") ? "turn" : "";
+  const ss = l.sector_state || "";
+  const sc = ss === "Leading" ? "up" : ss === "Lagging" ? "dn" : ss ? "turn" : "";
+  const st = l.sector_turn === 1 ? " · just turned" : l.sector_turn === -1 ? " · just turned" : "";
+  const extra = [];
+  if (l.rs_lead) extra.push(`<span class="bdg turn">RS leads price</span>`);
+  if (l.breakout) extra.push(`<span class="bdg ${l.breakout > 0 ? "up" : "dn"}">${Math.abs(l.breakout) >= 1.5 ? "6M" : "3M"} ${l.breakout > 0 ? "breakout" : "breakdown"}${Math.abs(l.breakout) % 1 === 0.5 ? " on volume" : ""}</span>`);
+  if (l.macd_sig) extra.push(`<span class="bdg ${l.macd_sig > 0 ? "up" : "dn"}">MACD ${Math.abs(l.macd_sig) === 1 ? "flip" : "turn"}</span>`);
+  return `<div class="badges">${rg ? `<span class="bdg ${rc}" title="Weekly picture">W: ${esc(rg)}</span>` : ""}${ss ? `<span class="bdg ${sc}" title="vs its sector ETF">Sector: ${esc(ss)}${st}</span>` : ""}${l.family ? `<span class="bdg">${esc(l.family)}</span>` : ""}${extra.join("")}</div>`;
+}
+function fbRow(sym, side) {
+  const v = S.chartfb[`${sym}|${side}`] || "";
+  const dis = S.canWrite ? "" : "disabled";
+  return `<div class="fbrow"><span>This chart:</span><button class="fb" data-sym="${esc(sym)}" data-side="${side}" data-v="good" aria-pressed="${v === "good"}" ${dis}>Good</button><button class="fb" data-sym="${esc(sym)}" data-side="${side}" data-v="bad" aria-pressed="${v === "bad"}" ${dis}>Bad</button></div>`;
+}
+
 function leg(l, side) {
   const s = l.stats || {};
   const soon = l.earnings_in_window;
@@ -278,12 +334,14 @@ function leg(l, side) {
     <div class="co" title="${esc(l.company)}">${esc(l.company)} · ${esc(l.industry)}</div>
     ${l.chart_url ? `<button class="thumb" data-zoom="${esc(l.symbol)}|${side}" aria-label="Open ${esc(l.symbol)} chart"><img src="${esc(l.chart_url)}" alt="${esc(l.symbol)} daily chart" loading="lazy"></button>` : ""}
     <p class="read">${esc(l.read)}</p>
-    <div class="tags">${(l.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+    ${badges(l)}
+    <div class="tags">${(l.tags || []).map(t => `<span class="tag" title="${esc(TAGNAME[t] || t)}">${esc(t)}</span>`).join("")}</div>
     <div class="stats mono">
       <div><span>d21</span>${pct(s.d21)}</div><div><span>d50</span>${pct(s.d50)}</div><div><span>d200</span>${pct(s.d200)}</div>
-      <div><span>1W</span>${pct(s.p1w)}</div><div><span>1M</span>${pct(s.p1m)}</div><div><span>3M</span>${pct(s.p3m)}</div>
-      <div><span>Vol</span><span>${s.vol == null ? "–" : Math.round(s.vol) + "%"}</span></div><div><span>R²</span><span>${s.r2 == null ? "–" : s.r2.toFixed(2)}</span></div><div><span>x21</span><span>${s.x21 ?? "–"}</span></div>
+      <div><span>1M</span>${pct(s.p1m)}</div><div><span>3M</span>${pct(s.p3m)}</div><div><span>6M</span>${pct(s.p6m)}</div>
+      <div><span title="RS vs S&amp;P against its 40W MA">RS/MA</span>${pct(s.rs_ma)}</div><div><span title="RS vs sector ETF against its 40W MA">Sec/MA</span>${pct(s.rssec_ma)}</div><div><span>Vol</span><span>${s.vol == null ? "–" : Math.round(s.vol) + "%"}</span></div>
     </div>
+    ${fbRow(l.symbol, side)}
     <div class="earn ${soon ? "soon" : ""}">${l.next_earnings ? (soon ? "Earnings in hold window: " : "Next earnings ") + esc(l.next_earnings) : "Earnings date unknown"}</div>
   </div>`;
 }
@@ -333,7 +391,9 @@ function renderCharts(r) {
       <div class="legtop"><span class="side ${x.side}">${x.side}</span><span class="tkr" style="font-size:15px">${esc(x.symbol)}</span><span class="grade">${esc(x.grade || "–")}</span>
         <span class="tags" style="margin-left:auto">${(x.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</span></div>
       ${x.chart_url ? `<button class="thumb" data-zoom="${esc(x.symbol)}|${x.side}" aria-label="Open ${esc(x.symbol)} chart"><img src="${esc(x.chart_url)}" alt="${esc(x.symbol)} daily chart" loading="lazy"></button>` : ""}
+      ${badges(x)}
       <p class="read">${esc(x.read || "")}</p>
+      ${fbRow(x.symbol, x.side)}
     </div>`).join("")}</div></div>`).join("") : `<div class="empty">No charts match these filters.</div>`;
 }
 
@@ -367,6 +427,8 @@ document.addEventListener("click", async e => {
   }
   const z = e.target.closest("[data-zoom]");
   if (z) { openZoom(z.dataset.zoom); return; }
+  const fb = e.target.closest(".fb");
+  if (fb) { await saveFb(fb.dataset.sym, fb.dataset.side, fb.dataset.v); return; }
   const act = e.target.closest(".act");
   if (act) { const t = act.closest(".ticket"); const cur = S.decisions[t.dataset.id]?.action; await save(t.dataset.id, { action: cur === act.dataset.a ? null : act.dataset.a, reason: "", note: S.decisions[t.dataset.id]?.note || "" }); return; }
   if (e.target.id === "copybook") {
@@ -397,6 +459,69 @@ async function save(id, patch) {
     if (err?.code === "invalid_argument") { S.canWrite = false; render(); }
     else showBanner("That decision did not save. Check your connection and click it again.");
   }
+}
+
+async function saveFb(sym, side, v) {
+  if (!S.canWrite || !S.db) return;
+  const ref = S.db.collection("chart_feedback").doc(`${S.run.id}__${sym}-${side}`);
+  try {
+    if (S.chartfb[`${sym}|${side}`] === v) { await ref.delete(); return; }
+    await ref.set({ run_id: S.run.id, symbol: sym, side, verdict: v, decided_at: new Date().toISOString(), decided_by: S.uid || null });
+  } catch (err) {
+    if (err?.code === "invalid_argument") { S.canWrite = false; render(); }
+    else showBanner("That chart rating did not save. Click it again.");
+  }
+}
+
+const FNAME = { rs_vs_ma: "RS vs S&P above its 40W MA", rs_cross: "RS crossed its 40W MA (8W)", rs_hl: "RS blue/red dot (4W)", rs_lead: "RS crossed before price",
+  rssec_vs_ma: "RS vs sector above 40W MA", rssec_cross: "Sector RS crossed its MA", rssec_hl: "Sector RS new high/low", rssec_1m: "1M vs sector", rssec_3m: "3M vs sector",
+  sec_ratio: "Sector relative trend", sec_mom: "Sector relative momentum", sec_quad: "Sector state", sec_turn: "Just turned Leading/Lagging",
+  w_d40: "Price vs 40W MA", w_slope40: "40W MA slope", w_10gt40: "10W above 40W", p1w: "1W", p1m: "1M", p3m: "3M", p6m: "6M",
+  d21: "Price vs 21D", d50: "Price vs 50D", d200: "Price vs 200D", breakout: "3M/6M breakout", macd_sig: "MACD flip/turn", headroom: "Room to 6M level",
+  r2_63: "Straightness (R²)", er_63: "Efficiency ratio", x21_63: "21D crosses (chop)", vol63: "Volatility", ext21: "Stretch from 21D", base_tight: "Tight 6M base" };
+const fname = k => FNAME[k] || (k.startsWith("tag_") ? "Setup " + k.slice(4) : k);
+const fmtp = v => v == null ? "–" : `<span class="${v >= 0 ? "pos" : "neg"}">${v >= 0 ? "+" : ""}${Number(v).toFixed(2)}%</span>`;
+
+function renderTrack(r) {
+  const tr = (r.track_record || []).slice().reverse();
+  const done = tr.filter(x => x.ret5 != null);
+  const grp = k => { const g = done.filter(x => (k === "all" ? true : x.decision === k)); const n = g.length;
+    return { n, avg: n ? g.reduce((a, x) => a + x.ret5, 0) / n : null, hit: n ? g.filter(x => x.ret5 > 0).length / n : null }; };
+  const kp = (label, g) => `<div class="kpi"><span class="lbl">${label}</span><b>${g.avg == null ? "–" : (g.avg >= 0 ? "+" : "") + g.avg.toFixed(2) + "%"}</b><span class="lbl">${g.n} pairs · ${g.hit == null ? "–" : Math.round(g.hit * 100) + "% positive"}</span></div>`;
+  $("#track").innerHTML = done.length ? `
+    <p class="note">Average 1-week pair return (vol-balanced split, close to close from the scan date). This is the market's verdict on the desk and on your calls; it feeds the learner.</p>
+    <div class="kpis">${kp("Taken", grp("take"))}${kp("Passed", grp("pass"))}${kp("Watched", grp("watch"))}${kp("All published", grp("all"))}</div>
+    <div class="tablebox"><table><thead><tr><th>Scan</th><th>Long</th><th>Short</th><th>Conv.</th><th>Your call</th><th>1W</th><th>2W</th></tr></thead><tbody>
+      ${tr.map(x => `<tr><td class="mono">${esc(x.run)}</td><td class="mono">${esc(x.long)}</td><td class="mono">${esc(x.short)}</td><td class="mono">${x.conviction ?? "–"}</td><td>${esc(x.decision)}</td><td class="mono">${fmtp(x.ret5)}</td><td class="mono">${fmtp(x.ret10)}</td></tr>`).join("")}
+    </tbody></table></div>`
+    : `<div class="empty"><b>No results yet.</b> Each pair published here is scored one and two weeks later against what actually happened. The first results appear the week after this scan's hold period ends.</div>`;
+}
+
+function renderLearn(r) {
+  const m = r.model || {};
+  const sides = m.sides || {};
+  const pref = m.preference || {};
+  const icRow = (side) => { const x = sides[side]; if (!x) return ""; const h = x.holdout_ic || {};
+    return `<tr><td>${side}</td><td class="mono">${x.n_dates ?? "–"} weeks · ${(x.n_rows ?? 0).toLocaleString()} rows</td><td class="mono">${h.prior ?? "–"}</td><td class="mono">${h.current ?? "–"}</td><td class="mono">${h.fitted ?? "–"}</td><td class="mono"><b>${h.adopted ?? "–"}</b></td><td>${x.adopted ? "Updated" : "Kept"}</td></tr>`; };
+  const evid = side => { const f = (sides[side] || {}).top_feature_ic || {}; const vals = Object.values(f).map(Math.abs); const mx = Math.max(0.01, ...vals);
+    return Object.entries(f).map(([k, v]) => `<tr><td>${esc(fname(k))}</td><td class="mono">${v >= 0 ? "+" : ""}${v.toFixed(3)}</td><td><div class="bar"><i style="left:${v >= 0 ? 50 : 50 - Math.abs(v) / mx * 50}%;width:${Math.abs(v) / mx * 50}%;background:var(${v >= 0 ? "--long" : "--short"})"></i></div></td></tr>`).join(""); };
+  const chg = side => Object.entries((sides[side] || {}).changes || {}).map(([k, v]) => `${esc(fname(k))} ${v >= 0 ? "+" : ""}${v.toFixed(3)}`).join(", ") || "none";
+  const likes = o => Object.keys(o || {}).map(fname).map(esc).join(", ") || "–";
+  $("#learn").innerHTML = `
+    <p>Two teachers update the ranking every Saturday. <b>The market:</b> every past week in the price history is replayed through the same rules, and the model learns which signals preceded 1-week outperformance against the sector ETF. New weights are only adopted if they beat the current ones on the most recent 30% of weeks, and each weight moves at most a little per week. <b>You:</b> your Take / Pass calls and Good / Bad chart ratings train a second model of your eye. Its share of the ranking grows as you rate more.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="lbl">Weights in use</span><b>${esc(m.weights_source || "prior")}</b><span class="lbl">trained ${esc((m.trained_at || "").slice(0, 10) || "–")}</span></div>
+      <div class="kpi"><span class="lbl">Your ratings matched</span><b>${pref.n_matched ?? pref.n_labels ?? 0}</b><span class="lbl">switches on at 30</span></div>
+      <div class="kpi"><span class="lbl">Your model's share</span><b>${Math.round((pref.beta || 0) * 100)}%</b><span class="lbl">of the final ranking</span></div>
+    </div>
+    <div><div class="lbl" style="margin-bottom:6px">Out-of-sample skill (rank IC of score vs 1-week sector-relative return; 0 = none)</div>
+      <div class="tablebox"><table><thead><tr><th>Side</th><th>History</th><th>Prior</th><th>Last week</th><th>Fitted</th><th>In use</th><th></th></tr></thead><tbody>${icRow("long")}${icRow("short")}</tbody></table></div>
+      <p class="lbl" style="margin-top:6px">This week's changes · long: ${chg("long")} · short: ${chg("short")}</p></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr))">
+      ${["long", "short"].map(s => `<div><div class="lbl" style="margin-bottom:6px">What has worked for ${s}s</div><div class="tablebox"><table><tbody>${evid(s)}</tbody></table></div></div>`).join("")}
+    </div>
+    ${pref.beta ? `<div><div class="lbl" style="margin-bottom:6px">Your eye so far</div><p>You lean towards: ${likes(pref.top_likes)}.</p><p>You lean against: ${likes(pref.top_dislikes)}.</p></div>` : `<div class="empty">Your model switches on after 30 rated legs. Pass reasons that name a leg and Good / Bad on charts count the most.</div>`}
+    <p class="lbl">${esc(m.note || "")}</p>`;
 }
 
 function openZoom(key) {

@@ -117,7 +117,8 @@ def compute_panels(daily: dict[str, pd.DataFrame], spx_close: pd.Series, sector_
         "w_slope40": (s40 / s40.shift(8) - 1) * 100,
         "w_10gt40": (s10 > s40).astype(F32).where(s40.notna()),
     }
-    lead_win, hl_win, band = rc["cross_lookback_weeks"], rc["dot_lookback_weeks"], rc["lead_price_band_pct"]
+    lead_win, hl_win = rc["cross_lookback_weeks"], rc["dot_lookback_weeks"]
+    near, far = rc["lead_price_near_pct"], rc["lead_price_far_pct"]
     for tag, bench in (("rs", spx_w), ("rssec", sec_w)):
         r = rs_line_bluedot(cw, bench, rc["scale"], rc["ma_len"], rc["ma_type"], rc["hl_len"])
         bs_up, bs_dn = bars_since(r["cross_up"]), bars_since(r["cross_dn"])
@@ -133,12 +134,14 @@ def compute_panels(daily: dict[str, pd.DataFrame], spx_close: pd.Series, sector_
         wk[f"{tag}_cross_wk"] = pd.concat([bs_up, bs_dn]).groupby(level=0).min().reindex(cw.index)
         wk[f"{tag}_hl"] = hl.where(r["ma"].notna())
         wk[f"{tag}_nh_wk"], wk[f"{tag}_nl_wk"] = bnh, bnl
-    # RS-leads-price: RS (vs S&P, Dean's script) crossed its MA recently while price has not yet
-    # clearly crossed its 40W MA -> early turn.
+    # RS-leads-price: RS (vs S&P, Dean's script) crossed its 40W MA recently while price is still
+    # approaching its own 40W MA (up to `far` % on the not-yet-crossed side) or only just through it
+    # (up to `near` %). Note RS/MA ~ stock-vs-40W minus S&P-vs-40W: when the index is well above its
+    # 40W, long-side leads are rare and short-side leads common, and vice versa.
     wd40 = wk["w_d40"]
     lead = pd.DataFrame(0.0, index=cw.index, columns=cw.columns)
-    lead = lead.mask((wk["rs_cross"] == 1) & (wd40 <= band), 1.0)
-    lead = lead.mask((wk["rs_cross"] == -1) & (wd40 >= -band), -1.0)
+    lead = lead.mask((wk["rs_cross"] == 1) & wd40.between(-far, near), 1.0)
+    lead = lead.mask((wk["rs_cross"] == -1) & wd40.between(-near, far), -1.0)
     wk["rs_lead"] = lead.where(wk["rs_vs_ma"].notna())
     for k, df in wk.items():
         out[k] = df.reindex(c.index, method="ffill").astype(F32)
