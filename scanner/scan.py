@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DC idea engine v2 — weekly top-down technical sweep of US stocks > $2bn.
+"""DC idea engine — weekly top-down technical sweep of US stocks > $2bn.
 
 Pipeline
   1. Universe from TradingView's screener (symbols, sectors, market caps). Fallback: cached universe.
@@ -27,6 +27,7 @@ import yaml
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
 OUT = ROOT / "out"
+ENGINE = str((CFG.get("engine") or {}).get("version", "2.0"))
 CACHE = ROOT / "data" / "universe.csv"
 log = logging.getLogger("scan")
 
@@ -237,7 +238,7 @@ def track_record(close: pd.DataFrame, today: pd.Timestamp) -> list[dict]:
     for pf in sorted((ROOT / "history" / "review").glob("*/pairs.json")):
         run = pf.parent.name
         try:
-            t0 = close.index[close.index <= pd.Timestamp(run)][-1]
+            t0 = close.index[close.index <= pd.Timestamp(run[:10])][-1]
         except IndexError:
             continue
         i0 = close.index.get_loc(t0)
@@ -283,7 +284,8 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
 
     shutil.rmtree(OUT / "charts", ignore_errors=True)
     (OUT / "charts").mkdir(parents=True)
-    run_id = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    # run id = scan date + engine version (+ -r2, -r3 for repeat runs the same day; the workflow sets it)
+    run_id = os.environ.get("DC_RUN_ID") or f"{dt.datetime.now(dt.timezone.utc).date().isoformat()}-v{ENGINE}"
 
     # 1. universe
     try:
@@ -333,7 +335,7 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
     feat_dir = ROOT / "history" / "features"
     feat_dir.mkdir(parents=True, exist_ok=True)
     for rid in sorted(x for x in labelled if x and not (feat_dir / f"{x}.csv.gz").exists()):
-        past = daily["Close"].index[daily["Close"].index <= pd.Timestamp(rid)]
+        past = daily["Close"].index[daily["Close"].index <= pd.Timestamp(rid[:10])]
         if not len(past):
             continue
         ps = snapshot(panels, past[-1]).join(meta, how="inner")
@@ -417,7 +419,9 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
                for s in ("long", "short")}
     result = {
         "run_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "run_id": run_id, "data_through": str(today.date()), "source": source,
+        "run_id": run_id, "engine": ENGINE,
+        "trigger": os.environ.get("DC_TRIGGER", "schedule"), "cycle_id": os.environ.get("DC_CYCLE_ID") or None,
+        "data_through": str(today.date()), "source": source,
         "universe_count": int(len(meta)),
         "eligible": {"long": int((allc.side == "long").sum()), "short": int((allc.side == "short").sum())},
         "candidate_count": len(records),
@@ -439,4 +443,4 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", stream=sys.stdout)
     sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-    run()
+    run(learn_enabled=os.environ.get("DC_LEARN", "1") != "0")

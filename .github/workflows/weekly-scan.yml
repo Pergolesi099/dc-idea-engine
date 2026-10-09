@@ -3,7 +3,20 @@ name: weekly-scan
 on:
   schedule:
     - cron: "0 5 * * 6"     # Saturday 05:00 UTC = 07:00 Paris (summer) / 06:00 (winter)
-  workflow_dispatch: {}     # "Run workflow" button for manual runs (any branch)
+  workflow_dispatch:        # manual runs: the desk's "Run new scan" button, or Actions -> Run workflow
+    inputs:
+      engine:
+        description: "Engine version to run (e.g. 2.0), or latest"
+        default: latest
+        required: false
+      trigger:
+        description: "schedule | manual"
+        default: manual
+        required: false
+      cycle_id:
+        description: "Desk cycle id (set by the desk's Run new scan button)"
+        default: ""
+        required: false
 
 permissions:
   contents: write
@@ -19,6 +32,9 @@ jobs:
     env:
       # main publishes to `output`; any other branch to `output-<branch>` so tests never touch production
       OUT_BRANCH: ${{ github.ref_name == 'main' && 'output' || format('output-{0}', github.ref_name) }}
+      REQ_ENGINE: ${{ inputs.engine || 'latest' }}
+      DC_TRIGGER: ${{ github.event_name == 'schedule' && 'schedule' || inputs.trigger || 'manual' }}
+      DC_CYCLE_ID: ${{ inputs.cycle_id || '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -30,29 +46,56 @@ jobs:
       - name: Install
         run: pip install -r requirements.txt
 
+      # latest / current version -> run from main and let it learn.
+      # an older version -> run its frozen tag (code + config + weights at release) on today's data,
+      # with today's history and labels copied in; it does not learn and never touches main's model/.
+      - name: Resolve engine
+        run: |
+          CUR=$(python -c "import yaml;print(yaml.safe_load(open('config.yaml'))['engine']['version'])")
+          REQ="${REQ_ENGINE#v}"
+          if [ -z "$REQ" ] || [ "$REQ" = "latest" ] || [ "$REQ" = "$CUR" ]; then
+            ENGINE="$CUR"; DIR="."; LEARN=1
+          else
+            git fetch --depth 1 origin "refs/tags/engine-v$REQ:refs/tags/engine-v$REQ" \
+              || { echo "::error::No tag engine-v$REQ. Known engines are listed in engines.json."; exit 1; }
+            git worktree add --detach eng "engine-v$REQ"
+            rm -rf eng/history eng/labels eng/data
+            cp -r history labels data eng/ 2>/dev/null || true
+            ENGINE="$REQ"; DIR="eng"; LEARN=0
+          fi
+          D=$(date -u +%F); RID="$D-v$ENGINE"; n=2
+          while [ -f "history/$RID.json" ]; do RID="$D-v$ENGINE-r$n"; n=$((n+1)); done
+          echo "ENGINE=$ENGINE" >> "$GITHUB_ENV"
+          echo "DIR=$DIR" >> "$GITHUB_ENV"
+          echo "DC_LEARN=$LEARN" >> "$GITHUB_ENV"
+          echo "DC_RUN_ID=$RID" >> "$GITHUB_ENV"
+          echo "Engine v$ENGINE from $DIR, run $RID, learning=$LEARN, trigger=$DC_TRIGGER"
+
       - name: Scan, learn, chart
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-        run: python scanner/scan.py
+        run: python "$DIR/scanner/scan.py"
 
       - name: Commit learning state and archives to this branch
         run: |
           git config --global user.name  "dc-idea-engine-bot"
           git config --global user.email "actions@users.noreply.github.com"
-          D=$(python -c "import json;print(json.load(open('out/results.json'))['run_id'])")
-          mkdir -p history data
-          cp out/results.json "history/$D.json"
-          [ -f out/universe.csv ] && cp out/universe.csv data/universe.csv
-          git add history data model
-          git commit -m "scan $D" || echo "nothing to commit"
+          D=$(python -c "import json;print(json.load(open('$DIR/out/results.json'))['run_id'])")
+          mkdir -p history/features data
+          cp "$DIR/out/results.json" "history/$D.json"
+          [ -f "$DIR/history/features/$D.csv.gz" ] && [ "$DIR" != "." ] && cp "$DIR/history/features/$D.csv.gz" history/features/
+          [ -f "$DIR/out/universe.csv" ] && cp "$DIR/out/universe.csv" data/universe.csv
+          git add history data
+          [ "$DC_LEARN" = "1" ] && git add model
+          git commit -m "scan $D (engine v$ENGINE, $DC_TRIGGER)" || echo "nothing to commit"
           git pull --rebase origin "${{ github.ref_name }}" || true
           git push origin "HEAD:${{ github.ref_name }}"
 
       - name: Publish charts to ${{ env.OUT_BRANCH }} (overwritten each run)
         run: |
-          D=$(python -c "import json;print(json.load(open('out/results.json'))['run_id'])")
-          cd out
+          D=$(python -c "import json;print(json.load(open('$DIR/out/results.json'))['run_id'])")
+          cd "$DIR/out"
           git init -q -b "$OUT_BRANCH"
           git add -A
-          git commit -qm "scan $D"
+          git commit -qm "scan $D (engine v$ENGINE)"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" "$OUT_BRANCH"

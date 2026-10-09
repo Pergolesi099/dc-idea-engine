@@ -16,6 +16,14 @@ Weekly technical sweep for the DC long/short pairs book. Runs every Saturday on 
 
 All thresholds live in `config.yaml`.
 
-**Manual run:** Actions tab → weekly-scan → Run workflow.
+**Manual run:** the desk's *Run new scan* button (scan + Claude review, desk updated), or Actions tab → weekly-scan → Run workflow (scan only; `engine` input = a version or `latest`).
+
+## Engine versions
+Small, incremental improvements ship as numbered engine versions so each change can be judged against the last.
+- `config.yaml` → `engine.version` is the version the code on `main` runs; `engines.json` is the changelog the desk shows.
+- **To ship a change:** edit `scanner/` and/or `config.yaml`, run `python tools/release_engine.py 2.1 "summary" "change 1" "change 2"`, commit everything together, push. The `release-tag` workflow tags it `engine-v2.1`.
+- Every run is stamped with its engine: run id `YYYY-MM-DD-v2.1` (`-r2`, `-r3` for repeat runs the same day).
+- **Older versions stay runnable:** `engine: 2.0` checks out tag `engine-v2.0` (code, config and learned weights frozen at release) and runs it on today's data. Only the current version learns and writes `model/`.
+- Minor bump (2.0 → 2.1) for threshold or weight tweaks; major bump (2 → 3) when the steps or the features change.
 **Optional secret:** `POLYGON_API_KEY` (free key from polygon.io) for history gap-filling and fallback.
 **Local test without network:** `python tests/test_offline.py`

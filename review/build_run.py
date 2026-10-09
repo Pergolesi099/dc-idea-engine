@@ -33,7 +33,9 @@ uploads = dict(line.split() for line in (work / "uploads.txt").read_text().split
 
 run_ts = dt.datetime.fromisoformat(res["run_utc"])
 run_id = res.get("run_id") or run_ts.date().isoformat()
-hold_until = dt.date.fromisoformat(run_id) + dt.timedelta(days=HOLD_DAYS)
+run_date = dt.date.fromisoformat(run_id[:10])
+engine = res.get("engine") or "2.0"
+hold_until = run_date + dt.timedelta(days=HOLD_DAYS)
 problems = []
 
 
@@ -98,7 +100,9 @@ if problems:
 
 model = res.get("model", {})
 doc = {
-    "run_utc": res["run_utc"], "run_id": run_id, "label": dt.date.fromisoformat(run_id).strftime("%a %-d %b %Y"),
+    "run_utc": res["run_utc"], "run_id": run_id, "label": run_date.strftime("%a %-d %b %Y") + (f" · run {run_id.rsplit('-r', 1)[1]}" if "-r" in run_id[10:] else ""),
+    "run_date": run_date.isoformat(), "engine": engine, "trigger": res.get("trigger", "schedule"),
+    "cycle_id": res.get("cycle_id"),
     "data_through": res.get("data_through"), "source": res["source"], "universe_count": res["universe_count"],
     "eligible": res.get("eligible"), "regime_counts": res.get("regime_counts"),
     "hold_until": hold_until.isoformat(), "market_note": pj.get("market_note", ""),

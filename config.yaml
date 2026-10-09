@@ -1,4 +1,10 @@
-# DC idea engine v2 — all tunables live here.
+# DC idea engine — all tunables live here.
+# Any change to this file or to scanner/ is a new engine version: bump engine.version and add an
+# entry to engines.json in the same commit (python tools/release_engine.py does both). The tag
+# engine-v<version> is created automatically on push to main and freezes code + config + weights.
+
+engine:
+  version: "2.0"
 
 universe:
   min_market_cap: 2.0e+9        # USD

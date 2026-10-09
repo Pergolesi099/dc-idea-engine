@@ -1,0 +1,42 @@
+name: release-tag
+
+# Freezes each engine version: when engines.json names a version that has no tag yet,
+# tag the commit that introduced it as engine-v<version>.
+on:
+  push:
+    branches: [main]
+    paths: [engines.json]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check config and registry agree
+        run: |
+          python - <<'EOF'
+          import json, re
+          reg = json.load(open("engines.json"))
+          cfg = re.search(r'(?m)^engine:\n  version: "([^"]+)"', open("config.yaml").read())
+          assert cfg, "config.yaml has no engine.version"
+          assert cfg.group(1) == reg["current"], f"config.yaml says {cfg.group(1)}, engines.json says {reg['current']}"
+          print("engine", reg["current"])
+          EOF
+
+      - name: Tag the current engine if it is new
+        run: |
+          V=$(python -c "import json;print(json.load(open('engines.json'))['current'])")
+          if git rev-parse -q --verify "refs/tags/engine-v$V" >/dev/null; then
+            echo "engine-v$V already tagged"; exit 0
+          fi
+          git config user.name  "dc-idea-engine-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git tag -a "engine-v$V" -m "engine v$V"
+          git push origin "engine-v$V"

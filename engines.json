@@ -1,0 +1,14 @@
+{
+ "current": "2.0",
+ "versions": [
+  {
+   "version": "2.0",
+   "released": "2026-10-08",
+   "tag": "engine-v2.0",
+   "summary": "Top-down sweep: weekly gate + RS Line - Blue Dot, sector rotation, S1/S2/S3/MOM daily setups, 3M/6M breakouts, MACD; outcome + preference learning.",
+   "changes": [
+    "Baseline engine. First versioned release."
+   ]
+  }
+ ]
+}

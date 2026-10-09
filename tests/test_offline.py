@@ -121,7 +121,7 @@ if __name__ == "__main__":
     check(res, "tradingview path")
     shutil.copy(scan.OUT / "universe.csv", scan.CACHE)
     # Dean's feedback on an older desk run (no feature snapshot yet) -> must be backfilled and learned
-    old_run = str((IDX[-30]).date())
+    old_run = str((IDX[-30]).date()) + "-v2.0"   # versioned run ids must backfill too
     c1 = pd.DataFrame(res["candidates"])
     (TMP / "labels").mkdir(exist_ok=True)
     L = c1[c1.side == "long"].symbol.tolist()
@@ -138,4 +138,10 @@ if __name__ == "__main__":
     pref = res["model"]["report"]["preference"]
     print("   preference:", {k: pref.get(k) for k in ("n_labels", "n_matched", "beta")})
     assert pref["n_matched"] >= 30 and pref["beta"] > 0, pref
+    # engine versioning: run id carries the version, older-style ids still parse, registry agrees
+    assert res["engine"] == scan.ENGINE and res["run_id"].endswith(f"-v{scan.ENGINE}"), res["run_id"]
+    reg = json.loads((ROOT / "engines.json").read_text())
+    assert reg["current"] == scan.ENGINE, (reg["current"], scan.ENGINE)
+    assert reg["versions"][0]["version"] == scan.ENGINE
+    print("   engine:", res["engine"], "run_id:", res["run_id"])
     print("OK", TMP)
