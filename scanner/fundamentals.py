@@ -113,7 +113,7 @@ def fetch_yahoo(sym: str, ysym: str, with_extras: bool, cfg: dict) -> dict:
 
 
 # ------------------------------------------------------------------ news headlines
-UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"}
+UA = {"User-Agent": "Mozilla/5.0"}   # a full browser UA without cookies gets 429 from Yahoo
 
 
 def fetch_news(sym: str, ysym: str, cfg: dict) -> list[dict]:
