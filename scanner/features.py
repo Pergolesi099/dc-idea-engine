@@ -140,8 +140,8 @@ def compute_panels(daily: dict[str, pd.DataFrame], spx_close: pd.Series, sector_
     # 40W, long-side leads are rare and short-side leads common, and vice versa.
     wd40 = wk["w_d40"]
     lead = pd.DataFrame(0.0, index=cw.index, columns=cw.columns)
-    lead = lead.mask((wk["rs_cross"] == 1) & wd40.between(-far, near), 1.0)
-    lead = lead.mask((wk["rs_cross"] == -1) & wd40.between(-near, far), -1.0)
+    lead = lead.mask((wk["rs_cross"] == 1) & (wd40 >= -far) & (wd40 <= near), 1.0)
+    lead = lead.mask((wk["rs_cross"] == -1) & (wd40 >= -near) & (wd40 <= far), -1.0)
     wk["rs_lead"] = lead.where(wk["rs_vs_ma"].notna())
     for k, df in wk.items():
         out[k] = df.reindex(c.index, method="ffill").astype(F32)
