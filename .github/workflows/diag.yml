@@ -1,6 +1,8 @@
 name: diag
 on:
-  workflow_dispatch: {}
+  push:
+    branches: [dev-fund]
+    paths: [tools/diag_sources.py, .github/workflows/diag.yml, scanner/fundamentals.py]
 permissions:
   contents: write
 jobs:
