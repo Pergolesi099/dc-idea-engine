@@ -34,7 +34,22 @@ header.desk { display: grid; gap: 10px; }
 .brandrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; justify-content: space-between; }
 h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
 .runpick { display: flex; align-items: center; gap: 8px; }
-.runpick select { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 5px 8px; }
+.runpick select { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 5px 8px; max-width: 100%; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-width: 0; }
+.runbtn { border: 1px solid var(--accent); background: var(--accent); color: var(--surface); border-radius: var(--r); padding: 5px 12px; cursor: pointer; font-weight: 700; white-space: nowrap; }
+.runbtn.ghost { background: var(--surface); color: var(--ink); border-color: var(--line); font-weight: 500; }
+.runbtn:disabled { opacity: .55; cursor: not-allowed; }
+.enginechip { font-family: var(--font-data); font-size: 12px; padding: 1px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.enginenote { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; color: var(--muted); font-size: 13px; max-width: 100ch; }
+.enginenote b { color: var(--ink); font-weight: 500; }
+.cycle { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 8px 12px; font-size: 13px; }
+.cycle .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+.cycle.done .dot { background: var(--long); }
+.cycle.failed { border-color: var(--short); }
+.cycle.failed .dot { background: var(--short); }
+.cycle .x { margin-left: auto; padding: 2px 8px; font-size: 12px; }
+@media (prefers-reduced-motion: no-preference) { .cycle.live .dot { animation: pulse 1.4s ease-in-out infinite; } }
+@keyframes pulse { 50% { opacity: .3; } }
 .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); }
 .facts b { color: var(--ink); font-weight: 500; }
 .note { max-width: 78ch; margin: 0; color: var(--ink); }
@@ -153,12 +168,18 @@ dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
   <header class="desk">
     <div class="brandrow">
       <h1>DC Idea Desk</h1>
-      <div class="runpick"><label class="lbl" for="run">Scan</label><select id="run" disabled><option>Loading…</option></select></div>
+      <div class="controls">
+        <div class="runpick"><label class="lbl" for="engine">Engine</label><select id="engine" disabled><option>Loading…</option></select></div>
+        <div class="runpick"><label class="lbl" for="run">Scan</label><select id="run" disabled><option>Loading…</option></select></div>
+        <div class="runpick" id="runctl"><button class="runbtn" id="runscan" disabled>Run new scan</button></div>
+      </div>
     </div>
+    <div class="enginenote" id="enginenote" hidden></div>
     <div class="facts" id="facts"></div>
     <p class="note" id="note"></p>
   </header>
 
+  <div id="cycle" class="cycle" hidden aria-live="polite"></div>
   <div id="banner" class="banner" hidden></div>
 
   <nav class="tabs" role="tablist">
@@ -204,8 +225,14 @@ const REASONS = { pass: ["Long leg weak", "Short leg weak", "Both charts weak", 
                   watch: ["Wait for pullback", "Wait for breakout", "Wait for earnings", "Other"] };
 
 const S = { db: null, user: null, uid: null, canWrite: true, runs: [], run: null, decisions: {}, unsub: null, chartfb: {}, unsub2: null,
-            tab: "pairs", fSector: "All", fConv: 0, fHide: false, gSide: "all", gGrade: "all" };
+            tab: "pairs", fSector: "All", fConv: 0, fHide: false, gSide: "all", gGrade: "all",
+            mcp: null, engines: [], engine: "all", allRuns: [], cycle: null, myCycle: null, arm: false, busy: false };
 try { const t = localStorage.getItem("desk.tab"); if (t) S.tab = t; } catch (e) {}
+try { const g = localStorage.getItem("desk.engine"); if (g) S.engine = g; } catch (e) {}
+const REVIEW_TASK = "trig_01GBb5aagGJvJdSW6U8WtLGm";   // the "DC Idea Desk - REVIEW" scheduled task
+const engOf = r => String(r?.engine || "2.0");
+const vkey = v => String(v).split(".").map(n => String(n).padStart(4, "0")).join(".");
+const ACTIVE = ["requested", "scanning", "reviewing"];
 
 function showBanner(msg) { const b = $("#banner"); b.textContent = msg; b.hidden = !msg; }
 
@@ -222,23 +249,147 @@ renderEmpty("Loading the latest scan…");
     try { S.uid = await user.id(); } catch (e) {}
     try { const w = await user.can("data.write"); if (w === false) S.canWrite = false; } catch (e) {}
   }
-  try {
-    const snap = await db.collection("runs").orderBy("run_utc", "desc").limit(12).get();
-    S.runs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  } catch (e) { renderEmpty("The desk could not load scans right now. Reload the page in a minute."); return; }
+  use("mcp").then(m => { S.mcp = m; renderControls(); });
+  $("#run").addEventListener("change", e => selectRun(e.target.value));
+  $("#engine").addEventListener("change", e => { S.engine = e.target.value; try { localStorage.setItem("desk.engine", S.engine); } catch (err) {} applyRuns(); });
+  db.collection("engines").onSnapshot(snap => {
+    S.engines = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    applyRuns();
+  }, err => {});
+  db.collection("cycles").orderBy("requested_at", "desc").limit(1).onSnapshot(snap => {
+    S.cycle = snap.docs.length ? { id: snap.docs[0].id, ...snap.docs[0].data() } : null;
+    renderCycle(); renderControls();
+  }, err => {});
+  db.collection("runs").orderBy("run_utc", "desc").limit(40).onSnapshot(snap => {
+    S.allRuns = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    applyRuns();
+  }, err => renderEmpty("The desk could not load scans right now. Reload the page in a minute."));
+})();
+
+/* ---------- engines + scan list ---------- */
+function engineList() {
+  const m = {};
+  S.engines.forEach(e => { m[String(e.version || e.id)] = e; });
+  S.allRuns.forEach(r => { const v = engOf(r); m[v] = m[v] || { version: v }; });
+  return Object.values(m).sort((a, b) => vkey(b.version).localeCompare(vkey(a.version)));
+}
+function currentEngine() {
+  const l = engineList();
+  return (l.find(e => e.current) || l[0] || { version: "2.0" }).version;
+}
+function applyRuns() {
+  const engs = engineList();
+  if (S.engine !== "all" && !engs.some(e => e.version === S.engine)) S.engine = "all";
+  const cur = currentEngine();
+  const esel = $("#engine");
+  esel.innerHTML = `<option value="all">All engines</option>` + engs.map(e =>
+    `<option value="${esc(e.version)}" ${S.engine === e.version ? "selected" : ""}>v${esc(e.version)}${e.version === cur ? " · current" : ""}</option>`).join("");
+  esel.disabled = false;
+  S.runs = S.allRuns.filter(r => S.engine === "all" || engOf(r) === S.engine);
+  const sel = $("#run");
   if (!S.runs.length) {
-    renderEmpty("<b>No scan published yet.</b> The weekly review fills this desk on Saturday morning after the GitHub scan runs. Each run adds 15–25 pair tickets, every chart it reviewed, and a Book of the pairs you take.");
+    sel.innerHTML = `<option>No scans</option>`; sel.disabled = true;
+    S.run = null;
+    if (S.unsub) { S.unsub(); S.unsub = null; }
+    if (S.unsub2) { S.unsub2(); S.unsub2 = null; }
+    $("#facts").innerHTML = ""; $("#note").textContent = "";
+    renderEmpty(S.allRuns.length
+      ? `<b>No scans from engine v${esc(S.engine)} yet.</b> Press Run new scan to run this version on today's market, or pick another engine.`
+      : "<b>No scan published yet.</b> The weekly review fills this desk on Saturday morning after the GitHub scan runs, or press Run new scan. Each run adds 15–25 pair tickets, every chart it reviewed, and a Book of the pairs you take.");
+  } else {
+    sel.innerHTML = S.runs.map(r => `<option value="${esc(r.id)}">${esc(r.label || r.id)} · v${esc(engOf(r))}${r.trigger === "manual" ? " · manual" : ""}</option>`).join("");
+    sel.disabled = false;
+    const mine = S.myCycle && S.runs.find(r => r.cycle_id === S.myCycle);
+    const keep = S.run && S.runs.find(r => r.id === S.run.id);
+    const pick = mine || keep || S.runs[0];
+    if (mine) S.myCycle = null;
+    sel.value = pick.id;
+    if (S.run && S.run.id === pick.id) { S.run = pick; render(); }   // same scan, fresher doc
+    else selectRun(pick.id);
+  }
+  renderEngineNote(); renderControls();
+}
+function renderEngineNote() {
+  const box = $("#enginenote");
+  const v = S.engine === "all" ? (S.run ? engOf(S.run) : null) : S.engine;
+  const e = v && engineList().find(x => x.version === v);
+  if (!e || !(e.summary || e.released)) { box.hidden = true; return; }
+  const ch = (e.changes || []).join(" · ");
+  box.innerHTML = `<span class="enginechip">v${esc(e.version)}</span>${e.released ? `<span>released <b class="mono">${esc(e.released)}</b></span>` : ""}<span>${esc(e.summary || "")}</span>${ch && ch !== e.summary ? `<span>Changes: ${esc(ch)}</span>` : ""}`;
+  box.hidden = false;
+}
+
+/* ---------- manual scan cycle ---------- */
+function cycleBusy() {
+  const c = S.cycle;
+  if (!c || !ACTIVE.includes(c.status)) return false;
+  return Date.now() - new Date(c.updated_at || c.requested_at).getTime() < 3 * 3600e3;   // stale after 3h
+}
+function runEngine() { return S.engine === "all" ? currentEngine() : S.engine; }
+function renderControls() {
+  const ctl = $("#runctl"); if (!ctl) return;
+  const v = runEngine();
+  if (!S.db || !S.canWrite) { ctl.innerHTML = `<button class="runbtn" disabled title="You can view this desk but not start scans">Run new scan</button>`; return; }
+  if (!S.mcp) { ctl.innerHTML = `<button class="runbtn" disabled title="Starting a scan needs the Claude Code Remote connector, which this view cannot reach">Run new scan</button>`; return; }
+  if (cycleBusy() || S.busy) { ctl.innerHTML = `<button class="runbtn" disabled>Scan running…</button>`; return; }
+  ctl.innerHTML = S.arm
+    ? `<button class="runbtn" id="rungo">Run engine v${esc(v)} now</button><button class="runbtn ghost" id="runcancel">Cancel</button>`
+    : `<button class="runbtn" id="runscan" title="Scan today's market with engine v${esc(v)}, then review and publish new pairs here">Run new scan · v${esc(v)}</button>`;
+}
+const STATUS = { requested: "Requested, waiting for Claude to start", scanning: "Scanning the market on GitHub", reviewing: "Reading charts and pairing",
+  published: "Published", failed: "Failed" };
+function renderCycle() {
+  const box = $("#cycle"), c = S.cycle;
+  if (!c) { box.hidden = true; return; }
+  const age = Date.now() - new Date(c.updated_at || c.requested_at).getTime();
+  const live = ACTIVE.includes(c.status) && age < 3 * 3600e3;
+  if (!live && age > 36 * 3600e3) { box.hidden = true; return; }   // old news
+  const t = d => d ? new Date(d).toLocaleString([], { weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  const stale = ACTIVE.includes(c.status) && !live;
+  box.className = "cycle" + (live ? " live" : c.status === "published" ? " done" : (c.status === "failed" || stale) ? " failed" : "");
+  box.innerHTML = `<span class="dot"></span><b>Scan cycle</b><span class="enginechip">v${esc(c.engine || "?")}</span>
+    <span>${esc(stale ? "No progress for 3 hours; it probably stopped" : (STATUS[c.status] || c.status))}${c.message ? ": " + esc(c.message) : ""}</span>
+    <span class="lbl">started ${esc(t(c.requested_at))}${c.status === "published" && c.updated_at ? " · done " + esc(t(c.updated_at)) : ""}</span>
+    ${c.status === "published" && c.run_id ? `<button class="x" data-open="${esc(c.run_id)}">Open this scan</button>` : ""}`;
+  box.hidden = false;
+}
+async function startCycle() {
+  const v = runEngine();
+  const now = new Date();
+  const id = "c-" + now.toISOString().replace(/[-:T]/g, "").slice(0, 14);
+  S.busy = true; S.arm = false; renderControls();
+  const ref = S.db.collection("cycles").doc(id);
+  try {
+    await ref.set({ cycle_id: id, engine: v, status: "requested", requested_at: now.toISOString(),
+      updated_at: now.toISOString(), requested_by: S.uid || null });
+  } catch (err) {
+    S.busy = false; renderControls();
+    showBanner("The scan request did not save, so nothing was started. Check your connection and press Run new scan again.");
     return;
   }
-  const sel = $("#run");
-  sel.innerHTML = S.runs.map(r => `<option value="${esc(r.id)}">${esc(r.label || r.id)}</option>`).join("");
-  sel.disabled = false;
-  sel.addEventListener("change", () => selectRun(sel.value));
-  selectRun(S.runs[0].id);
-})();
+  try {
+    await S.mcp.callTool("Claude Code Remote", "fire_trigger",
+      { trigger_id: REVIEW_TASK, text: `MANUAL CYCLE cycle_id=${id} engine=${v}` }, { cache: false });
+    S.myCycle = id;
+    showBanner("");
+  } catch (err) {
+    const why = {
+      needs_reauth: "Reconnect Claude Code Remote in your claude.ai connector settings, then press Run new scan again.",
+      server_not_connected: "Claude Code Remote is not connected for this page. Allow it when the page asks, then try again.",
+      not_granted: "This page was not allowed to use Claude Code Remote. Allow it from the page's Permissions menu, then try again.",
+      consent_required: "Allow this page to use Claude Code Remote, then press Run new scan again.",
+      rate_limited: "Too many requests just now. Wait a minute and press Run new scan again.",
+    }[err?.code] || `The scan could not start (${esc(err?.code || "unknown error")}${err?.message ? ": " + esc(err.message) : ""}).`;
+    try { await ref.update({ status: "failed", message: "could not start the review task", updated_at: new Date().toISOString() }); } catch (e2) {}
+    showBanner(why);
+  }
+  S.busy = false; renderControls();
+}
 
 function selectRun(id) {
   S.run = S.runs.find(r => r.id === id);
+  if (!S.run) return;
+  renderEngineNote();
   S.decisions = {};
   if (S.unsub) S.unsub();
   S.unsub = S.db.collection("decisions").where("run_id", "==", id).onSnapshot(snap => {
@@ -267,6 +418,7 @@ function render() {
   const r = S.run; if (!r) return;
   const cands = r.candidates || [], pairs = r.pairs || [];
   $("#facts").innerHTML = [
+    `Engine <b class="mono">v${esc(engOf(r))}</b>${r.trigger === "manual" ? " · manual run" : ""}`,
     `Scanned <b class="mono">${esc((r.run_utc || "").slice(0, 16).replace("T", " "))} UTC</b>`,
     `Universe <b class="mono">${esc(r.universe_count)}</b> US stocks over $2bn`,
     `Charts reviewed <b class="mono">${cands.length}</b>`,
@@ -438,6 +590,19 @@ document.addEventListener("click", async e => {
     return;
   }
   if (e.target.id === "lbclose") $("#lb").close();
+  if (e.target.id === "runscan") { S.arm = true; renderControls(); $("#rungo")?.focus(); return; }
+  if (e.target.id === "runcancel") { S.arm = false; renderControls(); return; }
+  if (e.target.id === "rungo") { await startCycle(); return; }
+  const op = e.target.closest("[data-open]");
+  if (op) {
+    const r = S.allRuns.find(x => x.id === op.dataset.open);
+    if (r) {
+      if (S.engine !== "all" && engOf(r) !== S.engine) S.engine = "all";
+      S.run = r; applyRuns();
+      $("#run").value = r.id; selectRun(r.id);
+    }
+    return;
+  }
 });
 document.addEventListener("change", e => {
   const k = e.target.dataset.k; if (!k) return;
