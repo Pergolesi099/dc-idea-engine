@@ -78,6 +78,18 @@ learning:
   pref_beta_k: 150              # beta = n / (n + k): his model's share of the ranking
   pref_beta_max: 0.5
 
+# Fundamentals for the shortlisted candidates (Yahoo; FMP surprises if FMP_API_KEY is set; SEC EDGAR guidance).
+fundamentals:
+  enabled: true
+  basket_per_sector: 20         # largest names per supersector form the sector reference basket
+  workers: 6
+  news_days: 21
+  news_max: 6
+  guidance: true
+  guidance_days: 120            # latest earnings release (8-K item 2.02, exhibit 99) within this window
+  sec_user_agent: "dc-idea-engine research bot pergolesi099@users.noreply.github.com"
+
 charts:
   weekly_bars: 104              # 2 years
-  daily_bars: 126               # 6 months
+  daily_bars: 252               # 1 year
+  daily_rs_ma: 200              # MA on the daily RS line (Kabbaj's original 200)

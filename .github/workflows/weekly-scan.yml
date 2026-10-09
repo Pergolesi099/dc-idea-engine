@@ -74,6 +74,7 @@ jobs:
       - name: Scan, learn, chart
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}       # optional: sales surprise (else EPS surprise only, from Yahoo)
         run: python "$DIR/scanner/scan.py"
 
       - name: Commit learning state and archives to this branch

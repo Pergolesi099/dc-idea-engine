@@ -25,5 +25,7 @@ Small, incremental improvements ship as numbered engine versions so each change 
 - Every run is stamped with its engine: run id `YYYY-MM-DD-v2.1` (`-r2`, `-r3` for repeat runs the same day).
 - **Older versions stay runnable:** `engine: 2.0` checks out tag `engine-v2.0` (code, config and learned weights frozen at release) and runs it on today's data. Only the current version learns and writes `model/`.
 - Minor bump (2.0 → 2.1) for threshold or weight tweaks; major bump (2 → 3) when the steps or the features change.
-**Optional secret:** `POLYGON_API_KEY` (free key from polygon.io) for history gap-filling and fallback.
+**Optional secrets:** `POLYGON_API_KEY` (free key from polygon.io) for history gap-filling and fallback; `FMP_API_KEY` for the sales surprise in the fundamentals block (EPS surprise comes from Yahoo without it).
+
+**Fundamentals** (`scanner/fundamentals.py`): Yahoo consensus (FY0/FY1/FY2 EPS and sales, 90-day EPS trend, last surprise, headlines) for every candidate plus the 20 largest names per supersector (sector aggregates), SEC EDGAR earnings-release guidance excerpts, weekly estimate snapshots in `history/fundamentals/` (sales revisions need ~13 weeks of them).
 **Local test without network:** `python tests/test_offline.py`

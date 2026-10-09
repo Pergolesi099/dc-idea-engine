@@ -4,7 +4,7 @@ Runs every Saturday after the GitHub scan. Goal: turn ~130 top-down charts into 
 on the DC Idea Desk, ready for Dean's take / watch / pass before Sunday's SCREEN, and keep the
 learning loop fed.
 
-Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k  (collections: `runs`, `decisions`, `chart_feedback`, `engines`, `cycles`)
+Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k  (collections: `runs`, `run_details`, `decisions`, `chart_feedback`, `feedback`, `engines`, `cycles`)
 Repo: Pergolesi099/dc-idea-engine — scan output on branch `output`; learning state on `main`
 (`model/`, `history/`, `labels/`).
 
@@ -35,9 +35,19 @@ ArtifactData `list` on `decisions` and on `chart_feedback` with `out_dir=<scratc
 (page with `query.cursor` until done), then `python review/export_labels.py <scratch>/labels_raw`.
 This rewrites `labels/*.jsonl`. Commit them in step 7.
 
+## 1b. Dean's written feedback and chart mark-ups (feeds the next engine version)
+ArtifactData `list` on `feedback` with `out_dir=<scratch>/labels_raw`. For every item with status `queued`
+that has a `chart_id`, fetch the chart (Artifact read, url = desk, `path` = chart_id, `out_dir=<scratch>/fbimg`);
+for items on this run's charts the scan's `charts/` folder works too. Then
+`python review/feedback_digest.py <scratch>/labels_raw <scratch>/fbimg <scratch>/work` → `work/feedback.md` and
+`work/feedback/<id>.png` (his marks drawn and numbered on the chart). Read every item and image: this is Dean
+showing you how he reads charts. Let it shape your grading this week, and digest it in step 6b.
+
 ## 2. Prepare
 `python review/prepare.py <scratch>/scan <scratch>/work`
 → `candidates.tsv`, `sheets/*.png` (3 charts per sheet), `pair_matrix.tsv`.
+Also `context.md`: fundamentals vs sector, recent headlines and the latest earnings-release guidance
+excerpt (SEC 8-K) per candidate. Read `engine/backlog.md` (open items = what Dean has taught so far).
 Read `model/feedback_summary.md`: how your grades matched Dean's calls, his pass reasons, what his
 preference model and the outcome model currently reward. Let it shape your eye this week.
 
@@ -66,6 +76,18 @@ Write `work/verdicts.json`: `{"SYM|side": ["A"|"B"|"C", "one-line read, <= 14 wo
 Reads say what the chart shows in trader shorthand, weekly first ("RS crossed 40W, price reclaiming
 40W; 6M breakout on volume"). No predictions, no targets.
 
+## 3b. Why it moved, and guidance
+Write `work/qual.json`: `{"SYM|side": {"why": "...", "guidance": "..." | null}}` for EVERY candidate.
+- **why** (≤ 22 words): the consensus explanation of the recent move, good or bad, from the headlines and the
+  numbers in `context.md` (beat/miss, guide up/down, estimate revisions, sector or macro theme, deal, rating
+  change). Plain statement of what the market is reacting to; no predictions. No company news →
+  "No company-specific news; trading with <sector / theme>".
+- **guidance** (≤ 35 words, or null): only what management guided in the GUIDANCE excerpt: revenue, EPS,
+  EBITDA, margins, backlog, orders, book-to-bill, with the numbers and direction (raised / reaffirmed /
+  cut). Name the period ("FY26", "Q4"). Never invent a figure; no excerpt → null.
+- Fundamentals: weigh them in the read when they clearly support or fight the chart (a long on falling
+  estimates, a short on a beat-and-raise), but the chart still decides the grade.
+
 ## 4. Pair
 Write `work/pairs.json`: `{"market_note": "...", "pairs": [{long, short, conviction 1-5, type, thesis}]}`.
 - Both legs from the SAME supersector, graded A or B, never C. Each symbol in at most one pair.
@@ -86,16 +108,26 @@ Convert `scan/charts/*.png` to WebP into `desk/_assets/` (quality 82), then Arti
     python3 -c "from PIL import Image;import glob,os;[Image.open(f).convert('RGB').save('desk/_assets/'+os.path.basename(f)[:-4]+'.webp','WEBP',quality=82,method=6) for f in glob.glob('<scratch>/scan/charts/*.png')]"
 
 ## 6. Build and publish the run
-`python review/build_run.py <scratch>/scan <scratch>/work` → `work/run_doc.json` and the archive
+`python review/build_run.py <scratch>/scan <scratch>/work` → `work/run_doc.json`, `work/run_detail.json` and the archive
 `history/review/<run_id>/{verdicts,pairs}.json`. It refuses to build if any candidate lacks a verdict
 or chart, a pair leg is missing or C-graded, legs are in different sectors, or a symbol is reused.
 Fix and rerun; never hand-edit around it.
 The run doc carries `engine`, `trigger` and `cycle_id` from the scan; the desk's Engine dropdown filters on them.
-Then ArtifactData `set` on collection `runs`, doc id = run_id, `file_path` = run_doc.json
+Then ArtifactData `set` on collection `run_details`, doc id = run_id, `file_path` = run_detail.json
+(first, so the desk never shows a run without its detail), and `set` on collection `runs`, doc id = run_id, `file_path` = run_doc.json
 (if the doc already exists, `get` it first and pass `if_version`).
 
+## 6b. Digest Dean's feedback into the engine backlog
+For each queued item in `work/feedback.md` add an entry at the top of `engine/backlog.md` (format in that file):
+his words close to verbatim, the marks summarised, your reading of what it says about how he reads charts,
+and a concrete, testable change (feature, rule, threshold or weight). Merge with an existing open item when
+it is the same idea (add the feedback id to it). Then `ArtifactData update` on `feedback/<id>` (pin
+`if_version`): `{status: "digested", backlog_id: "B-0NN", reply: "<one line: how you understood it>",
+digested_at}`. Never delete feedback. Do not change scanner code here: changes ship as a new engine version
+when Dean asks (`tools/release_engine.py`), citing the backlog ids.
+
 ## 7. Commit the learning inputs
-On `main`: `git add labels history/review && git commit -m "review <run_id>" && git pull --rebase && git push`.
+On `main`: `git add labels history/review engine/backlog.md && git commit -m "review <run_id>" && git pull --rebase && git push`.
 Never touch `model/` by hand: the scan owns it.
 
 ## 8. Housekeeping
@@ -107,7 +139,8 @@ Never touch `model/` by hand: the scan owns it.
 Manual cycle: `cycles/<id>` → `{status: "published", run_id, pairs: <count>, updated_at}`. Any failure after
 step 0 → `{status: "failed", message, updated_at}` and stop.
 
-Report (SendUserMessage), four lines; start with the engine version and whether it was the Saturday run
-or a manual cycle: pairs published (count by conviction and by family), sectors with nothing tradeable,
+Report (SendUserMessage), five lines; start with the engine version and whether it was the Saturday run
+or a manual cycle; the fifth line is feedback digested this week and the open backlog items ready for the
+next engine version: pairs published (count by conviction and by family), sectors with nothing tradeable,
 what the learner changed this week (`model.sides.*.changes`, adopted or kept), and any anomaly
 (scan fallback, missing earnings dates, sector mapping oddities). Link the desk.

@@ -274,7 +274,7 @@ def _clean(o):
     return o
 
 
-def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = True) -> dict:
+def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = True, fund_fn=None) -> dict:
     import shutil
 
     import learn
@@ -378,6 +378,14 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
              (allc.side == "long").sum(), (allc.side == "short").sum(), len(final))
 
     earn = next_earnings(sorted(set(final.symbol)))
+    # fundamentals, sector aggregates, news + earnings-release guidance (best effort, never fatal)
+    import fundamentals
+    try:
+        fund, sector_fund, context = (fund_fn or fundamentals.collect)(
+            sorted(set(final.symbol)), meta, daily["Close"].iloc[-1], run_id, ROOT, CFG, ysym=yahoo_symbol)
+    except Exception as e:  # noqa: BLE001
+        log.warning("fundamentals failed: %s", e)
+        fund, sector_fund, context = {}, {}, {}
     records = []
     for r in final.to_dict("records"):
         sym = r["symbol"]
@@ -404,7 +412,7 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
                                        "x21_63", "vol63", "rs_vs_ma", "rssec_vs_ma", "rssec_1m", "rssec_3m",
                                        "w_d40", "w_slope40", "sec_ratio", "sec_mom", "res126", "sup126",
                                        "headroom_long", "headroom_short", "sessions")},
-            "next_earnings": earn.get(sym),
+            "next_earnings": earn.get(sym), "fund": fund.get(sym),
             "outcome_score": r["outcome_score"], "pref_score": r["pref_score"], "final_score": r["final_score"],
             "chart": f"charts/{fn}",
         })
@@ -432,10 +440,12 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
                             | {"top_feature_ic": dict(list(r["feature_ic"].items())[:8])}
                             for s, r in report.get("sides", {}).items()}},
         "track_record": track_record(daily["Close"], today),
+        "sector_fund": sector_fund,
         "config": CFG,
         "candidates": records,
     }
     (OUT / "results.json").write_text(json.dumps(_clean(result), indent=1))
+    (OUT / "context.json").write_text(json.dumps(_clean(context), indent=1, ensure_ascii=False))
     log.info("Done: %d charts written", len(records))
     return result
 

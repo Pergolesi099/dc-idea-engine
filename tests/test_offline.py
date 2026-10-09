@@ -16,6 +16,7 @@ import pandas as pd
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scanner"))
 import features as F  # noqa: E402
+import fundamentals as FU  # noqa: E402
 import scan  # noqa: E402
 
 TMP = pathlib.Path(tempfile.mkdtemp(prefix="dcie2-"))
@@ -90,6 +91,41 @@ def fake_hist(symbols, sessions):
     return {s: HIST[s] for s in symbols if s in HIST and not s.endswith("07")}   # simulate gaps
 
 
+def fake_fetch(sym, ysym, extras, cfg):
+    h = sum(map(ord, sym))
+    if h % 9 == 0:
+        return {"symbol": sym}                                   # no coverage
+    e0 = 1 + h % 7
+    e1 = e0 * (1 + (h % 11 - 3) / 20)
+    out = {"symbol": sym, "ccy": "EUR" if h % 13 == 0 else "USD", "fy_end": 1735603200,
+           "eps0": e0, "eps1": e1, "eps2": e1 * 1.1, "rev0": 1e9 * e0, "rev1": 1.05e9 * e0, "rev2": 1.1e9 * e0,
+           "n_an": 12}
+    if extras:
+        out.update({"eps1_90d": e1 * 0.97, "epssurp": 4.2, "surp_q": "2026-06-30",
+                    "news": [{"d": "2026-10-01", "t": f"{sym} raises outlook", "s": "", "p": "Test"}]})
+    return out
+
+
+class FakeSec:
+    def guidance(self, sym, days):
+        return {"date": "2026-08-01", "form": "8-K", "url": "https://example.invalid", "excerpt": "FY26 revenue $1.2-1.3 billion"} \
+            if sum(map(ord, sym)) % 2 else None
+
+
+def fake_fund(cands, meta, price, run_id, root, cfg, ysym=None):
+    return FU.collect(cands, meta, price, run_id, root, cfg, fetch=fake_fetch, fmp=lambda s, k: {"revsurp": 1.5, "epssurp": 3.0, "surp_date": "2026-08-01"}, sec_fn=FakeSec())
+
+
+def test_guidance_extract():
+    txt = ("Revenue for the quarter was $1.1 billion, compared to $1.0 billion for the same period last year.\n"
+           "Full-year 2026 outlook: the company now expects revenue of $4.4 to $4.6 billion and adjusted EBITDA of $900 million.\n"
+           "Backlog at quarter end reached $7.2 billion, up 18% year over year.\n"
+           "We thank our employees.\nForward-Looking Statements\nThis release expects revenue of $9 billion blah.")
+    g = FU.extract_guidance(FU._html_text(txt.replace("\n", "<br>")))
+    assert "4.4 to $4.6 billion" in g and "Backlog" in g and "$9 billion" not in g and "same period" not in g, g
+    print("[guidance extract] ok:", g[:90])
+
+
 def broken_tv():
     raise ConnectionError("simulated TradingView block")
 
@@ -117,7 +153,8 @@ def check(res, label):
 
 if __name__ == "__main__":
     test_rs_port()
-    res = scan.run(fake_tv, fake_hist)
+    test_guidance_extract()
+    res = scan.run(fake_tv, fake_hist, fund_fn=fake_fund)
     check(res, "tradingview path")
     shutil.copy(scan.OUT / "universe.csv", scan.CACHE)
     # Dean's feedback on an older desk run (no feature snapshot yet) -> must be backfilled and learned
@@ -132,12 +169,32 @@ if __name__ == "__main__":
           for i, s in enumerate(L[25:45])]
     (TMP / "labels" / "decisions.jsonl").write_text("".join(json.dumps(x) + "\n" for x in dec))
     (TMP / "labels" / "chart_feedback.jsonl").write_text("".join(json.dumps(x) + "\n" for x in fb))
-    res = scan.run(broken_tv, fake_hist)
+    # an older fundamentals snapshot (~13 weeks back) so sales revisions can be computed
+    snap = pd.read_csv(next((TMP / "history" / "fundamentals").glob("*.csv.gz")))
+    snap["rev1"] = snap.rev1 / 1.02
+    old_snap = (pd.Timestamp(res["run_id"][:10]) - pd.Timedelta(days=91)).date().isoformat()
+    snap.to_csv(TMP / "history" / "fundamentals" / f"{old_snap}-v2.0.csv.gz", index=False)
+    res = scan.run(broken_tv, fake_hist, fund_fn=fake_fund)
     check(res, "cached-universe path + feedback")
     assert (TMP / "history" / "features" / f"{old_run}.csv.gz").exists(), "backfill missing"
     pref = res["model"]["report"]["preference"]
     print("   preference:", {k: pref.get(k) for k in ("n_labels", "n_matched", "beta")})
     assert pref["n_matched"] >= 30 and pref["beta"] > 0, pref
+    # fundamentals attached to candidates, sector aggregates present, context written, size check
+    c2 = pd.DataFrame(res["candidates"])
+    have = c2.fund.notna().mean()
+    assert have > 0.8, have
+    f0 = next(x for x in c2.fund if x and x.get("pe1"))
+    assert {"pe1", "epsg1", "revg1", "peg1", "epsrev3m", "revsurp"} <= set(f0), f0
+    assert abs(f0["epsrev3m"] - 3.09) < 0.05, f0["epsrev3m"]           # 1/0.97 - 1
+    f1 = next(x for sym, x in zip(c2.symbol, c2.fund) if x and sym in set(snap.symbol) and x.get("eps1"))
+    assert abs(f1["revrev3m"] - 2.0) < 0.05, f1["revrev3m"]            # snapshot 91 days back at /1.02
+    assert res["sector_fund"] and all("pe1" in v for v in res["sector_fund"].values())
+    eur = [x for x in c2.fund if x and x.get("ccy") == "EUR"]
+    assert all(x["pe1"] is None for x in eur)
+    ctx = json.loads((scan.OUT / "context.json").read_text())
+    assert any("guidance" in v for v in ctx.values()) and any("news" in v for v in ctx.values())
+    print("   fundamentals:", f"{have:.0%} covered;", "sector", next(iter(res["sector_fund"].items())))
     # engine versioning: run id carries the version, older-style ids still parse, registry agrees
     assert res["engine"] == scan.ENGINE and res["run_id"].endswith(f"-v{scan.ENGINE}"), res["run_id"]
     reg = json.loads((ROOT / "engines.json").read_text())
