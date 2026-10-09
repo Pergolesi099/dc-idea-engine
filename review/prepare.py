@@ -8,6 +8,8 @@ Writes to work_dir:
   candidates.tsv      one line per candidate: family, tags, weekly regime, sector state, key numbers
   sheets/*.png        contact sheets, 3 charts per sheet, grouped by supersector + side
   pair_matrix.tsv     every long x short within a supersector: 60D correlation, vol ratio, beta
+  context.md          per candidate: fundamentals vs sector, recent headlines, earnings-release guidance
+                      excerpt (SEC 8-K). Source material for the "why it moved" and "guidance" lines.
 """
 import json
 import pathlib
@@ -27,7 +29,39 @@ cands["tags"] = cands.tags.apply(",".join)
 cols = ["key", "supersector", "industry", "family", "tags", "regime", "sector_state", "rs_lead", "breakout",
         "macd_sig", "d21", "d50", "d200", "p1m", "p3m", "p6m", "rs_vs_ma", "rssec_vs_ma", "r2_63", "x21_63",
         "vol63", "final_score", "next_earnings"]
+FK = ["pe1", "epsg1", "epsg2", "revg1", "revg2", "epsrev3m", "revrev3m", "epssurp", "revsurp"]
+if "fund" in cands:
+    for k in FK:
+        cands[k] = cands.fund.apply(lambda f, k=k: f.get(k) if isinstance(f, dict) else None)
+    cols += FK
 cands[[c for c in cols if c in cands]].round(2).to_csv(work / "candidates.tsv", sep="\t", index=False)
+
+ctx_p = src / "context.json"
+ctx = json.loads(ctx_p.read_text()) if ctx_p.exists() else {}
+secf = res.get("sector_fund") or {}
+
+
+def fmt(v, pct=False):
+    return "–" if v is None or v != v else (f"{v:+.1f}%" if pct else f"{v:.1f}")
+
+
+out = [f"# Context for the why-it-moved and guidance lines ({len(cands)} candidates)", ""]
+for c in cands.itertuples():
+    f = getattr(c, "fund", None)
+    f = f if isinstance(f, dict) else {}
+    sf, cx = secf.get(c.supersector, {}), ctx.get(c.symbol, {})
+    out.append(f"## {c.key} · {c.supersector} · 1M {fmt(c.p1m, True)} 3M {fmt(c.p3m, True)}")
+    out.append(f"PE1 {fmt(f.get('pe1'))} (sector {fmt(sf.get('pe1'))}) · EPS g FY1 {fmt(f.get('epsg1'), True)} "
+               f"(sector {fmt(sf.get('epsg1'), True)}) · sales g FY1 {fmt(f.get('revg1'), True)} · EPS rev 3M "
+               f"{fmt(f.get('epsrev3m'), True)} · surprise EPS {fmt(f.get('epssurp'), True)} sales {fmt(f.get('revsurp'), True)}"
+               f"{' · reports in ' + f.get('ccy') if f.get('ccy') else ''} · next earnings {c.next_earnings or '–'}")
+    for n in cx.get("news", []):
+        out.append(f"- {n.get('d')} · {n.get('t')} ({n.get('p') or '?'}){' — ' + n['s'] if n.get('s') else ''}")
+    g = cx.get("guidance")
+    if g:
+        out.append(f"- GUIDANCE {g['form']} {g['date']}: {g['excerpt']}")
+    out.append("")
+(work / "context.md").write_text("\n".join(out))
 
 PER, W = 3, 1200
 for (ss, side), g in cands.groupby(["supersector", "side"]):

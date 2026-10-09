@@ -6,11 +6,14 @@ Usage: python review/build_run.py <scan_output_dir> <work_dir>
 
 Reads from work_dir (written during the review):
   verdicts.json   {"SYM|side": [grade, one-line read]} for every candidate
+  qual.json       {"SYM|side": {"why": str, "guidance": str|null}} for every candidate
   pairs.json      {"market_note": str, "pairs": [{long, short, conviction, type, thesis}]}
   pair_matrix.tsv from prepare.py
   uploads.txt     "SYM_side <asset id>" per uploaded chart
 Writes:
   work_dir/run_doc.json                      one document for the desk's `runs` collection
+  work_dir/run_detail.json                   fundamentals + why + guidance per candidate (`run_details`,
+                                             same doc id; kept apart so `runs` stays under the 256 KB cap)
   <repo>/history/review/<run_id>/verdicts.json, pairs.json   archive for the learner / track record
 Exits non-zero with a list of problems if the inputs disagree, so a bad run is never published.
 """
@@ -27,6 +30,8 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 src, work = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
 res = json.loads((src / "results.json").read_text())
 verdicts = json.loads((work / "verdicts.json").read_text())
+qual = json.loads((work / "qual.json").read_text()) if (work / "qual.json").exists() else {}
+ctx = json.loads((src / "context.json").read_text()) if (src / "context.json").exists() else {}
 pj = json.loads((work / "pairs.json").read_text())
 pm = pd.read_csv(work / "pair_matrix.tsv", sep="\t")
 uploads = dict(line.split() for line in (work / "uploads.txt").read_text().split("\n") if line.strip())
@@ -43,7 +48,7 @@ def r1(v, d=2):
     return None if v is None else round(float(v), d)
 
 
-cands, by_key = [], {}
+cands, by_key, detail = [], {}, {}
 for c in res["candidates"]:
     key = f"{c['symbol']}|{c['side']}"
     grade, read = verdicts.get(key, [None, None])
@@ -52,6 +57,13 @@ for c in res["candidates"]:
     upl = uploads.get(f"{c['symbol'].replace('.', '-')}_{c['side']}")
     if upl is None:
         problems.append(f"no uploaded chart for {key}")
+    q = qual.get(key) or {}
+    if not (q.get("why") or "").strip():
+        problems.append(f"no why-it-moved line for {key}")
+    g = (ctx.get(c["symbol"]) or {}).get("guidance") or {}
+    detail[key] = {"fund": c.get("fund"), "why": q.get("why"), "guidance": q.get("guidance") or None,
+                   "guidance_src": ({"form": g.get("form"), "date": g.get("date"), "url": g.get("url")}
+                                    if q.get("guidance") and g else None)}
     ne = c.get("next_earnings")
     row = {
         "symbol": c["symbol"], "company": c["company"], "side": c["side"], "supersector": c["supersector"],
@@ -113,8 +125,12 @@ doc = {
     "track_record": res.get("track_record", []),
     "candidates": cands, "pairs": pairs,
 }
+doc["has_detail"] = True
 out = work / "run_doc.json"
 out.write_text(json.dumps(doc, separators=(",", ":")))
+det = {"run_id": run_id, "sector_fund": res.get("sector_fund") or {}, "candidates": detail}
+(work / "run_detail.json").write_text(json.dumps(det, separators=(",", ":"), ensure_ascii=False))
+dsize = (work / "run_detail.json").stat().st_size / 1024
 
 arch = REPO / "history" / "review" / run_id
 arch.mkdir(parents=True, exist_ok=True)
@@ -126,7 +142,8 @@ arch.mkdir(parents=True, exist_ok=True)
 size = out.stat().st_size / 1024
 print(f"run {run_id}: {len(cands)} candidates, {len(pairs)} pairs, "
       f"{sum(c['earnings_in_window'] for c in cands)} legs with earnings by {hold_until}, {size:.0f} KB -> {out}")
-if size > 240:
-    print("WARNING: run doc close to the 256 KB document limit")
+print(f"detail doc {dsize:.0f} KB -> {work / 'run_detail.json'}")
+if size > 240 or dsize > 240:
+    print("WARNING: a document is close to the 256 KB limit")
 print("doc_id", run_id)
 print("archived", arch)

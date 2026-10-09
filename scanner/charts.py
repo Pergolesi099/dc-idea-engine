@@ -1,10 +1,11 @@
-"""Top-down chart: weekly (2Y) on the left, daily (6M) on the right.
+"""Top-down chart: weekly (2Y) on the left, daily (1Y) on the right.
 
 Left:  weekly candles + 10W/40W SMA; RS Line - Blue Dot vs S&P 500 (slope-coloured line, 40W MA,
        blue new-high / red new-low dots, crossover markers).
-Right: daily candles + 21/50/200D SMA, 6M and 3M support/resistance, breakout markers, volume;
-       MACD (12,26,9) histogram; stock vs sector ETF with 50D MA and sector-rotation shading
-       (Leading / Improving / Weakening / Lagging).
+Right: daily candles + 21/50/200D SMA, 6M and 3M support/resistance, breakout markers (no volume);
+       daily RS vs S&P 500 with its 200D MA (Thami Kabbaj's original setting), 52W-high/low dots and
+       crossovers; MACD (12,26,9) histogram; stock vs sector ETF with 50D MA and sector-rotation
+       shading (Leading / Improving / Weakening / Lagging).
 """
 from __future__ import annotations
 
@@ -44,10 +45,10 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
            path: pathlib.Path, cfg: dict) -> None:
     rc, sr = cfg["rs"], cfg["sector_rotation"]
     d = d.dropna(subset=["Close"])
-    fig = plt.figure(figsize=(14, 7.6), dpi=100)
-    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.15], left=0.045, right=0.985, top=0.885, bottom=0.05, wspace=0.12)
+    fig = plt.figure(figsize=(14, 9.2), dpi=100)
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.2], left=0.045, right=0.985, top=0.905, bottom=0.04, wspace=0.12)
     gl = gs[0].subgridspec(2, 1, height_ratios=[3, 1.6], hspace=0.05)
-    gr = gs[1].subgridspec(3, 1, height_ratios=[2.7, 0.9, 1.1], hspace=0.05)
+    gr = gs[1].subgridspec(4, 1, height_ratios=[2.6, 1.15, 0.85, 0.95], hspace=0.06)
 
     # ---------- weekly (2Y)
     w = to_weekly({k: d[[k]].rename(columns={k: sym}) for k in ("Open", "High", "Low", "Close", "Volume")})
@@ -77,11 +78,11 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     cu, cd = r["cross_up"].iloc[-nW:].values, r["cross_dn"].iloc[-nW:].values
     axr.scatter(x[cu], rs[cu], marker="^", s=40, color=UP, zorder=4)
     axr.scatter(x[cd], rs[cd], marker="v", s=40, color=DN, zorder=4)
-    axr.set_ylabel("RS vs S&P", fontsize=8)
+    axr.set_ylabel("RS vs S&P · 40W MA", fontsize=8)
     axr.grid(alpha=0.2)
     _dates(axr, vw.index)
 
-    # ---------- daily (6M)
+    # ---------- daily (1Y)
     nD = cfg["charts"]["daily_bars"]
     vd = d.iloc[-nD:]
     axd = fig.add_subplot(gr[0])
@@ -102,31 +103,46 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
         axd.scatter([len(vd) - 1], [vd.Close.iloc[-1]], marker="^" if bo > 0 else "v", s=80,
                     color=UP if bo > 0 else DN, zorder=5)
     lo, hi = vd.Low.min(), vd.High.max()
-    axd.set_ylim(lo - (hi - lo) * 0.18, hi + (hi - lo) * 0.05)
-    axv = axd.twinx()
-    axv.bar(xd, vd.Volume, color=np.where(vd.Close >= vd.Open, UP, DN), alpha=0.25, width=0.7)
-    axv.set_ylim(0, vd.Volume.max() * 5)
-    axv.set_yticks([])
+    axd.set_ylim(lo - (hi - lo) * 0.10, hi + (hi - lo) * 0.05)
     axd.legend(loc="lower left", frameon=False, ncol=3)
-    axd.set_title("Daily · 6M", loc="left")
+    axd.set_title("Daily · 1Y", loc="left")
     axd.grid(alpha=0.2)
     axd.tick_params(labelbottom=False)
 
-    axm = fig.add_subplot(gr[1], sharex=axd)
+    # daily RS vs S&P with its 200D MA (Kabbaj); 52W new-high / new-low dots; crossovers
+    axq = fig.add_subplot(gr[1], sharex=axd)
+    dl = cfg["charts"].get("daily_rs_ma", 200)
+    rq = rs_line_bluedot(d[["Close"]], spx.reindex(d.index).ffill(), rc["scale"], dl, rc["ma_type"], 252)
+    rq = {k: v["Close"].iloc[-nD:].values for k, v in rq.items()}
+    rsq, maq = rq["rs"], rq["ma"]
+    for i in range(1, len(rsq)):
+        axq.plot([i - 1, i], rsq[i - 1:i + 1], color=UP if rsq[i] >= rsq[i - 1] else DN, lw=1.2)
+    axq.plot(xd, maq, color="#222222", lw=1.3, label=f"{dl}D MA")
+    hq, lq = rq["nh"].astype(bool), rq["nl"].astype(bool)
+    axq.scatter(xd[hq], rsq[hq], s=16, color="#2f6fd1", alpha=0.55, zorder=3)
+    axq.scatter(xd[lq], rsq[lq], s=16, color=DN, alpha=0.55, zorder=3)
+    cuq, cdq = rq["cross_up"].astype(bool), rq["cross_dn"].astype(bool)
+    axq.scatter(xd[cuq], rsq[cuq], marker="^", s=40, color=UP, zorder=4)
+    axq.scatter(xd[cdq], rsq[cdq], marker="v", s=40, color=DN, zorder=4)
+    axq.set_ylabel(f"RS vs S&P · {dl}D", fontsize=8)
+    axq.legend(loc="upper left", frameon=False, fontsize=7)
+    axq.grid(alpha=0.2)
+    axq.tick_params(labelbottom=False)
+
+    # MACD (12,26,9) histogram: dark = growing, light = fading
+    axm = fig.add_subplot(gr[2], sharex=axd)
     m = d.Close.ewm(span=12, adjust=False).mean() - d.Close.ewm(span=26, adjust=False).mean()
     sig = m.ewm(span=9, adjust=False).mean()
     hst = (m - sig).iloc[-nD:].values
     rising = np.r_[False, hst[1:] > hst[:-1]]
     hc = np.where(hst >= 0, np.where(rising, UP, "#8fd3b0"), np.where(rising, "#f0a49c", DN))
     axm.bar(xd, hst, color=hc, width=0.8)
-    axm.plot(xd, m.iloc[-nD:].values, color="#1f6fd1", lw=0.8)
-    axm.plot(xd, sig.iloc[-nD:].values, color="#e08a00", lw=0.8)
     axm.axhline(0, color="#999999", lw=0.5)
-    axm.set_ylabel("MACD", fontsize=8)
+    axm.set_ylabel("MACD hist", fontsize=8)
     axm.grid(alpha=0.2)
     axm.tick_params(labelbottom=False)
 
-    axs = fig.add_subplot(gr[2], sharex=axd)
+    axs = fig.add_subplot(gr[3], sharex=axd)
     if etf is not None:
         rsd = d.Close / etf.reindex(d.index).ffill()
         ratio = (rsd.ewm(span=sr["smooth_len"], adjust=False, min_periods=sr["smooth_len"]).mean()
@@ -158,9 +174,9 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     def f(k, n=1, sign=True):
         v = row.get(k)
         return "–" if v is None or not np.isfinite(v) else (f"{v:+.{n}f}" if sign else f"{v:.{n}f}")
-    fig.text(0.045, 0.965, f"{sym}  {str(row.get('company', ''))[:26]}  |  {row.get('supersector')}  |  "
+    fig.text(0.045, 0.972, f"{sym}  {str(row.get('company', ''))[:26]}  |  {row.get('supersector')}  |  "
              f"{row['side'].upper()} [{tags}]  |  Sector: {sec}{turn}{lead}", fontsize=10, fontweight="bold")
-    fig.text(0.045, 0.932, f"d21 {f('d21')}%  d50 {f('d50')}%  d200 {f('d200')}%   1W {f('p1w')}%  1M {f('p1m')}%  "
+    fig.text(0.045, 0.946, f"d21 {f('d21')}%  d50 {f('d50')}%  d200 {f('d200')}%   1W {f('p1w')}%  1M {f('p1m')}%  "
              f"3M {f('p3m')}%  6M {f('p6m')}%   RS/MA {f('rs_vs_ma')}%  RSsec/MA {f('rssec_vs_ma')}%   "
              f"R² {f('r2_63', 2, False)}  vol {f('vol63', 0, False)}%   score {f('final_score', 2, False)}", fontsize=9)
     fig.savefig(path, dpi=100)

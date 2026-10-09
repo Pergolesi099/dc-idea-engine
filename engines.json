@@ -1,6 +1,20 @@
 {
- "current": "2.0",
+ "current": "2.1",
  "versions": [
+  {
+   "version": "2.1",
+   "released": "2026-10-09",
+   "tag": "engine-v2.1",
+   "summary": "1Y daily chart without volume, daily RS vs S&P with 200D MA, MACD histogram; fundamentals, headlines and earnings-release guidance per candidate; feedback queue and chart mark-up feeding an engine backlog.",
+   "changes": [
+    "Daily panel 6M -> 1Y; volume bars removed",
+    "Daily RS vs S&P with 200D MA (Kabbaj), 52W high/low dots, crossovers",
+    "MACD panel shows the histogram only",
+    "Fundamentals per candidate vs sector: PE FY1/FY2, EPS FY0-2, EPS and sales growth FY1/FY2, PEG, 3M EPS and sales revisions, last surprises",
+    "Why-it-moved line from headlines; management guidance from the latest earnings release (SEC 8-K)",
+    "Desk feedback queue and chart mark-ups digested into engine/backlog.md"
+   ]
+  },
   {
    "version": "2.0",
    "released": "2026-10-08",
