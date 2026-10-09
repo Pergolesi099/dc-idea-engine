@@ -68,15 +68,17 @@ def tag_frame(df: pd.DataFrame, side: str, cfg: dict) -> pd.DataFrame:
     return t.fillna(False)
 
 
-def side_table(df: pd.DataFrame, side: str, cfg: dict) -> pd.DataFrame:
-    """Eligible rows for one side with tags, regime and normalised features (z in [-0.5, 0.5])."""
+def side_table(df: pd.DataFrame, side: str, cfg: dict, gated: bool = True) -> pd.DataFrame:
+    """Eligible rows for one side with tags, regime and normalised features (z in [-0.5, 0.5]).
+    gated=False keeps every name with a sector (used to backfill features for past desk runs)."""
     u = cfg["universe"]
     reg = regime(df)
     tags = tag_frame(df, side, cfg)
-    ok = (gate(reg, side, cfg) & tags[TAGS].any(axis=1)
-          & (df.sessions >= u["min_history_sessions"])
-          & df.vol63.between(u["min_ann_vol_pct"], u["max_ann_vol_pct"])
-          & df.supersector.notna())
+    ok = df.supersector.notna()
+    if gated:
+        ok &= (gate(reg, side, cfg) & tags[TAGS].any(axis=1)
+               & (df.sessions >= u["min_history_sessions"])
+               & df.vol63.between(u["min_ann_vol_pct"], u["max_ann_vol_pct"]))
     sub = df[ok].copy()
     if sub.empty:
         return sub

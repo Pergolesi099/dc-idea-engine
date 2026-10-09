@@ -153,13 +153,13 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     # ---------- header
     tags = ", ".join(row.get("tags") or [])
     sec = SECTOR_STATES.get(row.get("sec_quad"), "–")
-    turn = {1.0: " (just turned Leading)", -1.0: " (just turned Lagging)"}.get(row.get("sec_turn"), "")
-    lead = {1.0: "  ·  RS crossed up before price", -1.0: "  ·  RS crossed down before price"}.get(row.get("rs_lead"), "")
+    turn = {1.0: " (new)", -1.0: " (new)"}.get(row.get("sec_turn"), "")
+    lead = {1.0: "  ·  RS leads price ↑", -1.0: "  ·  RS leads price ↓"}.get(row.get("rs_lead"), "")
     def f(k, n=1, sign=True):
         v = row.get(k)
         return "–" if v is None or not np.isfinite(v) else (f"{v:+.{n}f}" if sign else f"{v:.{n}f}")
-    fig.text(0.045, 0.965, f"{sym}  {str(row.get('company', ''))[:38]}  |  {row.get('supersector')}  |  "
-             f"{row['side'].upper()} [{tags}]  |  Sector: {sec}{turn}{lead}", fontsize=10.5, fontweight="bold")
+    fig.text(0.045, 0.965, f"{sym}  {str(row.get('company', ''))[:26]}  |  {row.get('supersector')}  |  "
+             f"{row['side'].upper()} [{tags}]  |  Sector: {sec}{turn}{lead}", fontsize=10, fontweight="bold")
     fig.text(0.045, 0.932, f"d21 {f('d21')}%  d50 {f('d50')}%  d200 {f('d200')}%   1W {f('p1w')}%  1M {f('p1m')}%  "
              f"3M {f('p3m')}%  6M {f('p6m')}%   RS/MA {f('rs_vs_ma')}%  RSsec/MA {f('rssec_vs_ma')}%   "
              f"R² {f('r2_63', 2, False)}  vol {f('vol63', 0, False)}%   score {f('final_score', 2, False)}", fontsize=9)

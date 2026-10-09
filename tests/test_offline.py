@@ -120,6 +120,22 @@ if __name__ == "__main__":
     res = scan.run(fake_tv, fake_hist)
     check(res, "tradingview path")
     shutil.copy(scan.OUT / "universe.csv", scan.CACHE)
+    # Dean's feedback on an older desk run (no feature snapshot yet) -> must be backfilled and learned
+    old_run = str((IDX[-30]).date())
+    c1 = pd.DataFrame(res["candidates"])
+    (TMP / "labels").mkdir(exist_ok=True)
+    L = c1[c1.side == "long"].symbol.tolist()
+    Sh = c1[c1.side == "short"].symbol.tolist()
+    dec = [{"run_id": old_run, "long": L[i], "short": Sh[i], "action": "take" if i % 2 else "pass",
+            "reason": "Long leg weak" if i % 2 == 0 else ""} for i in range(25)]
+    fb = [{"run_id": old_run, "symbol": s, "side": "long", "verdict": "good" if i % 3 else "bad"}
+          for i, s in enumerate(L[25:45])]
+    (TMP / "labels" / "decisions.jsonl").write_text("".join(json.dumps(x) + "\n" for x in dec))
+    (TMP / "labels" / "chart_feedback.jsonl").write_text("".join(json.dumps(x) + "\n" for x in fb))
     res = scan.run(broken_tv, fake_hist)
-    check(res, "cached-universe path")
+    check(res, "cached-universe path + feedback")
+    assert (TMP / "history" / "features" / f"{old_run}.csv.gz").exists(), "backfill missing"
+    pref = res["model"]["report"]["preference"]
+    print("   preference:", {k: pref.get(k) for k in ("n_labels", "n_matched", "beta")})
+    assert pref["n_matched"] >= 30 and pref["beta"] > 0, pref
     print("OK", TMP)

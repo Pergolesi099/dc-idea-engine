@@ -324,6 +324,30 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
         dates = [d for d in week_ends if warm <= d <= last_ok]
         weights, pref_model, report = learn.run(ROOT, panels, meta, fwd, dates, CFG)
 
+    # 4b. backfill feature snapshots for desk runs that predate v2 (so Dean's labels on them count)
+    labelled = set()
+    for name in ("decisions", "chart_feedback"):
+        lp = ROOT / "labels" / f"{name}.jsonl"
+        if lp.exists():
+            labelled |= {json.loads(x).get("run_id") for x in lp.read_text().splitlines() if x.strip()}
+    feat_dir = ROOT / "history" / "features"
+    feat_dir.mkdir(parents=True, exist_ok=True)
+    for rid in sorted(x for x in labelled if x and not (feat_dir / f"{x}.csv.gz").exists()):
+        past = daily["Close"].index[daily["Close"].index <= pd.Timestamp(rid)]
+        if not len(past):
+            continue
+        ps = snapshot(panels, past[-1]).join(meta, how="inner")
+        rows = [side_table(ps, s, CFG, gated=False).assign(side=s) for s in ("long", "short")]
+        bf = pd.concat(rows).reset_index()
+        bf[["symbol", "side", "supersector", "regime"] + [c for c in bf.columns if c.startswith("z_")]].to_csv(
+            feat_dir / f"{rid}.csv.gz", index=False, float_format="%.4f")
+        log.info("Backfilled features for desk run %s (as of %s)", rid, past[-1].date())
+    if labelled and learn_enabled:
+        pref_model, pref = learn.fit_preference(ROOT, CFG)   # refit now that backfills exist
+        report["preference"] = pref
+        (ROOT / "model" / "report.json").write_text(json.dumps(report, indent=1, default=float))
+        (ROOT / "model" / "feedback_summary.md").write_text(learn.feedback_summary(ROOT, report, pref))
+
     # 5. today's ranking
     snap = snapshot(panels, today).join(meta, how="inner")
     beta = (report.get("preference") or {}).get("beta", 0.0) if pref_model is not None else 0.0
@@ -340,8 +364,6 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
         tabs.append(tab)
     allc = pd.concat(tabs).reset_index()
     # store every eligible row's features: the preference model joins Dean's labels to these later
-    feat_dir = ROOT / "history" / "features"
-    feat_dir.mkdir(parents=True, exist_ok=True)
     keep = ["symbol", "side", "supersector", "regime", "outcome_score", "pref_score", "final_score"] + \
         [c for c in allc.columns if c.startswith("z_")]
     fe = allc[keep].copy()
