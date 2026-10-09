@@ -7,7 +7,7 @@
 :root {
   --bg: #f3f5f3; --surface: #ffffff; --sunk: #e9edeb; --ink: #16201d; --muted: #5b6a65; --line: #d7dfdb;
   --long: #17805a; --long-soft: #e2f2ea; --short: #b8443a; --short-soft: #f8e6e3;
-  --accent: #a86c12; --accent-soft: #f6ead6; --warn: #9a5b00; --warn-soft: #fbefd9;
+  --accent: #a86c12; --accent-soft: #f6ead6; --warn: #9a5b00; --warn-soft: #fbefd9; --mark: #c21e78;
   --font-display: "Chivo", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Chivo", "Helvetica Neue", Arial, sans-serif;
   --font-data: "Chivo Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -16,11 +16,11 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0f1513; --surface: #161e1b; --sunk: #1d2724; --ink: #e3eae7; --muted: #92a39d; --line: #283430;
   --long: #45c290; --long-soft: #173329; --short: #ef7b6f; --short-soft: #3a1f1c;
-  --accent: #e2a94e; --accent-soft: #3a2c15; --warn: #f0b75a; --warn-soft: #362a12; color-scheme: dark } }
+  --accent: #e2a94e; --accent-soft: #3a2c15; --warn: #f0b75a; --warn-soft: #362a12; --mark: #f05aa8; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #0f1513; --surface: #161e1b; --sunk: #1d2724; --ink: #e3eae7; --muted: #92a39d; --line: #283430;
   --long: #45c290; --long-soft: #173329; --short: #ef7b6f; --short-soft: #3a1f1c;
-  --accent: #e2a94e; --accent-soft: #3a2c15; --warn: #f0b75a; --warn-soft: #362a12; color-scheme: dark }
+  --accent: #e2a94e; --accent-soft: #3a2c15; --warn: #f0b75a; --warn-soft: #362a12; --mark: #f05aa8; color-scheme: dark }
 
 body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 14px; line-height: 1.45; }
 .wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 18px; }
@@ -149,11 +149,55 @@ textarea.copyout { width: 100%; min-height: 90px; font-family: var(--font-data);
 .empty b { color: var(--ink); }
 .banner { background: var(--warn-soft); color: var(--warn); border-radius: var(--r); padding: 8px 12px; }
 
+/* fundamentals + qualitative */
+.why { font-size: 13px; margin: 0; }
+.why b, .guide b { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-right: 4px; }
+.guide { font-size: 13px; margin: 0; padding: 5px 8px; background: var(--sunk); border-radius: 4px; }
+.guide a { color: var(--muted); font-size: 11px; }
+.fstrip { display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: 12px; }
+.fstrip span { white-space: nowrap; }
+.fstrip i { font-style: normal; color: var(--muted); }
+details.fund summary { cursor: pointer; font-size: 12px; color: var(--muted); }
+details.fund table { font-size: 12px; margin-top: 4px; }
+details.fund td, details.fund th { padding: 3px 6px; }
+details.fund td:not(:first-child), details.fund th:not(:first-child) { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.fnote { font-size: 11px; color: var(--muted); margin: 4px 0 0; }
+
+/* feedback */
+.fbk { display: grid; gap: 14px; max-width: 860px; }
+.composer { display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; }
+.composer textarea { width: 100%; min-height: 96px; resize: vertical; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px; font: inherit; color: var(--ink); }
+.crow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.crow .hint { color: var(--muted); font-size: 12px; margin-right: auto; }
+.qitem { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; display: grid; gap: 4px; }
+.qitem p { margin: 0; white-space: pre-wrap; }
+.qmeta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--muted); align-items: center; }
+.qst { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 1px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); }
+.qst.digested { background: var(--long-soft); color: var(--long); }
+.reply { font-size: 13px; color: var(--muted); border-left: 2px solid var(--line); padding-left: 8px; }
+.cmt { margin-left: auto; }
+
 /* lightbox */
-dialog.lb { border: 0; padding: 0; background: transparent; max-width: min(1120px, 96vw); width: 100%; }
+dialog.lb { border: 0; padding: 0; background: transparent; max-width: min(1240px, 97vw); width: 100%; }
 dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
 .lbinner { background: var(--surface); border-radius: var(--r); padding: 10px; display: grid; gap: 8px; }
-.lbinner img { width: 100%; height: auto; border-radius: 4px; }
+.lbinner img { width: 100%; height: auto; border-radius: 4px; display: block; }
+.stage { position: relative; line-height: 0; user-select: none; touch-action: none; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage.drawing { cursor: crosshair; }
+.stage .mk { fill: none; stroke: var(--mark); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.stage .mk.old { stroke: var(--muted); stroke-dasharray: 5 4; }
+.pin { position: absolute; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%; background: var(--mark); color: #fff; font: 700 11px/20px var(--font-data); text-align: center; pointer-events: none; }
+.pin.old { background: var(--muted); }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tool { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 3px 10px; cursor: pointer; font-size: 13px; }
+.tool[aria-pressed="true"] { background: var(--mark); border-color: var(--mark); color: #fff; }
+.marks { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.marks li { display: flex; gap: 6px; align-items: center; }
+.marks li .n { width: 20px; height: 20px; border-radius: 50%; background: var(--mark); color: #fff; font: 700 11px/20px var(--font-data); text-align: center; flex: none; }
+.marks input { flex: 1 1 auto; min-width: 0; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; }
+.lbcols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; line-height: 1.45; }
+.sent { font-size: 12px; color: var(--muted); }
 .lbbar { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
 .x { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 4px 10px; cursor: pointer; }
 
@@ -188,6 +232,7 @@ dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
     <button role="tab" id="tab-book" aria-selected="false" data-tab="book">Book<span class="count" id="c-book"></span></button>
     <button role="tab" id="tab-track" aria-selected="false" data-tab="track">Track record<span class="count" id="c-track"></span></button>
     <button role="tab" id="tab-learn" aria-selected="false" data-tab="learn">Learning</button>
+    <button role="tab" id="tab-fbk" aria-selected="false" data-tab="fbk">Your feedback<span class="count" id="c-fbk"></span></button>
   </nav>
 
   <section id="view-pairs">
@@ -207,13 +252,42 @@ dialog.lb::backdrop { background: rgb(0 0 0 / .72); }
   <section id="view-learn" hidden>
     <div class="learn" id="learn"></div>
   </section>
+  <section id="view-fbk" hidden>
+    <div class="fbk" id="fbk"></div>
+  </section>
 </div>
 
 <dialog class="lb" id="lb">
   <div class="lbinner">
     <div class="lbbar"><span id="lbtitle" class="mono"></span><button class="x" id="lbclose">Close</button></div>
-    <img id="lbimg" alt="">
-    <p id="lbread" class="read"></p>
+    <div class="tools" id="tools">
+      <span class="lbl">Mark the chart</span>
+      <button class="tool" data-tool="box" aria-pressed="false">Box</button>
+      <button class="tool" data-tool="line" aria-pressed="false">Line</button>
+      <button class="tool" data-tool="pin" aria-pressed="false">Point</button>
+      <button class="tool" id="mkundo">Undo</button>
+      <button class="tool" id="mkclear">Clear</button>
+      <span class="lbl" style="margin-left:auto">Grey dashed = sent before</span>
+    </div>
+    <div class="stage" id="stage"><img id="lbimg" alt=""><svg id="mksvg" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg><div id="pins"></div></div>
+    <div class="lbcols">
+      <p id="lbread" class="read"></p>
+      <ol class="marks" id="marklist"></ol>
+      <div class="composer" style="padding:10px">
+        <label class="lbl" for="lbtext">Your read of this chart: what you see, what you would do, what the engine missed</label>
+        <textarea id="lbtext" placeholder="e.g. RS broke to a new high two weeks before price cleared the 6M level. That lead is the setup I want; the engine graded it B for being extended."></textarea>
+        <div class="crow"><span class="hint" id="lbhint">Marks and text go to the engine review queue together.</span><button class="btn" id="lbsend">Send to engine queue</button></div>
+        <div class="sent" id="lbsent"></div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="lb" id="cm">
+  <div class="lbinner" style="max-width:640px;margin:auto">
+    <div class="lbbar"><span id="cmtitle" class="mono"></span><button class="x" id="cmclose">Close</button></div>
+    <textarea id="cmtext" style="width:100%;min-height:120px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:8px;font:inherit" placeholder="Why this pair works or doesn't for you."></textarea>
+    <div class="crow"><span class="hint">Queued for the next engine review.</span><button class="btn" id="cmsend">Send to engine queue</button></div>
   </div>
 </dialog>
 
@@ -226,7 +300,8 @@ const REASONS = { pass: ["Long leg weak", "Short leg weak", "Both charts weak", 
 
 const S = { db: null, user: null, uid: null, canWrite: true, runs: [], run: null, decisions: {}, unsub: null, chartfb: {}, unsub2: null,
             tab: "pairs", fSector: "All", fConv: 0, fHide: false, gSide: "all", gGrade: "all",
-            mcp: null, engines: [], engine: "all", allRuns: [], cycle: null, myCycle: null, arm: false, busy: false };
+            mcp: null, engines: [], engine: "all", allRuns: [], cycle: null, myCycle: null, arm: false, busy: false,
+            detail: null, fb: [], zkey: null, tool: null, marks: [], drag: null };
 try { const t = localStorage.getItem("desk.tab"); if (t) S.tab = t; } catch (e) {}
 try { const g = localStorage.getItem("desk.engine"); if (g) S.engine = g; } catch (e) {}
 const REVIEW_TASK = "trig_01GBb5aagGJvJdSW6U8WtLGm";   // the "DC Idea Desk - REVIEW" scheduled task
@@ -259,6 +334,12 @@ renderEmpty("Loading the latest scan…");
   db.collection("cycles").orderBy("requested_at", "desc").limit(1).onSnapshot(snap => {
     S.cycle = snap.docs.length ? { id: snap.docs[0].id, ...snap.docs[0].data() } : null;
     renderCycle(); renderControls();
+  }, err => {});
+  db.collection("feedback").orderBy("created_at", "desc").limit(200).onSnapshot(snap => {
+    S.fb = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    $("#c-fbk").textContent = S.fb.filter(x => x.status === "queued").length || "";
+    if (S.tab === "fbk") renderFbk();
+    if ($("#lb").open) drawMarks();
   }, err => {});
   db.collection("runs").orderBy("run_utc", "desc").limit(40).onSnapshot(snap => {
     S.allRuns = snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -390,6 +471,10 @@ function selectRun(id) {
   S.run = S.runs.find(r => r.id === id);
   if (!S.run) return;
   renderEngineNote();
+  S.detail = null;
+  S.db.collection("run_details").doc(id).get().then(snap => {
+    if (S.run && S.run.id === id && snap.exists) { S.detail = snap.data(); render(); }
+  }).catch(() => {});
   S.decisions = {};
   if (S.unsub) S.unsub();
   S.unsub = S.db.collection("decisions").where("run_id", "==", id).onSnapshot(snap => {
@@ -430,7 +515,7 @@ function render() {
   $("#c-charts").textContent = cands.length;
   $("#c-book").textContent = taken;
   $("#c-track").textContent = (r.track_record || []).filter(x => x.ret5 != null).length || "";
-  for (const t of ["pairs", "charts", "book", "track", "learn"]) {
+  for (const t of ["pairs", "charts", "book", "track", "learn", "fbk"]) {
     $("#tab-" + t).setAttribute("aria-selected", String(S.tab === t));
     $("#view-" + t).hidden = S.tab !== t;
   }
@@ -439,6 +524,7 @@ function render() {
   if (S.tab === "book") renderBook(r);
   if (S.tab === "track") renderTrack(r);
   if (S.tab === "learn") renderLearn(r);
+  if (S.tab === "fbk") renderFbk();
   if (!S.canWrite) showBanner("You can view this desk but not record decisions.");
 }
 
@@ -486,6 +572,7 @@ function leg(l, side) {
     <div class="co" title="${esc(l.company)}">${esc(l.company)} · ${esc(l.industry)}</div>
     ${l.chart_url ? `<button class="thumb" data-zoom="${esc(l.symbol)}|${side}" aria-label="Open ${esc(l.symbol)} chart"><img src="${esc(l.chart_url)}" alt="${esc(l.symbol)} daily chart" loading="lazy"></button>` : ""}
     <p class="read">${esc(l.read)}</p>
+    ${qualBlock(l.symbol, side)}
     ${badges(l)}
     <div class="tags">${(l.tags || []).map(t => `<span class="tag" title="${esc(TAGNAME[t] || t)}">${esc(t)}</span>`).join("")}</div>
     <div class="stats mono">
@@ -493,6 +580,7 @@ function leg(l, side) {
       <div><span>1M</span>${pct(s.p1m)}</div><div><span>3M</span>${pct(s.p3m)}</div><div><span>6M</span>${pct(s.p6m)}</div>
       <div><span title="RS vs S&amp;P against its 40W MA">RS/MA</span>${pct(s.rs_ma)}</div><div><span title="RS vs sector ETF against its 40W MA">Sec/MA</span>${pct(s.rssec_ma)}</div><div><span>Vol</span><span>${s.vol == null ? "–" : Math.round(s.vol) + "%"}</span></div>
     </div>
+    ${fundBlock(l.symbol, side, l.supersector || "")}
     ${fbRow(l.symbol, side)}
     <div class="earn ${soon ? "soon" : ""}">${l.next_earnings ? (soon ? "Earnings in hold window: " : "Next earnings ") + esc(l.next_earnings) : "Earnings date unknown"}</div>
   </div>`;
@@ -522,6 +610,7 @@ function ticket(p) {
       ${["take", "watch", "pass"].map(x => `<button class="act" data-a="${x}" aria-pressed="${a === x}" ${dis}>${x[0].toUpperCase() + x.slice(1)}</button>`).join("")}
       ${reasons.length ? `<select data-k="reason" aria-label="Reason" ${dis}><option value="">Reason…</option>${reasons.map(x => `<option ${d.reason === x ? "selected" : ""}>${esc(x)}</option>`).join("")}</select>` : ""}
       ${a ? `<input data-k="note" placeholder="Note" value="${esc(d.note || "")}" aria-label="Note" ${dis}>` : ""}
+      <button class="tool cmt" data-cmt="${esc(id)}" ${dis} title="Tell the engine why this pair works or doesn't for you">Comment</button>
       <span class="saved">${d.decided_at ? "Saved " + new Date(d.decided_at).toLocaleString([], { weekday: "short", hour: "2-digit", minute: "2-digit" }) : ""}</span>
     </div>
   </article>`;
@@ -545,6 +634,8 @@ function renderCharts(r) {
       ${x.chart_url ? `<button class="thumb" data-zoom="${esc(x.symbol)}|${x.side}" aria-label="Open ${esc(x.symbol)} chart"><img src="${esc(x.chart_url)}" alt="${esc(x.symbol)} daily chart" loading="lazy"></button>` : ""}
       ${badges(x)}
       <p class="read">${esc(x.read || "")}</p>
+      ${qualBlock(x.symbol, x.side, true)}
+      ${fundBlock(x.symbol, x.side, x.supersector, true)}
       ${fbRow(x.symbol, x.side)}
     </div>`).join("")}</div></div>`).join("") : `<div class="empty">No charts match these filters.</div>`;
 }
@@ -590,6 +681,16 @@ document.addEventListener("click", async e => {
     return;
   }
   if (e.target.id === "lbclose") $("#lb").close();
+  const cm = e.target.closest("[data-cmt]");
+  if (cm) { openComment(cm.dataset.cmt); return; }
+  if (e.target.id === "cmclose") { $("#cm").close(); return; }
+  if (e.target.id === "cmsend") { await sendComment(); return; }
+  if (e.target.id === "fbsend") { await sendGeneral(); return; }
+  const tl = e.target.closest("[data-tool]");
+  if (tl) { S.tool = S.tool === tl.dataset.tool ? null : tl.dataset.tool; drawTools(); return; }
+  if (e.target.id === "mkundo") { S.marks.pop(); drawMarks(); return; }
+  if (e.target.id === "mkclear") { S.marks = []; drawMarks(); return; }
+  if (e.target.id === "lbsend") { await sendChart(); return; }
   if (e.target.id === "runscan") { S.arm = true; renderControls(); $("#rungo")?.focus(); return; }
   if (e.target.id === "runcancel") { S.arm = false; renderControls(); return; }
   if (e.target.id === "rungo") { await startCycle(); return; }
@@ -610,6 +711,8 @@ document.addEventListener("change", e => {
   save(t.dataset.id, { ...d, [k]: e.target.value });
 });
 $("#lb").addEventListener("click", e => { if (e.target.id === "lb") $("#lb").close(); });
+$("#cm").addEventListener("click", e => { if (e.target.id === "cm") $("#cm").close(); });
+$("#marklist").addEventListener("input", e => { const i = Number(e.target.dataset.i); if (S.marks[i]) S.marks[i].txt = e.target.value; });
 
 async function save(id, patch) {
   if (!S.canWrite || !S.db) return;
@@ -693,9 +796,157 @@ function openZoom(key) {
   const [sym, side] = key.split("|");
   const x = (S.run.candidates || []).find(c => c.symbol === sym && c.side === side);
   if (!x) return;
-  $("#lbimg").src = x.chart_url; $("#lbimg").alt = sym + " daily chart";
+  if (S.zkey !== key) { S.marks = []; $("#lbtext").value = ""; $("#lbsent").textContent = ""; }
+  S.zkey = key; S.tool = null;
+  $("#lbimg").src = x.chart_url; $("#lbimg").alt = sym + " weekly and daily chart";
   $("#lbtitle").textContent = `${side.toUpperCase()} ${sym} · ${x.company} · grade ${x.grade || "–"}`;
   $("#lbread").textContent = x.read || "";
+  const ok = S.canWrite && !!S.db;
+  $("#tools").hidden = !ok; $("#lbsend").disabled = !ok;
+  drawTools(); drawMarks();
   $("#lb").showModal();
+}
+
+/* ---------- fundamentals + qualitative ---------- */
+const det = (sym, side) => ((S.detail || {}).candidates || {})[`${sym}|${side}`] || null;
+const nfmt = (v, d = 1) => v == null ? "–" : Number(v).toFixed(d);
+const gfmt = v => v == null ? "–" : `<span class="${v >= 0 ? "pos" : "neg"}">${v >= 0 ? "+" : ""}${Number(v).toFixed(1)}%</span>`;
+const capfmt = v => v == null ? "–" : v >= 1e12 ? `$${(v / 1e12).toFixed(2)}tn` : `$${(v / 1e9).toFixed(1)}bn`;
+function qualBlock(sym, side, compact) {
+  const d = det(sym, side); if (!d) return "";
+  const g = d.guidance ? `<p class="guide"><b>Guidance</b>${esc(d.guidance)}${d.guidance_src && d.guidance_src.url
+    ? ` <a href="${esc(d.guidance_src.url)}" target="_blank" rel="noopener">${esc(d.guidance_src.form || "")} ${esc(d.guidance_src.date || "")}</a>` : ""}</p>` : "";
+  return `${d.why ? `<p class="why"><b>Why it moved</b>${esc(d.why)}</p>` : ""}${compact ? "" : g}`;
+}
+function fundBlock(sym, side, sector, compact) {
+  const d = det(sym, side); const f = d && d.fund; if (!f) return "";
+  const sf = ((S.detail || {}).sector_fund || {})[sector] || {};
+  const strip = `<div class="fstrip mono">
+    <span><i>Mcap</i> ${capfmt(f.mcap)}</span>
+    <span><i>PE FY1</i> ${nfmt(f.pe1)} <i>/ sec ${nfmt(sf.pe1)}</i></span>
+    <span><i>EPS g FY1</i> ${gfmt(f.epsg1)} <i>/ sec</i> ${gfmt(sf.epsg1)}</span>
+    <span><i>Sales g FY1</i> ${gfmt(f.revg1)}</span>
+    <span><i>EPS rev 3M</i> ${gfmt(f.epsrev3m)}</span>
+  </div>`;
+  if (compact) return strip;
+  const row = (k, a, b = "") => `<tr><td>${k}</td><td>${a}</td><td>${b}</td></tr>`;
+  const surpWhen = f.surp_date ? ` <i class="lbl">(${esc(f.surp_date)})</i>` : "";
+  return `${strip}<details class="fund"><summary>All fundamentals</summary><div class="tablebox"><table>
+    <thead><tr><th></th><th>${esc(sym)}</th><th>Sector</th></tr></thead><tbody>
+    ${row("Market cap", capfmt(f.mcap))}
+    ${row("PE FY1", nfmt(f.pe1), nfmt(sf.pe1))}
+    ${row("PE FY2", nfmt(f.pe2))}
+    ${row("EPS FY0 / FY1 / FY2", `${nfmt(f.eps0, 2)} / ${nfmt(f.eps1, 2)} / ${nfmt(f.eps2, 2)}`)}
+    ${row("EPS growth FY1", gfmt(f.epsg1), gfmt(sf.epsg1))}
+    ${row("EPS growth FY2", gfmt(f.epsg2), gfmt(sf.epsg2))}
+    ${row("Sales growth FY1", gfmt(f.revg1), gfmt(sf.revg1))}
+    ${row("Sales growth FY2", gfmt(f.revg2), gfmt(sf.revg2))}
+    ${row("PEG FY1 / FY2", `${nfmt(f.peg1, 2)} / ${nfmt(f.peg2, 2)}`)}
+    ${row("EPS revision, 3M", gfmt(f.epsrev3m))}
+    ${row("Sales revision, 3M", f.revrev3m == null ? `<span class="lbl">from Jan</span>` : gfmt(f.revrev3m))}
+    ${row("EPS surprise, last 3M" + surpWhen, gfmt(f.epssurp))}
+    ${row("Sales surprise, last 3M", gfmt(f.revsurp))}
+    </tbody></table></div>
+    <p class="fnote">Consensus estimates; FY1 = current fiscal year. Sector = market-cap aggregate of the ${sf.n ?? "–"} largest ${esc(sector)} names with estimates.${f.ccy ? ` Reports in ${esc(f.ccy)}, so PE and PEG are not shown.` : ""}${f.n_an ? ` ${f.n_an} analysts.` : ""}</p></details>`;
+}
+
+/* ---------- feedback to the engine ---------- */
+const fbId = () => "f-" + new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 17) + "-" + Math.random().toString(36).slice(2, 6);
+async function queueFeedback(doc) {
+  if (!S.canWrite || !S.db) return false;
+  try {
+    await S.db.collection("feedback").doc(fbId()).set({ ...doc, status: "queued", created_at: new Date().toISOString(),
+      engine: S.run ? engOf(S.run) : currentEngine(), author: S.uid || null });
+    return true;
+  } catch (err) { showBanner("That feedback did not save. Check your connection and press Send again."); return false; }
+}
+async function sendGeneral() {
+  const ta = $("#fbtext"); const text = ta.value.trim(); if (!text) { ta.focus(); return; }
+  const scope = $("#fbscope").value;
+  const ok = await queueFeedback({ scope: "general", topic: scope, text, run_id: S.run ? S.run.id : null });
+  if (ok) { ta.value = ""; $("#fbmsg").textContent = "Queued for the next engine review."; }
+}
+let cmPair = null;
+function openComment(id) {
+  cmPair = (S.run.pairs || []).find(p => pid(p) === id); if (!cmPair) return;
+  $("#cmtitle").textContent = `LONG ${cmPair.long.symbol} / SHORT ${cmPair.short.symbol} · ${cmPair.supersector}`;
+  $("#cmtext").value = ""; $("#cm").showModal(); $("#cmtext").focus();
+}
+async function sendComment() {
+  const text = $("#cmtext").value.trim(); if (!text || !cmPair) return;
+  const d = decisionOf(cmPair) || {};
+  const ok = await queueFeedback({ scope: "pair", text, run_id: S.run.id, pair: { long: cmPair.long.symbol, short: cmPair.short.symbol },
+    supersector: cmPair.supersector, decision: d.action || null });
+  if (ok) $("#cm").close();
+}
+async function sendChart() {
+  const [sym, side] = (S.zkey || "|").split("|");
+  const x = (S.run.candidates || []).find(c => c.symbol === sym && c.side === side); if (!x) return;
+  const text = $("#lbtext").value.trim();
+  if (!text && !S.marks.length) { $("#lbhint").textContent = "Write a note or mark the chart first."; return; }
+  const marks = S.marks.map(m => ({ t: m.t, x1: +m.x1.toFixed(4), y1: +m.y1.toFixed(4), x2: +m.x2.toFixed(4), y2: +m.y2.toFixed(4), txt: m.txt || "" }));
+  const ok = await queueFeedback({ scope: "chart", text, marks, run_id: S.run.id, symbol: sym, side, chart_id: x.chart_id || null,
+    grade: x.grade || null, verdict: S.chartfb[`${sym}|${side}`] || null });
+  if (ok) { S.marks = []; S.tool = null; $("#lbtext").value = ""; $("#lbsent").textContent = "Queued for the next engine review."; drawTools(); drawMarks(); }
+}
+
+/* chart mark-up: coordinates are fractions of the image, so they survive any display size */
+function drawTools() { document.querySelectorAll("[data-tool]").forEach(b => b.setAttribute("aria-pressed", String(S.tool === b.dataset.tool))); $("#stage").classList.toggle("drawing", !!S.tool); }
+function shape(m, cls) {
+  if (m.t === "box") return `<rect class="mk ${cls}" x="${Math.min(m.x1, m.x2)}" y="${Math.min(m.y1, m.y2)}" width="${Math.abs(m.x2 - m.x1)}" height="${Math.abs(m.y2 - m.y1)}"/>`;
+  if (m.t === "line") return `<line class="mk ${cls}" x1="${m.x1}" y1="${m.y1}" x2="${m.x2}" y2="${m.y2}"/>`;
+  return "";
+}
+function drawMarks() {
+  const [sym, side] = (S.zkey || "|").split("|");
+  const old = S.run ? S.fb.filter(f => f.scope === "chart" && f.run_id === S.run.id && f.symbol === sym && f.side === side).flatMap(f => f.marks || []) : [];
+  const all = [...S.marks, ...(S.drag ? [S.drag] : [])];
+  $("#mksvg").innerHTML = old.map(m => shape(m, "old")).join("") + all.map(m => shape(m, "")).join("");
+  $("#pins").innerHTML = old.map((m, i) => `<span class="pin old" style="left:${m.x1 * 100}%;top:${m.y1 * 100}%">${i + 1}</span>`).join("") +
+    S.marks.map((m, i) => `<span class="pin" style="left:${m.x1 * 100}%;top:${m.y1 * 100}%">${i + 1}</span>`).join("");
+  const keep = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.i : null;
+  $("#marklist").innerHTML = S.marks.map((m, i) => `<li><span class="n">${i + 1}</span><input id="mark-${i}" data-i="${i}" value="${esc(m.txt || "")}" placeholder="What this ${m.t === "box" ? "area" : m.t === "line" ? "line" : "point"} shows"></li>`).join("");
+  if (keep != null && $(`#mark-${keep}`)) $(`#mark-${keep}`).focus();
+  const sent = old.length ? `${S.fb.filter(f => f.scope === "chart" && f.run_id === S.run.id && f.symbol === sym && f.side === side).length} note(s) already sent on this chart.` : "";
+  if (!$("#lbsent").textContent.startsWith("Queued")) $("#lbsent").textContent = sent;
+}
+function ptr(e) { const r = $("#stage").getBoundingClientRect(); return { x: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), y: Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)) }; }
+$("#stage").addEventListener("pointerdown", e => {
+  if (!S.tool) return;
+  e.preventDefault();
+  const p = ptr(e);
+  if (S.tool === "pin") { S.marks.push({ t: "pin", x1: p.x, y1: p.y, x2: p.x, y2: p.y, txt: "" }); drawMarks(); $(`#mark-${S.marks.length - 1}`)?.focus(); return; }
+  S.drag = { t: S.tool, x1: p.x, y1: p.y, x2: p.x, y2: p.y, txt: "" };
+  $("#stage").setPointerCapture(e.pointerId);
+});
+$("#stage").addEventListener("pointermove", e => { if (!S.drag) return; const p = ptr(e); S.drag.x2 = p.x; S.drag.y2 = p.y; drawMarks(); });
+$("#stage").addEventListener("pointerup", e => {
+  if (!S.drag) return;
+  const m = S.drag; S.drag = null;
+  if (Math.hypot(m.x2 - m.x1, m.y2 - m.y1) > 0.01) S.marks.push(m);
+  drawMarks(); $(`#mark-${S.marks.length - 1}`)?.focus();
+});
+
+function renderFbk() {
+  const rows = S.fb;
+  const where = f => f.scope === "chart" ? `${esc(f.symbol)} ${esc(f.side)} chart${(f.marks || []).length ? ` · ${(f.marks || []).length} mark(s)` : ""}`
+    : f.scope === "pair" ? `${esc(f.pair?.long)} / ${esc(f.pair?.short)} pair` : `general${f.topic ? " · " + esc(f.topic) : ""}`;
+  const when = d => d ? new Date(d).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  const dis = S.canWrite ? "" : "disabled";
+  $("#fbk").innerHTML = `
+    <div class="composer">
+      <label class="lbl" for="fbtext">Explain your thinking to the engine</label>
+      <textarea id="fbtext" ${dis} placeholder="How you read a setup, what you look for first, what makes you pass. Examples help more than rules: name a ticker and a date."></textarea>
+      <div class="crow"><span class="hint" id="fbmsg">The Saturday review turns each note into a candidate change for the next engine version and replies here.</span>
+        <select id="fbscope" aria-label="Topic" ${dis}><option>Chart reading</option><option>Pairing</option><option>Fundamentals</option><option>Risk and sizing</option><option>Other</option></select>
+        <button class="btn" id="fbsend" ${dis}>Send to engine queue</button></div>
+    </div>
+    <p class="lbl">To comment on one chart, open it and mark it up; to comment on a pair, use Comment on its ticket.</p>
+    ${rows.length ? rows.map(f => `<div class="qitem">
+      <div class="qmeta"><span class="qst ${esc(f.status)}">${esc(f.status === "digested" ? "digested" : "queued")}</span><span>${where(f)}</span><span>${esc(f.run_id || "")}</span><span>v${esc(f.engine || "?")}</span><span>${esc(when(f.created_at))}</span>${f.backlog_id ? `<span class="enginechip">${esc(f.backlog_id)}</span>` : ""}</div>
+      ${f.text ? `<p>${esc(f.text)}</p>` : ""}
+      ${(f.marks || []).filter(m => m.txt).map((m, i) => `<p class="lbl" style="text-transform:none;letter-spacing:0">mark: ${esc(m.txt)}</p>`).join("")}
+      ${f.reply ? `<div class="reply">${esc(f.reply)}</div>` : ""}
+    </div>`).join("") : `<div class="empty"><b>Nothing sent yet.</b> Notes you send here, chart mark-ups and pair comments queue for the Saturday review, which files each one in the engine backlog and replies under it.</div>`}`;
 }
 </script>

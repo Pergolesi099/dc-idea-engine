@@ -1,0 +1,20 @@
+name: diag
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/diag_sources.py || true
+      - run: |
+          mkdir d && cp diag.txt d/ && cd d && git init -q -b diag-out && git add -A
+          git -c user.name=bot -c user.email=bot@users.noreply.github.com commit -qm diag
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" diag-out
