@@ -4,7 +4,7 @@
 # engine-v<version> is created automatically on push to main and freezes code + config + weights.
 
 engine:
-  version: "2.0"
+  version: "2.1"
 
 universe:
   min_market_cap: 2.0e+9        # USD
@@ -84,7 +84,7 @@ fundamentals:
   basket_per_sector: 20         # largest names per supersector form the sector reference basket
   workers: 6
   news_days: 21
-  news_max: 6
+  news_max: 8
   guidance: true
   guidance_days: 120            # latest earnings release (8-K item 2.02, exhibit 99) within this window
                                 # SEC wants a real contact: repo secret SEC_USER_AGENT = "Name email"
