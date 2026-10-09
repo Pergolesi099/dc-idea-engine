@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""DC idea engine — weekly technical sweep of US stocks > $2bn.
+"""DC idea engine v2 — weekly top-down technical sweep of US stocks > $2bn.
 
 Pipeline
-  1. Universe + coarse technicals from TradingView's screener (one request).
-     Fallback: cached universe (data/universe.csv) + metrics computed from price history.
-  2. Signals S1/S2/S3 scored within each supersector, long and short side.
-  3. Top pool per sector/side -> full daily history (Yahoo; Polygon for gaps if key set).
-  4. Exact 21/50/200D distances, smoothness (R2, efficiency ratio, 21D crosses), RS vs sector ETF.
-  5. Final rank = signal + smoothness; quota per sector/side; render charts; write out/results.json.
+  1. Universe from TradingView's screener (symbols, sectors, market caps). Fallback: cached universe.
+  2. ~3 years of daily history for the whole universe (Yahoo; Polygon for gaps), S&P 500, sector ETFs.
+  3. Feature panels for every name and date (features.py): weekly trend + RS Line - Blue Dot,
+     sector rotation, daily setups (S1/S2/S3/MOM), 6M/3M breakouts, MACD histogram.
+  4. Learning (learn.py): outcome model on years of weekly history + Dean's desk feedback.
+  5. Today: weekly gate -> setups/triggers -> learned score -> quota per sector/side -> charts.
 """
 from __future__ import annotations
 
@@ -200,181 +200,61 @@ def get_history(symbols: list[str], sessions: int) -> dict[str, pd.DataFrame]:
     return hist
 
 
-# ---------------------------------------------------------------- metrics
-def metrics_from_history(h: pd.DataFrame, etf: pd.Series | None) -> dict:
-    c = h.Close.astype(float)
-    if len(c) < 64:
-        return {}
-    m = {
-        "close": c.iloc[-1],
-        "d21": (c.iloc[-1] / c.rolling(21).mean().iloc[-1] - 1) * 100,
-        "d50": (c.iloc[-1] / c.rolling(50).mean().iloc[-1] - 1) * 100,
-        "d200": (c.iloc[-1] / c.rolling(200).mean().iloc[-1] - 1) * 100 if len(c) >= 200 else np.nan,
-        "p1w": (c.iloc[-1] / c.iloc[-6] - 1) * 100,
-        "p1m": (c.iloc[-1] / c.iloc[-22] - 1) * 100,
-        "p3m": (c.iloc[-1] / c.iloc[-64] - 1) * 100,
-    }
-    m["sessions"] = len(c)
-    m["vol_63_ann"] = float(np.log(c).diff().iloc[-63:].std() * np.sqrt(252) * 100)
-    w = c.iloc[-63:]
-    y = np.log(w.values)
-    x = np.arange(len(y))
-    slope, intercept = np.polyfit(x, y, 1)
-    resid = y - (slope * x + intercept)
-    m["r2_63"] = float(1 - resid.var() / y.var()) if y.var() > 0 else 0.0
-    m["slope_63_ann"] = float(slope * 252 * 100)
-    m["er_63"] = float(abs(w.iloc[-1] - w.iloc[0]) / w.diff().abs().sum())
-    sma21 = c.rolling(21).mean().iloc[-63:]
-    side = np.sign(w - sma21).replace(0, np.nan).ffill()
-    m["sma21_crosses_63"] = int((side.diff().abs() > 0).sum())
-    if etf is not None:
-        rs = (c / etf.reindex(c.index).ffill()).dropna()
-        if len(rs) > 22:
-            m["rs_1m"] = (rs.iloc[-1] / rs.iloc[-22] - 1) * 100
-            m["rs_3m"] = (rs.iloc[-1] / rs.iloc[-64] - 1) * 100 if len(rs) > 64 else np.nan
-    return {k: (round(float(v), 3) if pd.notna(v) else None) for k, v in m.items()}
+
+# ---------------------------------------------------------------- panels
+BENCH = "^GSPC"
 
 
-# ---------------------------------------------------------------- signals
-def _pct_in_sector(df: pd.DataFrame, col: str) -> pd.Series:
-    return df.groupby("supersector")[col].rank(pct=True)
+def build_panels(hist: dict[str, pd.DataFrame], meta: pd.DataFrame):
+    """Wide date x symbol panels, S&P 500 close, each symbol's sector-ETF close panel."""
+    spx = hist.get(BENCH, hist.get("SPY"))
+    if spx is None:
+        raise SystemExit("No S&P 500 history (neither ^GSPC nor SPY) — cannot compute RS.")
+    idx = spx.index
+    syms = [s for s in meta.index if s in hist]
+    daily = {k: pd.DataFrame({s: hist[s][k] for s in syms}).reindex(idx).astype("float64")
+             for k in ("Open", "High", "Low", "Close", "Volume")}
+    etf_close = {e: hist[e].Close.reindex(idx).ffill() for e in SECTOR_ETF.values() if e in hist}
+    sector_bench = pd.DataFrame({s: etf_close.get(SECTOR_ETF[meta.at[s, "supersector"]]) for s in syms},
+                                index=idx)
+    return daily, spx.Close, sector_bench, etf_close
 
 
-def score_signals(df: pd.DataFrame) -> pd.DataFrame:
-    """Adds long_score/short_score in [0,1] (within-sector percentile of best strategy hit) and tags."""
-    s = CFG["strategies"]
-    df = df.copy()
-    for side in ("long", "short"):
-        df[f"{side}_tags"] = [[] for _ in range(len(df))]
-    scores = {"long": [], "short": []}
-
-    def add(name, side, mask, raw):
-        raw = raw.where(mask)
-        if raw.notna().sum() == 0:
-            return
-        pct = raw.groupby(df.supersector).rank(pct=True)
-        scores[side].append(pct.rename(name))
-        for i in df.index[mask.fillna(False)]:
-            df.at[i, f"{side}_tags"].append(name)
-
-    hi_lo = df[["d50", "d200"]]
-    if s["s1"]["enabled"]:
-        up = (df.d21 > 0) & (df.d50 > 0) & (df.d200 > 0) & (df.d21 > hi_lo.max(axis=1))
-        dn = (df.d21 < 0) & (df.d50 < 0) & (df.d200 < 0) & (df.d21 < hi_lo.min(axis=1))
-        up_raw = df.d21 - hi_lo.max(axis=1)
-        dn_raw = hi_lo.min(axis=1) - df.d21
-        if s["s1"]["bonus_200_over_50"]:
-            up_raw = up_raw + 0.5 * (df.d200 > df.d50)
-            dn_raw = dn_raw + 0.5 * (df.d200 < df.d50)
-        long_m, long_r, short_m, short_r = (up, up_raw, dn, dn_raw)
-        if s["s1"]["mode"] == "fade":
-            long_m, long_r, short_m, short_r = dn, dn_raw, up, up_raw
-        add("S1", "long", long_m, long_r)
-        add("S1", "short", short_m, short_r)
-    if s["s2"]["enabled"]:
-        p = _pct_in_sector(df, s["s2"]["perf_field"])
-        add("S2", "long", (p >= s["s2"]["leader_pct"]) & (df.d21 < 0) & (df.d50 > 0), p)
-        add("S2", "short", (p <= s["s2"]["laggard_pct"]) & (df.d21 > 0) & (df.d50 < 0), 1 - p)
-    if s["s3"]["enabled"]:
-        band = s["s3"]["band_pct"]
-        near = df.d200.abs() <= band
-        closeness = 1 - df.d200.abs() / band
-        add("S3", "long", near & (df.p1m > 0), closeness)
-        if s["s3"]["short_breakdowns"]:
-            add("S3", "short", near & (df.p1m < 0), closeness)
-
-    for side in ("long", "short"):
-        df[f"{side}_score"] = pd.concat(scores[side], axis=1).max(axis=1) if scores[side] else np.nan
-        df[f"{side}_mom"] = np.nan
-
-    if s.get("mom", {}).get("enabled"):
-        comp = (_pct_in_sector(df, "p1w") + _pct_in_sector(df, "p1m") + _pct_in_sector(df, "p3m")) / 3
-        lm = (comp >= s["mom"]["leader_pct"]) & (df.d50 > 0)
-        sm = (comp <= s["mom"]["laggard_pct"]) & (df.d50 < 0)
-        df["long_mom"] = comp.where(lm)
-        df["short_mom"] = (1 - comp).where(sm)
-        for side, mask in (("long", lm), ("short", sm)):
-            for i in df.index[mask.fillna(False)]:
-                df.at[i, f"{side}_tags"].append("MOM")
-    return df
+def forward_relative(close: pd.DataFrame, bench: pd.DataFrame, n: int) -> pd.DataFrame:
+    return ((close.shift(-n) / close) / (bench.shift(-n) / bench) - 1) * 100
 
 
-def revalidate_tags(r: dict) -> list[str]:
-    """Re-check each tag on exact history-based distances (TradingView only has a 20D SMA)."""
-    s = CFG["strategies"]
-    long_side = r["side"] == "long"
-    d21, d50, d200, p1m = r["d21"], r["d50"], r["d200"], r["p1m"]
-    if None in (d21, d50, d200, p1m):
-        return []
-    keep = []
-    for t in r["tags"]:
-        if t == "S1":
-            up = d21 > 0 and d50 > 0 and d200 > 0 and d21 > max(d50, d200)
-            dn = d21 < 0 and d50 < 0 and d200 < 0 and d21 < min(d50, d200)
-            want_up = long_side if s["s1"]["mode"] == "follow" else not long_side
-            ok = up if want_up else dn
-        elif t == "S2":
-            ok = (d21 < 0 < d50) if long_side else (d50 < 0 < d21)
-        elif t == "S3":
-            ok = abs(d200) <= s["s3"]["band_pct"] and (p1m > 0 if long_side else p1m < 0)
-        elif t == "MOM":
-            ok = d50 > 0 if long_side else d50 < 0
-        else:
-            ok = True
-        if ok:
-            keep.append(t)
-    return keep
-
-
-def smoothness_score(df: pd.DataFrame) -> pd.Series:
-    raw = 0.5 * df.r2_63.fillna(0) + 0.5 * df.er_63.fillna(0) - 0.03 * df.sma21_crosses_63.fillna(10)
-    return raw.groupby(df.supersector).rank(pct=True)
-
-
-# ---------------------------------------------------------------- charts
-def render_chart(sym: str, row: dict, h: pd.DataFrame, etf: pd.Series | None, path: pathlib.Path) -> None:
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
-    n = CFG["charts"]["display_sessions"]
-    c = h.Close
-    smas = {21: c.rolling(21).mean(), 50: c.rolling(50).mean(), 200: c.rolling(200).mean()}
-    v = h.iloc[-n:]
-    x = np.arange(len(v))
-    fig, (ax, axv, axr) = plt.subplots(3, 1, figsize=(11, 7), sharex=True,
-                                      gridspec_kw={"height_ratios": [5, 1, 1.6]})
-    up = v.Close >= v.Open
-    col = np.where(up, "#1a9e5a", "#d0453b")
-    ax.vlines(x, v.Low, v.High, color=col, linewidth=0.8)
-    ax.bar(x, (v.Close - v.Open).abs().clip(lower=v.Close * 0.0008), bottom=np.minimum(v.Open, v.Close),
-           color=col, width=0.7)
-    for k, colr in ((21, "#1f6fd1"), (50, "#e08a00"), (200, "#7b3fbf")):
-        ax.plot(x, smas[k].iloc[-n:].values, color=colr, linewidth=1.3, label=f"SMA{k}")
-    ax.legend(loc="upper left", fontsize=8, frameon=False)
-    ax.grid(alpha=0.25)
-    tags = ", ".join(f"{t}" for t in row["tags"])
-    ax.set_title(
-        f"{sym}  {row['company'][:40]}  |  {row['supersector']}  |  {row['side'].upper()} [{tags}]\n"
-        f"d21 {row['d21']:+.1f}%  d50 {row['d50']:+.1f}%  d200 {row['d200']:+.1f}%   "
-        f"1W {row['p1w']:+.1f}%  1M {row['p1m']:+.1f}%  3M {row['p3m']:+.1f}%   "
-        f"R² {row['r2_63']:.2f}  ER {row['er_63']:.2f}  x21 {int(row['sma21_crosses_63'])}",
-        fontsize=9.5, loc="left")
-    axv.bar(x, v.Volume, color=col, width=0.7, alpha=0.6)
-    axv.set_yticks([])
-    if etf is not None:
-        rs = (c / etf.reindex(c.index).ffill()).iloc[-n:]
-        rs = rs / rs.iloc[0] * 100
-        axr.plot(x, rs.values, color="#333333", linewidth=1.2)
-        axr.axhline(100, color="#999999", linewidth=0.6, linestyle="--")
-        axr.set_ylabel(f"RS vs {SECTOR_ETF[row['supersector']]}", fontsize=8)
-    axr.grid(alpha=0.25)
-    ticks = np.linspace(0, len(v) - 1, 7).astype(int)
-    axr.set_xticks(ticks)
-    axr.set_xticklabels([v.index[i].strftime("%d %b") for i in ticks], fontsize=8)
-    fig.tight_layout()
-    fig.savefig(path, dpi=100)
-    plt.close(fig)
+def track_record(close: pd.DataFrame, today: pd.Timestamp) -> list[dict]:
+    """Realised 5/10-session pair returns for every pair published on past runs."""
+    out = []
+    dec = {}
+    p = ROOT / "labels" / "decisions.jsonl"
+    if p.exists():
+        for line in p.read_text().splitlines():
+            if line.strip():
+                r = json.loads(line)
+                dec[(r.get("run_id"), r.get("long"), r.get("short"))] = r.get("action")
+    for pf in sorted((ROOT / "history" / "review").glob("*/pairs.json")):
+        run = pf.parent.name
+        try:
+            t0 = close.index[close.index <= pd.Timestamp(run)][-1]
+        except IndexError:
+            continue
+        i0 = close.index.get_loc(t0)
+        for pr in json.loads(pf.read_text()).get("pairs", []):
+            lo, sh = pr.get("long"), pr.get("short")
+            if lo not in close or sh not in close:
+                continue
+            row = {"run": run, "long": lo, "short": sh, "conviction": pr.get("conviction"),
+                   "decision": dec.get((run, lo, sh)) or "none"}
+            sl = (pr.get("split_long") or 50) / 100
+            for n in (5, 10):
+                if i0 + n < len(close.index) and close.index[i0 + n] <= today:
+                    rl = close[lo].iloc[i0 + n] / close[lo].iloc[i0] - 1
+                    rsh = close[sh].iloc[i0 + n] / close[sh].iloc[i0] - 1
+                    row[f"ret{n}"] = round(float((sl * rl - (1 - sl) * rsh) * 100), 2)
+            out.append(row)
+    return out
 
 
 # ---------------------------------------------------------------- pipeline
@@ -386,141 +266,146 @@ def _clean(o):
         return [_clean(v) for v in o]
     if isinstance(o, (np.integer,)):
         return int(o)
+    if isinstance(o, (np.bool_,)):
+        return bool(o)
     if isinstance(o, (float, np.floating)):
         return None if not np.isfinite(o) else round(float(o), 4)
     return o
 
 
-def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
+def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = True) -> dict:
     import shutil
+
+    import learn
+    from charts import render
+    from features import SECTOR_STATES, compute_panels, snapshot, to_weekly
+    from model import load_weights, score, select, side_table
+
     shutil.rmtree(OUT / "charts", ignore_errors=True)
     (OUT / "charts").mkdir(parents=True)
-    sel, ch = CFG["selection"], CFG["charts"]
-    cache = CACHE
-    etfs = list(SECTOR_ETF.values())
+    run_id = dt.datetime.now(dt.timezone.utc).date().isoformat()
 
+    # 1. universe
     try:
-        uni = universe_fn()
+        meta = universe_fn()
         source = "tradingview"
-        uni[["symbol", "company", "exchange", "sector", "industry", "supersector", "mcap"]].to_csv(
+        OUT.mkdir(exist_ok=True)
+        meta[["symbol", "company", "exchange", "sector", "industry", "supersector", "mcap"]].to_csv(
             OUT / "universe.csv", index=False)
-        log.info("TradingView universe: %d names", len(uni))
     except Exception as e:  # noqa: BLE001
-        log.warning("TradingView failed (%s); falling back to cached universe + history", e)
-        if not cache.exists():
+        log.warning("TradingView failed (%s); using cached universe", e)
+        if not CACHE.exists():
             raise SystemExit("No TradingView and no cached universe — cannot run.") from e
-        base = pd.read_csv(cache)
-        hist_all = history_fn(base.symbol.tolist() + etfs, ch["history_sessions"])
-        rows = []
-        for r in base.itertuples():
-            h = hist_all.get(r.symbol)
-            if h is not None:
-                rows.append({**r._asdict(), **metrics_from_history(h, None)})
-        uni = pd.DataFrame(rows).drop(columns=["Index"], errors="ignore").dropna(subset=["d200", "p3m"])
-        source = "history-fallback"
+        meta = pd.read_csv(CACHE)
+        source = "cached-universe"
+    meta = meta.drop_duplicates("symbol").set_index("symbol")[
+        ["company", "exchange", "sector", "industry", "supersector", "mcap"]]
+    log.info("Universe: %d names (%s)", len(meta), source)
 
-    scored = score_signals(uni)
+    # 2. full-universe history
+    etfs = list(SECTOR_ETF.values())
+    hist = history_fn(list(meta.index) + etfs + [BENCH, "SPY"], CFG["data"]["history_sessions"])
+    daily, spx, sector_bench, etf_close = build_panels(hist, meta)
+    meta = meta.loc[daily["Close"].columns]
+    log.info("History: %d/%d symbols, %d sessions", daily["Close"].shape[1], len(meta), len(daily["Close"]))
 
-    pool = []
+    # 3. features (all dates, all names)
+    panels = compute_panels(daily, spx, sector_bench, CFG)
+    panels["sessions"] = daily["Close"].notna().cumsum().astype("float32")
+    today = daily["Close"].index[-1]
+
+    # 4. learning
+    weights, pref_model, report = load_weights(ROOT / "model"), None, {}
+    if learn_enabled:
+        fwd = {h: forward_relative(daily["Close"], sector_bench, h) for h in (5, 10)}
+        week_ends = to_weekly({"Close": daily["Close"][[daily["Close"].columns[0]]]})["Close"].index
+        warm = daily["Close"].index[min(len(daily["Close"]) - 1, 300)]
+        last_ok = daily["Close"].index[-11] if len(daily["Close"]) > 11 else daily["Close"].index[0]
+        dates = [d for d in week_ends if warm <= d <= last_ok]
+        weights, pref_model, report = learn.run(ROOT, panels, meta, fwd, dates, CFG)
+
+    # 5. today's ranking
+    snap = snapshot(panels, today).join(meta, how="inner")
+    beta = (report.get("preference") or {}).get("beta", 0.0) if pref_model is not None else 0.0
+    tabs = []
     for side in ("long", "short"):
-        cs = scored[scored[f"{side}_score"].notna() | scored[f"{side}_mom"].notna()].copy()
-        cs["has_rule"] = cs[f"{side}_score"].notna()          # S1/S2/S3 hits outrank MOM fill
-        cs["signal_score"] = cs[f"{side}_score"].fillna(cs[f"{side}_mom"])
-        top = (cs.sort_values(["has_rule", "signal_score"], ascending=False)
-               .groupby("supersector").head(sel["pool_per_side_per_sector"]))
-        pool.append(top.assign(side=side, tags=top[f"{side}_tags"]))
-    pool = pd.concat(pool, ignore_index=True).drop_duplicates(["symbol", "side"])
-    log.info("Candidate pool: %d (side-rows)", len(pool))
-
-    funnel: dict[str, dict] = {}
-
-    def stage(name: str, frame: pd.DataFrame | None, per_side_col: str | None = None) -> None:
-        for side in ("long", "short"):
-            if per_side_col:   # scored universe: one row per symbol, side via score column
-                cnt = frame.dropna(subset=[f"{side}_score"]).groupby("supersector").size()
-            else:
-                cnt = frame[frame.side == side].groupby("supersector").size() if len(frame) else pd.Series(dtype=int)
-            for ss in SECTOR_ETF:
-                funnel.setdefault(f"{ss}|{side}", {})[name] = int(cnt.get(ss, 0))
-
-    stage("triggered_rules", scored, per_side_col="score")
-    stage("pooled", pool)
-
-    hist = history_fn(sorted(set(pool.symbol)) + etfs, ch["history_sessions"])
-    etf_close = {e: hist[e].Close for e in etfs if e in hist}
-    missing_history = sorted(set(pool.symbol) - set(hist))
-    log.info("History: %d/%d symbols, %d missing, ETFs %d/%d", len(set(pool.symbol)) - len(missing_history),
-             len(set(pool.symbol)), len(missing_history), len(etf_close), len(etfs))
-
-    exact = []
-    for r in pool.to_dict("records"):
-        h = hist.get(r["symbol"])
-        if h is None:
+        tab = side_table(snap, side, CFG)
+        if tab.empty:
             continue
-        m = metrics_from_history(h, etf_close.get(SECTOR_ETF[r["supersector"]]))
-        if not m:
-            continue
-        exact.append({**r, **m})   # history-based 21/50/200D overwrite TradingView's approximations
-    cand = pd.DataFrame(exact)
-    stage("with_history", cand)
+        tab["outcome_score"] = score(tab, weights[side])
+        tab["pref_score"] = learn.preference_score(pref_model, tab) if pref_model is not None else np.nan
+        po = tab.groupby("supersector").outcome_score.rank(pct=True)
+        pp = tab.groupby("supersector").pref_score.rank(pct=True) if pref_model is not None else po
+        tab["final_score"] = (1 - beta) * po + beta * pp
+        tabs.append(tab)
+    allc = pd.concat(tabs).reset_index()
+    # store every eligible row's features: the preference model joins Dean's labels to these later
+    feat_dir = ROOT / "history" / "features"
+    feat_dir.mkdir(parents=True, exist_ok=True)
+    keep = ["symbol", "side", "supersector", "regime", "outcome_score", "pref_score", "final_score"] + \
+        [c for c in allc.columns if c.startswith("z_")]
+    fe = allc[keep].copy()
+    fe.to_csv(feat_dir / f"{run_id}.csv.gz", index=False, float_format="%.4f")
 
-    u = CFG["universe"]
-    cand = cand[(cand.sessions >= u["min_history_sessions"]) & (cand.vol_63_ann <= u["max_ann_vol_pct"])
-                & (cand.vol_63_ann >= u["min_ann_vol_pct"])].copy()
-    cand["tags"] = [revalidate_tags(r) for r in cand.to_dict("records")]
-    cand = cand[cand.tags.str.len() > 0].copy()
-    cand["has_rule"] = cand.tags.apply(lambda t: any(x in ("S1", "S2", "S3") for x in t))
-    stage("after_vol_history_retag", cand)
-
-    s3 = CFG["strategies"]["s3"]
-    soft = cand.tags.apply(lambda t: set(t) <= {"S3", "MOM"})   # S3-only or MOM-only: must look clean
-    choppy = (cand.r2_63 < s3["min_r2"]) | (cand.sma21_crosses_63 > s3["max_sma21_crosses"])
-    cand = cand[~(soft & choppy)].copy()
-    stage("after_chop_filter", cand)
-
-    w = CFG["ranking"]
-    cand["smooth_score"] = smoothness_score(cand)
-    cand["final_score"] = w["weight_signal"] * cand.signal_score + w["weight_smoothness"] * cand.smooth_score
-    cand = cand.sort_values(["has_rule", "final_score"], ascending=False).drop_duplicates("symbol")
-    final = (cand.sort_values(["has_rule", "final_score"], ascending=False)
-             .groupby(["supersector", "side"]).head(sel["quota_per_side_per_sector"])
-             .sort_values(["supersector", "side", "final_score"], ascending=[True, True, False]))
-    stage("final", final)
+    best = allc.sort_values("final_score", ascending=False).drop_duplicates("symbol")
+    quota = CFG["selection"]["quota_per_side_per_sector"]
+    final = select(best, quota).sort_values(["supersector", "side", "final_score"], ascending=[True, True, False])
+    log.info("Eligible: %d long, %d short; selected %d",
+             (allc.side == "long").sum(), (allc.side == "short").sum(), len(final))
 
     earn = next_earnings(sorted(set(final.symbol)))
-    final = final.assign(next_earnings=final.symbol.map(earn))
-
-    # last 126 daily log returns for finalists + sector ETFs -> pair correlation / vol ratio downstream
-    rets = {}
-    for s in sorted(set(final.symbol)) + [e for e in etfs if e in hist]:
-        c = hist[s].Close.astype(float)
-        rets[s] = np.log(c).diff().iloc[-126:]
-    pd.DataFrame(rets).round(6).to_csv(OUT / "returns.csv")
-
     records = []
     for r in final.to_dict("records"):
         sym = r["symbol"]
+        raw = snap.loc[sym].to_dict()
+        etf = SECTOR_ETF[r["supersector"]]
+        row = {**raw, **{k: r[k] for k in ("side", "regime", "tags", "final_score", "outcome_score", "pref_score")},
+               "symbol": sym, "sector_etf": etf}
         fn = f"{sym.replace('.', '-')}_{r['side']}.png"
         try:
-            render_chart(sym, r, hist[sym], etf_close.get(SECTOR_ETF[r["supersector"]]), OUT / "charts" / fn)
+            d = pd.DataFrame({k: daily[k][sym] for k in ("Open", "High", "Low", "Close", "Volume")})
+            render(sym, row, d, spx, etf_close.get(etf), OUT / "charts" / fn, CFG)
         except Exception as e:  # noqa: BLE001
             log.warning("chart %s failed: %s", sym, e)
             continue
-        keep = ["symbol", "company", "exchange", "supersector", "industry", "side", "tags", "mcap", "close",
-                "d21", "d50", "d200", "p1w", "p1m", "p3m", "r2_63", "er_63", "sma21_crosses_63",
-                "slope_63_ann", "vol_63_ann", "sessions", "next_earnings", "rs_1m", "rs_3m", "has_rule", "signal_score", "smooth_score", "final_score"]
-        rec = {k: r.get(k) for k in keep}
-        rec["chart"] = f"charts/{fn}"
-        records.append(rec)
+        records.append({
+            "symbol": sym, "company": raw["company"], "exchange": raw["exchange"], "supersector": r["supersector"],
+            "industry": raw["industry"], "side": r["side"], "tags": r["tags"], "regime": r["regime"],
+            "family": r["family"],
+            "mcap": raw["mcap"], "close": float(daily["Close"][sym].iloc[-1]),
+            "sector_state": SECTOR_STATES.get(raw.get("sec_quad")), "sector_turn": raw.get("sec_turn"),
+            "rs_lead": raw.get("rs_lead"), "rs_cross": raw.get("rs_cross"), "rs_hl": raw.get("rs_hl"),
+            "breakout": raw.get("breakout"), "macd_sig": raw.get("macd_sig"),
+            **{k: raw.get(k) for k in ("d21", "d50", "d200", "p1w", "p1m", "p3m", "p6m", "r2_63", "er_63",
+                                       "x21_63", "vol63", "rs_vs_ma", "rssec_vs_ma", "rssec_1m", "rssec_3m",
+                                       "w_d40", "w_slope40", "sec_ratio", "sec_mom", "res126", "sup126",
+                                       "headroom_long", "headroom_short", "sessions")},
+            "next_earnings": earn.get(sym),
+            "outcome_score": r["outcome_score"], "pref_score": r["pref_score"], "final_score": r["final_score"],
+            "chart": f"charts/{fn}",
+        })
 
+    rets = {}
+    for s in sorted(set(final.symbol)) + [e for e in etf_close]:
+        src = daily["Close"][s] if s in daily["Close"] else etf_close[s]
+        rets[s] = np.log(src).diff().iloc[-126:]
+    pd.DataFrame(rets).round(6).to_csv(OUT / "returns.csv")
+
+    w_sides = {s: dict(sorted(((k, v) for k, v in weights[s].items()), key=lambda kv: -abs(kv[1]))[:12])
+               for s in ("long", "short")}
     result = {
         "run_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "source": source,
-        "universe_count": int(len(uni)),
-        "pool_count": int(len(pool)),
+        "run_id": run_id, "data_through": str(today.date()), "source": source,
+        "universe_count": int(len(meta)),
+        "eligible": {"long": int((allc.side == "long").sum()), "short": int((allc.side == "short").sum())},
         "candidate_count": len(records),
-        "history_missing": missing_history,
-        "funnel": funnel,
+        "regime_counts": snap.assign(reg=__import__("features").regime(snap)).reg.value_counts().to_dict(),
+        "model": {"weights_source": weights.get("source", "prior"), "top_weights": w_sides,
+                  "report": {k: v for k, v in report.items() if k != "sides"},
+                  "sides": {s: {k: v for k, v in r.items() if k != "feature_ic"}
+                            | {"top_feature_ic": dict(list(r["feature_ic"].items())[:8])}
+                            for s, r in report.get("sides", {}).items()}},
+        "track_record": track_record(daily["Close"], today),
         "config": CFG,
         "candidates": records,
     }
@@ -531,4 +416,5 @@ def run(universe_fn=tv_universe, history_fn=get_history) -> dict:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", stream=sys.stdout)
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
     run()

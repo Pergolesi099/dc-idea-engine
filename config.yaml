@@ -1,4 +1,4 @@
-# DC idea engine — all tunables live here.
+# DC idea engine v2 — all tunables live here.
 
 universe:
   min_market_cap: 2.0e+9        # USD
@@ -8,36 +8,69 @@ universe:
   max_ann_vol_pct: 80           # 63D annualised vol cap; keeps pair legs balanceable
   min_ann_vol_pct: 12           # below this = pinned by a takeover bid, not a setup
 
-selection:
-  pool_per_side_per_sector: 25  # names per sector/side pulled for full history + smoothness
-  quota_per_side_per_sector: 6  # charts per sector/side (11 sectors x 2 sides x 6 = 132)
+data:
+  history_sessions: 820         # ~3.2 years: 2Y weekly chart + 40W/52W warm-up + learning history
 
+selection:
+  quota_per_side_per_sector: 6  # charts per sector/side (11 sectors x 2 sides x 6 = 132 max)
+
+# Step 1 — long timeframe (weekly). Only names whose weekly picture agrees with the side go on.
+gate:
+  long: [Uptrend, Turning up]
+  short: [Downtrend, Turning down]
+
+# RS Line - Blue Dot (Dean's Pine script), run on weekly bars.
+rs:
+  scale: 100
+  ma_len: 40                    # 40W ~ 200D
+  ma_type: SMA
+  hl_len: 52                    # blue/red dots = 52-week RS high/low
+  cross_lookback_weeks: 8       # an RS/MA cross counts as "recent" for this many weeks
+  dot_lookback_weeks: 4         # a blue/red dot counts as recent for this many weeks
+  lead_price_band_pct: 5        # RS-leads-price: price still within +/-5% of its 40W MA when RS crosses
+
+# Stock vs its own sector ETF, RRG-style (Leading / Improving / Weakening / Lagging).
+sector_rotation:
+  smooth_len: 5                 # 5D EMA of the stock/sector ratio, to stop day-to-day flicker
+  trend_len: 50                 # relative trend = smoothed ratio vs its 50D average
+  mom_len: 10                   # relative momentum = change of that over 10 sessions
+  turn_recent_days: 10          # "just turned Leading/Lagging" window
+
+# Step 2 — daily setups (Dean's guide).
 strategies:
   s1:
-    enabled: true
     mode: follow                # follow = trade the thrust direction; fade = inverse it
-    bonus_200_over_50: true     # rewards the "21 +++ / 50 + / 200 ++" shape
   s2:
-    enabled: true
     perf_field: p3m             # p3m or p1m
-    leader_pct: 0.80            # top 20% of sector on perf -> long pullback candidates
-    laggard_pct: 0.20           # bottom 20% -> short bounce candidates
+    leader_pct: 0.80
+    laggard_pct: 0.20
   s3:
-    enabled: true
     band_pct: 3.0               # |distance from 200D| <= this
-    short_breakdowns: true      # also flag breakdowns through the 200D as shorts
-    min_r2: 0.55                # "straight picture" requirement (63D log-price fit)
-    max_sma21_crosses: 6        # in the last 63 sessions
-
+    min_r2: 0.55                # "straight picture" requirement
   mom:
-    enabled: true               # fill tier: only used for slots S1/S2/S3 leave empty
-    leader_pct: 0.80            # avg of 1W/1M/3M sector percentiles >= this, and above 50D -> long
-    laggard_pct: 0.20           # <= this, and below 50D -> short
+    leader_pct: 0.80
+    laggard_pct: 0.20
 
-ranking:
-  weight_signal: 0.6
-  weight_smoothness: 0.4
+# Step 3 — short-term triggers on the 6M / 3M window.
+triggers:
+  breakout_exclude_days: 5      # resistance/support = 3M or 6M range high/low, excluding the last week
+  breakout_recent_days: 5       # breakout must have happened within this many sessions and still hold
+  breakout_volume_ratio: 1.5    # volume vs 50D average on the breakout days for the "confirmed" bonus
+  macd_recent_days: 3           # MACD histogram flip / turn within this many sessions
+
+learning:
+  horizon: 5                    # sessions; matches the 1-week hold
+  holdout_frac: 0.30            # newest 30% of dates are the out-of-sample test
+  ridge_alpha: 50
+  min_rows: 3000
+  min_ic_gain: 0.003            # new weights must beat current ones out of sample by this much
+  blend: 0.5                    # move halfway towards the fitted weights...
+  max_step: 0.03                # ...but never more than this per weight per week
+  pref_min_labels: 30           # Dean's-eye model switches on after this many labelled legs
+  pref_C: 0.3
+  pref_beta_k: 150              # beta = n / (n + k): his model's share of the ranking
+  pref_beta_max: 0.5
 
 charts:
-  display_sessions: 130         # ~6 months on screen
-  history_sessions: 400         # enough for a valid 200D across the display window
+  weekly_bars: 104              # 2 years
+  daily_bars: 126               # 6 months

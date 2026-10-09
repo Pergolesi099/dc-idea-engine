@@ -3,19 +3,22 @@ name: weekly-scan
 on:
   schedule:
     - cron: "0 5 * * 6"     # Saturday 05:00 UTC = 07:00 Paris (summer) / 06:00 (winter)
-  workflow_dispatch: {}     # "Run workflow" button for manual runs
+  workflow_dispatch: {}     # "Run workflow" button for manual runs (any branch)
 
 permissions:
   contents: write
 
 concurrency:
-  group: weekly-scan
+  group: weekly-scan-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
+    env:
+      # main publishes to `output`; any other branch to `output-<branch>` so tests never touch production
+      OUT_BRANCH: ${{ github.ref_name == 'main' && 'output' || format('output-{0}', github.ref_name) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,28 +30,29 @@ jobs:
       - name: Install
         run: pip install -r requirements.txt
 
-      - name: Scan
+      - name: Scan, learn, chart
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
         run: python scanner/scan.py
 
-      - name: Archive results on main (small JSON + universe cache)
+      - name: Commit learning state and archives to this branch
         run: |
           git config --global user.name  "dc-idea-engine-bot"
           git config --global user.email "actions@users.noreply.github.com"
-          D=$(date -u +%F)
+          D=$(python -c "import json;print(json.load(open('out/results.json'))['run_id'])")
           mkdir -p history data
           cp out/results.json "history/$D.json"
           [ -f out/universe.csv ] && cp out/universe.csv data/universe.csv
-          git add history data
+          git add history data model
           git commit -m "scan $D" || echo "nothing to commit"
-          git push
+          git pull --rebase origin "${{ github.ref_name }}" || true
+          git push origin "HEAD:${{ github.ref_name }}"
 
-      - name: Publish charts to 'output' branch (overwritten weekly, no history bloat)
+      - name: Publish charts to ${{ env.OUT_BRANCH }} (overwritten each run)
         run: |
-          D=$(date -u +%F)
+          D=$(python -c "import json;print(json.load(open('out/results.json'))['run_id'])")
           cd out
-          git init -q -b output
+          git init -q -b "$OUT_BRANCH"
           git add -A
           git commit -qm "scan $D"
-          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" output
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" "$OUT_BRANCH"

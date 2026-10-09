@@ -4,3 +4,4 @@ requests>=2.31
 pyyaml>=6.0
 matplotlib>=3.8
 yfinance>=0.2.54
+scikit-learn>=1.4
