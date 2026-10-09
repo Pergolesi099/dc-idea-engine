@@ -87,7 +87,7 @@ fundamentals:
   news_max: 6
   guidance: true
   guidance_days: 120            # latest earnings release (8-K item 2.02, exhibit 99) within this window
-  sec_user_agent: "dc-idea-engine research bot pergolesi099@users.noreply.github.com"
+                                # SEC wants a real contact: repo secret SEC_USER_AGENT = "Name email"
 
 charts:
   weekly_bars: 104              # 2 years

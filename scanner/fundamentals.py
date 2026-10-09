@@ -106,31 +106,53 @@ def fetch_yahoo(sym: str, ysym: str, with_extras: bool, cfg: dict) -> dict:
     except Exception as e:  # noqa: BLE001
         log.debug("eps hist %s: %s", sym, e)
     try:
-        cut = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=cfg["news_days"])
-        items = []
-        for n in (t.news or [])[:25]:
-            c = n.get("content") or n
-            title = c.get("title")
-            when = c.get("pubDate") or c.get("displayTime")
-            if when:
-                ts = pd.Timestamp(when)
-            elif n.get("providerPublishTime"):
-                ts = pd.Timestamp(n["providerPublishTime"], unit="s", tz="UTC")
-            else:
-                ts = None
-            if ts is not None and ts.tzinfo is None:
-                ts = ts.tz_localize("UTC")
-            if not title or (ts is not None and ts < cut):
-                continue
-            prov = (c.get("provider") or {}).get("displayName") if isinstance(c.get("provider"), dict) else n.get("publisher")
-            items.append({"d": ts.date().isoformat() if ts is not None else None, "t": title[:180],
-                          "s": (c.get("summary") or "")[:280], "p": prov})
-            if len(items) >= cfg["news_max"]:
-                break
-        out["news"] = items
+        out["news"] = fetch_news(sym, ysym, cfg)
     except Exception as e:  # noqa: BLE001
         log.debug("news %s: %s", sym, e)
     return out
+
+
+# ------------------------------------------------------------------ news headlines
+UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"}
+
+
+def fetch_news(sym: str, ysym: str, cfg: dict) -> list[dict]:
+    """Recent headlines: Yahoo Finance search (ticker-tagged news), Yahoo RSS as a fallback."""
+    cut = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=cfg["news_days"])
+    items, seen = [], set()
+
+    def add(ts, title, prov, summary=""):
+        if not title or ts is None or ts < cut:
+            return
+        k = re.sub(r"\W+", "", title.lower())[:60]
+        if k in seen:
+            return
+        seen.add(k)
+        items.append({"d": ts.date().isoformat(), "t": title[:180], "s": (summary or "")[:280], "p": prov})
+    try:
+        r = requests.get("https://query2.finance.yahoo.com/v1/finance/search",
+                         params={"q": ysym, "newsCount": 12, "quotesCount": 0}, headers=UA, timeout=15)
+        for n in (r.json().get("news") or []) if r.ok else []:
+            rel = n.get("relatedTickers") or []
+            if rel and ysym not in rel and sym not in rel:
+                continue
+            add(pd.Timestamp(n["providerPublishTime"], unit="s", tz="UTC") if n.get("providerPublishTime") else None,
+                n.get("title"), n.get("publisher"))
+    except Exception as e:  # noqa: BLE001
+        log.debug("yahoo search news %s: %s", sym, e)
+    if len(items) < 3:
+        try:
+            import xml.etree.ElementTree as ET
+            r = requests.get("https://feeds.finance.yahoo.com/rss/2.0/headline",
+                             params={"s": ysym, "region": "US", "lang": "en-US"}, headers=UA, timeout=15)
+            for it in ET.fromstring(r.content).iter("item") if r.ok else []:
+                ts = pd.Timestamp(it.findtext("pubDate")) if it.findtext("pubDate") else None
+                ts = ts.tz_convert("UTC") if ts is not None and ts.tzinfo else ts
+                add(ts, it.findtext("title"), "Yahoo RSS", html.unescape(it.findtext("description") or ""))
+        except Exception as e:  # noqa: BLE001
+            log.debug("yahoo rss %s: %s", sym, e)
+    items.sort(key=lambda x: x["d"], reverse=True)
+    return items[:cfg["news_max"]]
 
 
 # ------------------------------------------------------------------ FMP (optional, needs FMP_API_KEY)
@@ -271,6 +293,11 @@ def sector_aggregates(df: pd.DataFrame) -> dict:
     out = {}
     d = df[(df.ccy.fillna("USD") == "USD") & df.price.gt(0) & df.mcap.gt(0)].copy()
     d["shares"] = d.mcap / d.price
+    # one-offs (turnarounds, near-zero bases) swamp an aggregate: keep names with EPS growth in [-80%, +300%]
+    for a, b in (("eps0", "eps1"), ("eps1", "eps2")):
+        g = (d[b] - d[a]) / d[a].abs()
+        bad = g.notna() & ((g < -0.8) | (g > 3.0))
+        d.loc[bad, b if a == "eps0" else "eps2"] = np.nan
     for ss, g in d.groupby("supersector"):
         e0, e1, e2 = (g.shares * g.eps0), (g.shares * g.eps1), (g.shares * g.eps2)
         ok1 = g.eps1.notna()
@@ -348,7 +375,10 @@ def collect(cands: list[str], meta: pd.DataFrame, price: pd.Series, run_id: str,
     context = {}
     if fc.get("guidance", True):
         try:
-            sec = sec_fn or Sec(fc.get("sec_user_agent", "dc-idea-engine research bot"))
+            ua = os.environ.get("SEC_USER_AGENT")       # "Name email": SEC requires a real contact
+            if not sec_fn and not ua:
+                raise RuntimeError("SEC_USER_AGENT secret not set; skipping earnings-release guidance")
+            sec = sec_fn or Sec(ua)
             if hasattr(sec, "load_ciks"):
                 sec.load_ciks()
             for s in cands:
