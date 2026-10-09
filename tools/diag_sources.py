@@ -1,33 +1,25 @@
 """Diagnostics for the fundamentals sources (run on GitHub Actions; prints what each source returns)."""
-import json, sys, traceback, logging
-sys.path.insert(0, "scanner")
-logging.basicConfig(level=logging.DEBUG)
-import yaml, yfinance as yf
-import fundamentals as FU
-cfg = yaml.safe_load(open("config.yaml"))["fundamentals"]
+import json, sys, traceback
+import requests
 out = []
-for s in ("AAPL", "CAT"):
-    t = yf.Ticker(s)
-    try:
-        n = t.news
-        out.append(f"news {s}: {len(n or [])} items; first keys {list((n or [{}])[0].keys())[:8]}")
-        out.append(json.dumps((n or [None])[0], default=str)[:900])
-    except Exception:
-        out.append(f"news {s} error: " + traceback.format_exc()[-600:])
-    try:
-        out.append(f"fetch_yahoo {s}: " + json.dumps(FU.fetch_yahoo(s, s, True, cfg), default=str)[:900])
-    except Exception:
-        out.append("fetch_yahoo error: " + traceback.format_exc()[-600:])
-sec = FU.Sec(cfg["sec_user_agent"])
-try:
-    sec.load_ciks(); out.append(f"ciks: {len(sec.ciks)}")
-    for s in ("CAT", "AAPL", "ETN"):
+UAS = ["dc-idea-engine research bot pergolesi099@users.noreply.github.com",
+       "DC Idea Engine pergolesi099@users.noreply.github.com",
+       "Pergolesi099 Research pergolesi099@users.noreply.github.com",
+       "Mozilla/5.0 (compatible; dc-idea-engine; +https://github.com/Pergolesi099) pergolesi099@users.noreply.github.com"]
+for ua in UAS:
+    for url in ("https://www.sec.gov/files/company_tickers.json", "https://data.sec.gov/submissions/CIK0000018230.json"):
         try:
-            g = sec.guidance(s, cfg["guidance_days"])
-            out.append(f"guidance {s}: " + json.dumps(g)[:1200])
-        except Exception:
-            out.append(f"guidance {s} error: " + traceback.format_exc()[-800:])
-except Exception:
-    out.append("sec error: " + traceback.format_exc()[-800:])
+            r = requests.get(url, headers={"User-Agent": ua, "Accept-Encoding": "gzip, deflate"}, timeout=20)
+            out.append(f"SEC {r.status_code} {url[-35:]} UA={ua[:40]} body={r.text[:120]!r}")
+        except Exception as e:
+            out.append(f"SEC err {e}")
+for url in ("https://feeds.finance.yahoo.com/rss/2.0/headline?s=CAT&region=US&lang=en-US",
+            "https://news.google.com/rss/search?q=Caterpillar+CAT+stock+when:21d&hl=en-US&gl=US&ceid=US:en",
+            "https://query2.finance.yahoo.com/v1/finance/search?q=CAT&newsCount=8&quotesCount=0"):
+    try:
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=20)
+        out.append(f"NEWS {r.status_code} {url[:60]} len={len(r.text)} head={r.text[:400]!r}")
+    except Exception as e:
+        out.append(f"NEWS err {url[:50]} {e}")
 open("diag.txt", "w").write("\n".join(out))
 print("\n".join(out))
