@@ -1,0 +1,173 @@
+{
+ "market_note": "Breadth split: 429 Uptrend vs 417 Downtrend and 284 Turning down. Leadership in refiners, shipping, hotel REITs and select software; building products, construction materials and packaged food lag. Q3 earnings start 10/21: several legs report inside the hold. Health Care and Utilities left empty: no correlated A/B pair.",
+ "pairs": [
+  {
+   "long": "ECPG",
+   "short": "PFSI",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 48,
+   "thesis": "Specialty finance RV: ECPG basing in Leading trend vs PFSI breaking 6M support, Lagging; corr 0.36."
+  },
+  {
+   "long": "DRH",
+   "short": "AKR",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 43,
+   "thesis": "REIT RV: DRH blue-dot RS above rising 40W vs AKR rolling under 40W, 6M break; corr 0.53."
+  },
+  {
+   "long": "MTCH",
+   "short": "LBTYA",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 49,
+   "thesis": "MTCH RS crossed 40W MA, holding 50D vs LBTYA 6M support break, Lagging; corr 0.29."
+  },
+  {
+   "long": "BBY",
+   "short": "PATK",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 45,
+   "thesis": "BBY pullback to 50D in uptrend vs PATK breaking 6M support, Lagging; BBY Weakening vs sector is the flag. Corr 0.39."
+  },
+  {
+   "long": "KO",
+   "short": "MKC",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 57,
+   "thesis": "Defensive staples RV: KO above rising 40W at 50D vs MKC rejected at 200D below falling 40W; corr 0.43."
+  },
+  {
+   "long": "PM",
+   "short": "MZTI",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 55,
+   "thesis": "PM range breakout, Leading vs MZTI flagging above 6M support, Lagging new; corr 0.32."
+  },
+  {
+   "long": "CHEF",
+   "short": "UNFI",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 48,
+   "thesis": "Food distributors: CHEF tight flag under 6M high vs UNFI RS crossed down (Lead) below 21/50D; corr 0.36."
+  },
+  {
+   "long": "DINO",
+   "short": "EXE",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 43,
+   "thesis": "Refiner leadership vs gas laggard: DINO fresh 6M breakout vs EXE below falling 40W; EXE short trigger not fired. Corr 0.20."
+  },
+  {
+   "long": "HGTY",
+   "short": "FG",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 51,
+   "thesis": "Insurance: HGTY reclaimed 40W, breaking 6M high vs FG 6M breakdown (extended d21 -12, scale in). Corr 0.22."
+  },
+  {
+   "long": "RGA",
+   "short": "RNST",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 45,
+   "thesis": "RGA clearing 6M high, RS crossed up vs RNST RS breaking down (Lead) at 40W, trigger pending; corr 0.27."
+  },
+  {
+   "long": "GCT",
+   "short": "QXO",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 53,
+   "thesis": "Wholesale distribution RV: GCT 6M breakout vs QXO 6M support broken, Lagging new; GCT Weakening vs sector. Corr 0.28."
+  },
+  {
+   "long": "HST",
+   "short": "CURB",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 43,
+   "thesis": "REIT RV: HST reclaiming 50D above 40W vs CURB RS crossed below MA (Lead), 3M break; corr 0.29."
+  },
+  {
+   "long": "VRSN",
+   "short": "MMYT",
+   "conviction": 2,
+   "type": "industry",
+   "split_long": 62,
+   "thesis": "VRSN MACD flipping up under 6M vs MMYT rejected at 200D, Lagging; corr 0.15, vol ratio 0.60 (edge). Both report 10/22-10/27."
+  },
+  {
+   "long": "LIND",
+   "short": "HAYW",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 35,
+   "thesis": "LIND 6M breakout but d21 +18 vs HAYW 6M support break, Lagging new; vol ratio 1.82, size down the long. Corr 0.31."
+  },
+  {
+   "long": "WLY",
+   "short": "LEVI",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 45,
+   "thesis": "WLY pullback held 3M support, MACD up vs LEVI post-earnings 6M break; weak hedge, corr 0.07."
+  },
+  {
+   "long": "TBBB",
+   "short": "HRL",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 40,
+   "thesis": "TBBB blue-dot 6M breakout vs HRL breaking 6M support; HRL sector Improving, corr 0.13."
+  },
+  {
+   "long": "VLO",
+   "short": "GLNG",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 39,
+   "thesis": "VLO 6M breakout, Leading vs GLNG RS under MA (Lead) on 6M support, untriggered; corr 0.13. Same refiner theme as DINO/EXE."
+  },
+  {
+   "long": "PWR",
+   "short": "WSO",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 45,
+   "thesis": "PWR reclaimed 21/50D, 3M 725 overhead vs WSO gapped through 6M support, Lagging; corr 0.15."
+  },
+  {
+   "long": "SSRM",
+   "short": "EXP",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 33,
+   "thesis": "SSRM holding 50D in uptrend vs EXP breaking 6M support, Lagging new; gold vs aggregates, vol ratio 2.04: size by vol. Corr 0.34."
+  },
+  {
+   "long": "HPE",
+   "short": "ATRO",
+   "conviction": 2,
+   "type": "sector",
+   "split_long": 48,
+   "thesis": "HPE RS leader but d21 +15 vs ATRO RS crossed below MA (Lead) on 3M support; ATRO is aerospace in Tech. Corr 0.46."
+  },
+  {
+   "long": "OKTA",
+   "short": "APP",
+   "conviction": 2,
+   "type": "industry",
+   "split_long": 47,
+   "thesis": "Software RV: OKTA vertical 6M breakout (d21 +15) vs APP breaking base below falling 40W; corr 0.19."
+  }
+ ]
+}

@@ -1,0 +1,498 @@
+{
+ "IDT|long": [
+  "B",
+  "Blue-dot RS above 40W; earnings gap, d21 +11%, sitting at 6M high"
+ ],
+ "VRSN|long": [
+  "B",
+  "Above rising 40W, RS barely over MA; choppy, MACD flipping up under 6M"
+ ],
+ "MRX|long": [
+  "B",
+  "Strong 40W trend, RS highs; holding 50D but sector Weakening, MACD red"
+ ],
+ "IRDM|long": [
+  "B",
+  "Above rising 40W; flat base under 3M, RS rolling, MACD fading"
+ ],
+ "MTCH|long": [
+  "B",
+  "RS crossed above 40W MA; pullback holding 50D, MACD still negative"
+ ],
+ "CNK|long": [
+  "C",
+  "RS hugging 40W MA, choppy; sector Weakening, range just under 6M high"
+ ],
+ "TMUS|short": [
+  "B",
+  "Below falling 40W, RS lows; spectrum-news gap through 6M support, d21 -11%"
+ ],
+ "LBTYA|short": [
+  "A",
+  "Below falling 40W, RS lows, Lagging; 6M support break, MACD red"
+ ],
+ "STUB|short": [
+  "C",
+  "Downtrend but bouncing off 6M support, d21 +7%, MACD up"
+ ],
+ "CARG|short": [
+  "C",
+  "Choppy weekly around 40W; sitting on 3M/6M support"
+ ],
+ "MMYT|short": [
+  "A",
+  "Below falling 40W, RS lows, Lagging; rejected at 200D, room to 6M"
+ ],
+ "TIGO|short": [
+  "B",
+  "Still at rising 40W, RS crossed down; gap lower, d21 -12% into 200D"
+ ],
+ "FIGS|long": [
+  "B",
+  "RS crossed up, above rising 40W; reclaim 21/50D but d21 +16%, under 3M/6M"
+ ],
+ "LIND|long": [
+  "B",
+  "Blue-dot RS, rising 40W; 6M breakout but d21 +18%, extended"
+ ],
+ "SIG|long": [
+  "C",
+  "Choppy reclaim of flat 40W; sector Weakening, stalling at 6M high"
+ ],
+ "GME|long": [
+  "C",
+  "Falling 40W just reclaimed; V-spike, d21 +12% straight into 6M high"
+ ],
+ "BBY|long": [
+  "B",
+  "Above rising 40W, RS rolling; pullback to 50D, MACD red, sector Weakening"
+ ],
+ "WLY|long": [
+  "A",
+  "Above rising 40W, RS over MA; pullback held 3M support, MACD flipping up"
+ ],
+ "HAYW|short": [
+  "A",
+  "Lost 40W, RS lows, Lagging new; 6M support break, MACD red"
+ ],
+ "PATK|short": [
+  "A",
+  "Below falling 40W, RS lows, Lagging; breaking 6M support"
+ ],
+ "WYNN|short": [
+  "A",
+  "Below falling 40W, RS lows, Lagging; 6M support break, MACD red"
+ ],
+ "LEVI|short": [
+  "B",
+  "Just lost 40W, RS lows; post-earnings 6M break, sector Improving"
+ ],
+ "AN|short": [
+  "C",
+  "Below 40W but downgrade gap, no base, parked on 6M support"
+ ],
+ "QSR|short": [
+  "C",
+  "Still at rising 40W; RS crossed down but sitting on 6M support"
+ ],
+ "TBBB|long": [
+  "A",
+  "Blue-dot RS, rising 40W; 6M breakout, d21 +6% (rotation Weakening flag)"
+ ],
+ "ELF|long": [
+  "B",
+  "RS crossed up, 40W turning; holding 21D but just under 6M level"
+ ],
+ "PM|long": [
+  "B",
+  "Above rising 40W, RS just crossed up; range breakout, 6M high ~3% above"
+ ],
+ "CHEF|long": [
+  "B",
+  "Rising 40W, RS highs; tight flag under 6M high, MACD flat, sector Weakening"
+ ],
+ "KO|long": [
+  "B",
+  "Above rising 40W, RS over MA; pullback to 50D, MACD flat, sector Weakening"
+ ],
+ "MO|long": [
+  "C",
+  "RS flat on 40W MA, choppy; MACD flipping up under 6M"
+ ],
+ "SFD|short": [
+  "B",
+  "Lost 40W, RS lows; parked on 6M support, MACD turning up"
+ ],
+ "HRL|short": [
+  "B",
+  "Below falling 40W, RS lows; breaking 6M support, MACD ticking up, sector Improving"
+ ],
+ "MZTI|short": [
+  "B",
+  "Below falling 40W, RS lows, Lagging new; flag just above 6M support"
+ ],
+ "MKC|short": [
+  "B",
+  "Below falling 40W, RS lows; rejected at 200D, d21 -6%, near 6M support"
+ ],
+ "REYN|short": [
+  "C",
+  "Whipsaw around flat 40W; basing above 3M support, MACD up"
+ ],
+ "UNFI|short": [
+  "B",
+  "Still at rising 40W, RS crossed down; below 21/50D, MACD flat"
+ ],
+ "MPC|long": [
+  "B",
+  "Parabolic above rising 40W, RS blue dots; 6M breakout but d21 >10, extended"
+ ],
+ "CVI|long": [
+  "B",
+  "Vertical above 40W, RS new highs; 6M breakout, sector Weakening, extended"
+ ],
+ "DINO|long": [
+  "A",
+  "Above rising 40W, RS leadership; fresh 6M breakout, MACD flipping up"
+ ],
+ "VLO|long": [
+  "A",
+  "Above rising 40W, RS blue dots; 6M breakout, MACD up, sector Leading"
+ ],
+ "PSX|long": [
+  "B",
+  "Above rising 40W, RS highs; pressing 6M high, sector Weakening vs XLE"
+ ],
+ "OVV|long": [
+  "C",
+  "Above 40W but choppy range; RS chopping its MA, stuck below 6M high"
+ ],
+ "GLNG|short": [
+  "B",
+  "Price testing rising 40W, RS under MA; sitting on 6M support, not broken"
+ ],
+ "EPD|short": [
+  "B",
+  "Price at 40W, RS rolled under MA; testing 3M/6M support, trigger pending"
+ ],
+ "EXE|short": [
+  "B",
+  "Below falling 40W, RS red dots; bounced off 6M support, MACD turning up"
+ ],
+ "AM|short": [
+  "C",
+  "Choppy range above rising 40W; RS under MA but no support break"
+ ],
+ "HCC|short": [
+  "C",
+  "Wide choppy swings above rising 40W; RS whipsawing MA, mid-range"
+ ],
+ "CNR|short": [
+  "C",
+  "Flat 40W, choppy two-way action; mid-range between 6M levels"
+ ],
+ "XP|long": [
+  "C",
+  "Gap +50% on Brazil election off flat base; event gap, no base"
+ ],
+ "HGTY|long": [
+  "A",
+  "Reclaimed rising 40W, RS crossed up; breaking 6M high, MACD flipping up"
+ ],
+ "ASST|long": [
+  "C",
+  "Crypto-treasury blow-off history; 40W barely turning, rolling under 6M high"
+ ],
+ "BWIN|long": [
+  "C",
+  "Deal-pinned: $7.7B buyout, flat under 6M level"
+ ],
+ "ECPG|long": [
+  "B",
+  "Strong above rising 40W, RS leading; basing under 6M high, choppy"
+ ],
+ "RGA|long": [
+  "A",
+  "Above rising 40W, RS crossed up; clearing 6M high, MACD flipping up"
+ ],
+ "FG|short": [
+  "B",
+  "Below falling 40W, RS red dots; broke 6M support but d21 -12 extended"
+ ],
+ "PFSI|short": [
+  "A",
+  "Below falling 40W, RS red dots; breaking 6M support, MACD negative"
+ ],
+ "MCHB|short": [
+  "B",
+  "Price still at rising 40W, RS crossed down; broke 3M support, MACD red"
+ ],
+ "RNST|short": [
+  "B",
+  "Price at rising 40W, RS breaking down; above 3M support, trigger pending"
+ ],
+ "WSC|short": [
+  "C",
+  "Below falling 40W but sitting on 6M support, MACD positive, sector Improving"
+ ],
+ "AGO|short": [
+  "C",
+  "Below falling 40W; bouncing off 6M support, MACD flipping up, sector Improving"
+ ],
+ "HAE|long": [
+  "B",
+  "RS crossed up, 40W rising; gap breakout of 6M, d21 >10"
+ ],
+ "TXG|long": [
+  "C",
+  "Parabolic, reversal bar off 6M high; MACD hist collapsing, exhaustion"
+ ],
+ "NVAX|long": [
+  "C",
+  "Choppy 40W, vaccine-headline spike d21 +20; biotech gap, no base"
+ ],
+ "ATRC|long": [
+  "B",
+  "Above rising 40W, RS strong; pulling back from 6M high, MACD red"
+ ],
+ "ALVO|long": [
+  "B",
+  "Early turn: reclaimed 40W, RS crossed MA; under 6M high, MACD soft"
+ ],
+ "CON|long": [
+  "A",
+  "Above rising 40W, RS blue dots; breaking 6M high, MACD flipping up"
+ ],
+ "IRON|short": [
+  "B",
+  "Broke 40W, RS red dot under MA; cracking 6M support, biotech event risk"
+ ],
+ "BBIO|short": [
+  "C",
+  "Just under flattening 40W; into 3M/6M support, MACD flipping up"
+ ],
+ "NAMS|short": [
+  "C",
+  "Below falling 40W but sitting on 6M support, MACD positive, binary trial"
+ ],
+ "ACAD|short": [
+  "C",
+  "Event gap down -29%, d21 -14; on 6M support, extended"
+ ],
+ "CVS|short": [
+  "C",
+  "At rising 40W, RS under MA; holding 200D/3M support, MACD turning up"
+ ],
+ "VERA|short": [
+  "B",
+  "Below falling 40W, RS red; testing 6M support, biotech binary risk"
+ ],
+ "ECO|long": [
+  "B",
+  "Parabolic above rising 40W, RS blue dots; 6M breakout but d21 +11.5 extended"
+ ],
+ "DHT|long": [
+  "A",
+  "Above rising 40W, RS new highs; sector Leading new, 6M breakout, MACD up"
+ ],
+ "GCT|long": [
+  "B",
+  "RS reclaimed 40W, price above 40W; 6M breakout, sector Weakening flag"
+ ],
+ "LPG|long": [
+  "C",
+  "Above rising 40W but stalling under 6M 60; MACD negative, sector Weakening"
+ ],
+ "CRL|long": [
+  "C",
+  "Above rising 40W, RS strong; wick rejection at 6M 303, sector Weakening"
+ ],
+ "PWR|long": [
+  "B",
+  "Above rising 40W, RS back over MA; reclaimed 21/50D, 3M 725 overhead"
+ ],
+ "QXO|short": [
+  "A",
+  "Below falling 40W, RS red dots; sector Lagging new, 6M support broken"
+ ],
+ "WSO|short": [
+  "A",
+  "Below falling 40W, RS lows; gapped through 6M support, MACD down, Lagging"
+ ],
+ "ESAB|short": [
+  "B",
+  "Below falling 40W, RS lows; sitting on 6M support, MACD up, sector Improving"
+ ],
+ "ATMU|short": [
+  "B",
+  "RS crossed under 40W, 40W rolling; 6M break but MACD positive, sector Improving"
+ ],
+ "SARO|short": [
+  "B",
+  "Below falling 40W, RS lows, sector Lagging; 6M break but extended, p1m -15%"
+ ],
+ "PFGC|short": [
+  "C",
+  "Price under flat 40W, RS weak; bouncing off 3M support, MACD rising"
+ ],
+ "AUGO|long": [
+  "B",
+  "Above rising 40W, RS over MA; news gap into 3M 93.5, MACD just turning"
+ ],
+ "SSRM|long": [
+  "B",
+  "Above rising 40W, RS over MA; pullback holding 50D, MACD negative, Weakening"
+ ],
+ "TRLV|long": [
+  "C",
+  "Choppy above 40W; lost 21D, MACD negative, cannabis policy event-driven"
+ ],
+ "CTVA|long": [
+  "C",
+  "Choppy over 40W, R2 0; spin-off spike faded at 6M 14.4"
+ ],
+ "NUE|long": [
+  "C",
+  "Above rising 40W but RS fading; choppy around 21/50D, no trigger"
+ ],
+ "STLD|long": [
+  "C",
+  "Above 40W, RS drifting to MA; under 50D, chop, earnings 10/19"
+ ],
+ "AMRZ|short": [
+  "B",
+  "Below falling 40W, RS lows; 6M support breaking, MACD up, sector Improving"
+ ],
+ "EXP|short": [
+  "A",
+  "Below falling 40W, RS red dots; sector Lagging new, 6M support breaking"
+ ],
+ "KNF|short": [
+  "B",
+  "Below falling 40W, RS lows; on 6M support, MACD up, activist event risk"
+ ],
+ "GPK|short": [
+  "A",
+  "Below falling 40W, RS lows; sector Lagging new, 6M support broken"
+ ],
+ "CALM|short": [
+  "B",
+  "Below falling 40W, RS lows, Lagging; testing 6M 63.5 after 1M -13%"
+ ],
+ "APD|short": [
+  "C",
+  "Price at rising 40W, RS under MA; chop above 6M support, MACD up"
+ ],
+ "PEB|long": [
+  "B",
+  "Above rising 40W, RS above MA; tight base just under 6M high, untriggered"
+ ],
+ "DRH|long": [
+  "B",
+  "Above rising 40W, blue RS dots; basing on 50D, 6M high ~8% overhead"
+ ],
+ "LTC|long": [
+  "C",
+  "Uptrend but sector Weakening; rejected at 6M high, MACD rolling negative"
+ ],
+ "HST|long": [
+  "B",
+  "Above 40W, RS retesting MA; reclaiming 50D, MACD positive, choppy since peak"
+ ],
+ "OPEN|short": [
+  "B",
+  "Below falling 40W, red dots; extended (d21 -11) into 6M support"
+ ],
+ "AKR|short": [
+  "A",
+  "Rolled under 40W, RS red dots; breaking 6M support, MACD negative"
+ ],
+ "STWD|short": [
+  "B",
+  "Below falling 40W; vertical capitulation through 6M support, extended"
+ ],
+ "HGV|short": [
+  "C",
+  "Below 40W but extended, sitting on 6M support, MACD turning up; sector Improving"
+ ],
+ "CURB|short": [
+  "B",
+  "Weekly only turning, RS crossed below MA; broke 3M support/200D, 6M below"
+ ],
+ "NMRK|short": [
+  "B",
+  "Below falling 40W, red dots; breaking 6M support but stretched (1M -14%)"
+ ],
+ "OKTA|long": [
+  "B",
+  "Above rising 40W, RS leading; 6M breakout but d21 +15, vertical"
+ ],
+ "SDGR|long": [
+  "C",
+  "Blow-off reversal at 6M high, MACD flipped red; sector Weakening"
+ ],
+ "HPE|long": [
+  "B",
+  "Above rising 40W, RS leading; poking 6M high, extended d21 +15"
+ ],
+ "RNG|long": [
+  "C",
+  "Strong weekly but stalling under 6M high, MACD red; sector Weakening"
+ ],
+ "CRWD|long": [
+  "B",
+  "Above rising 40W, blue RS dots; at 6M breakout, MACD fading; sector Weakening"
+ ],
+ "P|long": [
+  "C",
+  "Parabolic blow-off, d21 +25 above 6M breakout; exhaustion risk"
+ ],
+ "JOBY|short": [
+  "B",
+  "Below falling 40W, red dots; breaking 6M support but d21 -10"
+ ],
+ "REZI|short": [
+  "B",
+  "Below falling 40W, red dots; breaking 6M support; sector Improving flag"
+ ],
+ "CRUS|short": [
+  "B",
+  "Rolled under 40W, RS red; failed 50D bounce, MACD flipped down, 6M support close"
+ ],
+ "TTD|short": [
+  "C",
+  "Long-faded downtrend; compressed on 6M support, sector Improving"
+ ],
+ "APP|short": [
+  "B",
+  "Below falling 40W, red dots; breaking base, MACD flipping down, 6M support ~5% below"
+ ],
+ "ATRO|short": [
+  "B",
+  "Weekly only turning, RS crossed below MA; sitting on 3M support"
+ ],
+ "ORA|short": [
+  "B",
+  "Below falling 40W, red dots; drifting into 6M support, MACD flat"
+ ],
+ "AVA|short": [
+  "B",
+  "Rolled under 40W, red dots; bounced off 6M support, MACD flipping up"
+ ],
+ "PCG|short": [
+  "C",
+  "Gap-driven break, now bouncing off 6M support, MACD up; sector Improving"
+ ],
+ "NRG|short": [
+  "C",
+  "Below falling 40W but +13% bounce off 6M support, MACD up"
+ ],
+ "CTRI|short": [
+  "C",
+  "Basing on 6M support, MACD positive; Leading vs sector"
+ ],
+ "CWT|short": [
+  "C",
+  "Choppy around flat 40W for two years; sitting on 3M support"
+ ]
+}
