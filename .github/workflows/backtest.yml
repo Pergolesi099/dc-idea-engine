@@ -1,0 +1,34 @@
+name: backtest
+
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: "Name for the result file (e.g. v2.2-vs-v2.1)"
+        default: "backtest"
+
+permissions:
+  contents: write
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Replay select -> pair -> one-week P&L over the price history
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: python tools/backtest.py "bt/${{ inputs.label }}.json"
+      - name: Publish to the backtest branch (overwritten each run)
+        run: |
+          cd bt
+          git init -q -b backtest
+          git add -A
+          git -c user.name=dc-idea-engine-bot -c user.email=actions@users.noreply.github.com commit -qm "backtest ${{ inputs.label }} @ ${{ github.ref_name }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" backtest
