@@ -78,6 +78,17 @@ learning:
   pref_beta_k: 150              # beta = n / (n + k): his model's share of the ranking
   pref_beta_max: 0.5
 
+# v2.2 risk rules. enabled: false reproduces v2.1 selection exactly (used by the backtest baseline).
+risk:
+  enabled: true
+  short_knife_max_below21: 3.0  # shorts: price at most 3% below its 21D (no falling knives)
+  short_require_bounce: true    # shorts: 1W or 2W return > 0 (short into a bounce, not after a collapse)
+  short_tags_barred: [MOM]      # momentum-laggard shorts barred
+  stretch_max_sigma: 2.0        # no entry > 2 monthly sigmas beyond the 21D in the trade's direction
+  earnings_block_days: 7        # drop legs reporting within 7 days of the Monday entry (0 = off)
+  beta_len: 60                  # sessions for each leg's beta vs the S&P 500
+  min_conviction: 3             # pairs below this are not published
+
 # Fundamentals for the shortlisted candidates (Yahoo; FMP surprises if FMP_API_KEY is set; SEC EDGAR guidance).
 fundamentals:
   enabled: true

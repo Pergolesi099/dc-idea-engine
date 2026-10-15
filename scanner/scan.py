@@ -373,11 +373,35 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
 
     best = allc.sort_values("final_score", ascending=False).drop_duplicates("symbol")
     quota = CFG["selection"]["quota_per_side_per_sector"]
-    final = select(best, quota).sort_values(["supersector", "side", "final_score"], ascending=[True, True, False])
-    log.info("Eligible: %d long, %d short; selected %d",
-             (allc.side == "long").sum(), (allc.side == "short").sum(), len(final))
+    rk = CFG.get("risk") or {}
+    blk = rk.get("earnings_block_days", 0) if rk.get("enabled") else 0
+    earn: dict = {}
+    blocked: set = set()
+    final = select(best, quota)
+    for _ in range(3):   # earnings gate: drop legs reporting inside the first week, refill, re-check new names
+        new = sorted(set(final.symbol) - set(earn))
+        if not new:
+            break
+        earn.update(next_earnings(new))
+        if not blk:
+            break
+        lim = today.date() + dt.timedelta(days=blk + 3)   # Friday data -> Monday entry + blk days
+        hit = {s for s, d in earn.items() if d and dt.date.fromisoformat(d) <= lim}
+        if not (hit - blocked):
+            break
+        blocked |= hit
+        final = select(best[~best.symbol.isin(blocked)], quota)
+    final = final.sort_values(["supersector", "side", "final_score"], ascending=[True, True, False])
+    log.info("Eligible: %d long, %d short; earnings-blocked %d; selected %d",
+             (allc.side == "long").sum(), (allc.side == "short").sum(), len(blocked), len(final))
 
-    earn = next_earnings(sorted(set(final.symbol)))
+    lr = np.log(daily["Close"]).diff()
+    lspx = np.log(spx).diff()
+    bl = rk.get("beta_len", 60)
+    betas = {}
+    for sym in set(final.symbol):
+        j = pd.concat([lr[sym], lspx], axis=1).dropna().iloc[-bl:]
+        betas[sym] = float(j.iloc[:, 0].cov(j.iloc[:, 1]) / j.iloc[:, 1].var()) if len(j) > 20 else None
     # fundamentals, sector aggregates, news + earnings-release guidance (best effort, never fatal)
     import fundamentals
     try:
@@ -412,7 +436,7 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
                                        "x21_63", "vol63", "rs_vs_ma", "rssec_vs_ma", "rssec_1m", "rssec_3m",
                                        "w_d40", "w_slope40", "sec_ratio", "sec_mom", "res126", "sup126",
                                        "headroom_long", "headroom_short", "sessions")},
-            "next_earnings": earn.get(sym), "fund": fund.get(sym),
+            "next_earnings": earn.get(sym), "fund": fund.get(sym), "beta": betas.get(sym), "p2w": raw.get("p2w"),
             "outcome_score": r["outcome_score"], "pref_score": r["pref_score"], "final_score": r["final_score"],
             "chart": f"charts/{fn}",
         })
@@ -433,6 +457,7 @@ def run(universe_fn=tv_universe, history_fn=get_history, learn_enabled: bool = T
         "universe_count": int(len(meta)),
         "eligible": {"long": int((allc.side == "long").sum()), "short": int((allc.side == "short").sum())},
         "candidate_count": len(records),
+        "earnings_blocked": sorted(blocked),
         "regime_counts": snap.assign(reg=__import__("features").regime(snap)).reg.value_counts().to_dict(),
         "model": {"weights_source": weights.get("source", "prior"), "top_weights": w_sides,
                   "report": {k: v for k, v in report.items() if k != "sides"},

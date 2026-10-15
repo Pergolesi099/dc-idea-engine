@@ -152,7 +152,7 @@ def compute_panels(daily: dict[str, pd.DataFrame], spx_close: pd.Series, sector_
     out["d50"] = ((c / s50 - 1) * 100).astype(F32)
     out["d200"] = ((c / s200 - 1) * 100).astype(F32)
     out["ext21"] = out["d21"].abs()
-    for k, n in (("p1w", 5), ("p1m", 21), ("p3m", 63), ("p6m", 126)):
+    for k, n in (("p1w", 5), ("p2w", 10), ("p1m", 21), ("p3m", 63), ("p6m", 126)):
         out[k] = ((c / c.shift(n) - 1) * 100).astype(F32)
     lr = np.log(c)
     out["vol63"] = (lr.diff().rolling(63, min_periods=63).std() * np.sqrt(252) * 100).astype(F32)

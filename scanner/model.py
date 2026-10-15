@@ -65,7 +65,34 @@ def tag_frame(df: pd.DataFrame, side: str, cfg: dict) -> pd.DataFrame:
     t["SECT"] = (df.sec_turn * sg == 1) & (df.rssec_vs_ma * sg > 0)   # daily turn agrees with weekly sector RS
     t["BO"] = df.breakout * sg > 0
     t["MACD"] = df.macd_sig * sg > 0
+    r = cfg.get("risk") or {}
+    if r.get("enabled") and not L:
+        for tg in r.get("short_tags_barred", []):        # e.g. MOM: momentum-laggard shorts = falling knives
+            t[tg] = False
     return t.fillna(False)
+
+
+def risk_mask(df: pd.DataFrame, side: str, cfg: dict) -> pd.Series:
+    """v2.2 risk rules (all off when risk.enabled is false, which reproduces v2.1 selection).
+    - stretch: no entry more than `stretch_max_sigma` monthly sigmas beyond the 21D in the trade's direction
+    - shorts: no falling knives (price at most `short_knife_max_below21` % below its 21D) and a bounce
+      required (1W or 2W return > 0): short into a bounce, not after a collapse."""
+    r = cfg.get("risk") or {}
+    ok = pd.Series(True, index=df.index)
+    if not r.get("enabled"):
+        return ok
+    sg = 1 if side == "long" else -1
+    sm = r.get("stretch_max_sigma")
+    if sm:
+        sigma_m = df.vol63 / np.sqrt(12)
+        ok &= ~((df.d21 * sg) / sigma_m > sm)
+    if side == "short":
+        k = r.get("short_knife_max_below21")
+        if k is not None:
+            ok &= df.d21 >= -k
+        if r.get("short_require_bounce"):
+            ok &= (df.p1w > 0) | (df.p2w > 0)
+    return ok.fillna(False)
 
 
 def side_table(df: pd.DataFrame, side: str, cfg: dict, gated: bool = True) -> pd.DataFrame:
@@ -78,7 +105,8 @@ def side_table(df: pd.DataFrame, side: str, cfg: dict, gated: bool = True) -> pd
     if gated:
         ok &= (gate(reg, side, cfg) & tags[TAGS].any(axis=1)
                & (df.sessions >= u["min_history_sessions"])
-               & df.vol63.between(u["min_ann_vol_pct"], u["max_ann_vol_pct"]))
+               & df.vol63.between(u["min_ann_vol_pct"], u["max_ann_vol_pct"])
+               & risk_mask(df, side, cfg))
     sub = df[ok].copy()
     if sub.empty:
         return sub
