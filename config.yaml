@@ -4,7 +4,7 @@
 # engine-v<version> is created automatically on push to main and freezes code + config + weights.
 
 engine:
-  version: "2.2"
+  version: "2.3"
 
 universe:
   min_market_cap: 2.0e+9        # USD
@@ -66,6 +66,7 @@ triggers:
   macd_recent_days: 3           # MACD histogram flip / turn within this many sessions
 
 learning:
+  outcome_mode: shadow          # shadow = priors rank, outcome learner only reports (v2.3); live = learner sets weights
   horizon: 5                    # sessions; matches the 1-week hold
   holdout_frac: 0.30            # newest 30% of dates are the out-of-sample test
   ridge_alpha: 50

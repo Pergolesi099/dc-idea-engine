@@ -220,6 +220,9 @@ def feedback_summary(root: pathlib.Path, report: dict, pref: dict) -> str:
         lines.append("- Leans against: " + ", ".join(pref["top_dislikes"]))
         lines.append("")
     lines.append("## What the market rewarded (outcome model, out of sample)")
+    if report.get("outcome_mode") == "shadow":
+        lines.append("- Shadow mode: the engine ranks on the prior weights; treat this as weak context only "
+                     "(walk-forward, learned weights did not survive trading).")
     for side, r in report.get("sides", {}).items():
         best = [f"{k} ({v:+.3f})" for k, v in list(r["feature_ic"].items())[:5]]
         lines.append(f"- {side}: holdout IC adopted {r['holdout_ic']['adopted']:+.3f} "
@@ -232,7 +235,12 @@ def feedback_summary(root: pathlib.Path, report: dict, pref: dict) -> str:
 def run(root: pathlib.Path, panels, meta, fwd, dates, cfg) -> tuple[dict, object | None, dict]:
     model_dir = root / "model"
     model_dir.mkdir(exist_ok=True)
-    current = load_weights(model_dir)
+    shadow = cfg["learning"].get("outcome_mode", "live") == "shadow"
+    prior = normalise(PRIOR)
+    # shadow: the outcome learner is fitted against the priors every week and reported, but never trades.
+    # Walk-forward research (tools/research_v3.py, 162 weeks) found learned leg weights cut the mechanical
+    # book's Sharpe from 0.64 to 0.09, so since v2.3 the priors rank and the learner only advises.
+    current = {"long": dict(prior), "short": dict(prior), "source": "prior"} if shadow else load_weights(model_dir)
     ds = build_dataset(panels, meta, fwd, dates, cfg)
     log.info("Training rows: %d over %d dates", len(ds), ds.date.nunique() if len(ds) else 0)
     if len(ds) < cfg["learning"]["min_rows"]:
@@ -240,7 +248,12 @@ def run(root: pathlib.Path, panels, meta, fwd, dates, cfg) -> tuple[dict, object
         new, report = current, {"sides": {}, "note": "insufficient history"}
     else:
         new, report = fit_outcome(ds, current, cfg)
-    new["source"] = "learned" if any(r.get("adopted") for r in report["sides"].values()) else current.get("source", "prior")
+    if shadow:
+        report["outcome_mode"] = "shadow"
+        report["shadow_note"] = "Fitted weights are NOT used: 'adopted'/'changes' show what the learner would do vs the priors."
+        new = {"long": dict(prior), "short": dict(prior), "source": "prior (outcome learner in shadow)"}
+    else:
+        new["source"] = "learned" if any(r.get("adopted") for r in report["sides"].values()) else current.get("source", "prior")
     new["updated"] = str(dt.date.today())
     pref_model, pref = fit_preference(root, cfg)
     report.update({"trained_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),

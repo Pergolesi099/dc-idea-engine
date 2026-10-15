@@ -1,6 +1,19 @@
 {
- "current": "2.2",
+ "current": "2.3",
  "versions": [
+  {
+   "version": "2.3",
+   "released": "2026-10-15",
+   "tag": "engine-v2.3",
+   "summary": "Outcome learner moved to shadow: the priors rank; learned leg weights failed walk-forward",
+   "changes": [
+    "Walk-forward research over 162 weeks (2023-08 to 2026-09, refit every 4 weeks): v2.2 with prior weights Sharpe 0.64 (halves 0.60 / 0.68); with learned leg weights 0.09",
+    "Pair model on simulated same-sector spreads (1W, 1M, blend) did not beat mechanical pairing out of sample (Sharpe -0.13 to 0.23); quintile calibration flat, so no measured conviction ships",
+    "1-month hold of the same book: Sharpe 0.08 vs 0.64 weekly; horizon flags not shipped",
+    "Live weights (drifted ~0.6-0.7 L1 from the priors after the 10 Oct fit) reset to the priors; learner still fits weekly and reports what it would change",
+    "Preference model on Dean's desk labels unchanged"
+   ]
+  },
   {
    "version": "2.2",
    "released": "2026-10-15",

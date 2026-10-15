@@ -1,0 +1,392 @@
+{
+ "computed_utc": "2026-10-15T20:05:02+00:00",
+ "history": "2022-08-12 -> 2026-09-11 (214 weeks); evaluation from week 52 (2023-08-11)",
+ "universe": 1575,
+ "pair_rows": 102888,
+ "refit_weeks": 4,
+ "strategies": {
+  "A": {
+   "label": "v2.2 as live (prior weights, mechanical pairing, 1W)",
+   "all": {
+    "periods": 162,
+    "mean_pct": 0.129,
+    "stdev_pct": 1.459,
+    "sharpe_ann": 0.64,
+    "hit_rate": 0.525,
+    "worst_pct": -3.13,
+    "max_dd_pct": -7.79,
+    "cum_pct": 21.2
+   },
+   "first": {
+    "periods": 81,
+    "mean_pct": 0.13,
+    "stdev_pct": 1.545,
+    "sharpe_ann": 0.6,
+    "hit_rate": 0.469,
+    "worst_pct": -3.13,
+    "max_dd_pct": -7.79,
+    "cum_pct": 10.0
+   },
+   "second": {
+    "periods": 81,
+    "mean_pct": 0.129,
+    "stdev_pct": 1.376,
+    "sharpe_ann": 0.68,
+    "hit_rate": 0.58,
+    "worst_pct": -2.61,
+    "max_dd_pct": -7.19,
+    "cum_pct": 10.2
+   }
+  },
+  "B": {
+   "label": "learned leg weights, mechanical pairing, 1W",
+   "all": {
+    "periods": 162,
+    "mean_pct": 0.019,
+    "stdev_pct": 1.451,
+    "sharpe_ann": 0.09,
+    "hit_rate": 0.512,
+    "worst_pct": -3.53,
+    "max_dd_pct": -9.55,
+    "cum_pct": 1.4
+   },
+   "first": {
+    "periods": 81,
+    "mean_pct": 0.02,
+    "stdev_pct": 1.392,
+    "sharpe_ann": 0.11,
+    "hit_rate": 0.481,
+    "worst_pct": -3.03,
+    "max_dd_pct": -9.55,
+    "cum_pct": 0.9
+   },
+   "second": {
+    "periods": 81,
+    "mean_pct": 0.017,
+    "stdev_pct": 1.516,
+    "sharpe_ann": 0.08,
+    "hit_rate": 0.543,
+    "worst_pct": -3.53,
+    "max_dd_pct": -9.51,
+    "cum_pct": 0.5
+   }
+  },
+  "C": {
+   "label": "pair model (1W target), 1W",
+   "all": {
+    "periods": 162,
+    "mean_pct": -0.028,
+    "stdev_pct": 1.525,
+    "sharpe_ann": -0.13,
+    "hit_rate": 0.438,
+    "worst_pct": -4.39,
+    "max_dd_pct": -20.9,
+    "cum_pct": -6.2
+   },
+   "first": {
+    "periods": 81,
+    "mean_pct": 0.08,
+    "stdev_pct": 1.36,
+    "sharpe_ann": 0.43,
+    "hit_rate": 0.432,
+    "worst_pct": -4.39,
+    "max_dd_pct": -9.41,
+    "cum_pct": 5.9
+   },
+   "second": {
+    "periods": 81,
+    "mean_pct": -0.136,
+    "stdev_pct": 1.675,
+    "sharpe_ann": -0.59,
+    "hit_rate": 0.444,
+    "worst_pct": -4.34,
+    "max_dd_pct": -20.9,
+    "cum_pct": -11.5
+   }
+  },
+  "D": {
+   "label": "v2.2 mechanical pairing held 1M (monthly)",
+   "all": {
+    "periods": 41,
+    "mean_pct": 0.064,
+    "stdev_pct": 2.783,
+    "sharpe_ann": 0.08,
+    "hit_rate": 0.488,
+    "worst_pct": -7.42,
+    "max_dd_pct": -14.67,
+    "cum_pct": 1.1
+   },
+   "first": {
+    "periods": 20,
+    "mean_pct": -0.227,
+    "stdev_pct": 3.053,
+    "sharpe_ann": -0.26,
+    "hit_rate": 0.35,
+    "worst_pct": -5.07,
+    "max_dd_pct": -13.64,
+    "cum_pct": -5.3
+   },
+   "second": {
+    "periods": 21,
+    "mean_pct": 0.341,
+    "stdev_pct": 2.544,
+    "sharpe_ann": 0.46,
+    "hit_rate": 0.619,
+    "worst_pct": -7.42,
+    "max_dd_pct": -9.06,
+    "cum_pct": 6.7
+   }
+  },
+  "E": {
+   "label": "pair model (1M target) held 1M (monthly)",
+   "all": {
+    "periods": 41,
+    "mean_pct": -0.119,
+    "stdev_pct": 2.884,
+    "sharpe_ann": -0.14,
+    "hit_rate": 0.488,
+    "worst_pct": -6.17,
+    "max_dd_pct": -14.1,
+    "cum_pct": -6.3
+   },
+   "first": {
+    "periods": 20,
+    "mean_pct": -0.324,
+    "stdev_pct": 2.446,
+    "sharpe_ann": -0.46,
+    "hit_rate": 0.4,
+    "worst_pct": -4.62,
+    "max_dd_pct": -12.15,
+    "cum_pct": -6.8
+   },
+   "second": {
+    "periods": 21,
+    "mean_pct": 0.076,
+    "stdev_pct": 3.297,
+    "sharpe_ann": 0.08,
+    "hit_rate": 0.571,
+    "worst_pct": -6.17,
+    "max_dd_pct": -11.29,
+    "cum_pct": 0.5
+   }
+  },
+  "F": {
+   "label": "pair model ranked on 1W+1M blend, 1W",
+   "all": {
+    "periods": 162,
+    "mean_pct": 0.055,
+    "stdev_pct": 1.697,
+    "sharpe_ann": 0.23,
+    "hit_rate": 0.512,
+    "worst_pct": -5.07,
+    "max_dd_pct": -18.29,
+    "cum_pct": 6.8
+   },
+   "first": {
+    "periods": 81,
+    "mean_pct": -0.071,
+    "stdev_pct": 1.44,
+    "sharpe_ann": -0.36,
+    "hit_rate": 0.481,
+    "worst_pct": -3.0,
+    "max_dd_pct": -18.29,
+    "cum_pct": -6.4
+   },
+   "second": {
+    "periods": 81,
+    "mean_pct": 0.181,
+    "stdev_pct": 1.92,
+    "sharpe_ann": 0.68,
+    "hit_rate": 0.543,
+    "worst_pct": -5.07,
+    "max_dd_pct": -9.19,
+    "cum_pct": 14.1
+   }
+  }
+ },
+ "calibration": {
+  "5": [
+   {
+    "quintile": 1,
+    "mean_spread_pct": -0.034,
+    "hit_rate": 0.502,
+    "n": 16030
+   },
+   {
+    "quintile": 2,
+    "mean_spread_pct": 0.009,
+    "hit_rate": 0.5,
+    "n": 16133
+   },
+   {
+    "quintile": 3,
+    "mean_spread_pct": 0.02,
+    "hit_rate": 0.507,
+    "n": 16133
+   },
+   {
+    "quintile": 4,
+    "mean_spread_pct": 0.012,
+    "hit_rate": 0.506,
+    "n": 16134
+   },
+   {
+    "quintile": 5,
+    "mean_spread_pct": -0.015,
+    "hit_rate": 0.502,
+    "n": 16230
+   }
+  ],
+  "mechanical_5": [
+   {
+    "quintile": 1,
+    "mean_spread_pct": 0.119,
+    "hit_rate": 0.518
+   },
+   {
+    "quintile": 2,
+    "mean_spread_pct": -0.059,
+    "hit_rate": 0.497
+   },
+   {
+    "quintile": 3,
+    "mean_spread_pct": -0.046,
+    "hit_rate": 0.5
+   },
+   {
+    "quintile": 4,
+    "mean_spread_pct": -0.062,
+    "hit_rate": 0.497
+   },
+   {
+    "quintile": 5,
+    "mean_spread_pct": 0.042,
+    "hit_rate": 0.504
+   }
+  ],
+  "21": [
+   {
+    "quintile": 1,
+    "mean_spread_pct": 0.199,
+    "hit_rate": 0.513,
+    "n": 16030
+   },
+   {
+    "quintile": 2,
+    "mean_spread_pct": 0.2,
+    "hit_rate": 0.51,
+    "n": 16135
+   },
+   {
+    "quintile": 3,
+    "mean_spread_pct": 0.152,
+    "hit_rate": 0.508,
+    "n": 16131
+   },
+   {
+    "quintile": 4,
+    "mean_spread_pct": 0.227,
+    "hit_rate": 0.511,
+    "n": 16133
+   },
+   {
+    "quintile": 5,
+    "mean_spread_pct": 0.435,
+    "hit_rate": 0.521,
+    "n": 16231
+   }
+  ],
+  "mechanical_21": [
+   {
+    "quintile": 1,
+    "mean_spread_pct": 0.288,
+    "hit_rate": 0.517
+   },
+   {
+    "quintile": 2,
+    "mean_spread_pct": 0.141,
+    "hit_rate": 0.507
+   },
+   {
+    "quintile": 3,
+    "mean_spread_pct": 0.189,
+    "hit_rate": 0.506
+   },
+   {
+    "quintile": 4,
+    "mean_spread_pct": 0.216,
+    "hit_rate": 0.505
+   },
+   {
+    "quintile": 5,
+    "mean_spread_pct": 0.38,
+    "hit_rate": 0.527
+   }
+  ]
+ },
+ "pair_model_importance": {
+  "5": {
+   "vol_l": 0.00552,
+   "ssc": 0.00481,
+   "p1m_s": 0.00464,
+   "d21_l": 0.00408,
+   "beta_s": 0.00403,
+   "d21_s": 0.00395,
+   "lsc": 0.00296,
+   "beta_l": 0.0029,
+   "p1m_l": 0.00254,
+   "vol_s": 0.00183,
+   "rssec_gap": 0.00138,
+   "rs_gap": 0.00097,
+   "bo_l": 0.00092,
+   "macd_s": 0.00092,
+   "same_ind": 0.0009,
+   "quad_gap": 0.00056,
+   "lvr": 0.00034,
+   "quad_s": 0.00033,
+   "quad_l": 0.00027,
+   "corr60": 0.00025,
+   "reg_s": 0.00022,
+   "net_beta": 0.00021,
+   "macd_l": 0.00018,
+   "bo_s": 0.00015,
+   "reg_l": 9e-05,
+   "lead_l": 0.0,
+   "lead_s": 0.0
+  },
+  "21": {
+   "beta_s": 0.00725,
+   "vol_s": 0.00664,
+   "beta_l": 0.00567,
+   "p1m_l": 0.00426,
+   "p1m_s": 0.00422,
+   "lsc": 0.0036,
+   "vol_l": 0.00325,
+   "d21_l": 0.00274,
+   "rssec_gap": 0.0026,
+   "net_beta": 0.0025,
+   "d21_s": 0.00209,
+   "rs_gap": 0.00138,
+   "quad_s": 0.0012,
+   "quad_gap": 0.00116,
+   "ssc": 0.00055,
+   "corr60": 0.00049,
+   "lead_l": 0.00027,
+   "lead_s": 0.00025,
+   "macd_s": 0.00018,
+   "reg_s": 0.00013,
+   "reg_l": 0.00011,
+   "lvr": 6e-05,
+   "same_ind": 5e-05,
+   "bo_l": 5e-05,
+   "bo_s": 1e-05,
+   "quad_l": 0.0,
+   "macd_l": 0.0
+  }
+ },
+ "notes": [
+  "walk-forward: every model only sees labels known at its refit date",
+  "today's universe: survivorship bias, more so further back",
+  "no costs, borrow or earnings gate; mechanical pairing stands in for the chart review"
+ ]
+}

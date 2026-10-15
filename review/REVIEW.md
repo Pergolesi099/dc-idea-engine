@@ -153,5 +153,5 @@ step 0 → `{status: "failed", message, updated_at}` and stop.
 Report (SendUserMessage), five lines; start with the engine version and whether it was the Saturday run
 or a manual cycle; the fifth line is feedback digested this week and the open backlog items ready for the
 next engine version: pairs published (count by conviction and by family), sectors with nothing tradeable,
-what the learner changed this week (`model.sides.*.changes`, adopted or kept), and any anomaly
+what the outcome learner would change this week (`model.sides.*.changes`; since v2.3 it runs in shadow, so say "would" — the priors rank), and any anomaly
 (scan fallback, missing earnings dates, sector mapping oddities). Link the desk.
