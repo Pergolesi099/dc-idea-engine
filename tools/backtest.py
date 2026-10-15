@@ -41,13 +41,8 @@ def variants(base: dict) -> dict:
     return {
         "v2.1": v(enabled=False),
         "v2.2": v(enabled=True),
-        "v2.1 + short fix only": v(enabled=True, stretch_max_sigma=None),
-        "v2.1 + stretch cap only": v(enabled=True, short_knife_max_below21=None, short_require_bounce=False,
-                                     short_tags_barred=[]),
-        "stretch cap + 1M-bounce shorts": v(enabled=True, short_require_bounce=False, short_bounce_1m=True,
-                                            short_tags_barred=["MOM"]),
-        "stretch cap + longs vs sector ETF": v(enabled=True, short_knife_max_below21=None,
-                                               short_require_bounce=False, short_tags_barred=[], hedge_etf=True),
+        "v2.2 without stretch cap": v(enabled=True, stretch_max_sigma=None),
+        "v2.1 + stretch cap only": v(enabled=True, short_bounce_1m=False, short_tags_barred=[]),
     }
 
 
@@ -159,7 +154,10 @@ def main(out_path: pathlib.Path, meta=None, history_fn=None):
                          "spy": (spy_close.iloc[i0 + HOLD] / spy_open.iloc[i0 + 1] - 1) * 100})
         wk = pd.DataFrame(rows).set_index("date")
         pairs_df = pd.DataFrame(prs)
+        half = len(wk) // 2
         res = {"vol_balanced": stats(wk, "port_vol"), "beta_neutral": stats(wk, "port_beta"),
+               "first_half": stats(wk.iloc[:half], "port_vol"), "second_half": stats(wk.iloc[half:], "port_vol"),
+               "first_half_to": str(wk.index[half - 1].date()),
                "avg_pairs_per_week": round(wk.n.mean(), 1),
                "pair_hit_rate": round((pairs_df.pair_vol > 0).mean(), 3) if len(pairs_df) else None,
                "long_leg_avg_pct": round(wk.long_leg.mean(), 3), "short_leg_avg_pct": round(wk.short_leg.mean(), 3),
