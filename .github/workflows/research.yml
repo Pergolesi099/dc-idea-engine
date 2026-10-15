@@ -1,0 +1,37 @@
+name: research
+
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: "Name for the result file"
+        default: "research_v3"
+      sessions:
+        description: "Price history in sessions"
+        default: "1300"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Walk-forward research (multi-horizon, pair model)
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: python tools/research_v3.py "rs/${{ inputs.label }}.json" "${{ inputs.sessions }}"
+      - name: Publish to the research branch
+        run: |
+          cd rs
+          git init -q -b research
+          git add -A
+          git -c user.name=dc-idea-engine-bot -c user.email=actions@users.noreply.github.com commit -qm "research ${{ inputs.label }} @ ${{ github.ref_name }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" research
