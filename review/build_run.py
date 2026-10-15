@@ -72,6 +72,7 @@ for c in res["candidates"]:
         "rs_lead": c.get("rs_lead"), "breakout": c.get("breakout"), "macd_sig": c.get("macd_sig"),
         "grade": grade, "read": read, "chart_url": f"/_blob/{upl}" if upl else None, "chart_id": upl,
         "next_earnings": ne, "earnings_in_window": bool(ne and dt.date.fromisoformat(ne) <= hold_until),
+        "beta": r1(c.get("beta")),
         "stats": {"d21": r1(c.get("d21"), 1), "d50": r1(c.get("d50"), 1), "d200": r1(c.get("d200"), 1),
                   "p1w": r1(c.get("p1w"), 1), "p1m": r1(c.get("p1m"), 1), "p3m": r1(c.get("p3m"), 1),
                   "p6m": r1(c.get("p6m"), 1), "rs_ma": r1(c.get("rs_vs_ma"), 1), "rssec_ma": r1(c.get("rssec_vs_ma"), 1),
@@ -91,6 +92,9 @@ for i, p in enumerate(pj["pairs"], 1):
         problems.append(f"pair {p['long']}/{p['short']}: legs in different supersectors")
     if "C" in (lo["grade"], sh["grade"]):
         problems.append(f"pair {p['long']}/{p['short']}: uses a C-graded leg")
+    min_conv = ((res.get("config") or {}).get("risk") or {}).get("min_conviction", 0)
+    if int(p["conviction"]) < min_conv:
+        problems.append(f"pair {p['long']}/{p['short']}: conviction {p['conviction']} below the floor of {min_conv}")
     for s in (p["long"], p["short"]):
         if s in used:
             problems.append(f"{s} used in more than one pair")
@@ -100,10 +104,15 @@ for i, p in enumerate(pj["pairs"], 1):
     if len(m):
         corr, vr = float(m.corr60.iloc[0]), float(m.vol_ratio.iloc[0])
     split_long = round(100 / (1 + vr)) if vr else 50
+    bl, bs = lo.get("beta"), sh.get("beta")
+    net_beta = r1(split_long / 100 * bl - (1 - split_long / 100) * bs) if bl is not None and bs is not None else None
+    beta_split = round(100 * bs / (bl + bs)) if bl and bs and bl > 0.2 and bs > 0.2 else None
     pairs.append({
         "rank": i, "supersector": lo["supersector"], "type": p.get("type", "sector"),
         "conviction": int(p["conviction"]), "thesis": p["thesis"], "long": lo, "short": sh,
         "corr60": r1(corr), "vol_ratio": r1(vr), "split_long": split_long, "split_short": 100 - split_long,
+        "net_beta": net_beta, "beta_split_long": beta_split,
+        "beta_split_short": (100 - beta_split) if beta_split is not None else None,
     })
 
 if problems:
@@ -137,7 +146,8 @@ arch.mkdir(parents=True, exist_ok=True)
 (arch / "verdicts.json").write_text(json.dumps(verdicts, indent=1))
 (arch / "pairs.json").write_text(json.dumps({"market_note": pj.get("market_note", ""), "pairs": [
     {"long": p["long"]["symbol"], "short": p["short"]["symbol"], "conviction": p["conviction"],
-     "type": p["type"], "split_long": p["split_long"], "thesis": p["thesis"]} for p in pairs]}, indent=1))
+     "type": p["type"], "split_long": p["split_long"], "beta_split_long": p["beta_split_long"],
+     "net_beta": p["net_beta"], "thesis": p["thesis"]} for p in pairs]}, indent=1))
 
 size = out.stat().st_size / 1024
 print(f"run {run_id}: {len(cands)} candidates, {len(pairs)} pairs, "

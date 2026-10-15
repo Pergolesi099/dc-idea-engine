@@ -605,6 +605,8 @@ function ticket(p) {
       <span>Corr 60D <b>${p.corr60 ?? "–"}</b></span>
       <span>Vol ratio L/S <b>${p.vol_ratio ?? "–"}</b></span>
       <span>Vol-balanced split <b>${p.split_long ?? "–"} / ${p.split_short ?? "–"}</b></span>
+      <span title="Net beta to the S&amp;P of the vol-balanced split (0 = market-neutral)">Net beta <b>${p.net_beta ?? "–"}</b></span>
+      <span title="Long/short split that makes the pair beta-neutral">Beta-neutral split <b>${p.beta_split_long ?? "–"} / ${p.beta_split_short ?? "–"}</b></span>
     </div>
     <div class="decide">
       ${["take", "watch", "pass"].map(x => `<button class="act" data-a="${x}" aria-pressed="${a === x}" ${dis}>${x[0].toUpperCase() + x.slice(1)}</button>`).join("")}

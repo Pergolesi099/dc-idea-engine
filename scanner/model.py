@@ -92,6 +92,8 @@ def risk_mask(df: pd.DataFrame, side: str, cfg: dict) -> pd.Series:
             ok &= df.d21 >= -k
         if r.get("short_require_bounce"):
             ok &= (df.p1w > 0) | (df.p2w > 0)
+        if r.get("short_bounce_1m"):
+            ok &= df.p1m > 0
     return ok.fillna(False)
 
 

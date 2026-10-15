@@ -44,10 +44,14 @@ def variants(base: dict) -> dict:
         "v2.1 + short fix only": v(enabled=True, stretch_max_sigma=None),
         "v2.1 + stretch cap only": v(enabled=True, short_knife_max_below21=None, short_require_bounce=False,
                                      short_tags_barred=[]),
+        "stretch cap + 1M-bounce shorts": v(enabled=True, short_require_bounce=False, short_bounce_1m=True,
+                                            short_tags_barred=["MOM"]),
+        "stretch cap + longs vs sector ETF": v(enabled=True, short_knife_max_below21=None,
+                                               short_require_bounce=False, short_tags_barred=[], hedge_etf=True),
     }
 
 
-def book(snap, cfg, w, quota):
+def book(snap, cfg, w, quota, etf_of=None):
     tabs = []
     for side in ("long", "short"):
         t = side_table(snap, side, cfg)
@@ -61,6 +65,12 @@ def book(snap, cfg, w, quota):
     best = allc.sort_values("final_score", ascending=False).drop_duplicates("symbol")
     sel = select(best, quota)
     pairs = []
+    if (cfg.get("risk") or {}).get("hedge_etf"):
+        L = sel[sel.side == "long"].sort_values("final_score", ascending=False)
+        for ss, g in L.groupby("supersector"):
+            for i in range(len(g)):
+                pairs.append({"ss": ss, "long": g.symbol.iloc[i], "short": etf_of[ss], "score": g.final_score.iloc[i], "rank": i})
+        sel = sel.iloc[0:0]
     for ss, g in sel.groupby("supersector"):
         L = g[g.side == "long"].sort_values("final_score", ascending=False)
         S = g[g.side == "short"].sort_values("final_score", ascending=False)
@@ -99,12 +109,17 @@ def main(out_path: pathlib.Path, meta=None, history_fn=None):
     meta = meta.loc[daily["Close"].columns]
     panels = compute_panels(daily, spx, sector_bench, cfg0)
     panels["sessions"] = daily["Close"].notna().cumsum().astype("float32")
-    C, O = daily["Close"], daily["Open"]
+    C, O = daily["Close"].copy(), daily["Open"].copy()
+    for e in etfs:
+        if e in hist:
+            C[e] = hist[e].Close.reindex(C.index)
+            O[e] = hist[e].Open.reindex(C.index)
     idx = C.index
     lr, lspx = np.log(C).diff(), np.log(spx).diff()
     week_ends = to_weekly({"Close": C[[C.columns[0]]]})["Close"].index
     dates = [d for d in week_ends if idx[300] <= d and idx.get_loc(d) + HOLD < len(idx)]
-    spy_open, spy_close = hist.get("SPY", hist.get(scan.BENCH)).Open.reindex(idx), spx
+    spyh = hist.get("SPY", hist.get(scan.BENCH))
+    spy_open, spy_close = spyh.Open.reindex(idx), spyh.Close.reindex(idx)
     w = normalise(PRIOR)
     quota = cfg0["selection"]["quota_per_side_per_sector"]
     snaps = {d: snapshot(panels, d).join(meta, how="inner") for d in dates}
@@ -116,7 +131,7 @@ def main(out_path: pathlib.Path, meta=None, history_fn=None):
         for d in dates:
             i0 = idx.get_loc(d)
             e, x = idx[i0 + 1], idx[i0 + HOLD]
-            ps = book(snaps[d], cfg, w, quota)
+            ps = book(snaps[d], cfg, w, quota, scan.SECTOR_ETF)
             pr_v, pr_b, lg, sh, nb = [], [], [], [], []
             for p in ps:
                 a, b = p["long"], p["short"]
@@ -148,6 +163,7 @@ def main(out_path: pathlib.Path, meta=None, history_fn=None):
                "avg_pairs_per_week": round(wk.n.mean(), 1),
                "pair_hit_rate": round((pairs_df.pair_vol > 0).mean(), 3) if len(pairs_df) else None,
                "long_leg_avg_pct": round(wk.long_leg.mean(), 3), "short_leg_avg_pct": round(wk.short_leg.mean(), 3),
+               "spread_avg_pct": round((wk.long_leg - wk.short_leg).mean(), 3),
                "avg_net_beta_vol_split": round(wk.net_beta.mean(), 3),
                "corr_to_spy": round(wk.port_vol.corr(wk.spy), 2),
                "spy_mean_week_pct": round(wk.spy.mean(), 3),

@@ -1,6 +1,6 @@
 # Weekly review procedure (Claude) — engine-versioned
 
-Runs every Saturday after the GitHub scan. Goal: turn ~130 top-down charts into 15–25 pair tickets
+Runs every Saturday after the GitHub scan. Goal: turn ~130 top-down charts into 10–15 pair tickets
 on the DC Idea Desk, ready for Dean's take / watch / pass before Sunday's SCREEN, and keep the
 learning loop fed.
 
@@ -95,8 +95,19 @@ Write `work/pairs.json`: `{"market_note": "...", "pairs": [{long, short, convict
 - Prefer a Leading-vs-Lagging sector-rotation contrast between the legs: it is the cleanest pair.
 - Use `pair_matrix.tsv`: prefer corr60 > 0.2; flag vol_ratio outside 0.6–1.6 in the thesis.
 - Conviction: 4 = A/A or A/B same-industry, corr > 0.3, rotation contrast; 3 = solid A/B;
-  2 = tradeable but weak fit; never publish 1; 5 reserved for exceptional setups.
-- Aim for 15–25 pairs covering as many supersectors as the charts allow. Fewer good pairs beats padding.
+  5 reserved for exceptional setups. Since v2.2 only conviction >= `risk.min_conviction` (3) is
+  published: build_run.py refuses anything lower. The 10 Oct week showed why: the nine conviction-2
+  pairs averaged -3.7% while conviction 3-4 made +0.7%.
+- Aim for 10–15 pairs covering as many supersectors as the charts allow. Fewer good pairs beats padding.
+- Shorts: prefer a weak weekly picture with a bounce into a falling 21D/50D or a 3M/6M level. Do not
+  short a name that has just collapsed (the engine already filters >3% below the 21D; grade the rest
+  of the knife-catching C).
+- Borrow: if Interactive Brokers tools are available in this session, check every short leg's
+  shortable shares and borrow fee before pairing; drop a short that is not shortable or costs more than
+  5% a year, and say so in the report. If they are not available, write "borrow unchecked" in the
+  market note.
+- Beta: each ticket shows the pair's net beta (vol-balanced split) and a beta-neutral split. Mention in
+  the thesis when |net beta| > 0.3.
 - Make sure the Lead family (RS leads price) is represented where its charts are A/B.
 - market_note: 1–2 sentences on breadth (`regime_counts`), sector rotation themes, earnings season.
 
