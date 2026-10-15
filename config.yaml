@@ -84,7 +84,8 @@ risk:
   short_bounce_1m: true         # shorts: 1M return > 0 -- short a weak weekly picture into a bounce,
                                 # never after a collapse (backtest: Sharpe 0.38 -> 0.79, max DD -13% -> -7.6%)
   short_tags_barred: [MOM]      # momentum-laggard shorts barred
-  short_knife_max_below21: null # tested and rejected (killed the edge); kept switchable
+  short_knife_max_below21: 3.0  # and price at most 3% below its 21D: alone this rule hurt, combined with the
+                                # 1M bounce it cut the worst week from -5.1% to -2.7% in the backtest
   short_require_bounce: false   # 1W/2W bounce rule: tested and rejected
   stretch_max_sigma: 2.0        # no entry > 2 monthly sigmas beyond the 21D in the trade's direction
   earnings_block_days: 7        # drop legs reporting within 7 days of the Monday entry (0 = off)

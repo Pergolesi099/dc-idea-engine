@@ -42,6 +42,7 @@ def variants(base: dict) -> dict:
         "v2.1": v(enabled=False),
         "v2.2": v(enabled=True),
         "v2.2 without stretch cap": v(enabled=True, stretch_max_sigma=None),
+        "v2.2 without knife rule": v(enabled=True, short_knife_max_below21=None),
         "v2.1 + stretch cap only": v(enabled=True, short_bounce_1m=False, short_tags_barred=[]),
     }
 
