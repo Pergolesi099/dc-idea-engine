@@ -1,6 +1,21 @@
 {
- "current": "2.1",
+ "current": "2.2",
  "versions": [
+  {
+   "version": "2.2",
+   "released": "2026-10-15",
+   "tag": "engine-v2.2",
+   "summary": "Short-side fix and risk gates, chosen by a full-pipeline backtest: Sharpe 0.37 -> 0.79, max drawdown -13% -> -7.6% over 113 weeks; positive in both halves.",
+   "changes": [
+    "Shorts only after a 1-month bounce (1M return > 0) and no more than 3% below the 21D; momentum-laggard shorts barred",
+    "Stretch cap: no entry more than 2 monthly sigmas beyond the 21D in the trade's direction",
+    "Earnings gate: legs reporting within 7 days of the Monday entry are dropped and refilled",
+    "Each leg's 60D beta vs the S&P; tickets show the pair's net beta and a beta-neutral split",
+    "Only conviction 3+ pairs published; 10-15 pairs per run",
+    "Borrow check on short legs in the review when IBKR tools are available",
+    "tools/backtest.py + backtest workflow: select -> pair -> one-week P&L replay, by variant and by half"
+   ]
+  },
   {
    "version": "2.1",
    "released": "2026-10-09",

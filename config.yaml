@@ -4,7 +4,7 @@
 # engine-v<version> is created automatically on push to main and freezes code + config + weights.
 
 engine:
-  version: "2.1"
+  version: "2.2"
 
 universe:
   min_market_cap: 2.0e+9        # USD
