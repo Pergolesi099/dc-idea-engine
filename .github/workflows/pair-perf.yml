@@ -1,0 +1,32 @@
+name: pair-perf
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Desk run id, e.g. 2026-10-10-v2.1"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  perf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Mark the run's pairs to market
+        run: python tools/pair_perf.py "${{ inputs.run_id }}" "perf/${{ inputs.run_id }}.json"
+      - name: Publish to the perf branch (overwritten each run)
+        run: |
+          cd perf
+          git init -q -b perf
+          git add -A
+          git -c user.name=dc-idea-engine-bot -c user.email=actions@users.noreply.github.com commit -qm "perf ${{ inputs.run_id }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" perf
