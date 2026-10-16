@@ -4,6 +4,10 @@ Runs every Saturday after the GitHub scan. Goal: turn ~130 top-down charts into 
 on the DC Idea Desk, ready for Dean's take / watch / pass before Sunday's SCREEN, and keep the
 learning loop fed.
 
+**Takes feed the book.** Every pair Dean marks Take is sized and staged by the autopilot
+(`autopilot/AUTOPILOT.md`): SCREEN Sun 19:53, cut-off at STAGE Mon 14:54 Paris. So publish only what you would
+be comfortable seeing staged, and keep each ticket's supersector, conviction and earnings flags accurate.
+
 Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k  (collections: `runs`, `run_details`, `decisions`, `chart_feedback`, `feedback`, `engines`, `cycles`)
 Repo: Pergolesi099/dc-idea-engine — scan output on branch `output`; learning state on `main`
 (`model/`, `history/`, `labels/`).

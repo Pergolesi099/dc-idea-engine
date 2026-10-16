@@ -29,3 +29,6 @@ Small, incremental improvements ship as numbered engine versions so each change 
 
 **Fundamentals** (`scanner/fundamentals.py`): Yahoo consensus (FY0/FY1/FY2 EPS and sales, 90-day EPS trend, last surprise, headlines) for every candidate plus the 20 largest names per supersector (sector aggregates), SEC EDGAR earnings-release guidance excerpts, weekly estimate snapshots in `history/fundamentals/` (sales revisions need ~13 weeks of them).
 **Local test without network:** `python tests/test_offline.py`
+
+## Autopilot (desk → book)
+Takes on the desk drive the live book: `autopilot/AUTOPILOT.md` (procedure for the scheduled SCREEN / STAGE / FILLCHECK / VIXWATCH phases) and `autopilot/size.py` (equal-dollar sizing). Ledger and dials live in the desk database (`book/<week>`, `book_control/control`).
