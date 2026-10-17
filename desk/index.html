@@ -142,6 +142,26 @@ th { font-weight: 500; color: var(--muted); font-size: 12px; }
 .tablebox { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
 .copyrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .btn { border: 1px solid var(--ink); background: var(--ink); color: var(--bg); border-radius: 4px; padding: 6px 12px; cursor: pointer; font-weight: 500; }
+.ap { display: grid; gap: 12px; }
+.ap h2 { font-size: 16px; margin: 0; }
+.ap .kpis { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.aphead { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
+.aphead select { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 3px 8px; }
+.phases { display: flex; flex-wrap: wrap; gap: 6px; }
+.ph { font-size: 12px; padding: 2px 8px; border-radius: 3px; background: var(--sunk); color: var(--muted); white-space: nowrap; }
+.ph.done { background: var(--long-soft); color: var(--long); }
+.ph.next { background: var(--accent-soft); color: var(--accent); }
+.dials { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 8px 12px; }
+.dials label { display: flex; gap: 6px; align-items: center; }
+.dials select { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 3px 6px; }
+.kill { border: 1px solid var(--short); background: var(--surface); color: var(--short); border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; margin-left: auto; }
+.kill[aria-pressed="true"] { background: var(--short); color: var(--surface); }
+.halted { background: var(--short-soft); color: var(--short); border-radius: var(--r); padding: 8px 12px; font-weight: 500; }
+td.num, th.num { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.over td { opacity: .45; }
+.loglist { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
+.loglist b { color: var(--ink); font-weight: 500; }
+.ok { color: var(--long); } .chk { color: var(--short); font-weight: 700; }
 textarea.copyout { width: 100%; min-height: 90px; font-family: var(--font-data); font-size: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
 
 /* states */
@@ -301,7 +321,8 @@ const REASONS = { pass: ["Long leg weak", "Short leg weak", "Both charts weak", 
 const S = { db: null, user: null, uid: null, canWrite: true, runs: [], run: null, decisions: {}, unsub: null, chartfb: {}, unsub2: null,
             tab: "pairs", fSector: "All", fConv: 0, fHide: false, gSide: "all", gGrade: "all",
             mcp: null, engines: [], engine: "all", allRuns: [], cycle: null, myCycle: null, arm: false, busy: false,
-            detail: null, fb: [], zkey: null, tool: null, marks: [], drag: null };
+            detail: null, fb: [], zkey: null, tool: null, marks: [], drag: null,
+            books: [], ctrl: null, ctrlVer: null, takes: [], bookWeek: null };
 try { const t = localStorage.getItem("desk.tab"); if (t) S.tab = t; } catch (e) {}
 try { const g = localStorage.getItem("desk.engine"); if (g) S.engine = g; } catch (e) {}
 const REVIEW_TASK = "trig_01GBb5aagGJvJdSW6U8WtLGm";   // the "DC Idea Desk - REVIEW" scheduled task
@@ -341,6 +362,19 @@ renderEmpty("Loading the latest scan…");
     if (S.tab === "fbk") renderFbk();
     if ($("#lb").open) drawMarks();
   }, err => {});
+  db.collection("book").orderBy("week", "desc").limit(12).onSnapshot(snap => {
+    S.books = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (S.tab === "book" && S.run) renderBook(S.run);
+  }, err => {});
+  db.collection("book_control").doc("control").onSnapshot(snap => {
+    S.ctrl = snap.exists ? snap.data() : null;
+    if (S.tab === "book" && S.run) renderBook(S.run);
+  }, err => {});
+  db.collection("decisions").where("action", "==", "take").onSnapshot(snap => {
+    S.takes = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    $("#c-book").textContent = cycleTakes().kept.length || "";
+    if (S.tab === "book" && S.run) renderBook(S.run);
+  }, err => {});
   db.collection("runs").orderBy("run_utc", "desc").limit(40).onSnapshot(snap => {
     S.allRuns = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     applyRuns();
@@ -376,7 +410,7 @@ function applyRuns() {
     $("#facts").innerHTML = ""; $("#note").textContent = "";
     renderEmpty(S.allRuns.length
       ? `<b>No scans from engine v${esc(S.engine)} yet.</b> Press Run new scan to run this version on today's market, or pick another engine.`
-      : "<b>No scan published yet.</b> The weekly review fills this desk on Saturday morning after the GitHub scan runs, or press Run new scan. Each run adds 15–25 pair tickets, every chart it reviewed, and a Book of the pairs you take.");
+      : "<b>No scan published yet.</b> The weekly review fills this desk on Saturday morning after the GitHub scan runs, or press Run new scan. Each run adds 15–25 pair tickets, every chart it reviewed, and the Book: your Takes, sized and staged by the autopilot.");
   } else {
     sel.innerHTML = S.runs.map(r => `<option value="${esc(r.id)}">${esc(r.label || r.id)} · v${esc(engOf(r))}${r.trigger === "manual" ? " · manual" : ""}</option>`).join("");
     sel.disabled = false;
@@ -513,7 +547,7 @@ function render() {
   const taken = pairs.filter(p => decisionOf(p)?.action === "take").length;
   $("#c-pairs").textContent = pairs.length;
   $("#c-charts").textContent = cands.length;
-  $("#c-book").textContent = taken;
+  $("#c-book").textContent = cycleTakes().kept.length || "";
   $("#c-track").textContent = (r.track_record || []).filter(x => x.ret5 != null).length || "";
   for (const t of ["pairs", "charts", "book", "track", "learn", "fbk"]) {
     $("#tab-" + t).setAttribute("aria-selected", String(S.tab === t));
@@ -642,17 +676,123 @@ function renderCharts(r) {
     </div>`).join("")}</div></div>`).join("") : `<div class="empty">No charts match these filters.</div>`;
 }
 
+/* ---------- autopilot book (desk Takes -> SCREEN Sun 19:53 -> STAGE Mon 14:54 cut-off) ---------- */
+function parisNow() {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", weekday: "short", hourCycle: "h23" }).formatToParts(new Date()).map(x => [x.type, x.value]));
+  const dow = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 7 }[p.weekday];
+  return { date: new Date(Date.UTC(+p.year, +p.month - 1, +p.day)), dow, mins: +p.hour * 60 + +p.minute };
+}
+const addDays = (d, n) => new Date(d.getTime() + n * 864e5);
+const ymd = d => d.toISOString().slice(0, 10);
+function isoWeek(d) {
+  const t = addDays(d, 4 - (d.getUTCDay() || 7));
+  const y = t.getUTCFullYear(), w = Math.ceil(((t - Date.UTC(y, 0, 1)) / 864e5 + 1) / 7);
+  return `${y}-W${String(w).padStart(2, "0")}`;
+}
+function bookClock() {   // the trading week the next/current book belongs to; Sat and Sun look ahead to Monday
+  const n = parisNow();
+  const monday = addDays(n.date, n.dow >= 6 ? 8 - n.dow : 1 - n.dow);
+  const cycleStart = addDays(n.date, n.dow === 7 ? -1 : n.dow === 6 ? 0 : -(n.dow + 1));   // most recent Saturday
+  const cutPassed = n.dow >= 2 && n.dow <= 5 || (n.dow === 1 && n.mins >= 14 * 60 + 54);
+  return { week: isoWeek(monday), monday, cycleStart: ymd(cycleStart), cutPassed, n };
+}
+function cycleTakes() {   // same rules as autopilot/AUTOPILOT.md: this cycle's runs, one pair per symbol, cap by conviction
+  const c = bookClock();
+  const cap = Number(S.ctrl?.max_pairs || 12);
+  const runDate = id => String(id || "").slice(0, 10);
+  const conv = t => Number(t.conviction || 0);
+  const list = S.takes.filter(t => runDate(t.run_id) >= c.cycleStart)
+    .sort((a, b) => String(b.decided_at).localeCompare(String(a.decided_at)));   // latest decision wins a symbol clash
+  const used = new Set(), uniq = [], clash = [];
+  list.forEach(t => { if (used.has(t.long) || used.has(t.short)) { clash.push(t); return; } used.add(t.long); used.add(t.short); uniq.push(t); });
+  uniq.sort((a, b) => conv(b) - conv(a) || String(b.run_id).localeCompare(String(a.run_id)) || String(a.decided_at).localeCompare(String(b.decided_at)));
+  return { kept: uniq.slice(0, cap), over: uniq.slice(cap), clash, cap };
+}
+const money = v => v == null ? "–" : "$" + Math.round(v).toLocaleString("en-US");
+const when = d => d ? new Date(d).toLocaleString([], { weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
+
+function renderAutopilot() {
+  const c = bookClock();
+  const ctrl = S.ctrl || {};
+  const weeks = [...new Set([c.week, ...S.books.map(b => b.week || b.id)])].sort().reverse();
+  const wk = S.bookWeek && weeks.includes(S.bookWeek) ? S.bookWeek : c.week;
+  const b = S.books.find(x => (x.week || x.id) === wk);
+  const isNext = wk === c.week;
+  const done = new Set(b?.phase_done || []);
+  const mon = c.monday.toLocaleDateString([], { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  const sun = addDays(c.monday, -1).toLocaleDateString([], { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  const nextPh = ["SCREEN", "STAGE", "FILLCHECK"].find(p => !done.has(p));
+  const ph = (p, t) => `<span class="ph ${done.has(p) ? "done" : isNext && p === nextPh ? "next" : ""}">${done.has(p) ? "✓ " : ""}${p}${t ? " · " + t : ""}</span>`;
+  const dis = S.canWrite ? "" : "disabled";
+  const opt = (vals, cur, fmt) => vals.map(v => `<option value="${v}" ${Number(cur) === v ? "selected" : ""}>${fmt(v)}</option>`).join("");
+  const T = cycleTakes();
+
+  let body = "";
+  if (b && (b.picks || []).length) {
+    const k = b.checks || {}, z = b.sizing || {};
+    const rows = b.picks.map(p => `<tr><td>${esc(p.supersector || "")}</td><td class="num">${p.conviction ?? "–"}</td>
+      <td class="mono">${esc(p.long)}</td><td class="num">${p.long_qty ?? "–"} × ${p.long_px ?? "–"}</td><td class="num">${money(p.long_qty * p.long_px)}</td>
+      <td class="mono">${esc(p.short)}</td><td class="num">${p.short_qty ?? "–"} × ${p.short_px ?? "–"}</td><td class="num">${money(p.short_qty * p.short_px)}</td></tr>`).join("");
+    body += `<div class="kpis">
+      <div class="kpi"><span class="lbl">Pairs sized</span><b>${b.picks.length}</b><span class="lbl">leg budget ${money(z.leg_budget_usd)}</span></div>
+      <div class="kpi"><span class="lbl">Leverage</span><b>${b.leverage ?? ctrl.leverage ?? 2}x</b><span class="lbl">NAV €${Math.round(b.nav_eur || 0).toLocaleString("en-US")} · EURUSD ${b.eurusd || "–"}</span></div>
+      <div class="kpi"><span class="lbl">Gross</span><b>${k.gross_x_nav ?? "–"}x</b><span class="lbl">${money(k.gross_usd)}</span></div>
+      <div class="kpi"><span class="lbl">Net skew</span><b>${k.net_skew_pct ?? "–"}%</b><span class="lbl ${k.status === "CHECK" ? "chk" : "ok"}">${esc(k.status || "–")}</span></div>
+    </div>
+    <div class="tablebox"><table><thead><tr><th>Sector</th><th class="num">Conv.</th><th>Long</th><th class="num">Qty × px</th><th class="num">$</th><th>Short</th><th class="num">Qty × px</th><th class="num">$</th></tr></thead><tbody>${rows}</tbody></table></div>
+    ${(b.staged_instruction_ids || []).length ? `<p class="lbl">${b.staged_instruction_ids.length} IBKR drafts staged · submit in IBKR · set stops manually (25% ref)</p>` : ""}`;
+    if (isNext && !done.has("STAGE")) {
+      const key = p => `${p.long}-${p.short}`;
+      const sized = new Set(b.picks.map(key)), now = new Set(T.kept.map(key));
+      const add = T.kept.filter(p => !sized.has(key(p))), rem = b.picks.filter(p => !now.has(key(p)));
+      if (add.length || rem.length) body += `<div class="banner">Your Takes changed since SCREEN: ${add.length ? "+" + add.map(p => `${esc(p.long)}/${esc(p.short)}`).join(", ") : ""}${add.length && rem.length ? " · " : ""}${rem.length ? "−" + rem.map(p => `${esc(p.long)}/${esc(p.short)}`).join(", ") : ""}. STAGE re-reads them at the cut-off.</div>`;
+    }
+  } else if (isNext) {
+    const rows = [...T.kept.map(p => [p, ""]), ...T.over.map(p => [p, "over"])].map(([p, cls]) => `<tr class="${cls}"><td>${esc(p.supersector || "")}</td><td class="num">${p.conviction ?? "–"}</td><td class="mono">${esc(p.long)}</td><td class="mono">${esc(p.short)}</td><td class="mono">${esc(p.run_id)}</td><td>${cls ? "over cap" : ""}</td></tr>`).join("");
+    body += `<p class="note">${done.has("SCREEN") ? "SCREEN found no Takes." : `Not sized yet. SCREEN sizes these on ${esc(sun)} 19:53; STAGE re-reads them at the cut-off.`} Equal dollars per leg = NAV × ${ctrl.leverage ?? 2}x ÷ 2n.</p>
+      ${rows ? `<div class="tablebox"><table><thead><tr><th>Sector</th><th class="num">Conv.</th><th>Long</th><th>Short</th><th>Scan</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`
+        : `<div class="empty"><b>No Takes this cycle.</b> Mark pairs Take on the Pairs tab. With none at the cut-off, STAGE only closes last week's positions.</div>`}
+      ${T.clash.length ? `<p class="lbl">Skipped, symbol already in a later Take: ${T.clash.map(p => `${esc(p.long)}/${esc(p.short)}`).join(", ")}</p>` : ""}`;
+  } else {
+    body += `<div class="empty">No pairs in the ${esc(wk)} book.</div>`;
+  }
+  if (b && (b.dropped || []).length) body += `<div><div class="lbl" style="margin-bottom:6px">Dropped · ${b.dropped.length}</div><ul class="loglist">${b.dropped.map(d => `<li><b class="mono">${esc(d.long)}/${esc(d.short)}</b> ${esc(d.reason || "")}</li>`).join("")}</ul></div>`;
+  if (b && (b.log || []).length) body += `<details><summary class="lbl" style="cursor:pointer">Autopilot log · ${b.log.length}</summary><ul class="loglist" style="margin-top:6px">${b.log.slice().reverse().map(l => `<li>${esc(when(l.ts))} <b>${esc(l.phase)}</b> ${esc(l.decision)}${l.reason ? " · " + esc(l.reason) : ""}</li>`).join("")}</ul></details>`;
+
+  return `<div class="ap">
+    <div class="aphead"><h2>Autopilot book</h2>
+      <select id="bookweek" aria-label="Book week">${weeks.map(w => `<option ${w === wk ? "selected" : ""}>${esc(w)}</option>`).join("")}</select>
+      <div class="phases">${ph("SCREEN", isNext ? "Sun 19:53" : "")}${ph("STAGE", isNext ? "Mon 14:54 cut-off" : "")}${ph("FILLCHECK", isNext ? "Mon/Tue 16:15" : "")}${b?.vix_fired ? `<span class="ph" style="background:var(--short-soft);color:var(--short)">VIX flatten staged</span>` : ""}</div>
+    </div>
+    ${ctrl.kill_switch ? `<div class="halted">Autopilot halted. No phase will screen, stage or re-stage until you resume.</div>` : ""}
+    <div class="dials">
+      <span class="lbl">Dials</span>
+      <label class="lbl">Leverage <select data-ctl="leverage" ${dis}>${opt([1, 1.5, 2, 2.5, 3], ctrl.leverage ?? 2, v => v + "x")}</select></label>
+      <label class="lbl">Max pairs <select data-ctl="max_pairs" ${dis}>${opt([6, 8, 10, 12, 15], ctrl.max_pairs ?? 12, v => v)}</select></label>
+      <span class="lbl">${isNext ? (c.cutPassed ? "cut-off passed" : `cut-off ${esc(mon)} 14:54`) : ""}</span>
+      <button class="kill" id="killsw" aria-pressed="${!!ctrl.kill_switch}" ${dis}>${ctrl.kill_switch ? "Resume autopilot" : "Halt autopilot"}</button>
+    </div>
+    ${body}
+  </div>`;
+}
+
+async function setCtrl(patch) {
+  if (!S.canWrite || !S.db) return;
+  try {
+    await S.db.collection("book_control").doc("control").set({ ...(S.ctrl || {}), ...patch, updated_at: new Date().toISOString(), updated_by: S.uid || null });
+  } catch (err) { showBanner("That setting did not save. Check your connection and try again."); }
+}
+
 function renderBook(r) {
   const pairs = r.pairs || [];
   const taken = pairs.filter(p => decisionOf(p)?.action === "take");
   const watch = pairs.filter(p => decisionOf(p)?.action === "watch");
   const passed = pairs.filter(p => decisionOf(p)?.action === "pass");
-  const lines = taken.map(p => `LONG ${p.long.symbol} / SHORT ${p.short.symbol}`).join("\n");
   const row = p => { const d = decisionOf(p) || {}; return `<tr><td class="mono">${esc(p.long.symbol)}</td><td class="mono">${esc(p.short.symbol)}</td><td>${esc(p.supersector)}</td><td class="mono">${p.conviction}</td><td>${esc(d.reason || "")}${d.note ? " · " + esc(d.note) : ""}</td></tr>`; };
   const table = (title, list) => `<div><div class="lbl" style="margin-bottom:6px">${title} · ${list.length}</div>${list.length ? `<div class="tablebox"><table><thead><tr><th>Long</th><th>Short</th><th>Sector</th><th>Conv.</th><th>Reason / note</th></tr></thead><tbody>${list.map(row).join("")}</tbody></table></div>` : `<div class="empty">None yet.</div>`}</div>`;
-  $("#book").innerHTML = `
-    <div class="copyrow"><span><b class="mono">${taken.length}</b> of 10 pairs taken for this week's book</span>${taken.length ? `<button class="btn" id="copybook">Copy for SCREEN</button>` : ""}</div>
-    ${taken.length ? `<textarea class="copyout" id="bookout" readonly>${esc(lines)}</textarea>` : ""}
+  $("#book").innerHTML = `${renderAutopilot()}
+    <h2 style="font-size:16px;margin:10px 0 0">Your calls on this scan <span class="count">${esc(r.label || r.id)}</span></h2>
     ${table("Taken", taken)}${table("Watching", watch)}${table("Passed", passed)}`;
 }
 
@@ -676,12 +816,7 @@ document.addEventListener("click", async e => {
   if (fb) { await saveFb(fb.dataset.sym, fb.dataset.side, fb.dataset.v); return; }
   const act = e.target.closest(".act");
   if (act) { const t = act.closest(".ticket"); const cur = S.decisions[t.dataset.id]?.action; await save(t.dataset.id, { action: cur === act.dataset.a ? null : act.dataset.a, reason: "", note: S.decisions[t.dataset.id]?.note || "" }); return; }
-  if (e.target.id === "copybook") {
-    const ta = $("#bookout");
-    try { await navigator.clipboard.writeText(ta.value); e.target.textContent = "Copied"; }
-    catch (err) { ta.focus(); ta.select(); e.target.textContent = "Selected: press Ctrl+C"; }
-    return;
-  }
+  if (e.target.id === "killsw") { await setCtrl({ kill_switch: !(S.ctrl && S.ctrl.kill_switch) }); return; }
   if (e.target.id === "lbclose") $("#lb").close();
   const cm = e.target.closest("[data-cmt]");
   if (cm) { openComment(cm.dataset.cmt); return; }
@@ -708,8 +843,10 @@ document.addEventListener("click", async e => {
   }
 });
 document.addEventListener("change", e => {
+  if (e.target.id === "bookweek") { S.bookWeek = e.target.value; renderBook(S.run); return; }
+  const c = e.target.dataset.ctl; if (c) { setCtrl({ [c]: Number(e.target.value) }); return; }
   const k = e.target.dataset.k; if (!k) return;
-  const t = e.target.closest(".ticket"); const d = S.decisions[t.dataset.id] || {};
+  const t = e.target.closest(".ticket"); if (!t) return; const d = S.decisions[t.dataset.id] || {};
   save(t.dataset.id, { ...d, [k]: e.target.value });
 });
 $("#lb").addEventListener("click", e => { if (e.target.id === "lb") $("#lb").close(); });

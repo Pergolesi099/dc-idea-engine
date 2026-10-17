@@ -19,7 +19,8 @@ Dean's approval on the desk is the only selection step. Nothing is picked by Cla
 Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k — use the ArtifactData tool, pin `if_version` on existing docs.
 - `book_control/control`: `{kill_switch, leverage, max_pairs, sizing, ...}`. Dean's dials. Read first, every run.
   `kill_switch: true` → log nothing, notify nothing, stop.
-- `book/<ISO week, e.g. 2026-W43>`: the ledger. Schema:
+- `book/<week>`: the ledger. **Week = ISO week of the trading Monday** (`YYYY-Www`): a run on Saturday or Sunday uses the
+  following Monday, so Sunday's SCREEN and Monday's STAGE write the same doc. Set the `week` field to the doc id. Schema:
 ```json
 {"week": "2026-W43", "phase_done": [], "run_ids": [], "leverage": 2.0, "vix_fired": false,
  "nav_eur": 0, "eurusd": 0, "sizing": {}, "checks": {},
@@ -41,7 +42,8 @@ Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k — use the ArtifactData
 5. Watch and pass are ignored.
 
 ## Phase: SCREEN (Sun 19:53 Paris)
-1. Read control; create `book/<week>` if missing (copy `leverage` from control). Reset `vix_fired`.
+1. Read control; create `book/<week>` if missing (copy `leverage` from control).
+   The desk's Book tab reads this doc live, so keep `picks`, `sizing`, `checks`, `dropped` and `log` complete. Reset `vix_fired`.
 2. Regime log only: SPX vs 200D, VIX. VIX > 30 → warning line in the notification. Never changes picks or leverage.
 3. Collect Takes. **None** → write the ledger (picks empty), push "No Takes on the desk yet — cut-off Mon 14:54",
    stop. STAGE will still do the close-out.
@@ -54,7 +56,8 @@ Desk: https://claude.ai/artifact/SDNEj77zxqT1ws5qMgjz8k — use the ArtifactData
    (from the run doc's `earnings_in_window`; flag only, Dean already saw it), desk link.
 
 ## Phase: STAGE (Mon 14:54 Paris, before the US open) — approval cut-off
-1. Read control and this week's ledger. No ledger → create it and run SCREEN steps 3–5 inline (log "SCREEN missing").
+1. Read control and this week's ledger. Leverage and max_pairs come from control **now** (Dean may change them on the
+   desk until the cut-off); store them on the ledger. No ledger → create it and run SCREEN steps 3–5 inline (log "SCREEN missing").
 2. **Re-collect Takes** (cut-off is now). Pairs added since Sunday are resolved and priced; pairs un-taken are removed.
    Log every change vs Sunday.
 3. Fresh quotes on every leg. For pairs carried from Sunday, a leg that moved > 3% since the SCREEN quote → drop
