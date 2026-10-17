@@ -1,0 +1,145 @@
+{
+ "market_note": "Breadth split: 464 Uptrend vs 428 Downtrend + 197 Turning down; rotation out of tech into energy, payments, insurance, staples and hotels, utilities and gas producers lagging. Q3 season starts, several legs report inside the 2W hold (flags on tickets); Materials has no tradeable long. Borrow unchecked.",
+ "pairs": [
+  {
+   "long": "XOM",
+   "short": "EXE",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 54,
+   "beta_split_long": null,
+   "net_beta": -0.43,
+   "thesis": "Oil leader breaking 6M vs gas producer bouncing into falling 50D/200D; Leading vs Improving, corr 0.53. Net beta -0.43 (energy negative to S&P)."
+  },
+  {
+   "long": "CHD",
+   "short": "REYN",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 54,
+   "beta_split_long": 52,
+   "net_beta": 0.01,
+   "thesis": "Household staples: CHD 6M breakout with RS turning up vs REYN (Lead) bouncing into falling 50D/200D; Leading vs Lagging, corr 0.44. CHD reports Oct 30."
+  },
+  {
+   "long": "NWE",
+   "short": "PEG",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 44,
+   "beta_split_long": 37,
+   "net_beta": 0.04,
+   "thesis": "Electric utilities: NWE above rising 40W on data-center deal vs PEG under falling 40W bouncing into 50D; Leading vs Lagging, corr 0.37."
+  },
+  {
+   "long": "MAR",
+   "short": "SBUX",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 45,
+   "beta_split_long": null,
+   "net_beta": -0.22,
+   "thesis": "MAR 3M breakout, RS back over 40W MA vs SBUX (Lead) losing 40W, bounce into falling 50D; Leading vs Lagging, corr 0.37. SBUX reports Oct 29."
+  },
+  {
+   "long": "URBN",
+   "short": "BIRK",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 56,
+   "beta_split_long": 70,
+   "net_beta": -0.3,
+   "thesis": "Apparel: URBN 6M breakout vs BIRK lower highs after Sell downgrade, bounce into falling 50D; corr 0.39. Net beta -0.30. BIRK earnings date missing."
+  },
+  {
+   "long": "KDP",
+   "short": "JBS",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 58,
+   "beta_split_long": null,
+   "net_beta": -0.02,
+   "thesis": "KDP early turn (RS through 40W MA) and 6M breakout vs JBS below falling 40W on collapsing estimates; Leading vs Improving, corr 0.25."
+  },
+  {
+   "long": "PR",
+   "short": "BKV",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 57,
+   "beta_split_long": null,
+   "net_beta": -0.55,
+   "thesis": "PR 6M breakout on rising oil vs BKV rejected at 50D below falling 40W; corr 0.45. Net beta -0.55: pair is long crude vs gas."
+  },
+  {
+   "long": "RGA",
+   "short": "AXS",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 61,
+   "beta_split_long": 58,
+   "net_beta": 0.02,
+   "thesis": "Insurers: RGA clean 6M breakout, blue dots vs AXS rolled below 40W on falling estimates; corr 0.42, vol ratio 0.64. AXS reports Oct 28."
+  },
+  {
+   "long": "CON",
+   "short": "GMED",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 47,
+   "beta_split_long": 47,
+   "net_beta": 0.0,
+   "thesis": "CON 6M breakout, sector Leading vs GMED below falling 40W/200D bouncing into 50D; corr 0.35."
+  },
+  {
+   "long": "GCT",
+   "short": "FBIN",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 41,
+   "beta_split_long": 52,
+   "net_beta": -0.31,
+   "thesis": "GCT 6M breakout, blue dots vs FBIN below falling 40W bouncing into 50D; corr 0.24. Net beta -0.31."
+  },
+  {
+   "long": "HST",
+   "short": "INVH",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 40,
+   "beta_split_long": null,
+   "net_beta": 0.03,
+   "thesis": "REITs: HST pullback held 50D, RS back over MA vs INVH (Lead) rolled below 40W; Leading vs Improving, corr 0.34, vol ratio 1.50. INVH reports Oct 28."
+  },
+  {
+   "long": "VEEV",
+   "short": "CALX",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 42,
+   "beta_split_long": 58,
+   "net_beta": -0.3,
+   "thesis": "VEEV 6M breakout with RS turn vs CALX basing under falling 40W/200D; corr 0.20 (low). Net beta -0.30."
+  },
+  {
+   "long": "CNK",
+   "short": "LYV",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 43,
+   "beta_split_long": 38,
+   "net_beta": 0.06,
+   "thesis": "Entertainment: CNK pressing 6M high, sector Leading vs LYV (Lead) RS below 40W MA under falling 50D; corr 0.31."
+  },
+  {
+   "long": "MTCH",
+   "short": "MANU",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 45,
+   "beta_split_long": null,
+   "net_beta": 0.11,
+   "thesis": "MTCH RS back over 40W MA under 6M high vs MANU (Lead) rolling over into falling 50D; corr 0.24."
+  }
+ ]
+}

@@ -1,0 +1,478 @@
+{
+ "CNK|long": [
+  "B",
+  "Above rising 40W, blue dots; testing 6M 39 resistance, breakout pending"
+ ],
+ "MTCH|long": [
+  "B",
+  "RS reclaimed 40W MA, blue dot; held 50D, just under 6M high"
+ ],
+ "MRX|long": [
+  "C",
+  "Strong weekly but sector Lagging; daily stalling, MACD negative"
+ ],
+ "MSGS|long": [
+  "C",
+  "Weekly fine; sector Weakening, daily flat range, MACD rolling"
+ ],
+ "MANU|short": [
+  "B",
+  "RS lost 40W MA, 10W rolling; bounce into falling 50D"
+ ],
+ "LYV|short": [
+  "B",
+  "RS broke below 40W MA; price under falling 50D, 40W still rising"
+ ],
+ "RDDT|short": [
+  "C",
+  "Choppy around 40W, 79% vol; no clean structure"
+ ],
+ "CHKP|short": [
+  "B",
+  "Weekly downtrend; base rallying into 200D and 6M 143 resistance"
+ ],
+ "FIGS|long": [
+  "C",
+  "Vertical blow-off gap, +29% over 21D; exhaustion risk"
+ ],
+ "SIG|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed; gap above 6M on De Beers chatter"
+ ],
+ "ANF|long": [
+  "B",
+  "RS crossed 40W MA, blue dots; daily pressing 6M 155"
+ ],
+ "URBN|long": [
+  "A",
+  "Rising 40W, RS above MA, sector Leading; 6M breakout"
+ ],
+ "BBY|long": [
+  "B",
+  "Weekly turn above 40W, blue dots; sector Weakening, at 6M high"
+ ],
+ "MAR|long": [
+  "A",
+  "RS back above 40W MA; 3M breakout, room to 6M 410"
+ ],
+ "BROS|short": [
+  "C",
+  "Post-collapse bounce sitting on 6M support; knife"
+ ],
+ "NCLH|short": [
+  "B",
+  "Weekly downtrend, red dots; bounce toward falling 50D"
+ ],
+ "BIRK|short": [
+  "B",
+  "Lower highs below falling 40W; bounce into falling 50D failing"
+ ],
+ "SBUX|short": [
+  "B",
+  "RS lost 40W MA, price at 40W; bounce into falling 50D"
+ ],
+ "PLNT|short": [
+  "B",
+  "Weekly downtrend; sharp bounce toward 3M 57 resistance"
+ ],
+ "OSW|short": [
+  "B",
+  "RS below MA but price above rising 40W; bounce into 50D"
+ ],
+ "KDP|long": [
+  "A",
+  "Price reclaimed turning 40W, RS crossed MA; 6M breakout"
+ ],
+ "ELF|long": [
+  "B",
+  "Weekly turn above 40W; 6M breakout, sector Weakening"
+ ],
+ "IFF|long": [
+  "B",
+  "Above rising 40W, RS crossed MA; 6M breakout, sector Weakening"
+ ],
+ "CHEF|long": [
+  "C",
+  "Weekly strong but sector Lagging; flat flag under 6M"
+ ],
+ "FIZZ|long": [
+  "C",
+  "Choppy at flat 40W; +13% spike over 21D"
+ ],
+ "CHD|long": [
+  "B",
+  "RS crossing up 40W MA, 40W turning; 6M breakout, choppy history"
+ ],
+ "REYN|short": [
+  "A",
+  "Below falling 40W, RS red; bounce into falling 50D/200D"
+ ],
+ "MZTI|short": [
+  "C",
+  "Collapsed onto 6M support; no bounce to sell"
+ ],
+ "TSN|short": [
+  "B",
+  "Weekly rolled below 40W; bounce into falling 50D"
+ ],
+ "UNFI|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "JBS|short": [
+  "B",
+  "Below falling 40W; bounce above 21D toward 3M 14.35"
+ ],
+ "FRPT|short": [
+  "C",
+  "Price above 40W, R2 near zero; choppy"
+ ],
+ "MPC|long": [
+  "B",
+  "Parabolic weekly, blue dots; daily at 6M high, extended"
+ ],
+ "DINO|long": [
+  "B",
+  "Rising 40W, blue dots; at 6M high, extended from 50D"
+ ],
+ "CVI|long": [
+  "C",
+  "Parabolic, sector Weakening; exhaustion risk"
+ ],
+ "PSX|long": [
+  "B",
+  "Strong weekly, blue dots; sector Weakening, at 6M high"
+ ],
+ "PR|long": [
+  "B",
+  "Rising 40W, RS above MA; 6M breakout, sector only Improving"
+ ],
+ "XOM|long": [
+  "A",
+  "Rising 40W, RS above MA; 6M breakout, sector Leading"
+ ],
+ "BKV|short": [
+  "B",
+  "Below falling 40W; rejected at 50D, room to 6M 21"
+ ],
+ "GPOR|short": [
+  "C",
+  "Below 40W but R2 zero; choppy range"
+ ],
+ "CRK|short": [
+  "C",
+  "Flat base on 6M support; nothing to sell"
+ ],
+ "EXE|short": [
+  "B",
+  "Below falling 40W; bounce into 50D/200D, 6M 101 overhead"
+ ],
+ "CNX|short": [
+  "B",
+  "Lower highs under 40W; bounce toward falling 200D"
+ ],
+ "VAL|short": [
+  "C",
+  "Deal-pinned (Transocean); choppy at 40W"
+ ],
+ "HGTY|long": [
+  "A",
+  "RS crossed 40W MA; 6M breakout, sector Leading"
+ ],
+ "RGA|long": [
+  "A",
+  "Rising 40W, blue dots; clean 6M breakout"
+ ],
+ "MA|long": [
+  "A",
+  "RS crossed up 40W MA; 6M 600 breakout, sector Leading"
+ ],
+ "TRV|long": [
+  "B",
+  "Rising 40W, RS above MA; earnings pop into 6M 397"
+ ],
+ "MET|long": [
+  "B",
+  "Rising 40W, blue dots; testing 6M 101, not broken"
+ ],
+ "EZPW|long": [
+  "C",
+  "Weekly fine; daily choppy under 6M, no trigger"
+ ],
+ "AXS|short": [
+  "B",
+  "Rolled below 40W, RS red; bounce into falling 50D/200D"
+ ],
+ "INTR|short": [
+  "C",
+  "Event gap and -12% reversal; 61% vol"
+ ],
+ "MCY|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "NU|short": [
+  "C",
+  "Choppy around 40W, R2 near zero"
+ ],
+ "CDNA|long": [
+  "C",
+  "Parabolic, blow-off wick, MACD negative; sector Weakening"
+ ],
+ "HALO|long": [
+  "B",
+  "Rising 40W, blue dots; 6M breakout, sector Weakening"
+ ],
+ "HAE|long": [
+  "B",
+  "RS blue dots, 40W turning up; gap-driven, at 6M 121"
+ ],
+ "ILMN|long": [
+  "C",
+  "Reversal from 6M high, MACD rolling; sector Weakening"
+ ],
+ "ATRC|long": [
+  "C",
+  "Pulling back, MACD deeply negative; sector Weakening"
+ ],
+ "CON|long": [
+  "A",
+  "Rising 40W, blue dots; 6M breakout, sector Leading"
+ ],
+ "COO|short": [
+  "B",
+  "Below falling 40W; post-gap base bouncing into falling 21D"
+ ],
+ "SYK|short": [
+  "B",
+  "Weekly downtrend, RS red; bounce toward falling 50D"
+ ],
+ "VCEL|short": [
+  "C",
+  "Price at flat 40W; choppy, no edge"
+ ],
+ "VCYT|short": [
+  "C",
+  "Choppy around 40W, 74% vol"
+ ],
+ "GMED|short": [
+  "B",
+  "Below falling 40W/200D; bounce into 50D"
+ ],
+ "ENSG|short": [
+  "C",
+  "Flat, R2 low; no structure"
+ ],
+ "GCT|long": [
+  "A",
+  "Rising 40W, blue dots; 6M breakout, sector Leading"
+ ],
+ "FTRE|long": [
+  "B",
+  "Reclaimed 40W, RS above MA; pressing 6M 23.5"
+ ],
+ "INSW|long": [
+  "C",
+  "-8% reversal off highs, MACD flips; sector Weakening"
+ ],
+ "ATKR|long": [
+  "C",
+  "Deal-pinned flat line; no tradeable structure"
+ ],
+ "LPG|long": [
+  "C",
+  "Reversal off 6M high, MACD negative; sector Weakening"
+ ],
+ "DNOW|long": [
+  "C",
+  "Choppy, sector Weakening; no trigger"
+ ],
+ "ATMU|short": [
+  "B",
+  "Below falling 40W, RS red; weak bounce, 6M 40.8 below"
+ ],
+ "AYI|short": [
+  "B",
+  "Rolled below 40W, RS falling; stalling near 3M support"
+ ],
+ "WMS|short": [
+  "C",
+  "Weekly down but sitting on 6M support"
+ ],
+ "FBIN|short": [
+  "B",
+  "Below falling 40W; bounce into falling 50D"
+ ],
+ "TRU|short": [
+  "B",
+  "Below falling 40W; +13% V-bounce into 50D/200D"
+ ],
+ "LECO|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "AUGO|long": [
+  "C",
+  "Choppy, sector Weakening, short history"
+ ],
+ "WS|long": [
+  "C",
+  "R2 zero, weekly chop at 40W"
+ ],
+ "GEF|long": [
+  "C",
+  "Sector Lagging; pulling back below 21D"
+ ],
+ "RPM|short": [
+  "C",
+  "Below 40W but straight onto 6M support"
+ ],
+ "SMG|short": [
+  "B",
+  "Below falling 40W; bounce into falling 50D"
+ ],
+ "AXTA|short": [
+  "C",
+  "Price above 40W; merger news"
+ ],
+ "AMCR|short": [
+  "C",
+  "Choppy around 40W"
+ ],
+ "APD|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "PK|long": [
+  "B",
+  "RS crossed 40W, blue dots; 6M breakout, sector Weakening"
+ ],
+ "DRH|long": [
+  "B",
+  "Rising 40W, RS above MA; closing at 6M 13.7"
+ ],
+ "LTC|long": [
+  "B",
+  "Rising 40W; 6M breakout, sector Weakening"
+ ],
+ "HST|long": [
+  "B",
+  "Rising 40W, RS re-crossed MA; bounce off 50D, 6M 25.5 overhead"
+ ],
+ "AMT|long": [
+  "C",
+  "Below flat 40W, choppy; gap bounce"
+ ],
+ "HIW|long": [
+  "C",
+  "Sector Lagging; pulling back below 50D"
+ ],
+ "SPG|short": [
+  "C",
+  "Price still on rising 40W and 6M support"
+ ],
+ "INVH|short": [
+  "B",
+  "Rolled below 40W, RS red; bounce stalling under 50D"
+ ],
+ "ESS|short": [
+  "C",
+  "Price above rising 40W at 3M support"
+ ],
+ "MAC|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "SBAC|short": [
+  "B",
+  "Below falling 40W; +9% bounce toward falling 200D"
+ ],
+ "AHR|short": [
+  "C",
+  "Weekly uptrend intact"
+ ],
+ "PAYC|long": [
+  "B",
+  "RS crossed 40W MA, price reclaimed 40W; 6M breakout, >10% over 21D"
+ ],
+ "VEEV|long": [
+  "A",
+  "40W turning up, RS crossed MA; 6M breakout, sector Leading"
+ ],
+ "RBRK|long": [
+  "C",
+  "-10% reversal, MACD negative; sector Weakening"
+ ],
+ "P|long": [
+  "C",
+  "-20% reversal off highs; sector Weakening"
+ ],
+ "HTFL|long": [
+  "C",
+  "Flat after gap, MACD negative; sector Weakening"
+ ],
+ "FIVN|long": [
+  "C",
+  "-11% week, below 21D/50D; sector Weakening"
+ ],
+ "TDG|short": [
+  "B",
+  "Below falling 40W, RS red; bounce into falling 50D"
+ ],
+ "CALX|short": [
+  "B",
+  "Below falling 40W/200D; basing under 50D, 6M 32 below"
+ ],
+ "SNPS|short": [
+  "C",
+  "Event gaps both ways, -11% week; whipsaw"
+ ],
+ "KVYO|short": [
+  "C",
+  "Flat base under 40W, 75% vol; choppy"
+ ],
+ "DLB|short": [
+  "C",
+  "Price at flat 40W, choppy"
+ ],
+ "ZM|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "NWE|long": [
+  "B",
+  "Above rising 40W, RS crossed MA; gap on data-center deal at 6M"
+ ],
+ "RNW|long": [
+  "C",
+  "Deal-pinned flat line"
+ ],
+ "BKH|long": [
+  "B",
+  "Above rising 40W; gap on data-center deal under 6M 78"
+ ],
+ "PEG|short": [
+  "A",
+  "Below falling 40W, RS red; bounce into falling 50D"
+ ],
+ "MDU|short": [
+  "C",
+  "Weekly down but sitting on 6M 18.2 support"
+ ],
+ "EIX|short": [
+  "B",
+  "Post-gap base below falling 40W; bounce under 50D"
+ ],
+ "SRE|short": [
+  "B",
+  "Rolled below 40W; bounce into falling 50D"
+ ],
+ "EXC|short": [
+  "B",
+  "Broke 40W; bounce into falling 50D"
+ ],
+ "ATO|short": [
+  "B",
+  "Below 40W, sector Weakening; bounce into falling 50D"
+ ]
+}
