@@ -1,0 +1,155 @@
+{
+ "market_note": "Breadth mixed (Uptrend 537 / Range 484 / Downtrend 419 / Turning down 124); rotation out of AI into utilities, staples, lodging REITs and energy on the oil spike. Q3 season peaks: most legs report Nov 3-5, inside a 1-2 week hold. Borrow unchecked.",
+ "pairs": [
+  {
+   "long": "ED",
+   "short": "MDU",
+   "conviction": 4,
+   "type": "sector",
+   "split_long": 49,
+   "beta_split_long": null,
+   "net_beta": -0.24,
+   "thesis": "Electric utility breaking 6M highs with RS crossing up vs a gas utility rolling under its 40W; Leading vs Lagging, corr 0.47."
+  },
+  {
+   "long": "UCB",
+   "short": "MTB",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 47,
+   "beta_split_long": 65,
+   "net_beta": -0.2,
+   "thesis": "Regional banks: UCB 6M breakout with RS turning up vs MTB (Lead) slipping under 40W; Leading vs Lagging, corr 0.70."
+  },
+  {
+   "long": "TRV",
+   "short": "ORI",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 47,
+   "beta_split_long": null,
+   "net_beta": -0.02,
+   "thesis": "P&C leader clearing 6M high on Q3 beat vs ORI fading at 50D after a profit dip; corr 0.73."
+  },
+  {
+   "long": "COP",
+   "short": "GPOR",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 52,
+   "beta_split_long": null,
+   "net_beta": -0.27,
+   "thesis": "Oil over gas: COP 6M breakout with Brent rally vs GPOR stalling at 50D; Leading vs Lagging, corr 0.66. COP 11% extended."
+  },
+  {
+   "long": "BDX",
+   "short": "ABT",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 48,
+   "beta_split_long": null,
+   "net_beta": 0.17,
+   "thesis": "Med-tech: BDX 6M breakout, RS over 40W vs ABT (Lead) rejected at falling 40W after softened outlook; corr 0.60."
+  },
+  {
+   "long": "HALO",
+   "short": "PBH",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 41,
+   "beta_split_long": 57,
+   "net_beta": -0.15,
+   "thesis": "HALO new highs with RS blue dots vs PBH rejected at 50D, sector Lagging; clean rotation contrast but corr only 0.17."
+  },
+  {
+   "long": "FLYW",
+   "short": "FOUR",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 65,
+   "beta_split_long": 58,
+   "net_beta": 0.2,
+   "thesis": "Payments: FLYW pressing 6M high vs FOUR under falling 50D near 6M low; corr 0.36, vol ratio 0.55 so long leg sized up."
+  },
+  {
+   "long": "LMT",
+   "short": "RTX",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 42,
+   "beta_split_long": null,
+   "net_beta": -0.13,
+   "thesis": "Defense: LMT RS reclaiming 40W on Q3 beat vs RTX (Lead) losing 40W, bounce into falling 50D; corr 0.61. LMT gap extended."
+  },
+  {
+   "long": "DRH",
+   "short": "IRT",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 46,
+   "beta_split_long": 53,
+   "net_beta": -0.05,
+   "thesis": "REITs: lodging DRH 6M breakout at RS highs vs apartment IRT bouncing into falling 50D; corr 0.26."
+  },
+  {
+   "long": "IFF",
+   "short": "INGR",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 40,
+   "beta_split_long": null,
+   "net_beta": -0.11,
+   "thesis": "Food ingredients: IFF 6M breakout, sector Leading vs INGR under 21/50D, sector Lagging; corr 0.20, vol ratio 1.5."
+  },
+  {
+   "long": "TREX",
+   "short": "LPX",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 49,
+   "beta_split_long": 45,
+   "net_beta": 0.09,
+   "thesis": "Forest products: TREX 6M breakout after Stifel upgrade vs LPX bounce into falling 200D on cut estimates; corr 0.69."
+  },
+  {
+   "long": "CCK",
+   "short": "RPM",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 57,
+   "beta_split_long": null,
+   "net_beta": -0.3,
+   "thesis": "Packaging over coatings: CCK reclaims 50D off 200D with hist flip vs RPM stalling at 50D; corr 0.52. Net beta -0.3."
+  },
+  {
+   "long": "ANF",
+   "short": "BIRK",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 38,
+   "beta_split_long": 57,
+   "net_beta": -0.51,
+   "thesis": "Apparel: ANF clears 6M high on beat-and-revise vs BIRK rejected at 50D after Sell downgrade; corr 0.24, vol ratio 1.6, net beta -0.5."
+  },
+  {
+   "long": "SN",
+   "short": "BROS",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 58,
+   "beta_split_long": 22,
+   "net_beta": 0.43,
+   "thesis": "SN 6M breakout into expected beat-and-raise vs BROS weak bounce under falling 50D; corr 0.28, net beta +0.4."
+  },
+  {
+   "long": "NWS",
+   "short": "NYT",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 64,
+   "beta_split_long": null,
+   "net_beta": 0.18,
+   "thesis": "Newspapers: NWS RS crossing up 40W vs NYT lost 40W, bouncing toward 200D; corr 0.30, vol ratio 0.56. Both report Nov 4."
+  }
+ ]
+}
