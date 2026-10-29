@@ -141,13 +141,21 @@ it is the same idea (add the feedback id to it). Then `ArtifactData update` on `
 digested_at}`. Never delete feedback. Do not change scanner code here: changes ship as a new engine version
 when Dean asks (`tools/release_engine.py`), citing the backlog ids.
 
-## 7. Commit the learning inputs
-On `main`: `git add labels history/review engine/backlog.md && git commit -m "review <run_id>" && git pull --rebase && git push`.
+## 7. Back up the desk, then commit the learning inputs
+Dean's reviews exist only in the desk database until this step: never skip it, even on a failed cycle.
+ArtifactData `list` (page with `query.cursor` until done) on `feedback`, `decisions`, `chart_feedback`, `book`,
+`book_control` and `cycles` with `out_dir=<scratch>/snap` (fresh reads, after 6b, so digested statuses are captured).
+For every `chart_id` in feedback not yet in `history/desk/charts/`, Artifact read (url = desk, `path` = chart_id,
+`out_dir=<scratch>/snapimg`; one call per asset, the multi-`paths` read does not serve assets). Then
+`python tools/snapshot_desk.py <scratch>/snap <scratch>/snapimg`. If it REFUSES (desk shrank), do not pass
+`--allow-shrink`: stop, mark the cycle failed and tell Dean which collection lost documents.
+On `main`: `git add labels history/review history/desk engine/backlog.md && git commit -m "review <run_id>" && git pull --rebase && git push`.
 Never touch `model/` by hand: the scan owns it.
 
 ## 8. Housekeeping
 - Runs older than 26 weeks: delete their chart assets (Artifact delete with `path` = asset id) and
-  `update` the run doc so their `chart_url` fields are null. Never delete `decisions` or `chart_feedback`.
+  `update` the run doc so their `chart_url` fields are null. Never delete `decisions`, `chart_feedback` or `feedback`.
+  Never delete an asset a `feedback` item points at (`chart_id`) unless it is already in `history/desk/charts/`.
 - Clear `desk/_assets/` locally after upload.
 
 ## 9. Close the cycle and report

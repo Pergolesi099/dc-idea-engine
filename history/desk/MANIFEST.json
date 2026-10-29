@@ -1,0 +1,17 @@
+{
+ "snapshot_at": "2026-10-29T07:50:05Z",
+ "counts": {
+  "feedback": 52,
+  "decisions": 0,
+  "chart_feedback": 1,
+  "book": 2,
+  "book_control": 1,
+  "cycles": 0
+ },
+ "feedback_by_status": {
+  "digested": 1,
+  "queued": 51
+ },
+ "charts_archived": 51,
+ "charts_missing": []
+}

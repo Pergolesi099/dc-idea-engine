@@ -1,0 +1,1 @@
+{"_id": "control", "approval_cutoff": "Monday STAGE 14:54 Paris", "kill_switch": false, "leverage": 2, "max_pairs": 12, "note": "Autopilot control. kill_switch true halts every phase. leverage overrides the 2.0x default.", "sizing": "equal_dollar_per_leg", "updated_at": "2026-10-16T21:40:00Z"}
