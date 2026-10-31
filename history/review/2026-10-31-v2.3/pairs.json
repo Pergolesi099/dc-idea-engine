@@ -1,0 +1,135 @@
+{
+ "market_note": "Breadth improving (Uptrend 588 / Range 457 / Downtrend 418 / Turning down 95); rotation into staples, tobacco, REITs, storage and steel/chemicals, refiners rolling off highs, gap-ups on Q3 beats everywhere (graded C). Q3 season mostly reported: 85/114 legs have no next date. Borrow unchecked.",
+ "pairs": [
+  {
+   "long": "CUZ",
+   "short": "GLPI",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 50,
+   "beta_split_long": null,
+   "net_beta": 0.21,
+   "thesis": "Office REIT with RS crossing its 40W and a 21/50 turnaround vs a net-lease REIT stalling under its 50D; Leading vs Lagging, corr 0.55."
+  },
+  {
+   "long": "URI",
+   "short": "ALLY",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 40,
+   "beta_split_long": 47,
+   "net_beta": -0.14,
+   "thesis": "Rental leader breaking 6M on a 21/50 turnaround vs auto lender whose RS broke its 40W after the subprime-auto scare; Leading vs Improving, corr 0.24."
+  },
+  {
+   "long": "MDLZ",
+   "short": "HSY",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 52,
+   "beta_split_long": null,
+   "net_beta": -0.09,
+   "thesis": "Snacks with RS crossing up through its 40W vs Hershey rejected at its 21/50 after a beat analysts doubt; corr 0.72, no rotation contrast."
+  },
+  {
+   "long": "NUE",
+   "short": "CMC",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 48,
+   "beta_split_long": 60,
+   "net_beta": -0.23,
+   "thesis": "Steel leader with blue dots reclaiming the 21D vs rebar peer below all MAs with RS under its 40W; Leading vs Lagging, corr 0.73."
+  },
+  {
+   "long": "PKG",
+   "short": "SW",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 60,
+   "beta_split_long": 66,
+   "net_beta": -0.07,
+   "thesis": "Box maker with RS crossing up and a 21/50 turnaround vs Smurfit WestRock under its 50D after Q3 margin strain (RS leads price down); corr 0.73."
+  },
+  {
+   "long": "EG",
+   "short": "ORI",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 45,
+   "beta_split_long": null,
+   "net_beta": -0.14,
+   "thesis": "Reinsurer at 6M highs with RS crossing its 40W vs Old Republic failing under 50/200D; Leading vs Lagging, corr 0.70."
+  },
+  {
+   "long": "ABBV",
+   "short": "UHS",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 57,
+   "beta_split_long": null,
+   "net_beta": 0.09,
+   "thesis": "Pharma breakout on a beat-and-raise vs hospital operator rejected at 6M 190 and the 200D with a hist flip; Weakening vs Lagging, corr 0.22."
+  },
+  {
+   "long": "LNG",
+   "short": "EXE",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 45,
+   "beta_split_long": null,
+   "net_beta": -0.25,
+   "thesis": "LNG exporter breaking 6M 299 vs gas producer rolling under its 21D with RS red; Leading vs Improving, corr 0.34. Long leg 15% above its 21D."
+  },
+  {
+   "long": "SLB",
+   "short": "NOV",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 47,
+   "beta_split_long": 40,
+   "net_beta": 0.05,
+   "thesis": "Services major reclaiming the 21/50 with RS back over its 40W vs NOV losing its 40W RS and lagging XLE (Lead family); corr 0.72."
+  },
+  {
+   "long": "PM",
+   "short": "MKC",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 55,
+   "beta_split_long": null,
+   "net_beta": -0.19,
+   "thesis": "Tobacco leader with blue dots pressing 6M highs vs McCormick stalling under its falling 50D in a weekly downtrend; corr 0.40."
+  },
+  {
+   "long": "HOG",
+   "short": "FND",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 55,
+   "beta_split_long": 66,
+   "net_beta": -0.23,
+   "thesis": "Harley breaking 6M on a Q3 beat, RS crossed its 40W, vs Floor & Decor stalling at its 50D in a weekly downtrend; Leading vs Improving, corr 0.43. Long 12% extended."
+  },
+  {
+   "long": "V",
+   "short": "CFG",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 52,
+   "beta_split_long": null,
+   "net_beta": -0.3,
+   "thesis": "Visa at 6M highs with RS reclaimed vs Citizens with RS under its 40W and the 21D under the 50D (Lead family); corr 0.31."
+  },
+  {
+   "long": "PSA",
+   "short": "ADC",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 48,
+   "beta_split_long": null,
+   "net_beta": 0.14,
+   "thesis": "Storage REIT V-reversal with RS crossing its 40W vs net-lease REIT stalling under its 50D; Leading vs Improving, corr 0.49."
+  }
+ ]
+}
