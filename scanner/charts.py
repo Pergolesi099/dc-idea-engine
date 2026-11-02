@@ -35,14 +35,19 @@ def _candles(ax, df: pd.DataFrame, width: float = 0.7) -> np.ndarray:
     return x
 
 
-def _dates(ax, idx: pd.DatetimeIndex, n: int = 6, fmt: str = "%b %y"):
+def _dates(ax, idx: pd.DatetimeIndex, n: int = 6, fmt: str = "%b %y", blind: bool = False, unit: str = "M"):
     t = np.linspace(0, len(idx) - 1, n).astype(int)
     ax.set_xticks(t)
-    ax.set_xticklabels([idx[i].strftime(fmt) for i in t])
+    if blind:                                   # relative time only: no calendar dates on a blind chart
+        per = 21 if unit == "M" else 4.33
+        ax.set_xticklabels([f"-{round((len(idx) - 1 - i) / per)}M" if i < len(idx) - 1 else "now" for i in t])
+    else:
+        ax.set_xticklabels([idx[i].strftime(fmt) for i in t])
 
 
 def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series | None,
-           path: pathlib.Path, cfg: dict) -> None:
+           path: pathlib.Path, cfg: dict, blind: str | None = None) -> None:
+    """blind="#K3Q9": training chart. No ticker, company, dates or price levels (shapes only)."""
     rc, sr = cfg["rs"], cfg["sector_rotation"]
     d = d.dropna(subset=["Close"])
     fig = plt.figure(figsize=(14, 9.2), dpi=100)
@@ -64,7 +69,7 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     ax.plot(x, s10.iloc[-nW:].values, color="#1f6fd1", lw=1.2, label="10W")
     ax.plot(x, s40.iloc[-nW:].values, color="#7b3fbf", lw=1.4, label="40W")
     ax.legend(loc="upper left", frameon=False)
-    ax.set_title(f"Weekly · {row.get('regime') or '–'}", loc="left")
+    ax.set_title("Weekly · 2Y" if blind else f"Weekly · {row.get('regime') or '–'}", loc="left")
     ax.grid(alpha=0.2)
     ax.tick_params(labelbottom=False)
     axr = fig.add_subplot(gl[1], sharex=ax)
@@ -80,7 +85,9 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     axr.scatter(x[cd], rs[cd], marker="v", s=40, color=DN, zorder=4)
     axr.set_ylabel("RS vs S&P · 40W MA", fontsize=8)
     axr.grid(alpha=0.2)
-    _dates(axr, vw.index)
+    _dates(axr, vw.index, blind=bool(blind), unit="W")
+    if blind:
+        ax.tick_params(labelleft=False)
 
     # ---------- daily (1Y)
     nD = cfg["charts"]["daily_bars"]
@@ -97,7 +104,8 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
         for lvl, c in ((res, DN), (sup, UP)):
             if np.isfinite(lvl):
                 axd.axhline(lvl, color=c, ls=ls, lw=0.9, alpha=a)
-                axd.text(len(vd) - 1, lvl, f" {lab} {lvl:.2f}", color=c, va="bottom", ha="right", fontsize=7)
+                axd.text(len(vd) - 1, lvl, f" {lab}" if blind else f" {lab} {lvl:.2f}", color=c, va="bottom",
+                         ha="right", fontsize=7)
     bo = row.get("breakout") or 0
     if bo:
         axd.scatter([len(vd) - 1], [vd.Close.iloc[-1]], marker="^" if bo > 0 else "v", s=80,
@@ -106,6 +114,8 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     axd.set_ylim(lo - (hi - lo) * 0.10, hi + (hi - lo) * 0.05)
     axd.legend(loc="lower left", frameon=False, ncol=3)
     axd.set_title("Daily · 1Y", loc="left")
+    if blind:
+        axd.tick_params(labelleft=False)
     axd.grid(alpha=0.2)
     axd.tick_params(labelbottom=False)
 
@@ -164,7 +174,7 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
         axs.text(0.005, 0.92, f"Sector: {state}", transform=axs.transAxes, va="top", fontsize=8,
                  color=QUAD_COL.get(q[-1], "#222222") if len(q) else "#222222", fontweight="bold")
     axs.grid(alpha=0.2)
-    _dates(axs, vd.index, 7, "%d %b")
+    _dates(axs, vd.index, 7, "%d %b", blind=bool(blind))
 
     # ---------- header
     tags = ", ".join(row.get("tags") or [])
@@ -174,6 +184,12 @@ def render(sym: str, row: dict, d: pd.DataFrame, spx: pd.Series, etf: pd.Series 
     def f(k, n=1, sign=True):
         v = row.get(k)
         return "–" if v is None or not np.isfinite(v) else (f"{v:+.{n}f}" if sign else f"{v:.{n}f}")
+    if blind:
+        fig.text(0.045, 0.972, f"{blind}  |  {row.get('supersector')}  |  vs {row.get('sector_etf', 'sector')}",
+                 fontsize=10, fontweight="bold")
+        fig.savefig(path, dpi=100)
+        plt.close(fig)
+        return
     fig.text(0.045, 0.972, f"{sym}  {str(row.get('company', ''))[:26]}  |  {row.get('supersector')}  |  "
              f"{row['side'].upper()} [{tags}]  |  Sector: {sec}{turn}{lead}", fontsize=10, fontweight="bold")
     fig.text(0.045, 0.946, f"d21 {f('d21')}%  d50 {f('d50')}%  d200 {f('d200')}%   1W {f('p1w')}%  1M {f('p1m')}%  "
