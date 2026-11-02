@@ -12,13 +12,33 @@ Format:
     - Reading: what this says about how he reads charts, in one or two lines
     - Change: the concrete rule, feature, weight or threshold to try, and how to test it on history
 
+## LAB 2026-11-02 · v2.4 candidate tested (branch `v2.4-candidate`, results history/lab/2026-11-02-v2.4-candidate.json)
+History 2021-06 to 2026-11, 217 weeks of book replay (split 2024-09-27), 1,560 names, prior weights. 402 of 410 marks dated.
+- B-006 done: tools/harvest_marks.py -> labels/marks.jsonl. Dean's entry lines vs a permutation null (marks shifted together
+  within the same chart, 300 shuffles). Hit = signal within +-3 sessions, same direction. Daily marks (n=165):
+  sector turn 76% (lift 3.8) · vs-sector x 50D 66% (3.0) · price x 50D 65% (3.0) · daily RS x 200D 50% (3.9) ·
+  confluence>=3 48% (4.0) · weekly RS x 40W 44% (5.7) · MACD flip 38% (1.5) · 21D x 50D 21% (2.7) · TURN 11% (6.5). All p<0.003.
+  Caveat: hindsight marks on swing turns coincide with crosses by construction; this measures resemblance, not edge.
+- Engine on his daily entry marks (first Friday <= 5 sessions after), picked vs the same name/side on any Friday of that year:
+  v2.3 picked 4.2% (lift 0.54: v2.3 avoids his entries) · +score 6.1% (0.77) · v2.4 all 5.5% (1.28) · + trigger needs 3 crosses 6.1% (1.75).
+  Only 15% of his entries are even eligible in v2.3 (weekly gate + risk rules): the gate is the main gap, not the score.
+- 1W book Sharpe (all / H1 / H2): v2.3 -0.04 / -0.82 / 0.72 · +chop 0.21 / 0.54 / -0.22 · +tags 0.01 / -0.76 / 0.77 ·
+  +score 0.10 / -0.73 / 0.84 · v2.4 all -0.01 / 0.40 / -0.56 · +3 crosses 0.25 / -0.02 / 0.48 · +2 crosses 0.17 / -0.12 / 0.40.
+  Only +score beats v2.3 in both halves (marginally). v2.3 itself is flat over 2022-24: its 0.6-0.8 is a 2024-26 result.
+- 1M hold, non-overlapping (54 periods): v2.3 0.82 (-0.13 / 1.60) · v2.4 all 0.98 (0.38 / 1.55) · +3 crosses 1.24 (-0.35 / 3.17).
+- Event study vs sector ETF, all gated candidates: 1W -0.01%, 1M +0.29%, 2M +0.57%. The edge is at 1-2 months (B-005).
+  TURN long n=177: 1W -0.68, 1M -0.91 (negative) · B200 long n=987: ~0 · XBRK / TURN short: < 30 events (blocked by the gate).
+- Verdict: no v2.4 release as specified. Keep: confluence + sma_turn in the score (B-001a/B-002 as features). Park: TURN, B200
+  tags (no edge). Chop filter: halves disagree, park. Open: trigger-needs-3-crosses (best eye match, best totals, fails a half),
+  the weekly gate vs his entries, and a 1M-horizon book (B-005).
+
 ## B-007 · 2026-10-31 · open
 - From: feedback f-20261028165902610-zyni · run 2026-10-17-v2.3 · MZTI short (graded C)
 - Dean: no text; marks: short entry at a 50D cross with a histogram flip, then "long (weak against short mega trend)" at a later histogram flip.
 - Reading: a daily long signal against a falling weekly trend is low quality for him; the weekly trend sets the side, the daily only times it.
 - Change: penalise counter-trend daily triggers: Trigger/Turn longs with price < falling 40W (and shorts with price > rising 40W) get a score haircut instead of passing on daily signals. Test: split the 2023-2026 event study by weekly-trend agreement; ship the haircut only if disagreeing triggers underperform by > 0.5%/week.
 
-## B-006 · 2026-10-31 · open
+## B-006 · 2026-10-31 · done (harvest + scoring built; see LAB 2026-11-02)
 - From: feedback f-20261027202924577-zw5u, f-20261028163735457-3rmf, f-20261028164022426-cymy, f-20261028164359788-6psm, f-20261028164619914-ei0u, f-20261028164907588-tujk, f-20261028165107614-a4b2, f-20261028165234069-8cc9, f-20261028165337393-2exy, f-20261028165634262-uv6v, f-20261028170927582-yclb, f-20261028171018404-lymf, f-20261028171223667-25vl, f-20261028171404168-0rcj, f-20261028171947655-ehe3, f-20261028172117304-w53o, f-20261028172339117-qs6k, f-20261028172758368-c623, f-20261028173101897-flkn, f-20261028173410791-swpn, f-20261028175145443-7dqu, f-20261028175358991-ptyq, f-20261030171121646-qi1a, f-20261030171244974-auh5, f-20261030171326149-ygqf, f-20261030171424522-mzhf, f-20261030172047758-nn7t, f-20261030172230992-pxf2, f-20261030172412184-m37o, f-20261030172457109-0d95, f-20261030172600442-x6cu, f-20261030172648968-fyza, f-20261030173441675-ra8z, f-20261030173546011-llf7, f-20261030173718000-m2jo, f-20261030173829260-iqol, f-20261030174403685-gbvo, f-20261030174550233-bex4, f-20261030174700892-cecc, f-20261030174743778-z1mq · runs 2026-10-17-v2.3 and 2026-10-24-v2.3 · 40 charts, mostly no text
 - Dean: vertical lines labelled "long" / "short" (sometimes "long?" / "short?") across the 1Y daily and 2Y weekly panels, each on a past swing turn; plus an A/B/C grade on each chart.
 - Reading: he is labelling where he would have entered and exited in hindsight, swing by swing: turns are taken near MA crosses after a run, not at extremes. These lines are a dense, free set of supervised entry labels in his own eye.
