@@ -9,6 +9,9 @@ on:
       sessions:
         description: "Price history in sessions"
         default: "1300"
+      script:
+        description: "Lab script (writes its results under lab/<label>)"
+        default: "tools/lab_v24.py"
 
 permissions:
   contents: write
@@ -24,10 +27,10 @@ jobs:
           python-version: "3.11"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Engine candidate lab (marks, event study, backtest)
+      - name: Lab script
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-        run: python tools/lab_v24.py "lab/${{ inputs.label }}.json" "${{ inputs.sessions }}"
+        run: python "${{ inputs.script }}" "lab/${{ inputs.label }}" "${{ inputs.sessions }}"
       - name: Publish to the lab branch (overwritten each run)
         run: |
           cd lab
