@@ -1,0 +1,37 @@
+name: lab
+
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: "Name for the result file (e.g. v2.4-candidate)"
+        default: "lab_v24"
+      sessions:
+        description: "Price history in sessions"
+        default: "1300"
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Engine candidate lab (marks, event study, backtest)
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: python tools/lab_v24.py "lab/${{ inputs.label }}.json" "${{ inputs.sessions }}"
+      - name: Publish to the lab branch (overwritten each run)
+        run: |
+          cd lab
+          git init -q -b lab
+          git add -A
+          git -c user.name=dc-idea-engine-bot -c user.email=actions@users.noreply.github.com commit -qm "lab ${{ inputs.label }} @ ${{ github.ref_name }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" lab
