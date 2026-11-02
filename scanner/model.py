@@ -13,7 +13,7 @@ import pandas as pd
 
 from features import DIRECTIONAL, NONDIRECTIONAL, gate, regime, side_features
 
-TAGS = ["S1", "S2", "S3", "MOM", "LEAD", "SECT", "BO", "MACD"]
+TAGS = ["S1", "S2", "S3", "MOM", "LEAD", "SECT", "BO", "MACD", "TURN", "B200", "XBRK"]
 CONTINUOUS = DIRECTIONAL + NONDIRECTIONAL
 FEATURES = CONTINUOUS + [f"tag_{t}" for t in TAGS]
 
@@ -26,8 +26,11 @@ PRIOR = {
     "p1w": 0.0, "p1m": .02, "p3m": .03, "p6m": .02, "d21": 0.0, "d50": .01, "d200": .01,
     "breakout": .06, "macd_sig": .05, "headroom": .02,
     "r2_63": .06, "er_63": .04, "x21_63": -.04, "vol63": -.02, "ext21": -.04, "base_tight": .02,
+    "confluence": 0.0, "sma_turn": 0.0,           # v2.4 features: off in the v2.3 prior (see PRIOR_V24)
     **{f"tag_{t}": .01 for t in TAGS},
 }
+# v2.4 candidate prior: Dean's confluence / SMA-turn read gets weight (engine backlog B-001, B-002).
+PRIOR_V24 = {**PRIOR, "confluence": .06, "sma_turn": .04}
 
 
 def normalise(w: dict) -> dict:
@@ -65,6 +68,15 @@ def tag_frame(df: pd.DataFrame, side: str, cfg: dict) -> pd.DataFrame:
     t["SECT"] = (df.sec_turn * sg == 1) & (df.rssec_vs_ma * sg > 0)   # daily turn agrees with weekly sector RS
     t["BO"] = df.breakout * sg > 0
     t["MACD"] = df.macd_sig * sg > 0
+    v = cfg.get("v24") or {}
+    nconf = v.get("trigger_min_confluence") or 0
+    if nconf and "confluence" in df:                 # Trigger tags only on a confluence of crosses
+        t["BO"] &= df.confluence * sg >= nconf
+        t["MACD"] &= df.confluence * sg >= nconf
+    on = set(v.get("tags") or [])                    # v2.4 setups, per side: {"TURN": [long, short], ...}
+    for tg, col in (("TURN", "turn_setup"), ("B200", "b200"), ("XBRK", "xbrk")):
+        sides = (v.get("tag_sides") or {}).get(tg, ["long", "short"])
+        t[tg] = (df[col] * sg > 0) if (tg in on and side in sides and col in df) else False
     r = cfg.get("risk") or {}
     if r.get("enabled") and not L:
         for tg in r.get("short_tags_barred", []):        # e.g. MOM: momentum-laggard shorts = falling knives
@@ -86,6 +98,10 @@ def risk_mask(df: pd.DataFrame, side: str, cfg: dict) -> pd.Series:
     if sm:
         sigma_m = df.vol63 / np.sqrt(12)
         ok &= ~((df.d21 * sg) / sigma_m > sm)
+    ch = r.get("chop")                                # v2.4 (B-003): no sideways charts unless breaking out
+    if ch:
+        chop = (df.x21_63 >= ch.get("max_x21", 6)) | (df.r2_63 < ch.get("min_r2", 0.1))
+        ok &= ~(chop & ~(df.breakout * sg > 0))
     if side == "short":
         k = r.get("short_knife_max_below21")
         if k is not None:
@@ -127,7 +143,8 @@ def side_table(df: pd.DataFrame, side: str, cfg: dict, gated: bool = True) -> pd
     return out
 
 
-FAMILIES = {"Lead": ["LEAD"], "Turn": ["SECT", "S3"], "Trigger": ["BO", "MACD"], "Trend": ["S1", "S2", "MOM"]}
+FAMILIES = {"Lead": ["LEAD"], "Turn": ["SECT", "S3"], "Trigger": ["BO", "MACD", "TURN", "B200", "XBRK"],
+            "Trend": ["S1", "S2", "MOM"]}
 
 
 def family(tags: list[str]) -> str:

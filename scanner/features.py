@@ -88,6 +88,7 @@ DIRECTIONAL = [   # sign flips for shorts (higher = better for a long)
     "rssec_vs_ma", "rssec_cross", "rssec_hl", "rssec_1m", "rssec_3m",
     "p1w", "p1m", "p3m", "p6m", "d21", "d50", "d200", "breakout", "macd_sig", "headroom",
     "sec_ratio", "sec_mom", "sec_quad", "sec_turn",
+    "confluence", "sma_turn",                         # v2.4 (B-001, B-002); weight 0 in the v2.3 prior
 ]
 SECTOR_STATES = {2.0: "Leading", 1.0: "Improving", -1.0: "Weakening", -2.0: "Lagging"}
 NONDIRECTIONAL = ["r2_63", "er_63", "x21_63", "vol63", "ext21", "base_tight"]
@@ -225,6 +226,56 @@ def compute_panels(daily: dict[str, pd.DataFrame], spx_close: pd.Series, sector_
     sig = sig.mask((bfu < win) & (hist > 0), 1.0).mask((bfd < win) & (hist < 0), -1.0)
     out["macd_sig"] = sig.where(hist.notna()).astype(F32)
     out["macd_histn"] = histn.astype(F32)
+
+    # ---------- v2.4: Dean's turnaround / confluence read (engine backlog B-001, B-002)
+    # Events he boxes on his charts, each by direction: price crossing its 21D or 50D, the 21D crossing
+    # the 50D, price crossing the 200D, a MACD histogram flip, the daily RS vs S&P crossing its 200D MA,
+    # the stock/sector ratio crossing its 50D MA (the dashed line on the sector panel), price crossing
+    # its 40W MA on the weekly.
+    rs_d = c.div(spx_close.reindex(c.index), axis=0)
+    rs_d_ma = sma(rs_d, 200)
+    rsd_ma = sma(rsd, sr["trend_len"])
+    cw40_up = crossover(cw, s40).astype(F32).reindex(c.index, method="ffill").fillna(0) > 0
+    cw40_dn = crossunder(cw, s40).astype(F32).reindex(c.index, method="ffill").fillna(0) > 0
+    ev = {
+        "up": {"px": crossover(c, s21) | crossover(c, s50), "sma": crossover(s21, s50) | crossover(c, s200),
+               "macd": flip_up, "rsd": crossover(rs_d, rs_d_ma), "sec": crossover(rsd, rsd_ma), "w40": cw40_up},
+        "dn": {"px": crossunder(c, s21) | crossunder(c, s50), "sma": crossunder(s21, s50) | crossunder(c, s200),
+               "macd": flip_dn, "rsd": crossunder(rs_d, rs_d_ma), "sec": crossunder(rsd, rsd_ma), "w40": cw40_dn},
+    }
+    cw_ = 3                                              # "on the same bars": within the last 3 sessions
+    conf = {k: sum((bars_since(e) < cw_).astype(F32) for e in v.values()) for k, v in ev.items()}
+    ok = s200.notna() & rs_d_ma.notna()
+    out["confluence"] = (conf["up"] - conf["dn"]).where(ok).astype(F32)
+    # 21D/50D (or 200D) turn in the last 5 sessions, still on the new side
+    tw = 5
+    t_up = (bars_since(ev["up"]["sma"]) < tw) & (s21 > s50)
+    t_dn = (bars_since(ev["dn"]["sma"]) < tw) & (s21 < s50)
+    st = pd.DataFrame(0.0, index=c.index, columns=c.columns).mask(t_up, 1.0).mask(t_dn, -1.0)
+    out["sma_turn"] = st.where(s50.notna()).astype(F32)
+    # B-002 turnaround setup: SMA turn + histogram flip + sector-relative cross, all within 5 sessions
+    tu = t_up & (bars_since(flip_up) < tw) & (bars_since(ev["up"]["sec"]) < tw) & (hist > 0)
+    td = t_dn & (bars_since(flip_dn) < tw) & (bars_since(ev["dn"]["sec"]) < tw) & (hist < 0)
+    out["turn_setup"] = pd.DataFrame(0.0, index=c.index, columns=c.columns).mask(tu, 1.0).mask(td, -1.0) \
+        .where(s50.notna()).astype(F32)
+    # B-001(b) 200D bounce: low within 2% of a rising 200D in the last 5 sessions, back over the 21D,
+    # histogram rising (mirror for shorts: rally into a falling 200D rejected)
+    s200_up, s200_dn = s200 > s200.shift(20), s200 < s200.shift(20)
+    touch_lo = (l.rolling(5, min_periods=5).min() <= s200 * 1.02) & (c > s200)
+    touch_hi = (h.rolling(5, min_periods=5).max() >= s200 * 0.98) & (c < s200)
+    hrise, hfall = hist > hist.shift(1), hist < hist.shift(1)
+    bu = touch_lo & s200_up & (c > s21) & hrise
+    bd = touch_hi & s200_dn & (c < s21) & hfall
+    out["b200"] = pd.DataFrame(0.0, index=c.index, columns=c.columns).mask(bu, 1.0).mask(bd, -1.0) \
+        .where(s200.notna()).astype(F32)
+    # B-001(c)/B-004 extension break: close back under the 50D within 20 sessions of being > 2 monthly
+    # sigmas above it, histogram flipped down within 5 sessions (mirror for longs: capitulation reclaim)
+    sig_m = out["vol63"] / np.sqrt(12)
+    z50 = out["d50"] / sig_m
+    xs = (c < s50) & (z50.rolling(20, min_periods=20).max() > 2) & (bars_since(flip_dn) < tw)
+    xl = (c > s50) & (z50.rolling(20, min_periods=20).min() < -2) & (bars_since(flip_up) < tw)
+    out["xbrk"] = pd.DataFrame(0.0, index=c.index, columns=c.columns).mask(xl, 1.0).mask(xs, -1.0) \
+        .where(s50.notna()).astype(F32)
     return out
 
 

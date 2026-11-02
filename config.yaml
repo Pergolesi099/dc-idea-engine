@@ -92,6 +92,13 @@ risk:
   earnings_block_days: 7        # drop legs reporting within 7 days of the Monday entry (0 = off)
   beta_len: 60                  # sessions for each leg's beta vs the S&P 500
   min_conviction: 3             # pairs below this are not published
+  chop: null                    # v2.4 candidate (B-003): {max_x21: 6, min_r2: 0.1}
+
+# v2.4 candidate switches (all off = v2.3 selection). Tested by tools/lab_v24.py before any release.
+v24:
+  tags: []                      # TURN (B-002), B200 (B-001b), XBRK (B-001c/B-004)
+  tag_sides: {B200: [long], XBRK: [short]}
+  trigger_min_confluence: 0     # BO/MACD tags need this many same-direction crosses in 3 sessions
 
 # Fundamentals for the shortlisted candidates (Yahoo; FMP surprises if FMP_API_KEY is set; SEC EDGAR guidance).
 fundamentals:
