@@ -12,6 +12,23 @@ Format:
     - Reading: what this says about how he reads charts, in one or two lines
     - Change: the concrete rule, feature, weight or threshold to try, and how to test it on history
 
+## LAB 2026-11-02 · v3 "eye" (branch `v3-eye`, results history/lab/2026-11-02-eye-v3.json)
+Dean: scrap the gates; machine-learn his reviewed charts as pictures. Built scanner/eye.py (six chart panels, window-scaled,
+short = flipped picture) + tools/eye_lab.py. Labels: 219 dated entry lines (+ jitter), 12,357 same-chart non-entry dates,
+80 grades, 4,548 light universe negatives. History 2017-05 to 2026-11, 1,560 names.
+- It learns his eye: on stocks it never saw (5-fold by stock), best model (regularised logistic on the raw picture) AUC 0.83;
+  his entry date ranks in the top 10% of its own chart 54% of the time (10% by chance). PCA/kNN/GBM variants 0.63-0.78.
+- It does not learn his grades: Spearman 0.07 with A/B/C on held-out charts (80 grades is too few).
+- It does not make money out of sample (2020-02 to 2025-01, before any training picture): one pair per sector, 1W Sharpe
+  -0.51 (random pairs 0.07), 1M -0.33, 2M -0.29. Long pictures that look most like his entries underperform the rest at 2M
+  (-1.15%, t -2.6); short pictures help (+0.96%, t 2.3). In-sample 2025-26 is positive (0.5-1.5) but leaks: the training
+  pictures sit inside that period.
+- Why: his lines are drawn in hindsight on turns that worked. The picture at the turn looks the same for turns that fail,
+  so a model of "where he would mark" learns the look of an early turn, which on average does not follow through.
+- Next: blind labels. Show him past charts cut at a random date (future hidden), he grades side + A/B/C; outcomes are known at
+  once, so (1) we learn whether his blind read predicts returns at all, and (2) the model trains on forward-looking labels.
+  Not live: the eye model stays on the branch.
+
 ## LAB 2026-11-02 · v2.4 candidate tested (branch `v2.4-candidate`, results history/lab/2026-11-02-v2.4-candidate.json)
 History 2021-06 to 2026-11, 217 weeks of book replay (split 2024-09-27), 1,560 names, prior weights. 402 of 410 marks dated.
 - B-006 done: tools/harvest_marks.py -> labels/marks.jsonl. Dean's entry lines vs a permutation null (marks shifted together
