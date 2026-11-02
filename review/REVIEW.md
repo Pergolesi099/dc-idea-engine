@@ -149,7 +149,8 @@ For every `chart_id` in feedback not yet in `history/desk/charts/`, Artifact rea
 `out_dir=<scratch>/snapimg`; one call per asset, the multi-`paths` read does not serve assets). Then
 `python tools/snapshot_desk.py <scratch>/snap <scratch>/snapimg`. If it REFUSES (desk shrank), do not pass
 `--allow-shrink`: stop, mark the cycle failed and tell Dean which collection lost documents.
-On `main`: `git add labels history/review history/desk engine/backlog.md && git commit -m "review <run_id>" && git pull --rebase && git push`.
+Also back up the Chart Trainer (blind calls): ArtifactData `list` on `calls` at https://claude.ai/artifact/MiZMrbynjbfVhDEBSEUJAk with `out_dir=<scratch>/trainer` (page with `query.cursor`), then `python tools/snapshot_trainer.py <scratch>/trainer` (same shrink rule as the desk).
+On `main`: `git add labels history/review history/desk history/trainer engine/backlog.md && git commit -m "review <run_id>" && git pull --rebase && git push`.
 Never touch `model/` by hand: the scan owns it.
 
 ## 8. Housekeeping

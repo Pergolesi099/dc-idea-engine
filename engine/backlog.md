@@ -12,6 +12,14 @@ Format:
     - Reading: what this says about how he reads charts, in one or two lines
     - Change: the concrete rule, feature, weight or threshold to try, and how to test it on history
 
+## TRAINER 2026-11-02 · blind labels (Chart Trainer artifact, MiZMrbynjbfVhDEBSEUJAk)
+- Batch 1: 300 past charts (2020-03 to 2026-08), ticker/dates/prices hidden; 150 random, 150 eye-model top-2% picks
+  (tools/blind_batch.py on branch v3-eye, seed 1). Outcomes in history/trainer/batch-1/charts.json; page in trainer/.
+- Dean calls long/short/pass + A/B/C; calls in the trainer's `calls` collection, backed up Saturdays to history/trainer.
+- Next, once >= 100 long/short calls: (1) does his blind read beat the average chart at 1M (t > 2)? (2) does it beat the
+  model on the model's own picks? (3) if yes, retrain the eye model on blind calls (side + grade, outcome-weighted) and
+  rebuild the weekly sector pairs from it; if no, stop modelling his eye and say so.
+
 ## LAB 2026-11-02 · v3 "eye" (branch `v3-eye`, results history/lab/2026-11-02-eye-v3.json)
 Dean: scrap the gates; machine-learn his reviewed charts as pictures. Built scanner/eye.py (six chart panels, window-scaled,
 short = flipped picture) + tools/eye_lab.py. Labels: 219 dated entry lines (+ jitter), 12,357 same-chart non-entry dates,

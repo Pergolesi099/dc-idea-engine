@@ -1,0 +1,352 @@
+<title>Chart Trainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;700;800&family=Chivo+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: slim header (progress) -> tabs -> one blind chart, full width -> sticky call bar (Long / Short / Pass, then A/B/C) -> reveal strip. Results tab = scoreboard. Same palette family as the desk. */
+:root {
+  --bg: #f3f5f3; --surface: #ffffff; --sunk: #e9edeb; --ink: #16201d; --muted: #5b6a65; --line: #d7dfdb;
+  --long: #17805a; --long-soft: #e2f2ea; --short: #b8443a; --short-soft: #f8e6e3;
+  --accent: #a86c12; --accent-soft: #f6ead6; --good: #17805a; --bad: #b8443a;
+  --font-display: "Chivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Chivo", "Helvetica Neue", Arial, sans-serif;
+  --font-data: "Chivo Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 6px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1513; --surface: #161e1b; --sunk: #1d2724; --ink: #e3eae7; --muted: #92a39d; --line: #283430;
+  --long: #45c290; --long-soft: #173329; --short: #ef7b6f; --short-soft: #3a1f1c;
+  --accent: #e2a94e; --accent-soft: #3a2c15; --good: #45c290; --bad: #ef7b6f; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1513; --surface: #161e1b; --sunk: #1d2724; --ink: #e3eae7; --muted: #92a39d; --line: #283430;
+  --long: #45c290; --long-soft: #173329; --short: #ef7b6f; --short-soft: #3a1f1c;
+  --accent: #e2a94e; --accent-soft: #3a2c15; --good: #45c290; --bad: #ef7b6f; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 14px; line-height: 1.45; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px 120px; display: grid; gap: 14px; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.lbl { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+header { display: grid; gap: 8px; }
+.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(20px, 2.6vw, 26px); margin: 0; letter-spacing: -.01em; }
+.sub { color: var(--muted); max-width: 80ch; margin: 0; }
+.progress { display: flex; align-items: center; gap: 10px; }
+.bar { flex: 1; height: 6px; background: var(--sunk); border-radius: 3px; overflow: hidden; min-width: 120px; }
+.bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .3s; }
+nav { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+nav button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 12px; cursor: pointer; color: var(--muted); font-weight: 500; }
+nav button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.opt { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; }
+
+.chartbox { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 6px; }
+.chartbox img { display: block; width: auto; height: auto; aspect-ratio: 1400 / 920; max-width: 100%; max-height: calc(100vh - 96px - env(safe-area-inset-bottom, 0px)); margin: 0 auto; border-radius: 3px; background: #fff; cursor: zoom-in; }
+.chartbox { scroll-margin-top: 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 13px; padding: 6px 4px 2px; }
+.meta b { color: var(--ink); font-weight: 500; }
+
+.callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: var(--surface); border-top: 1px solid var(--line);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 10px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.callin { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 10px 16px; cursor: pointer; font-weight: 700; min-width: 64px; }
+.btn kbd { font-family: var(--font-data); font-size: 11px; color: var(--muted); margin-left: 6px; font-weight: 400; }
+.btn.long { border-color: var(--long); color: var(--long); }
+.btn.short { border-color: var(--short); color: var(--short); }
+.btn.long[aria-pressed="true"] { background: var(--long); color: var(--surface); }
+.btn.short[aria-pressed="true"] { background: var(--short); color: var(--surface); }
+.btn.pass[aria-pressed="true"] { background: var(--muted); color: var(--surface); border-color: var(--muted); }
+.btn.grade { min-width: 48px; }
+.btn.go { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.sep { width: 1px; height: 28px; background: var(--line); }
+.hint { color: var(--muted); font-size: 12px; margin-left: auto; }
+#note { flex: 1 1 180px; min-width: 0; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 9px 10px; }
+
+.reveal { display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; }
+.reveal h2 { margin: 0; font-size: 16px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.verdict { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.verdict.good { background: var(--long-soft); color: var(--good); }
+.verdict.bad { background: var(--short-soft); color: var(--bad); }
+.verdict.pass { background: var(--sunk); color: var(--muted); }
+.outs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 560px; }
+.out { background: var(--sunk); border-radius: 4px; padding: 6px 10px; display: grid; }
+.out b { font-family: var(--font-data); font-size: 18px; font-weight: 500; }
+.pos { color: var(--good); } .neg { color: var(--bad); }
+
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: var(--r); padding: 28px 20px; color: var(--muted); max-width: 70ch; }
+.empty b { color: var(--ink); }
+.banner { background: var(--accent-soft); color: var(--accent); border-radius: var(--r); padding: 8px 12px; }
+
+/* results */
+.res { display: grid; gap: 16px; max-width: 980px; }
+.res p { margin: 0; max-width: 75ch; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 10px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; display: grid; gap: 2px; }
+.kpi b { font-family: var(--font-data); font-size: 22px; font-weight: 500; }
+.tablebox { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-weight: 500; color: var(--muted); font-size: 12px; }
+td.n, th.n { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+.lb { position: fixed; inset: 0; z-index: 20; background: rgba(0,0,0,.85); display: grid; place-items: center; padding: 12px; cursor: zoom-out; }
+.lb img { max-width: 100%; max-height: 100%; background: #fff; }
+@media (max-width: 640px) { .hint { display: none; } .btn { padding: 9px 12px; min-width: 52px; } .btn kbd { display: none; } }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="top">
+      <h1>Chart Trainer</h1>
+      <div class="progress mono" style="min-width:min(100%,320px)"><span id="pcount">0 / 0</span><div class="bar"><i id="pbar"></i></div></div>
+    </div>
+    <p class="sub">Past charts cut at a date you can't see, ticker and prices hidden. Call each one as you would on a Monday morning: long, short or pass, then how strongly. Your calls are scored against what happened next, relative to the sector ETF.</p>
+  </header>
+  <nav role="tablist">
+    <button role="tab" id="t-call" aria-selected="true">Call</button>
+    <button role="tab" id="t-res" aria-selected="false">Results <span class="mono" id="c-res"></span></button>
+    <label class="opt"><input type="checkbox" id="showout" checked> Show outcome after each call</label>
+  </nav>
+  <div id="banner" class="banner" hidden></div>
+  <section id="v-call"></section>
+  <section id="v-res" hidden></section>
+</div>
+
+<div class="callbar" id="callbar" hidden>
+  <div class="callin">
+    <button class="btn long" id="b-long" aria-pressed="false">Long<kbd>L</kbd></button>
+    <button class="btn short" id="b-short" aria-pressed="false">Short<kbd>S</kbd></button>
+    <button class="btn pass" id="b-pass" aria-pressed="false">Pass<kbd>P</kbd></button>
+    <span class="sep"></span>
+    <button class="btn grade" id="b-A" disabled>A<kbd>1</kbd></button>
+    <button class="btn grade" id="b-B" disabled>B<kbd>2</kbd></button>
+    <button class="btn grade" id="b-C" disabled>C<kbd>3</kbd></button>
+    <input id="note" placeholder="Note (optional): what you see">
+    <span class="hint">A = would trade it now · B = decent · C = weak</span>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const S = { charts: [], calls: {}, db: null, cur: null, side: null, shownAt: 0, revealed: null, tab: "call", busy: false };
+try { const v = localStorage.getItem("trainer.showout"); if (v !== null) $("#showout").checked = v === "1"; } catch (e) {}
+$("#showout").addEventListener("change", e => { try { localStorage.setItem("trainer.showout", e.target.checked ? "1" : "0"); } catch (err) {} });
+
+const fmt = v => v == null ? "–" : (v > 0 ? "+" : "") + v.toFixed(1) + "%";
+const cls = v => v == null ? "" : v > 0 ? "pos" : v < 0 ? "neg" : "";
+// Edge is measured against the average chart in the batch: single stocks lag their sector ETF on average,
+// so a raw "short = minus the return" would reward shorting by default.
+const BASE = { "1w": 0, "1m": 0, "2m": 0 };
+const sideRet = (c, side, h) => { const v = c["rel_" + h]; if (v == null) return null; const x = v - BASE[h]; return side === "short" ? -x : x; };
+
+function setTab(t) {
+  S.tab = t;
+  $("#t-call").setAttribute("aria-selected", t === "call");
+  $("#t-res").setAttribute("aria-selected", t === "res");
+  $("#v-call").hidden = t !== "call";
+  $("#v-res").hidden = t !== "res";
+  $("#callbar").hidden = t !== "call" || !S.cur || S.revealed;
+  if (t === "res") renderRes();
+}
+$("#t-call").onclick = () => setTab("call");
+$("#t-res").onclick = () => setTab("res");
+
+function progress() {
+  const n = Object.keys(S.calls).length, N = S.charts.length;
+  $("#pcount").textContent = `${n} / ${N}`;
+  $("#pbar").style.width = N ? (100 * n / N) + "%" : "0";
+  $("#c-res").textContent = n || "";
+}
+
+function nextChart() {
+  S.side = null; S.revealed = null;
+  S.cur = S.charts.find(c => !S.calls[c.id]) || null;
+  renderCall();
+}
+
+function renderCall() {
+  const v = $("#v-call");
+  progress();
+  if (!S.charts.length) { v.innerHTML = `<div class="empty">Loading charts…</div>`; return; }
+  if (S.revealed) { renderReveal(); return; }
+  if (!S.cur) {
+    v.innerHTML = `<div class="empty"><b>All ${S.charts.length} charts called.</b> Open Results for the read. A new batch can be added at any time.</div>`;
+    $("#callbar").hidden = true; return;
+  }
+  const c = S.cur;
+  v.innerHTML = `<div class="chartbox"><img id="img" alt="Blind chart #${c.id}, ${c.supersector}" src="${c.url}">
+    <div class="meta"><span>Chart <b class="mono">#${c.id}</b></span><span>Sector <b>${c.supersector}</b></span>
+    <span>Panels: weekly 2Y · daily 1Y · RS vs S&amp;P · MACD hist · vs ${c.etf}</span></div></div>`;
+  $("#img").onclick = () => zoom(c.url);
+  $("#note").value = "";
+  ["long", "short", "pass"].forEach(s => $("#b-" + s).setAttribute("aria-pressed", "false"));
+  ["A", "B", "C"].forEach(g => $("#b-" + g).disabled = true);
+  $("#callbar").hidden = S.tab !== "call";
+  if (S.tab === "call" && window.scrollY > 0) v.querySelector(".chartbox").scrollIntoView({ block: "start" });
+  S.shownAt = performance.now();
+}
+
+function zoom(url) {
+  const d = document.createElement("div");
+  d.className = "lb";
+  d.innerHTML = `<img alt="" src="${url}">`;
+  d.onclick = () => d.remove();
+  document.body.appendChild(d);
+}
+
+function pick(side) {
+  if (!S.cur || S.revealed || S.busy) return;
+  S.side = side;
+  ["long", "short", "pass"].forEach(s => $("#b-" + s).setAttribute("aria-pressed", s === side ? "true" : "false"));
+  if (side === "pass") { commit(null); return; }
+  ["A", "B", "C"].forEach(g => $("#b-" + g).disabled = false);
+  $("#b-A").focus();
+}
+
+async function commit(grade) {
+  if (!S.cur || !S.side || S.busy) return;
+  const c = S.cur;
+  const rec = { call: S.side, grade: grade, note: $("#note").value.trim(), ms: Math.round(performance.now() - S.shownAt),
+                at: new Date().toISOString(), batch: c.batch || 1 };
+  S.busy = true;
+  try {
+    await S.db.collection("calls").doc(c.id).set(rec);
+    S.calls[c.id] = rec;
+    showBanner("");
+  } catch (e) {
+    showBanner("Your call was not saved (" + (e && e.code || "error") + "). Check you are signed in and try again.");
+    S.busy = false; return;
+  }
+  S.busy = false;
+  if ($("#showout").checked) { S.revealed = c; renderReveal(); } else nextChart();
+}
+
+function renderReveal() {
+  const c = S.revealed, r = S.calls[c.id];
+  $("#callbar").hidden = true;
+  const side = r.call;
+  const m1 = side === "pass" ? null : sideRet(c, side, "1m");
+  const verdict = side === "pass" ? `<span class="verdict pass">Passed</span>`
+    : `<span class="verdict ${m1 > 0 ? "good" : "bad"}">${side} ${r.grade || ""} · ${m1 > 0 ? "right" : "wrong"} at 1M</span>`;
+  const out = h => `<div class="out"><span class="lbl">${h === "1w" ? "1 week" : h === "1m" ? "1 month" : "2 months"} vs ${c.etf}</span>
+    <b class="${cls(c["rel_" + h])}">${fmt(c["rel_" + h])}</b><span class="lbl">stock ${fmt(c["ret_" + h])}</span></div>`;
+  $("#v-call").innerHTML = `<div class="chartbox"><img id="img" alt="Chart #${c.id}" src="${c.url}"></div>
+    <div class="reveal"><h2><span class="mono">${c.symbol}</span><span>${c.company || ""}</span>${verdict}</h2>
+      <div class="meta"><span>Chart date <b class="mono">${c.date}</b></span><span>Sector <b>${c.supersector}</b></span>
+      <span>Picked by <b>${c.source === "eye" ? "the eye model (" + c.eye_side + ")" : "random draw"}</b></span></div>
+      <div class="outs">${out("1w")}${out("1m")}${out("2m")}</div>
+      <div><button class="btn go" id="b-next">Next chart<kbd>Enter</kbd></button></div></div>`;
+  $("#img").onclick = () => zoom(c.url);
+  $("#b-next").onclick = nextChart;
+  $("#b-next").focus();
+}
+
+function showBanner(t) { const b = $("#banner"); b.textContent = t; b.hidden = !t; }
+
+// ---------- results
+function stats(xs) {
+  const v = xs.filter(x => x != null);
+  const n = v.length;
+  if (!n) return { n: 0 };
+  const m = v.reduce((a, b) => a + b, 0) / n;
+  const sd = n > 1 ? Math.sqrt(v.reduce((a, b) => a + (b - m) ** 2, 0) / (n - 1)) : 0;
+  return { n, m, hit: v.filter(x => x > 0).length / n, t: sd > 0 ? m / (sd / Math.sqrt(n)) : null };
+}
+
+function renderRes() {
+  const done = S.charts.filter(c => S.calls[c.id]);
+  const v = $("#v-res");
+  if (!done.length) { v.innerHTML = `<div class="empty"><b>No calls yet.</b> Results appear here from your first call. About 100 long/short calls give a first read; 300 give a usable one.</div>`; return; }
+  const H = ["1w", "1m", "2m"];
+  const row = (label, items, side) => {
+    const cells = H.map(h => {
+      const s = stats(items.map(c => sideRet(c, side || S.calls[c.id].call, h)));
+      return s.n ? `<td class="n ${cls(s.m)}">${fmt(s.m)}</td><td class="n">${Math.round(s.hit * 100)}%</td><td class="n">${s.t == null ? "–" : s.t.toFixed(1)}</td>`
+                 : `<td class="n">–</td><td class="n">–</td><td class="n">–</td>`;
+    }).join("");
+    return `<tr><td>${label}</td><td class="n">${items.length}</td>${cells}</tr>`;
+  };
+  const by = f => done.filter(f);
+  const calls = by(c => S.calls[c.id].call !== "pass");
+  const L = by(c => S.calls[c.id].call === "long"), Sh = by(c => S.calls[c.id].call === "short");
+  const g = (side, gr) => by(c => S.calls[c.id].call === side && S.calls[c.id].grade === gr);
+  const eyeAll = done.filter(c => c.source === "eye");
+  const eyeAgree = eyeAll.filter(c => S.calls[c.id].call === c.eye_side).length;
+  const all1m = stats(calls.map(c => sideRet(c, S.calls[c.id].call, "1m")));
+  const head = `<tr><th></th><th class="n">Charts</th>${H.map(h => `<th class="n">${h.toUpperCase()} edge</th><th class="n">Right</th><th class="n">t</th>`).join("")}</tr>`;
+  v.innerHTML = `<div class="res">
+    <div class="kpis">
+      <div class="kpi"><span class="lbl">Charts called</span><b>${done.length}</b><span class="lbl">${calls.length} long/short · ${done.length - calls.length} pass</span></div>
+      <div class="kpi"><span class="lbl">Your edge at 1 month</span><b class="${cls(all1m.m)}">${all1m.n ? fmt(all1m.m) : "–"}</b><span class="lbl">vs sector, in your call's direction</span></div>
+      <div class="kpi"><span class="lbl">Right at 1 month</span><b>${all1m.n ? Math.round(all1m.hit * 100) + "%" : "–"}</b><span class="lbl">t ${all1m.t == null ? "–" : all1m.t.toFixed(1)} · |t| &gt; 2 is a real signal</span></div>
+      <div class="kpi"><span class="lbl">Agreed with the model</span><b>${eyeAll.length ? Math.round(100 * eyeAgree / eyeAll.length) + "%" : "–"}</b><span class="lbl">on ${eyeAll.length} of its picks</span></div>
+    </div>
+    <p>Edge = the stock's return minus its sector ETF from the next open, compared with the average chart in the batch (${fmt(BASE["1m"])} at 1 month), in the direction you called. A short that falls more than the average chart is a positive edge. Right = share of calls with a positive edge.</p>
+    <div class="tablebox"><table><thead>${head}</thead><tbody>
+      ${row("All your long/short calls", calls)}
+      ${row("Your longs", L)}${row("· graded A", g("long", "A"))}${row("· graded B", g("long", "B"))}${row("· graded C", g("long", "C"))}
+      ${row("Your shorts", Sh)}${row("· graded A", g("short", "A"))}${row("· graded B", g("short", "B"))}${row("· graded C", g("short", "C"))}
+      ${row("Charts you passed, as longs", by(c => S.calls[c.id].call === "pass"), "long")}
+      ${row("Model's picks you saw, its side", eyeAll, null).replace("<td>Model", "<td>Model")}
+    </tbody></table></div>
+    <p class="lbl">Read with care until there are ~100 long/short calls: one month of one stock is a noisy number.</p>
+  </div>`;
+  // model row uses the model's side, not the user's
+  const tb = v.querySelector("tbody");
+  const last = tb.lastElementChild;
+  const cells = H.map(h => { const s = stats(eyeAll.map(c => sideRet(c, c.eye_side, h)));
+    return s.n ? `<td class="n ${cls(s.m)}">${fmt(s.m)}</td><td class="n">${Math.round(s.hit * 100)}%</td><td class="n">${s.t == null ? "–" : s.t.toFixed(1)}</td>`
+               : `<td class="n">–</td><td class="n">–</td><td class="n">–</td>`; }).join("");
+  last.innerHTML = `<td>Model's picks you saw, its side</td><td class="n">${eyeAll.length}</td>${cells}`;
+}
+
+// ---------- keyboard
+document.addEventListener("keydown", e => {
+  if (S.tab !== "call" || e.target.id === "note" || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (S.revealed) { if (k === "enter" || k === " ") { e.preventDefault(); nextChart(); } return; }
+  if (k === "l") pick("long"); else if (k === "s") pick("short"); else if (k === "p") pick("pass");
+  else if (S.side && S.side !== "pass" && (k === "1" || k === "a")) commit("A");
+  else if (S.side && S.side !== "pass" && (k === "2" || k === "b")) commit("B");
+  else if (S.side && S.side !== "pass" && (k === "3" || k === "c")) commit("C");
+});
+$("#b-long").onclick = () => pick("long");
+$("#b-short").onclick = () => pick("short");
+$("#b-pass").onclick = () => pick("pass");
+["A", "B", "C"].forEach(gr => $("#b-" + gr).onclick = () => commit(gr));
+
+// ---------- boot
+renderCall();
+(async () => {
+  try {
+    const r = await fetch("charts.json");
+    const m = await r.json();
+    S.charts = m.charts;
+    for (const h of ["1w", "1m", "2m"]) {
+      const xs = S.charts.map(c => c["rel_" + h]).filter(v => v != null);
+      BASE[h] = xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0;
+    }
+  } catch (e) { $("#v-call").innerHTML = `<div class="empty">The chart batch could not be loaded. Reload the page in a minute.</div>`; return; }
+  progress();
+  const use = n => (window.claude && window.claude.use) ? window.claude.use(n) : Promise.resolve(null);
+  const db = await use("db");
+  if (!db) { $("#v-call").innerHTML = `<div class="empty"><b>Sign in to claude.ai to make calls.</b> Your calls are saved to this page's database so the engine can learn from them.</div>`; return; }
+  S.db = db;
+  let first = true;
+  const timer = setTimeout(() => { if (first) showBanner("Your saved calls can't be reached yet. New calls will still be sent."); }, 10000);
+  db.collection("calls").onSnapshot(snap => {
+    const calls = {};
+    snap.docs.forEach(d => { calls[d.id] = d.data(); });
+    S.calls = calls;
+    if (!snap.metadata.fromCache) { clearTimeout(timer); if (first) showBanner(""); }
+    if (first) { first = false; nextChart(); }
+    else { progress(); if (S.tab === "res") renderRes(); }
+  }, err => { clearTimeout(timer); showBanner("Your saved calls could not be loaded (" + (err && err.code || "error") + ")."); if (first) { first = false; nextChart(); } });
+})();
+</script>
