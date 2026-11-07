@@ -1,0 +1,155 @@
+{
+ "market_note": "Breadth firm: 617 uptrends vs 387 downtrends, 35 turning up vs 52 turning down. Leadership in utilities, self-storage REITs, beverages and payments; laggards are gaming, mortgage REITs, packaged food, regional banks and defense post-midterms. Q3 season mostly done. Borrow unchecked (no IBKR tools this run).",
+ "pairs": [
+  {
+   "long": "ED",
+   "short": "PEG",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 50,
+   "beta_split_long": null,
+   "net_beta": -0.14,
+   "thesis": "Electric utilities RV: ED 6M breakout with RS over 40W MA (Leading) vs PEG below falling 40W, sector Lagging, bouncing into 50D. corr 0.67."
+  },
+  {
+   "long": "HR",
+   "short": "GLPI",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 49,
+   "beta_split_long": null,
+   "net_beta": -0.07,
+   "thesis": "REIT RV, Lead family: HR RS crossed 40W MA and reclaimed 200D (Leading) vs GLPI below falling 40W, Lagging, basing under 50D. corr 0.61."
+  },
+  {
+   "long": "TREX",
+   "short": "UFPI",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 45,
+   "beta_split_long": 34,
+   "net_beta": 0.18,
+   "thesis": "Forest products RV: TREX reclaimed 40W, RS crossed, gap over 6M on raised outlook vs UFPI clean weekly downtrend rejected at 50D/200D. corr 0.69."
+  },
+  {
+   "long": "HASI",
+   "short": "ALLY",
+   "conviction": 4,
+   "type": "sector",
+   "split_long": 48,
+   "beta_split_long": 47,
+   "net_beta": 0.01,
+   "thesis": "Financials rotation, Lead family: HASI RS back over 40W MA, reclaimed 21D/50D (Leading) vs ALLY rolled below 40W, sector Lagging, bounce stalls at 50D. corr 0.36."
+  },
+  {
+   "long": "KDP",
+   "short": "MKC",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 52,
+   "beta_split_long": null,
+   "net_beta": 0.06,
+   "thesis": "Staples: KDP RS crossed 40W MA, clean 6M breakout vs MKC weekly downtrend rejected at falling 200D. A/A, corr 0.56."
+  },
+  {
+   "long": "STZ",
+   "short": "TAP",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 51,
+   "beta_split_long": null,
+   "net_beta": -0.09,
+   "thesis": "Alcoholic beverages, Lead family: STZ RS crossing 40W MA, price reclaiming 40W vs TAP below falling 40W after outlook cut, rejected at 6M/200D. corr 0.78."
+  },
+  {
+   "long": "PPG",
+   "short": "MLM",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 51,
+   "beta_split_long": 51,
+   "net_beta": 0.0,
+   "thesis": "Materials: PPG RS crossed 40W MA, gap over 3M vs MLM below falling 40W, rejected at 3M/200D. corr 0.67."
+  },
+  {
+   "long": "PII",
+   "short": "BKNG",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 51,
+   "beta_split_long": 29,
+   "net_beta": 0.38,
+   "thesis": "Discretionary, Lead family: PII RS crossed 40W MA, reclaiming 200D on upward revisions vs BKNG below falling 40W, bounce rejected at 50D. corr 0.50. Net beta +0.38: use beta-neutral split."
+  },
+  {
+   "long": "ASO",
+   "short": "MGM",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 42,
+   "beta_split_long": 39,
+   "net_beta": 0.02,
+   "thesis": "Discretionary: ASO 6M breakout, RS over 40W MA vs MGM weekly breakdown bouncing into falling 50D after gaming sell-off. corr 0.31; ASO extended 12% over 21D."
+  },
+  {
+   "long": "EXR",
+   "short": "NLY",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 52,
+   "beta_split_long": 63,
+   "net_beta": -0.06,
+   "thesis": "REIT RV: EXR price and RS reclaimed 40W, 6M breakout (Leading storage) vs NLY rolled below 40W, bounce toward 50D. corr 0.61."
+  },
+  {
+   "long": "V",
+   "short": "CG",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 61,
+   "beta_split_long": 70,
+   "net_beta": -0.16,
+   "thesis": "Financials: V RS crossed 40W MA, 6M breakout vs CG weekly downtrend, bounce under falling 50D. corr 0.55; vol ratio 0.63."
+  },
+  {
+   "long": "SIRI",
+   "short": "CMCSA",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 49,
+   "beta_split_long": null,
+   "net_beta": 0.35,
+   "thesis": "Communication: SIRI RS crossed 40W, 6M breakout on guide raise vs CMCSA weekly downtrend, +15% bounce into 200D. corr 0.54; SIRI extended. Net beta +0.35 (CMCSA negative beta)."
+  },
+  {
+   "long": "LNG",
+   "short": "SLB",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 50,
+   "beta_split_long": null,
+   "net_beta": -0.34,
+   "thesis": "Energy: LNG weekly uptrend pulling back to 50D vs SLB weekly turning, RS under MA, rejected below 21D/50D. corr 0.41. Net beta -0.34: use beta-neutral split."
+  },
+  {
+   "long": "EEFT",
+   "short": "TEX",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 54,
+   "beta_split_long": 84,
+   "net_beta": -0.45,
+   "thesis": "Industrials, Lead family: EEFT RS crossing 40W MA while price below 40W (early turn) vs TEX rolled below 40W, bouncing into 50D. corr 0.43. Net beta -0.45 (TEX beta 1.27): use beta-neutral split."
+  },
+  {
+   "long": "MCK",
+   "short": "COO",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 62,
+   "beta_split_long": 54,
+   "net_beta": 0.05,
+   "thesis": "Health care: MCK uptrend, gap over 6M after upgrade vs COO weekly downtrend, post-gap bounce into 50D. corr 0.31; vol ratio 0.62."
+  }
+ ]
+}

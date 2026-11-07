@@ -1,0 +1,506 @@
+{
+ "SIRI|long": [
+  "B",
+  "RS crossed 40W, blue dot; 6M breakout on huge bar, +15% over 21D"
+ ],
+ "LION|long": [
+  "B",
+  "Price reclaimed 40W, RS crossed up; gap through 3M, extended"
+ ],
+ "CNK|long": [
+  "C",
+  "Weekly strong but daily stalled at 6M high, MACD rolling"
+ ],
+ "CARG|long": [
+  "C",
+  "Weekly range, 40W flat; choppy, many 21D crosses"
+ ],
+ "MANU|long": [
+  "B",
+  "Uptrend, RS back over 40W MA; bounce off 200D, room to 6M"
+ ],
+ "PPLI|long": [
+  "C",
+  "Weekly chop around flat 40W, RS under falling MA"
+ ],
+ "CHTR|short": [
+  "B",
+  "Clean weekly downtrend, red dots; bounce into falling 50D"
+ ],
+ "VZ|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "ECHO|short": [
+  "C",
+  "Below 40W but daily base choppy, many 21D crosses"
+ ],
+ "CMCSA|short": [
+  "B",
+  "Weekly downtrend, RS under falling MA; +15% bounce into 200D"
+ ],
+ "TKO|short": [
+  "C",
+  "Weekly rolling over but daily choppy, no clean trigger"
+ ],
+ "ARHS|long": [
+  "C",
+  "Blow-off: +25% over 21D, parabolic weekly bar"
+ ],
+ "ASO|long": [
+  "B",
+  "RS crossed 40W MA; gap breakout over 6M, extended 12%"
+ ],
+ "FIGS|long": [
+  "C",
+  "Rejected at 6M after blow-off, MACD flipped down"
+ ],
+ "MAR|long": [
+  "B",
+  "Uptrend, RS blue dot; holding 6M breakout; sector Weakening"
+ ],
+ "CROX|long": [
+  "C",
+  "Earnings gap into 6M high, no base"
+ ],
+ "PII|long": [
+  "B",
+  "RS crossed 40W MA, price at 40W; reclaiming 200D, extended"
+ ],
+ "WHR|short": [
+  "B",
+  "Clean weekly downtrend; bounce to 21D, near 6M low"
+ ],
+ "MGM|short": [
+  "A",
+  "Weekly breakdown, RS red; bounce into falling 50D, room to 6M"
+ ],
+ "BKNG|short": [
+  "A",
+  "Below falling 40W, RS red; bounce rejected at 50D"
+ ],
+ "FLUT|short": [
+  "B",
+  "Long downtrend; flat base under 50D, 6M support close"
+ ],
+ "OSK|short": [
+  "C",
+  "Weekly range at 40W; choppy"
+ ],
+ "ORLY|short": [
+  "C",
+  "Weekly drifting, R2 nil; choppy daily"
+ ],
+ "TBBB|long": [
+  "B",
+  "Persistent uptrend, RS blue dots; 6M breakout, extended 12%"
+ ],
+ "KDP|long": [
+  "A",
+  "RS crossed 40W MA, blue dots; 6M breakout, 5% over 21D"
+ ],
+ "FIZZ|long": [
+  "B",
+  "RS crossed 40W MA; gap to 6M, sector Weakening"
+ ],
+ "ELF|long": [
+  "C",
+  "Into 6M resistance with MACD negative"
+ ],
+ "STZ|long": [
+  "B",
+  "RS crossing 40W MA, price at 40W; reclaimed 200D"
+ ],
+ "PRMB|long": [
+  "C",
+  "Weekly chop around flat 40W"
+ ],
+ "SFD|short": [
+  "B",
+  "Weekly breakdown, RS red; bounce to 50D, 6M support near"
+ ],
+ "MZTI|short": [
+  "B",
+  "Steep weekly downtrend; bounce rejected under 6M, choppy base"
+ ],
+ "MKC|short": [
+  "A",
+  "Weekly downtrend, RS red; bounce rejected at falling 200D"
+ ],
+ "ACI|short": [
+  "A",
+  "Below falling 40W, sector Lagging; rejected at 3M, MACD flipped"
+ ],
+ "TAP|short": [
+  "B",
+  "Weekly downtrend; spike rejected at 6M/200D, choppy"
+ ],
+ "GIS|short": [
+  "B",
+  "Weekly downtrend; +11% bounce into 200D, MACD still rising"
+ ],
+ "RRC|long": [
+  "C",
+  "Gap then -11% reversal week: exhaustion"
+ ],
+ "LNG|long": [
+  "B",
+  "Weekly uptrend; rejected at 6M, pulling back to 50D"
+ ],
+ "PAA|long": [
+  "B",
+  "Strong weekly, RS blue dots; pullback to 50D, MACD flipped"
+ ],
+ "EPD|long": [
+  "B",
+  "RS back over 40W MA; daily choppy around 21D/50D"
+ ],
+ "MPLX|long": [
+  "C",
+  "Daily chop, MACD negative, 11 21D crosses"
+ ],
+ "PARR|long": [
+  "C",
+  "Daily breaking down, sector Lagging"
+ ],
+ "SLB|short": [
+  "B",
+  "Weekly turning, RS under MA; rejected below 21D/50D"
+ ],
+ "ARLP|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "HGTY|long": [
+  "C",
+  "+15% gap week, no base"
+ ],
+ "PRCH|long": [
+  "C",
+  "Stalled at 6M high, vol 66%"
+ ],
+ "V|long": [
+  "B",
+  "RS crossed 40W MA, blue dots; 6M breakout; sector Weakening"
+ ],
+ "MA|long": [
+  "B",
+  "RS crossed 40W MA; 6M breakout holding; sector Weakening"
+ ],
+ "TW|long": [
+  "B",
+  "Price reclaimed 40W, RS crossed; 6M breakout, 7% over 21D"
+ ],
+ "HASI|long": [
+  "A",
+  "Uptrend, RS crossed MA; reclaimed 21D/50D, room to 6M"
+ ],
+ "ALLY|short": [
+  "A",
+  "Rolled below 40W, RS red, sector Lagging; bounce stalls at 50D"
+ ],
+ "CG|short": [
+  "B",
+  "Weekly downtrend; bounce to 21D under falling 50D"
+ ],
+ "OTF|short": [
+  "B",
+  "Persistent downtrend; bounce rejected at 50D, 6M low near"
+ ],
+ "MTB|short": [
+  "B",
+  "Weekly turning down at 40W; rejected at 50D"
+ ],
+ "HBAN|short": [
+  "B",
+  "Below 40W, sector Lagging; rejected at 50D/200D, weekly choppy"
+ ],
+ "MCHB|short": [
+  "C",
+  "Weekly still at rising 40W; no clear turn"
+ ],
+ "XERS|long": [
+  "C",
+  "+41% gap week, biotech, no base"
+ ],
+ "CDNA|long": [
+  "C",
+  "Parabolic, -10% reversal week"
+ ],
+ "MCK|long": [
+  "B",
+  "Uptrend, RS blue dot; gap over 6M; sector Weakening"
+ ],
+ "HAE|long": [
+  "C",
+  "Rejected at 6M, MACD flat"
+ ],
+ "ABBV|long": [
+  "C",
+  "Strong weekly but stalled at 6M, MACD negative"
+ ],
+ "SYK|long": [
+  "C",
+  "Price under falling 40W; earnings gap into 200D"
+ ],
+ "ACAD|short": [
+  "B",
+  "Gap below 40W, RS red; bounce to 21D under 50D"
+ ],
+ "VERA|short": [
+  "C",
+  "Binary biotech; choppy daily"
+ ],
+ "DYN|short": [
+  "C",
+  "Binary biotech; +10% bounce off lows"
+ ],
+ "DNTH|short": [
+  "C",
+  "Biotech, price still at rising 40W"
+ ],
+ "PTCT|short": [
+  "B",
+  "Below 40W, RS under falling MA; bounce rejected at 50D"
+ ],
+ "COO|short": [
+  "B",
+  "Weekly downtrend; +15% post-gap bounce into 50D"
+ ],
+ "PGNY|long": [
+  "C",
+  "+19% gap week through 6M, no base"
+ ],
+ "FLYW|long": [
+  "B",
+  "RS over 40W MA, blue dots; 6M breakout, extended 12%"
+ ],
+ "EXPO|long": [
+  "B",
+  "Price and RS crossed 40W; 6M breakout with wick, +9%"
+ ],
+ "CART|long": [
+  "B",
+  "Uptrend, RS blue dots; pausing under 6M after gap"
+ ],
+ "FTRE|long": [
+  "B",
+  "Uptrend; pullback to 50D, MACD negative; sector Weakening"
+ ],
+ "EEFT|long": [
+  "B",
+  "RS crossing 40W MA, price under 40W; below 200D"
+ ],
+ "VSEC|short": [
+  "B",
+  "Rolled below 40W, RS red; +17% bounce toward 50D"
+ ],
+ "TEX|short": [
+  "B",
+  "Rolled below 40W, RS red; bounce into 50D"
+ ],
+ "WSO|short": [
+  "C",
+  "Weekly down but daily base choppy, R2 nil"
+ ],
+ "KLAR|short": [
+  "C",
+  "Sitting on 6M support; little room"
+ ],
+ "FDX|short": [
+  "C",
+  "Price above rising 40W; weekly fights the short"
+ ],
+ "ALSN|short": [
+  "C",
+  "Weekly chop at 40W"
+ ],
+ "TREX|long": [
+  "B",
+  "Price reclaimed 40W, RS crossed; gap over 6M, wick"
+ ],
+ "ATR|long": [
+  "B",
+  "RS crossed 40W MA; gap retesting 6M, 10% over 21D"
+ ],
+ "ECL|long": [
+  "B",
+  "Uptrend, RS crossed MA; 6M breakout, reversal wick"
+ ],
+ "PPG|long": [
+  "B",
+  "RS crossed 40W MA; gap over 3M, under 6M"
+ ],
+ "TRLV|long": [
+  "C",
+  "Choppy, R2 nil"
+ ],
+ "SW|long": [
+  "C",
+  "Weekly chop around flat 40W"
+ ],
+ "KNF|short": [
+  "B",
+  "Weekly breakdown, RS red; bounce into 50D, sector Leading"
+ ],
+ "UFPI|short": [
+  "A",
+  "Clean weekly downtrend, RS red; rejected at 50D/200D"
+ ],
+ "PRM|short": [
+  "C",
+  "Weekly still at rising 40W"
+ ],
+ "MLM|short": [
+  "A",
+  "Below falling 40W, RS red; rejected at 3M/200D"
+ ],
+ "AU|short": [
+  "C",
+  "Gold miner at 40W, +16% week; choppy"
+ ],
+ "DOW|short": [
+  "B",
+  "RS under 40W MA; rejected at 3M, -9.5% week"
+ ],
+ "SMA|long": [
+  "B",
+  "RS crossed 40W MA; 6M breakout, 10.6% over 21D"
+ ],
+ "CUBE|long": [
+  "B",
+  "Price and RS crossed 40W; 6M breakout, 10% over 21D"
+ ],
+ "EXR|long": [
+  "B",
+  "Price and RS crossed 40W; 6M breakout, 10% over 21D"
+ ],
+ "COLD|long": [
+  "B",
+  "Reclaimed 40W, RS crossed; 3M breakout, 6M close overhead"
+ ],
+ "PK|long": [
+  "B",
+  "Strong weekly, RS blue dots; pullback from 6M, MACD flipped"
+ ],
+ "HR|long": [
+  "A",
+  "RS crossed 40W MA, price reclaiming 40W; reclaimed 200D"
+ ],
+ "DX|short": [
+  "B",
+  "Rolled below 40W, sector Lagging; flat base under 21D"
+ ],
+ "AGNC|short": [
+  "B",
+  "Rolled below 40W, RS red; bounce stalls under 50D"
+ ],
+ "NLY|short": [
+  "B",
+  "Rolled below 40W, RS red; bounce toward 50D"
+ ],
+ "GLPI|short": [
+  "B",
+  "Below falling 40W, sector Lagging; base near 6M low"
+ ],
+ "RITM|short": [
+  "A",
+  "Below falling 40W, RS red; bounce rejected at 200D"
+ ],
+ "EQIX|short": [
+  "C",
+  "Price at rising 40W; weekly fights the short"
+ ],
+ "HNGE|long": [
+  "B",
+  "Persistent uptrend, RS blue dots; stalling at 6M"
+ ],
+ "APPN|long": [
+  "C",
+  "Rejected at 6M high, 10% over 21D"
+ ],
+ "U|long": [
+  "C",
+  "+37% gap week, no base"
+ ],
+ "SEZL|long": [
+  "C",
+  "Gap and fade under 3M; choppy"
+ ],
+ "MANH|long": [
+  "A",
+  "Price and RS crossed 40W, blue dots; 6M breakout, 7% over 21D"
+ ],
+ "SNPS|long": [
+  "C",
+  "Weekly chop under flat 40W"
+ ],
+ "NOC|short": [
+  "A",
+  "Below falling 40W, RS red; rejected under 200D, MACD flipped"
+ ],
+ "FTAI|short": [
+  "B",
+  "Rolled below 40W, RS red; bounce into 50D, vol 74%"
+ ],
+ "CRUS|short": [
+  "B",
+  "Weekly breakdown, RS red; flat base above 6M low"
+ ],
+ "GD|short": [
+  "C",
+  "Weekly chop at 40W"
+ ],
+ "IBM|short": [
+  "C",
+  "Weekly chop at 40W"
+ ],
+ "LMT|short": [
+  "C",
+  "Weekly chop at 40W, -11% reversal from 6M"
+ ],
+ "NWE|long": [
+  "A",
+  "Uptrend, RS blue dots; 6M breakout, 6.6% over 21D"
+ ],
+ "BKH|long": [
+  "A",
+  "Uptrend, RS crossed MA, blue dot; 6M breakout"
+ ],
+ "WTRG|long": [
+  "A",
+  "RS crossed 40W MA; 6M breakout, sector Leading"
+ ],
+ "RNW|long": [
+  "C",
+  "Flat at 6M after gap, sector Lagging"
+ ],
+ "ED|long": [
+  "A",
+  "Uptrend, RS crossed 40W MA; 6M breakout, 4% over 21D"
+ ],
+ "AVA|long": [
+  "B",
+  "RS crossing 40W MA; gap through 200D and 3M"
+ ],
+ "PCG|short": [
+  "B",
+  "Weekly breakdown, RS red; base under 50D"
+ ],
+ "ORA|short": [
+  "B",
+  "Weekly downtrend, RS red; base above 6M low"
+ ],
+ "PEG|short": [
+  "B",
+  "Below falling 40W, sector Lagging; bounce into 50D"
+ ],
+ "EIX|short": [
+  "C",
+  "Bounce above 21D/50D still rising; daily fights the short"
+ ],
+ "CMS|short": [
+  "C",
+  "Weekly chop at 40W"
+ ]
+}
