@@ -1,0 +1,155 @@
+{
+ "market_note": "Breadth constructive (612 uptrend vs 403 downtrend, 127 turning down); leadership rotating to defensives (staples, utilities, REITs) and specialty retail while homebuilders, consumer finance and A&D lag. Q3 reporting is done: no leg reports before 1 Dec. Borrow unchecked (no IBKR tools this run).",
+ "pairs": [
+  {
+   "long": "SN",
+   "short": "BLDR",
+   "conviction": 4,
+   "type": "sector",
+   "split_long": 58,
+   "beta_split_long": 57,
+   "net_beta": 0.01,
+   "thesis": "Leading vs Lagging: SN clean 6M breakout with blue dots against BLDR capped at a falling 50D in a weekly downtrend; corr 0.46."
+  },
+  {
+   "long": "COST",
+   "short": "NKE",
+   "conviction": 4,
+   "type": "sector",
+   "split_long": 60,
+   "beta_split_long": null,
+   "net_beta": -0.35,
+   "thesis": "COST RS crossed up through its 40W MA on a 6M breakout vs NKE failing at 3M resistance, MACD red; NKE investor day Tuesday is event risk. Net beta -0.35: use the beta-neutral split."
+  },
+  {
+   "long": "KR",
+   "short": "ACI",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 55,
+   "beta_split_long": null,
+   "net_beta": -0.19,
+   "thesis": "Food retail RV: KR reclaiming its 40W at 6M resistance vs ACI rolling under the 21D in a weekly downtrend; corr 0.68."
+  },
+  {
+   "long": "KO",
+   "short": "GIS",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 67,
+   "beta_split_long": null,
+   "net_beta": 0.1,
+   "thesis": "Staples leader vs laggard: KO 6M breakout vs GIS rejected at the 200D; vol ratio 0.49, size the GIS leg down."
+  },
+  {
+   "long": "TW",
+   "short": "MC",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 56,
+   "beta_split_long": null,
+   "net_beta": -0.47,
+   "thesis": "Brokers: TW early turn (RS through 40W MA) on a 6M breakout vs MC failing at the 50D, Leading vs Lagging; low corr 0.11. Net beta -0.47: use the beta-neutral split."
+  },
+  {
+   "long": "PLGO",
+   "short": "OMF",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 53,
+   "beta_split_long": null,
+   "net_beta": -0.46,
+   "thesis": "PLGO 6M breakout, blue dots vs OMF (Lead family, RS leads down) rolling under 50D onto 3M support; Leading vs Lagging. Net beta -0.46: use the beta-neutral split."
+  },
+  {
+   "long": "HAE",
+   "short": "PODD",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 47,
+   "beta_split_long": 81,
+   "net_beta": -0.38,
+   "thesis": "Med devices: HAE coiling under 6M in a weekly uptrend vs PODD bounce rejected at 3M/6M, MACD flipped red. Net beta -0.38: use the beta-neutral split."
+  },
+  {
+   "long": "FLYW",
+   "short": "QXO",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 62,
+   "beta_split_long": 75,
+   "net_beta": -0.47,
+   "thesis": "FLYW 6M breakout over a rising 40W vs QXO bounce into the 50D in a weekly downtrend; corr 0.48, vol ratio 0.60. Net beta -0.47: use the beta-neutral split."
+  },
+  {
+   "long": "EXPO",
+   "short": "ALK",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 60,
+   "beta_split_long": null,
+   "net_beta": -0.55,
+   "thesis": "EXPO early turn (price and RS reclaimed 40W) vs ALK bounce rejected at the 50D; corr 0.35. Net beta -0.55: use the beta-neutral split."
+  },
+  {
+   "long": "ECL",
+   "short": "EMN",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 56,
+   "beta_split_long": 60,
+   "net_beta": -0.04,
+   "thesis": "Specialty chemicals: ECL tagged the 6M high holding the 21D vs EMN stalled at the 50D in a weekly downtrend; Leading vs Lagging, corr 0.61."
+  },
+  {
+   "long": "PPG",
+   "short": "UFPI",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 55,
+   "beta_split_long": 43,
+   "net_beta": 0.15,
+   "thesis": "PPG reclaiming 40W at 6M resistance vs UFPI rejected at 50D/3M with MACD flipped red; Leading vs Lagging, corr 0.64."
+  },
+  {
+   "long": "SMA",
+   "short": "RITM",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 55,
+   "beta_split_long": null,
+   "net_beta": -0.09,
+   "thesis": "REITs: SMA RS crossed up on a 6M breakout vs RITM rejected at the 200D, MACD red; Leading vs Lagging, corr 0.49."
+  },
+  {
+   "long": "XHR",
+   "short": "MAA",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 47,
+   "beta_split_long": null,
+   "net_beta": 0.26,
+   "thesis": "REITs: XHR 6M breakout with RS at highs vs MAA bounce failing at the 50D; Leading vs Lagging, corr 0.24."
+  },
+  {
+   "long": "XMTR",
+   "short": "RKLB",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 53,
+   "beta_split_long": 61,
+   "net_beta": -0.42,
+   "thesis": "XMTR gap breakout, blue dots (16% over 21D) vs RKLB bounce into the 50D under a falling 40W; corr 0.46. Net beta -0.42: use the beta-neutral split."
+  },
+  {
+   "long": "OGE",
+   "short": "CMS",
+   "conviction": 4,
+   "type": "industry",
+   "split_long": 50,
+   "beta_split_long": null,
+   "net_beta": 0.04,
+   "thesis": "Electric utilities: OGE 6M breakout, RS crossed up vs CMS bounce into 200D/3M with MACD flipping; corr 0.79, near-neutral spread."
+  }
+ ]
+}
