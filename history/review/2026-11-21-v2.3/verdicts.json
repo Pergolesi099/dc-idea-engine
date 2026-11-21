@@ -1,0 +1,338 @@
+{
+ "SIRI|long": [
+  "B",
+  "Weekly uptrend, RS crossed 40W, blue dots; CEO-change gap, rejected at 6M, MACD red"
+ ],
+ "DIS|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily at 6M after run, MACD fading"
+ ],
+ "VZ|long": [
+  "C",
+  "Weekly 10W rolling into flat 40W; daily choppy around 50D/200D"
+ ],
+ "VRSN|long": [
+  "B",
+  "Weekly uptrend, RS over rising MA; daily under 6M, MACD flipped red"
+ ],
+ "PPLI|long": [
+  "C",
+  "Weekly range around flat 40W; daily choppy, -5% week off 3M"
+ ],
+ "MSGE|long": [
+  "C",
+  "Weekly uptrend but daily flat range, 18 21D crosses; sideways noise"
+ ],
+ "ASO|long": [
+  "B",
+  "Weekly breakout, RS crossed 40W, blue dot; daily at 6M, +20% over 50D"
+ ],
+ "COST|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily at 6M after run, MACD fading"
+ ],
+ "COLM|long": [
+  "B",
+  "Weekly RS crossed 40W MA, blue dots; daily 6M breakout, +8% over 21D"
+ ],
+ "SN|long": [
+  "B",
+  "Weekly strong uptrend, blue dots; daily -6% week toward 21D, MACD flipped red"
+ ],
+ "HOG|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily pulling back from 6M, MACD red"
+ ],
+ "WING|long": [
+  "C",
+  "Weekly under falling 40W; daily rejected at 200D/6M, MACD red"
+ ],
+ "LVS|short": [
+  "B",
+  "Weekly downtrend, red dots; bounce stalling at falling 50D, MACD at zero; vs-sector Leading"
+ ],
+ "BOOT|short": [
+  "B",
+  "Weekly under falling 40W, RS below MA; bounce under 3M, MACD fading"
+ ],
+ "BYD|short": [
+  "B",
+  "Weekly broke 40W, RS lost MA; bounce rejected below 3M/200D, MACD flipped red"
+ ],
+ "PATK|short": [
+  "C",
+  "Weekly downtrend but LCI all-stock merger just approved: deal-pinned"
+ ],
+ "COTY|long": [
+  "B",
+  "Weekly 40W reclaimed, RS crossed MA; daily gap to 6M, +23% over 50D"
+ ],
+ "PG|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA, blue dot; daily at 6M, MACD red"
+ ],
+ "FIZZ|long": [
+  "B",
+  "Weekly RS crossed 40W MA; daily at 6M after gap, MACD red, choppy base"
+ ],
+ "KO|long": [
+  "B",
+  "Weekly strong uptrend, blue dots; daily at 6M high, MACD just flipped red"
+ ],
+ "MO|long": [
+  "C",
+  "Weekly uptrend but sector Lagging (new); daily -5% week off 6M"
+ ],
+ "STZ|long": [
+  "B",
+  "Weekly turning, RS crossing 40W MA; daily under 6M/200D, MACD red"
+ ],
+ "LNG|long": [
+  "B",
+  "Weekly uptrend, RS over MA; daily pullback to 21D under 6M, MACD red"
+ ],
+ "COP|long": [
+  "B",
+  "Weekly uptrend, RS over MA; daily pullback under 21D holding 50D, MACD red"
+ ],
+ "RRC|long": [
+  "C",
+  "Weekly gap fading; daily -7.5% week, gap with no base"
+ ],
+ "APA|long": [
+  "B",
+  "Weekly uptrend, blue dot; daily pullback below 50D, trigger not fired"
+ ],
+ "CVX|long": [
+  "B",
+  "Weekly uptrend, RS over MA; daily pullback under 50D, MACD deep red"
+ ],
+ "ET|long": [
+  "C",
+  "Weekly rolling over; daily broke 21D/50D and 3M support"
+ ],
+ "PLMR|long": [
+  "B",
+  "Weekly RS crossed 40W; daily 6M breakout, +9% over 21D"
+ ],
+ "AFG|long": [
+  "B",
+  "Weekly uptrend, RS crossed MA, blue dot; daily at 6M, MACD fading"
+ ],
+ "SIGI|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily gap to 6M, MACD red"
+ ],
+ "HGTY|long": [
+  "C",
+  "Blow-off spike then reversal on secondary offering; MACD deep red"
+ ],
+ "RLI|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA, blue dot; daily at 6M, extended"
+ ],
+ "VIRT|long": [
+  "C",
+  "Weekly uptrend intact but daily choppy under 50D, -7% week"
+ ],
+ "FG|short": [
+  "B",
+  "Weekly downtrend, red dots; bounce rejected at 3M/200D, MACD flipped red"
+ ],
+ "XERS|long": [
+  "C",
+  "Blow-off: +24% over 21D, +110% over 200D"
+ ],
+ "VCEL|long": [
+  "C",
+  "Event gap with no base, +13% over 21D"
+ ],
+ "CON|long": [
+  "B",
+  "Weekly strong uptrend, blue dots; daily at 6M, MACD just flipped red"
+ ],
+ "TFX|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossing MA; daily 6M breakout, +8% over 21D"
+ ],
+ "CDNA|long": [
+  "C",
+  "Parabolic run reversing, -10% week, MACD deep red"
+ ],
+ "PRAX|long": [
+  "C",
+  "Binary biotech, choppy daily around 200D"
+ ],
+ "R|long": [
+  "B",
+  "Weekly uptrend, blue dots, sector Leading new; daily under 6M, MACD red"
+ ],
+ "EXPO|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily at 6M, +18% over 50D"
+ ],
+ "PGNY|long": [
+  "B",
+  "Weekly RS breakout, blue dot; daily gap to 6M, +8.5% over 21D"
+ ],
+ "MAS|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA, blue dots; daily pulling back from 6M"
+ ],
+ "ABM|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily under 6M on 21D, MACD red"
+ ],
+ "PTRN|long": [
+  "C",
+  "Recent IPO, choppy; -9% week"
+ ],
+ "ROL|short": [
+  "B",
+  "Weekly downtrend, RS under falling MA; bounce into 3M, MACD flipping red"
+ ],
+ "AAON|short": [
+  "C",
+  "Choppy, 75% vol; MACD rising, no rejection yet"
+ ],
+ "GPGI|short": [
+  "B",
+  "Weekly downtrend; bounce rejected at 200D/6M, MACD flipping red"
+ ],
+ "MWA|short": [
+  "B",
+  "Weekly broke 40W; bounce rejected at 3M/200D, MACD flipped red"
+ ],
+ "TRN|short": [
+  "B",
+  "Weekly under flat 40W; bounce failed at 200D, back under 21D, MACD red"
+ ],
+ "IBP|short": [
+  "B",
+  "Weekly under falling 40W; bounce under 200D/6M, MACD still green"
+ ],
+ "ATR|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily gap under 6M, MACD red"
+ ],
+ "ECL|long": [
+  "B",
+  "Weekly uptrend, RS crossed MA; daily off 6M toward 21D, MACD red"
+ ],
+ "LIN|long": [
+  "B",
+  "Weekly uptrend, RS crossed MA; daily off 3M toward 50D, MACD red"
+ ],
+ "RS|long": [
+  "C",
+  "Daily broke 50D, -6.5% week; MACD deep red"
+ ],
+ "APD|long": [
+  "C",
+  "Weekly choppy around 40W; daily range, R2 0.2"
+ ],
+ "BALL|long": [
+  "C",
+  "Weekly choppy; daily range under 6M, MACD red"
+ ],
+ "APLE|long": [
+  "B",
+  "Weekly strong, blue dots; daily rejected at 6M, MACD flipping red"
+ ],
+ "SHO|long": [
+  "B",
+  "Weekly strong, RS crossed MA; daily at 6M, MACD red"
+ ],
+ "SMA|long": [
+  "B",
+  "Weekly RS crossed 40W MA; daily at 6M, +11% over 50D"
+ ],
+ "CUBE|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily gap fading under 6M, MACD red"
+ ],
+ "AMH|long": [
+  "C",
+  "Weekly flat 40W, R2 0; choppy range"
+ ],
+ "AMT|long": [
+  "C",
+  "Choppy weekly; daily spike faded, MACD red"
+ ],
+ "WPC|short": [
+  "C",
+  "RS swinging back up through MA, MACD not red; AFFO guide raised"
+ ],
+ "EPRT|short": [
+  "C",
+  "Bounce already above 50D, RS ripping up; no rejection"
+ ],
+ "BOX|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA, blue dots; daily at 6M, MACD red"
+ ],
+ "VIA|long": [
+  "B",
+  "Weekly RS crossed MA; daily 6M breakout but +14% over 21D"
+ ],
+ "NTSK|long": [
+  "B",
+  "Weekly RS crossed MA; daily choppy under 6M, 75% vol"
+ ],
+ "AVPT|long": [
+  "B",
+  "Weekly reclaimed 40W, RS crossed MA; daily off 6M, MACD red"
+ ],
+ "RXO|long": [
+  "B",
+  "Weekly RS over MA; gap-and-flag under 3M/6M, MACD red"
+ ],
+ "ANET|long": [
+  "C",
+  "Daily broke 50D, -15% week; MACD red"
+ ],
+ "HWM|short": [
+  "B",
+  "Weekly broke 40W, RS lost MA; bounce under falling 50D, MACD still green"
+ ],
+ "BIP|long": [
+  "B",
+  "Weekly uptrend, blue dot, RS crossed; daily 3M breakout, +10% over 21D"
+ ],
+ "OGE|long": [
+  "B",
+  "Weekly uptrend, RS crossed MA; daily testing 6M, MACD flipped red"
+ ],
+ "WEC|long": [
+  "C",
+  "Daily straight into 6M after V, sector Weakening, MACD red"
+ ],
+ "SO|long": [
+  "B",
+  "Weekly price over 40W, RS crossed MA (early turn); daily under 3M, MACD flat"
+ ],
+ "NWN|long": [
+  "B",
+  "Weekly RS crossed 40W MA; daily pulled back from 6M spike, MACD red"
+ ],
+ "CWT|long": [
+  "C",
+  "Weekly choppy, R2 0; daily range, MACD red"
+ ],
+ "BEPC|short": [
+  "A",
+  "Weekly downtrend, red dots, sector Lagging new; bounce stalled at 50D, MACD flipped"
+ ],
+ "POR|short": [
+  "B",
+  "Weekly rolled under 40W; bounce into falling 50D, MACD fading; sector Improving"
+ ],
+ "PCG|short": [
+  "C",
+  "Event gap down, RS rebounding hard, vs-sector Leading"
+ ],
+ "EIX|short": [
+  "C",
+  "V-recovery over 21D/50D, RS crossing up; no rejection"
+ ]
+}

@@ -1,0 +1,105 @@
+{
+ "market_note": "Breadth still positive (538 uptrend + 238 turning up vs 400 downtrend) but only 18 names passed the short gate; worst Nasdaq week since Covid pushed leadership into utilities, insurers, staples and hotel/storage REITs. Q3 season done; ASO (8 Dec) and ABM (16 Dec) report inside a 1M hold. Borrow unchecked (no IBKR tools this session). No SEC guidance excerpts this run.",
+ "pairs": [
+  {
+   "long": "BIP",
+   "short": "BEPC",
+   "conviction": 4,
+   "type": "sector",
+   "split_long": 53,
+   "beta_split_long": null,
+   "net_beta": -0.31,
+   "thesis": "Brookfield siblings: BIP breaking out with blue-dot RS vs XLU (Leading) against BEPC rolling over at the 50D, sector just turned Lagging. Corr 0.53, vols balanced. BIP extended +10% over 21D: scale in. Net beta -0.31 (BIP beta ~0): short-beta tilt."
+  },
+  {
+   "long": "SO",
+   "short": "POR",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 53,
+   "beta_split_long": null,
+   "net_beta": -0.07,
+   "thesis": "Electric utilities: SO's weekly RS just crossed its 40W MA (Lead, sector Leading) vs POR's bounce stalling under a falling 50D. Corr 0.53. SO entry on a close over 3M 94.9."
+  },
+  {
+   "long": "MAS",
+   "short": "IBP",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 62,
+   "beta_split_long": 59,
+   "net_beta": 0.04,
+   "thesis": "Housing: MAS raised guide, RS through 40W with blue dots, vs IBP bouncing into the 200D/6M in a falling weekly. Corr 0.77, vol ratio 0.62 (IBP the wilder leg). IBP MACD not yet red: wait for rejection."
+  },
+  {
+   "long": "R",
+   "short": "TRN",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 55,
+   "beta_split_long": 50,
+   "net_beta": 0.06,
+   "thesis": "Transport/equipment: R in a blue-dot weekly uptrend, sector Leading new, vs TRN failing at the 200D and back under the 21D. Corr 0.48."
+  },
+  {
+   "long": "EXPO",
+   "short": "ROL",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 53,
+   "beta_split_long": null,
+   "net_beta": 0.04,
+   "thesis": "Services: EXPO's weekly RS crossed up (early turn) vs ROL's bounce into 3M resistance in a steep weekly downtrend, growth target in doubt. Corr 0.52. EXPO +18% over 50D: buy pullbacks."
+  },
+  {
+   "long": "ABM",
+   "short": "MWA",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 51,
+   "beta_split_long": null,
+   "net_beta": 0.1,
+   "thesis": "ABM clean weekly turn (R2 0.85), holding the 21D under 6M, vs MWA rejected at 3M/200D with MACD flipped red. Corr 0.27, weakest hedge of the run. ABM reports 16 Dec."
+  },
+  {
+   "long": "RLI",
+   "short": "FG",
+   "conviction": 3,
+   "type": "industry",
+   "split_long": 62,
+   "beta_split_long": null,
+   "net_beta": -0.36,
+   "thesis": "Multi-line insurance: RLI beat-and-special-dividend with RS through 40W vs FG's bounce rejected at 3M/200D, estimates down 16%. Corr 0.28, vol ratio 0.60 (FG twice as volatile). Net beta -0.36 (RLI negative beta vs FG 0.6): short-beta tilt."
+  },
+  {
+   "long": "ASO",
+   "short": "BOOT",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 53,
+   "beta_split_long": 61,
+   "net_beta": -0.12,
+   "thesis": "Specialty retail: ASO weekly breakout with RS crossing 40W vs BOOT's bounce stalling under 3M in a falling weekly. Corr 0.38, vols balanced. ASO reports 8 Dec and is +20% over 50D."
+  },
+  {
+   "long": "COLM",
+   "short": "LVS",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 47,
+   "beta_split_long": null,
+   "net_beta": -0.09,
+   "thesis": "COLM raised FY26 outlook, RS crossed 40W with blue dots, vs LVS: cleanest short chart in the run (red dots, bounce at falling 50D, estimates cut). Corr 0.36. COLM +8% over 21D."
+  },
+  {
+   "long": "HOG",
+   "short": "BYD",
+   "conviction": 3,
+   "type": "sector",
+   "split_long": 39,
+   "beta_split_long": 29,
+   "net_beta": 0.11,
+   "thesis": "Leisure: HOG reclaimed the 40W with RS through its MA vs BYD rejected under 3M/200D, MACD flipped red. Corr 0.65; vol ratio 1.57 near the limit, size HOG down."
+  }
+ ]
+}
